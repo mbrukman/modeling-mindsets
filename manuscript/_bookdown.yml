@@ -1,0 +1,24 @@
+book_filename: modeling-mindsets
+repo: https://github.com/christophM/interpretable-ml-book
+output_dir: "_book"
+rmd_subdir: FALSE
+language:
+  label:
+    fig: "FIGURE "
+    tab: "TABLE "
+  ui:
+    edit: "Edit"
+    chapter_name: "Chapter "
+rmd_files: ["index.Rmd",
+            "preface.Rmd",
+            "introduction.Rmd",
+            "modeling-mindsets.Rmd",
+            "statistical-inference.Rmd",
+            "bayesian-inference.Rmd",
+            "causal-inference.Rmd",
+            "machine-learning.Rmd",
+            "exploratory-analysis.Rmd",
+            "expert-systems.Rmd",
+            "logic-programming.Rmd",
+            "symbolic-artificial-intelligence.Rmd",
+            ]

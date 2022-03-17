@@ -1,0 +1,98 @@
+# Modeling 
+
+<!--chapter:end:index.Rmd-->
+
+---
+title: "Data Modeling Mindsets"
+author: "Christoph Molnar"
+header-includes:
+  - \setbeamercolor{structure}{fg=black}
+fontsize: 14pt
+mainfont: MerriWeather
+output: 
+  beamer_presentation:
+   theme: Rochester
+---
+
+# Details about the book
+
+- Short: 30 - 70 pages
+- Introduction to the topics, not to deep into the topics
+- Finish within a week
+- Publish regular manner: web, leanpub, amzn
+- printing format may differ 
+- Rather inclusive of modeling mindsets
+
+# Preface
+
+- When it comes to data modeling, there are very different mindsets
+- Bayesian stats, freq stats, causality, machine learning
+- I've personally met people who only follow one. Not very good.
+- But if you have access to multiple mindsets, you are the king  
+
+# Data Modeling Mindsets
+
+Bayesian and frequentist statistics, machine learning and causal inference -- these approaches share common methods and models.
+They differ in assumptions about the data-generating process and when a model is a good generalization of the real world.
+
+<!-- A quick overview of the different modeling approaches, described with one formula each. -->
+
+
+# Machine Learning
+
+$$\arg\min_f L(X,Y,f(X))$$
+
+Machine learning minimizes a loss function $L$ by finding the best function f that to predict target $Y$ from features X.
+A good machine learning model has a low loss on the test data.
+
+# Interpretable Machine Learning
+
+It's like machine learning, but interpretability in mind.
+It get's an extra mention because it differs from pure machine learning, as the focus on loss might be lessened.
+Also the mindset is expanded: Not only is the best model the one that minimizes loss, but we say it also makes sense to study the model instead of the real world.
+
+
+# Statistical Inference
+
+$$\arg\max_{\theta} P(\theta, X)$$
+
+Statistical inference fits the best parameters of a chosen probability distribution for variables $X$.
+A good statistical model has a high goodness-of-fit: the data fit the distribution.
+
+
+
+# Bayesian Inference
+
+$$P(\theta | X) = \frac{P(X | \theta) \cdot P(\theta)}{P(X)}$$
+
+Bayesian inference assumes that the distribution parameters $\theta$ are random variables with an a-priori distribution.
+<!-- The distributional parameters have an a-priori probability distribution $P(\theta)$ (before data), and our goal is to estimate the a posteriori distribution (given data).
+see also: https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation -->
+A good Bayesian model has a high posterior probability (Bayes factor).
+
+
+# Causal Inference
+
+$$P(Y|do(X))$$
+
+Causal inference operates on the principles of causality, intervention and counterfactuals..
+A good causal model has high goodness-of-fit and solid causal assumptions.
+
+
+# Exploratory "Modeling"
+
+
+# Expert Systems
+
+
+# Logic Programming 
+
+
+# Symbolic Artificial Intelligence
+
+# Which One is the Best?
+
+The smart way is to be pragmatic about the modeling choices. Need a causal interpretation? Think causal inference. Only predictive performance is important? Pick machine learning. Want to include prior information about model parameters? -> Bayesian stats.
+
+<!--chapter:end:overview.Rmd-->
+

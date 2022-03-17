@@ -1,0 +1,17 @@
+---
+title: "An Introduction to Data Modeling Mindsets"
+subtitle: "Become a Hedgehog of a Data Scientist, Not a Fox."
+author: "Christoph Molnar"
+date: "`r Sys.Date()`"
+knit: "bookdown::render_book"
+documentclass: scrbook
+link-citations: yes
+colorlinks: yes
+fontsize: 10pt
+site: bookdown::bookdown_site
+description: "Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable."
+always_allow_html: yes
+---
+
+# Summary
+

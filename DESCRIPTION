@@ -1,0 +1,5 @@
+Package: book
+Title: Packages for book
+Version: 0.0.1
+Depends:
+  knitr
