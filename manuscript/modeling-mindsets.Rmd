@@ -1,0 +1,13 @@
+# Modeling Mindsets
+
+
+
+TODO: Overview table comparing the different key concepts for these approaches.
+
+
+Content:
+
+* name for variables / features
+* Main assumptions
+* Central formula
+

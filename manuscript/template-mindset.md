@@ -1,24 +1,20 @@
-# Bayesian Inference
+# Title
 
 Short and precise description of the modeling mindset
 
 ---
 
-If you haven't read the [chapter on statistical inference](#statistical-inference), I recommend you do it first, since Bayesian inference is easier understood when you have a good grasp on statistical inference.
+A describing image
 
-
-TODO: A describing image
-
-TODO: A description based on intuition
+A description based on intuition
 
 ## Simple Example
-
-
 
 
 ---
 
 Central mathematical formula (maybe even create a box for it)
+
 
 ## Assumptions
 

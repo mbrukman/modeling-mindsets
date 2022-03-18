@@ -1,1 +1,241 @@
-# Statistical Inference
+# Frequentist Inference {#statistical-inference}
+
+Alternative title: Likelihoodism?
+Three questions:
+
+- What should I do? ->  Frequentist statistics, p-values
+- What should I believe? -> Bayesian stats, credibility intervals, posteriori stuff
+- What's the relative evidence? -> Likelihoodism
+
+TODO: Short and precise description of the modeling mindset
+
+---
+
+TODO: A describing image
+
+
+<!-- A description based on intuition -->
+Statistical inference is based on assuming a distribution for your data, or rather for the variables.
+The distribution that was assumed has parameters, like the center of the mass and the variance.
+The goal of statistical inference is to fit the distribution to the data, by changing the parameters of the distribution.
+Also, we want to make assumptions about the entire population, where, ideally, our data is a representative sample from.
+
+## Probability function
+
+First, consider this variable $X$:
+```{r}
+x = c(2.0, 1.1, 0.3, -0.1, 0.9, 0.9, 1.5,  1.4, 0.1, 0.8, 2.4, -1)
+```
+
+Now, we could simply compute the mean of this data:
+
+```{r}
+mean(x)
+```
+
+However, this would not constitute statistical inference, but only descriptive statistics.
+I merely described the data, but made no assumptions about the distribution. 
+
+So, now let's make an assumption about the data.
+Maybe it follows a Normal or Gaussian distribution?
+
+First, let's plot the data:
+
+```{r}
+hist(x)
+```
+
+## Likelihood
+
+Not looking that bad, but we actually need to fit the parameters of this distribution.
+The Normal distribution has two parameters, $\mu$ and $\sigma$.
+The center of the data is described by $\mu$, and the variance by $\sigma$.
+And this is what a Normal distribution with $\mu=0$ and $\sigma=1$ looks like:
+
+```{r}
+xx = seq(from = -3, to = 3, by = 0.1)
+dens = dnorm(xx)
+plot(xx, dens, type = "l")
+```
+
+
+As I said in the beginning, our goal is to fit a distribution.
+Fit means that we take the formula of the distribution, in which the parameters appear, and find the best set of parameters.
+Hold on! What is the "formula" of a distribution? And what is meant by "best"?
+Formula is the density of the distribution, which describes sloppily formulated how likely a certain value for the variable $X$ is.
+However, it's not a probability, but we speak of the density.
+For example, the density of $x=0$ for a Gaussian distribution with $\mu = 0$ and $\sigma = 1$ is `r dnorm(0)`, and for $x=1$ it's `r dnorm(1)`.
+Makes sense, since $x=0$ happens to be the center of the mass.
+
+The density of the Gaussian distribution is described by
+
+$$f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
+
+---
+
+A little bit to unfold here:
+
+* $\pi$ is literally the pi as in 3.14... so just a constant
+* The term $\frac{1}{\sigma \sqrt{2\pi}}$ is just a scaling factor that makes the overall density smaller the larger the variance of the distribution is.
+* The interesting part happens in the exponent of the $e$
+* The magic mostly happens in $\frac{x - \mu}{\sigma}$
+* Because the term above has a negative sign AND is in the exponent of the $e$, we know that the larger the term, the smaller the density
+* So, data with a HIGH density and therefore a high density are the ones with a small value for $\frac{x - \mu}{\sigma}$
+* So this becomes small when 1. x is very close to $\mu$
+* It also become smaller the larger $\sigma$ is. But this is again a scaling effect: The broader the distribution, the smaller the density at each part of the distribution.
+
+But as I said, the goal is not to find out the density for some point $x$.
+We couldn't find it out, because we don't even know $\mu$ and $\sigma$.
+But that is our original goal: Finding best fitting values for $\mu$ and $\sigma$.
+
+So, for which values of $\mu$ and $\sigma$ will the $f(x)$ be small?
+Keep in mind that we don't have only one data point $x$, but `r length(x)`.
+So we want to find parameters of the distribution that fit all the data well.
+
+## Maximum Likelihood Approach
+
+But what is the best $\mu$ and $\sigma$?
+How do we find out?
+The best parameters are the ones that maximize the likelihood of the data, based on the distribution we assumed, here Gaussian.
+the likelihood is the probability of a model given the 
+
+More concretely, we want these values to be as big as possible:
+$f(`r x[1]`)$, $f(`r x[2]`)$, $f(`r x[3]`)$, ...
+
+So, first we need a way to combine these indvidiual likelihoods.
+So, we multiply the probabilities.
+Also we don't speak of the density function $f$ any longer.
+Instead, we speak of the likelihood function $L$.
+I found that a bit confusing in the beginning, because it is the same function.
+Only difference being the emphasis: $f$ is the density for $x$ and the parameters are, well, just that, parameters.
+For the likelihood $L$, the focus is on the parameters as the input to this funciton, and the data are seen as fixed.
+The probability for our observed $n=`r length(x)` data points can therefore be expressed as:
+
+$$L(x_1, ..., x_n) = \prod_{i=1}^n f(x_i)$$
+
+And we want to find the maximum for it:
+
+$$\arg \max_{\mu,\sigma} \prod_{i=1}^n f(x_i)$$
+
+But maximizing a product is really ugly.
+Good thing is: The logarithm of something has the same maximum as the original.
+So we can log-transform the likelihood and then search for the maximum.
+The following formula is also called the log-likelihood.
+
+<!-- TODO: Check if its ok to write as optimization for both mu and sigma at the same time -->
+$$\arg \max_{\mu,\sigma} \sum_{i=1}^n log(f(x_i))$$
+
+Good thing about the log: It also removes the exponent of the Gaussian density, making our lifes even easier.
+
+$$log(f(x_i)) = log\left(\frac{1}{\sigma \sqrt{2\pi}}\right) \cdot \left(-\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2\right)$$
+
+Ok, let's search for the optimal value for $\mu$.
+Good thing is that $log\left(\frac{1}{\sigma \sqrt{2\pi}}\right)$ falls right off, because there is no $\mu$ in there and therefore just a constant, at least when it comes to optimizing $\mu$
+.
+$$\arg \max_{\mu} \sum_{i=1}^n -\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2$$
+
+The $\frac{1}{2}$ and $\frac{1}{\sigma^2} can also be removed, since it's a constant value that does not change WHERE the maximum value is (just how large it is, but we are not interested in finding the actual maximum, just the parameters that bring us there).
+
+
+$$\arg \max_{\mu} - \sum_{i=1}^n -\left(x - \mu\right)^2$$
+
+Already looking much more handable!
+Let's unweave the square:
+
+$$\arg \max_{\mu} - \sum_{i=1}^n x^2 - 2x\mu - \mu^2\right)$$
+
+So since we are looking for the maximum, we can set this derivative of this equation with respect to $\mu$ to zero.
+The $x^2$ then falls away.
+
+
+$$0 = - \sum_{i=1}^n  \left(2x - 2 \mu\right)$$
+
+By shuffling around the terms and dividing both sides by $2$, we get:
+
+$$\hat{\mu} = \frac{1}{n} \sum_{i=1}^n x_i$$
+
+The little hat on $\hat{\mu}$ indicactes that our result is not the true $\mu$, but an estimate.
+The little hat marks it as an impostor.
+And that's a very neat result.
+So the result of this tedious derivation is just the average of the variable!
+And this is our best estimate for the mean of the Gaussian distribution, assuming that we think our data come from a Gaussian distribution.
+Hold on!
+Didn't I say right at the beginning that computing the mean is descriptive statistics?
+Yes, I did, you don't have to check again.
+The big difference is that now we made the assumption that the data comes from the Gaussian distribution.
+This is stronger than just using the mean to describe the data.
+
+Because with the additional assumption of the Gaussian distribution we can do some neat tricks.
+For example
+
+* The assumption of the data distribution also tells us how the estimator $\hat{\mu}$ is distributed
+* This means we know that our estimator $\hat{\mu}}$ has a standard deviation due to the fact that it was estimated with data.
+* Now we can derive hypothesis tests
+* We can derive confidence intervals
+
+For $\sigma$ it's a bit more complicated, but also doable.
+You can do it at home if you are bored.
+
+<!-- what is frequentistic about it -->
+Here comes what differentiates frequentist statistics from the other mindsets.
+The assumption is that when the number of samples $n$ goes to infinity, we get perfectly close to the real model parameters.
+Again, only given that we made the  right assumptions.
+
+
+Central mathematical formula (maybe even create a box for it)
+
+## Assumptions
+
+
+## How it Works
+
+- give various approaches
+- how to create a model?
+- which terminology is used?
+- what approaches can be derived from this mindset
+- how does the estimation with data happen?
+- how are the models evaluated?
+- what are the origins for this approach?
+- where and how is the approach taught?
+- examples from real life where it is used
+
+## Hypothesis Tests
+
+Start with assumption of some null hypothesis.
+This already involves some distribution and also some specific parameters of this distribution.
+
+Before even looking at data, the frequentist approach says when we would reject the null hypothesis and when not.
+Like a cut-off values, in terms of probability.
+
+## Confidence Intervals
+
+## Regression Models 
+
+* Often we are not just interested in the distribution of a single variable
+* Or also not in the joint distribution
+* Instead we want to know the conditional distribution: For example, the probability for some disease conditional on the treatment that was given.
+* That also means we have to frame the problem as conditional likelihood:
+* $P(Y | X)$
+* Frequentist then makes assumptions about this distribution
+* For example, assuming a binomial distribution of Y given X
+
+## Frequentism and Likelihoodism
+
+We have to distinguish the two.
+While both are based on the likelihood, they have different approaches to evidence.
+
+
+
+## Comparison to Other Mindsets
+
+## What The Mindset is Good For
+
+- advantages can be computational, conceptual
+- match between goal and this mindset
+
+## Limitations
+
+-
+
+
+
