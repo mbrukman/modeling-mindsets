@@ -1,6 +1,6 @@
 ---
-title: "An Introduction to Data Modeling Mindsets"
-subtitle: "Become a Hedgehog of a Data Scientist, Not a Fox."
+title: "Modeling Mindsets for Data Scientists"
+subtitle: ""
 author: "Christoph Molnar"
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
@@ -9,9 +9,23 @@ link-citations: yes
 colorlinks: yes
 fontsize: 10pt
 site: bookdown::bookdown_site
-description: "Machine learning algorithms usually operate as black boxes and it is unclear how they derived a certain decision. This book is a guide for practitioners to make machine learning decisions interpretable."
+description: "Statistics, machine learning, causality, ... The best data scientists don't mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal -- and use the right tool for the right job."
 always_allow_html: yes
 ---
 
 # Summary
+
+Statistics, machine learning, causal inference, Bayesianism, ...
+There are many modeling mindset out there when it comes to learning from data about the world.
+
+Sometimes people have just one of these mindset to approach all types of modeling problems.
+But the best data modelers and data scientists have many of these mindsets.
+They don't just model the world with the mindset they happened to grow up with.
+But they pick the mindset that fits the job best.
+
+This book serves as an overview of various mindsets.
+Each modeling mindset has strengths and weaknesses, tasks it's good at, and tasks that are outright excluded for philosophical reasons.
+This book invites to dive into these different modeling mindsets.
+Broaden your horizon when it comes to modeling.
+The book is the first step of becoming a jack-of-all-trades of creating models of the real world with data.
 

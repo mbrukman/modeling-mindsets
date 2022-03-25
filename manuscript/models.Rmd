@@ -1,0 +1,113 @@
+# Models 
+
+<!-- summary: what is a model -->
+A model is a simplified representation of something.
+In the context of learning from data about the real world, a model represents a simplified aspects of the world.
+The reasons to have such a model is that it allows us to answer questions and make predictions.
+
+<!-- Examples for problem + model --> 
+For example, when we want to test the effectivity of a drug, we design randomized clinical trials.
+We have the question whether the drug is better than the placebo.
+How do we know that the drug is better? But there is variance.
+We have to build a model.
+
+A telecommunication company wants to know why customers quit their mobile contracts.
+They have data on those customers, but just by looking at the thousands of data they can't tell.
+The model can take factors into account that are related to customer churn.
+So they need a model to predict this.
+
+<!-- TODO: A third example -->
+
+
+<!-- Exlusion criteria -->
+In this book, I made two restrictions on the type of models that we study:
+First, it's a computational or mathematical model.
+That excludes, for example, physical models, such as the tiny houses that architects might produce. 
+Or biological models of cells and so on.
+The second restriction: The models are learned from data.
+This excludes "designed" models such as simulations.
+
+
+<!-- What constitutes a model -->
+There are three ingredients to a model:
+`Model = Components + Relationship + Parameters`
+
+The aspects of the world are represented as *components* within the model.
+Images are represented as tensors of pixels, for example.
+The blood pressure of a patient is represented with a number for the model to use.
+There are different names for these components:
+Random variables, covariates, predictor, latent variables, features, target, outcome, nodes, ...
+Some of these names already carry information about our intent how to model relationships between the components.
+The components reflect an aspect of the real world that we are interested in, or that have an important relationship with an aspect that we are interested in.
+Some components are merely internal to the model and don't necessarily reflect any real world component.
+For example nodes in a neural network, nuisance parameter in statistical models and so on.
+
+Within the model, the components are set mathematically or computationally in *relation* to each other.
+For example, the nodes in a neural network are functions of nodes at the lower level of the neural network.
+The outcome variable in a linear regression model is the sum of the input variables.
+The nodes in a tree are mutually exclusive and exhaustively cover the feature space. 
+Sometimes we want these relations as reflection of the same relations in nature, but they don't have to be.
+While the input features often have a natural represntation, the "inward-facing" parts of the model, such as weights, 
+
+The expresiveness of such relationships really depends on the class of the model.
+It can be a simple linear relationship like $Y = 5 \cdot X$, or we can have multiple compoents in complex relationships.
+For example we might model the probability of a stroke as a function of blood pressure and age. 
+However, these relationships are not fixed, at least not before the model was instantiated with data.
+
+Usually these relationships are *parameterized*.
+Meaning, we don't fully know the relationship in advance.
+The relationship has some adjustable knobs with which you can make the relationship "fit" the real world.
+We know that we can buy carrots with money.
+I know that I can get carrots with 1 EUR.
+But how many grams will I get?
+Let's call this unknown parameter in our equation $\beta$:
+
+$$1 \text{ EUR} = \beta \text{ Carrots}$$
+
+This part of my equation I could learn by going to the supermarket and checking the price.
+Maybe $\beta = 500$, so I get half a kilogram of carrots for 1 Euro.
+But that's just for one supermarket!
+Maybe I have to add more relationships into the model.
+Some properties about the supermarket, like the chain from which the supermarket is.
+You see, all these choice are already shaping very different models.
+
+There are many different types and names for parameters.
+Sometimes they just describe a distribution, like the mean of distribution.
+Or they describe the relationship between two variables, like regression coefficient.
+Or it's a weight in a neural network.
+
+What's different is hyperparameters.
+In a sense, they exist outside of what the model describes.
+Hyperparameters set how the learning from data takes place.
+
+We can also think about two states of a model: uninstantiated and instantiated.
+An instantiated model is one where we have already found some values for our parameters.
+An uninstantiated model is one where the parameters are not yet found.
+Uninstantiated models thereby form the family of models.
+You can have an instantiated linear regression model, with coefficients and so on.
+
+The models are parameterized, meaning the relationship between components are flexibly modelable.
+These *parameters* are adjusted using data, in the training or fitting process.
+
+
+<!--
+
+## Tasks
+
+There are different tasks
+
+* Regression:
+* Classification:
+* Clustering:
+* Outlier detection:
+* Pattern recognition:
+
+The tasks are not perfectly seperable from the models and mindsets.
+Because some mindsets are more concentrated on some of the tasks.
+
+
+
+-->
+
+
+

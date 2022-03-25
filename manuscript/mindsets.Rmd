@@ -1,0 +1,95 @@
+# Mindsets {#mindsets}
+
+<!-- from models to mindsets -->
+Models are just a bunch of components, relationships and parameters.
+Defined this way, models alone can't tell us how to interpret the world.
+We need to make further assumptions about the model, and how we infer properties of the world from these models.
+Take a linear regression model that models regional rice yield as a function of precipitation, average temperatures and use of fertilizer.
+It's a model, not a mindset.
+It depends on the mindset that we used to create the model how we may interpret the model.
+May we interpret the effect of fertilizer as causal for the rice yield? Or is it just a correlation? <!-- causal inference -->
+Would we trust the model to make accurate predictions for the future as well? <!-- risk-min mindset -->
+Can we say something about statistical significance of the effect of the fertilizer? <!-- frequentism -->
+Or did we just update prior information about fertilizer effects with new data? <!-- Bayesianism -->
+
+Welcome to **modeling mindsets**.
+
+<!-- definition of mindset -->
+Modeling mindsets are like colored pairs of glasses.
+When you put them on, you see the world in a certain way.
+You can still have a look at the same things and do similiar tasks, but everything will look different depending on the glasses.
+Bayesianism, frequentism, machine learning, ... these are all different mindsets when it comes to creating models with data.
+<!-- more detailed differences of mindsets -->
+Mindsets differ in how they interpret probabilities -- or whether probabilites are even part of their language.
+While mindsets shall include many different modeling tasks, they have some tasks where they truly shine.
+Each mindset invites you to ask different questions, and therefore form how you view the world through modeling.
+
+<!-- a normative frame -->
+**Modeling mindsets** are normative:
+They tell you what a good model is and what not.
+A modeling mindset also encompasses the set of questions we are allowed to ask with it, and which are out of reach.
+If you grew up with the mindset of a frequentist statistian, a good model for you is one that has a high goodness-of-fit.
+Performance of your model on unseen test data is not important to you.
+Also you are not interested in learning about posterior probabilities of your data.
+You reject the idea of using prior probabilities as recommended by Bayesian statistics.
+We can judge whether a model has a lower mean-squared error for new data than another model.
+This is an objective metric used in machine learning.
+But a causal inference statistician might reject the model, if it's not likelihood-based and constructed in a non-causal way.
+These examples illustrate that each modeling mindset comes with it's own rules and assumptions.
+
+<!-- archetypes -->
+The modeling mindsets, as I present them in this book, are archetypes: Pure forms of these mindsets.
+In reality, the boundaries between mindsets are much more fluid.
+These archetypes of mindsets mix within individuals, communities and approaches:
+A data scientist that mostly builds machine learning models might also use some simple regression models with hypothesis tests -- without building an entire pipeline for cross-validating the generalization error of this model.
+A research community might accept analysis using both frequentist and Bayesian statistics.
+
+<!-- short story with people -->
+Have you ever met someone who is like really into supervised machine learning?
+A person who always wants to translate every problem into a prediction problem for which we have labelled data?
+Or maybe have you worked with a statistician who always wants to do hypothesis tests?
+Or this hardcore Bayesian statistician?
+Some few people really do match a single archetype with 100% overlap.
+But I would say that most people learned one or two mindsets two begin with.
+And later got glimpses of other mindsets here and there.
+At least it's true for me:
+I studied statistics.
+It was almost purely the likelihood-based frequentist mindsets.
+We did have a bit of Bayesian statistics, nonparametric statistics and machine learning.
+Later on I dove deep into machine learning, so that my two primary mindsets are frequentism and supervised machine learning.
+But I also made some strides into causality.
+Certainly, the more modeling mindsets you are aware of, the better of a data scientist you are.
+
+<!-- not clear cut: mindset subsets, mindset overlaps -->
+This book does not claim to have a sharp scientific taxonomy or ontology of mindsets.
+Instead, I was quite liberal in deciding when something could be considered as a mindset.
+This means that mindsets can overlap, they can be an extension or subsets of other mindsets.
+As the main criterion for pronouncing something a distinct mindset, is when I thought that it's a useful view of the world, and you enhance your knowledge by seeing a particular thing as a modeling mindset.
+
+<!-- differentiators between mindsets -->
+I had a bit more objective criteria.
+
+* A mindset should have at least it's own Wikipedia entry.
+* A modeling mindset should be "holistic" in the sense that it encompasses a broad range of modeling tasks. Or at least expicitly exclude some tasks out of philosophical reasons.
+* Another, softer, criterion was that there are communities around modeling mindsets. For example, I dedicated a chapter to supervised machine learning, in addition to a chapter on machine learning. Supervised machine learning has such a big community, think of machine learning competitions a la Kaggle.
+* A mindset should have at least one aspect that is unique (except for the 'meta'-mindset chapters on [likelihood](#likelihood) and [risk-minimization](#risk-minimization).  
+
+<!--
+
+Other mindsets
+
+* Sampling theory ??
+* Generative models - machine learning
+* Discriminative models - machine learning
+* Symbolic AI
+* Logic Programming
+* ML + IML
+* Non-parametric statistics: Own mindset bc we don't assume the distributions any longer, which are elementary to frequentists and bayesians. Instead we do bootstrap, permutation tests and so on. computationally expensive, but fewer explicit choices for distributions.
+* Experiment of design / randomized trials: Mindset is that you don't work with observational data. Your modeling starts with data collection process. Modeling after not as important as collecting data. even comparison of means possible afterwards.
+* Interpretable machine learning and sensitivity analysis
+* Generative modeling: GANs, Naive Bayes, anything that produces samples. Modeling mindset: We want to replicate the data-generating process. Applications in art also. But can also be used for discriminative tasks. Models overlap with other approaches.
+* Neural networks: Own mindset because of some unique attributes that allow to think differently about modeling: embedding, transfer learning, generative modeling (link to the mindset at least), feature learning,  
+* Unsupervised learning / clustering / association rule learning / outlier detection: Mindset of finding general patterns inthe data. Not driven by a distinct $Y$, but instead by average big trends. 
+
+-->
+

@@ -1,0 +1,42 @@
+# Supervised Machine Learning
+
+Supervised machine learning is a sub-mindset of the machine learning or risk-minimization mindset.
+
+<!-- what is supervised mindset -->
+The supervised ML mindset is a risk-minimization mindset, where the goals is to minimize some loss function across data.
+It shares all the goals presented in [chapter machine learning](#machine-learning).
+
+<!-- why own mindset -->
+But why is supervised ML it's own mindset, and not just one specific task of machine learning?
+Supervised machine learning has one very clear distinguishing factor: It requires to have a ground truth for the prediction.
+Unsupervised machine learning does things like clustering and outlier detection.
+While we can express these problems as risk-minimization, we have no clue whether the clusters or outlier classification was correct.
+And that makes a big difference.
+I have met people who would not touch any unsupervised learning, since we don't know the true label.
+So I would definitely say that supervised is it's own mindset.
+And it's a big one with many people following it.
+
+<!-- formula -->
+If we want to express it mathematically, we take the loss minimization, but with a dedicated target variable $Y$:
+
+$$\arg \min_{f} L(Y, X, f(X))$$
+
+<!-- kaggle and competition -->
+The machine learning mindset invites competition.
+More than any of the other mindset can the goodness of the model be described by a single number: performance on unseen data.
+That opens a whole world of competitions.
+Truth to be told, there are other platforms that host competitions also for statistical models and such.
+But for machine learning it's especially easy to create a leaderboard with automatic evaluation.
+
+<!-- ml and automation -->
+Machine learning, like none of the other mindset, lends itself to automation.
+Due to this singular focus on optimization, we can automate much of it.
+Computers are good at optimizing stuff.
+We need humans for making assumptions like in Bayesianism and frequentism.
+A human has to decide on causal graphs for causal inference.
+Not so with machine learning.
+This makes it a prime candidate for automating processes.
+But it's also a weakness of the approach.
+The mindless optimization leads to big flaws.
+
+

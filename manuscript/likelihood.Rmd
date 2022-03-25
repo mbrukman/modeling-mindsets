@@ -1,33 +1,60 @@
-# Frequentist Inference {#statistical-inference}
+# Distributions and Likelihood
 
-Alternative title: Likelihoodism?
+The likelihood modeling mindset:
+We can express the world through parameterized distributions.
+The parameters of these distribution can be estimated using the likelihood function.
+For example with maximum likelihood estimation.
+
+The likelihood also builds the base for many other mindsets.
+Frequentism, Bayesianism, Causal inference.
+Also for machine learning it is sometimes used, but not as central as the for the other approaches.
+
+To draw conclusions, we need more assumptions.
+Either we make some assumptions about the long-run repetitions, and end up with [frequentist statistics](#frequentism), or we use the Bayes theorem and compute believes for [Bayesian inference](#bayesian).
+
+<!-- A description based on intuition -->
+Many modeling approaches are based on assuming a distribution for your data and optimizing the likelihood of the distributions parameters.
+
+Frequentist statistics, Bayesian statistics, likelihoodism and causal inference all rely on assuming a distribution for your data and optmizing the parameters of the distribution.
+This optimization happens through the likelihood.
+
+Your data has a distribution.
+If you have various variables, then we speak of the joint distribution.
+
+The distribution that was assumed has parameters, like the center of the mass and the variance.
+The goal of statistical inference is to fit the distribution to the data, by changing the parameters of the distribution.
+Also, we want to make assumptions about the entire population, where, ideally, our data is a representative sample from.
+
+
+## Probability function
+
+<!-- what is frequentistic about it -->
+Here comes what differentiates frequentist statistics from the other mindsets.
+The assumption is that when the number of samples $n$ goes to infinity, we get perfectly close to the real model parameters.
+Again, only given that we made the  right assumptions.
+
+
+Central mathematical formula (maybe even create a box for it)
+
+
+This likelihood as discussed here is extended to use prior probabilities in [Bayesian statistics](#bayesian-statistics).
+Frequentist statistics, likelihoodism and causal inference directly work with likelihoods.
+
 Three questions:
 
 - What should I do? ->  Frequentist statistics, p-values
 - What should I believe? -> Bayesian stats, credibility intervals, posteriori stuff
 - What's the relative evidence? -> Likelihoodism
 
-TODO: Short and precise description of the modeling mindset
+## Variable 
 
----
+First, consider a variable $X$:
 
-TODO: A describing image
-
-
-<!-- A description based on intuition -->
-Statistical inference is based on assuming a distribution for your data, or rather for the variables.
-The distribution that was assumed has parameters, like the center of the mass and the variance.
-The goal of statistical inference is to fit the distribution to the data, by changing the parameters of the distribution.
-Also, we want to make assumptions about the entire population, where, ideally, our data is a representative sample from.
-
-## Probability function
-
-First, consider this variable $X$:
 ```{r}
 x = c(2.0, 1.1, 0.3, -0.1, 0.9, 0.9, 1.5,  1.4, 0.1, 0.8, 2.4, -1)
 ```
 
-Now, we could simply compute the mean of this data:
+Now, we could simply compute the mean of this variable:
 
 ```{r}
 mean(x)
@@ -66,6 +93,7 @@ Formula is the density of the distribution, which describes sloppily formulated 
 However, it's not a probability, but we speak of the density.
 For example, the density of $x=0$ for a Gaussian distribution with $\mu = 0$ and $\sigma = 1$ is `r dnorm(0)`, and for $x=1$ it's `r dnorm(1)`.
 Makes sense, since $x=0$ happens to be the center of the mass.
+Note that, while density is not the same as probability, the density also adds up to 1 (the integral).
 
 The density of the Gaussian distribution is described by
 
@@ -134,7 +162,7 @@ Good thing is that $log\left(\frac{1}{\sigma \sqrt{2\pi}}\right)$ falls right of
 .
 $$\arg \max_{\mu} \sum_{i=1}^n -\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2$$
 
-The $\frac{1}{2}$ and $\frac{1}{\sigma^2} can also be removed, since it's a constant value that does not change WHERE the maximum value is (just how large it is, but we are not interested in finding the actual maximum, just the parameters that bring us there).
+The $\frac{1}{2}$ and $\frac{1}{\sigma^2}$ can also be removed, since it's a constant value that does not change WHERE the maximum value is (just how large it is, but we are not interested in finding the actual maximum, just the parameters that bring us there).
 
 
 $$\arg \max_{\mu} - \sum_{i=1}^n -\left(x - \mu\right)^2$$
@@ -142,7 +170,7 @@ $$\arg \max_{\mu} - \sum_{i=1}^n -\left(x - \mu\right)^2$$
 Already looking much more handable!
 Let's unweave the square:
 
-$$\arg \max_{\mu} - \sum_{i=1}^n x^2 - 2x\mu - \mu^2\right)$$
+$$\arg \max_{\mu} - \sum_{i=1}^n x^2 - 2x\mu - \mu^2$$
 
 So since we are looking for the maximum, we can set this derivative of this equation with respect to $\mu$ to zero.
 The $x^2$ then falls away.
@@ -169,73 +197,11 @@ Because with the additional assumption of the Gaussian distribution we can do so
 For example
 
 * The assumption of the data distribution also tells us how the estimator $\hat{\mu}$ is distributed
-* This means we know that our estimator $\hat{\mu}}$ has a standard deviation due to the fact that it was estimated with data.
+* This means we know that our estimator $\hat{\mu}$ has a standard deviation due to the fact that it was estimated with data.
 * Now we can derive hypothesis tests
 * We can derive confidence intervals
 
 For $\sigma$ it's a bit more complicated, but also doable.
 You can do it at home if you are bored.
-
-<!-- what is frequentistic about it -->
-Here comes what differentiates frequentist statistics from the other mindsets.
-The assumption is that when the number of samples $n$ goes to infinity, we get perfectly close to the real model parameters.
-Again, only given that we made the  right assumptions.
-
-
-Central mathematical formula (maybe even create a box for it)
-
-## Assumptions
-
-
-## How it Works
-
-- give various approaches
-- how to create a model?
-- which terminology is used?
-- what approaches can be derived from this mindset
-- how does the estimation with data happen?
-- how are the models evaluated?
-- what are the origins for this approach?
-- where and how is the approach taught?
-- examples from real life where it is used
-
-## Hypothesis Tests
-
-Start with assumption of some null hypothesis.
-This already involves some distribution and also some specific parameters of this distribution.
-
-Before even looking at data, the frequentist approach says when we would reject the null hypothesis and when not.
-Like a cut-off values, in terms of probability.
-
-## Confidence Intervals
-
-## Regression Models 
-
-* Often we are not just interested in the distribution of a single variable
-* Or also not in the joint distribution
-* Instead we want to know the conditional distribution: For example, the probability for some disease conditional on the treatment that was given.
-* That also means we have to frame the problem as conditional likelihood:
-* $P(Y | X)$
-* Frequentist then makes assumptions about this distribution
-* For example, assuming a binomial distribution of Y given X
-
-## Frequentism and Likelihoodism
-
-We have to distinguish the two.
-While both are based on the likelihood, they have different approaches to evidence.
-
-
-
-## Comparison to Other Mindsets
-
-## What The Mindset is Good For
-
-- advantages can be computational, conceptual
-- match between goal and this mindset
-
-## Limitations
-
--
-
 
 

@@ -1,0 +1,16 @@
+# What This Book is About
+
+* Mindsets
+* Models
+* Intuition how these works
+* The central ideas of each mindset
+* Teasers of the approaches 
+
+
+
+Not about 
+
+* History
+* Philosophy
+* Not an ontology: mindsets here can be overlapping or even be subset of another. it's about learning.
+* Not an introduction to all of these mindset. Just a teaser

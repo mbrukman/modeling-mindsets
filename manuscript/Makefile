@@ -1,12 +1,14 @@
 .PHONY : sbrl
 
+bookname = modeling-mindsets
+
 all : html pdf epub
 
 html : _book/index.html
 
-pdf : _book/interpretable-ml.pdf
+pdf : _book/$(bookname).pdf
 
-epub : _book/interpretable-ml.epub
+epub : _book/$(bookname).epub
 
 
 package: ../DESCRIPTION ../R/*.R
@@ -14,7 +16,7 @@ package: ../DESCRIPTION ../R/*.R
 
 _book/index.html :  *.Rmd
 	# When build fails interpretable-ml.Rmd is created and not removed. Next build will fail when file exists.
-	rm -f interpretable-ml.Rmd
+	rm -f $(bookname).Rmd
 	Rscript  -e "bookdown::render_book('./', 'bookdown::gitbook')"
 
 
@@ -22,14 +24,14 @@ _book/index.html :  *.Rmd
 	R --no-save --args $< < ../scripts/process-rmd-leanpub.R
 	R --no-save --args $@ < ../scripts/fix-leanpub.R
 
-_book/interpretable-ml.pdf : *.Rmd latex/*
-	# When build fails interpretable-ml.Rmd is created and not removed. Next build will fail when file exists.
-	rm -f interpretable-ml.Rmd
+_book/$(bookname).pdf : *.Rmd latex/*
+	# When build fails the bookfile Rmd  is created and not removed. Next build will fail when file exists.
+	rm -f $(bookname).Rmd
 	Rscript  -e "bookdown::render_book('./', 'bookdown::pdf_book')"
 
-_book/interpretable-ml.epub : *.Rmd
-	# When build fails interpretable-ml.Rmd is created and not removed. Next build will fail when file exists.
-	rm -f interpretable-ml.Rmd
+_book/$(bookname).epub : *.Rmd
+	# When build fails the bookfile Rmd is created and not removed. Next build will fail when file exists.
+	rm -f $(bookname).Rmd
 	Rscript  -e "bookdown::render_book('./', 'bookdown::epub_book')"
 
 11-references.Rmd : *.Rmd

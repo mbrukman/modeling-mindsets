@@ -1,50 +1,208 @@
-# Bayesian Inference
+# Bayesian Inference {#bayesian}
 
-Short and precise description of the modeling mindset
+Bayesian inference sees the world as parameterized distributions.
+To learn about the world, we have to learn about the best fitting parameters.
+But the parameters themselves are assumed to follow some distribution.
+So to learn about the parameters, we have to assume some prior distribution, and update our belief about the our parameters with data.
+This is then the posteriori distribution.
+
+Bayesian inference is a likelihood-based apprach that builds on the Bayes theorem:
+The distribution parameters do not only depend on the data, but we assume some prior distribution.
+Bayesian statistics is about beliefs.
+In Bayesian statistics, probability can be interpreted as the relative plausibility of an event.
+
 
 ---
 
 If you haven't read the [chapter on statistical inference](#statistical-inference), I recommend you do it first, since Bayesian inference is easier understood when you have a good grasp on statistical inference.
 
+<!-- intuition about knowledge updates -->
+Bayesian inference is about changing your mind.
+We update our knowledge about the world when new information comes in.
+You already know some stuff to the world.
+Prior to getting some new information.
+Then you update your knowledge, based on data / evidence.
+Then you go about your life with this udpated knowledge.
 
-TODO: A describing image
-
-TODO: A description based on intuition
-
-## Simple Example
-
-
-
-
----
-
-Central mathematical formula (maybe even create a box for it)
-
-## Assumptions
+<!-- Example of knowledge update in real life -->
+Imagine you are at a snack machine.
+You have a general idea how much you like snack machines.
+You rate most snack vending machines 6/10 - 9/10.
+Without further knowledge, you would expect the new machine that you just encountered to be somewhere in that range too.
+But this newly installed machine is directly at the train station, and it has your favorite chips.
+So you give it a rating of 9/10.
+But then two big betrayals.
+First, the chips got stuck one day, between the tray and the window pane.
+This happens, but it's always very annoying.
+But directly the day after, the machine refused to give you change.
+These betrayals made you change your rating to 5/10.
 
 
-## How it Works
+<!-- Bayes formula -->
+We can describe these updates of knowledge with the Bayes formula.
+The central formula can be described as:
 
-- give various approaches
-- how to create a model?
-- which terminology is used?
-- what approaches can be derived from this mindset
-- how does the estimation with data happen?
-- how are the models evaluated?
-- what are the origins for this approach?
-- where and how is the approach taught?
-- examples from real life where it is used
--
+$$P(\theta|D) = \frac{P(D | \theta) P(\theta)}{P(D)}$$
 
-## Comparison to Other Mindsets
+The $\theta$ is the parameter that you want to learn.
+The $D$ stands for the data, but sometimes also the letter $E$ for evidence is used.
+If we have a density instead of a probability, we would write:
 
-## What The Mindset is Good For
+$$f(\theta|x) = \frac{f(x | \theta) f(\theta)}{f(x)}$$
 
-- advantages can be computational, conceptual
-- match between goal and this mindset
+We can also write the following:
+
+
+$$f(\theta|x) \propto  f(x | \theta) f(\theta)$$
+
+Or in words:
+
+$$\text{Posterior} \propto \text{Likelihood} \cdot \text{ Prior}$$
+
+Sometimes the data is also called "evidence" within the Bayesian modeling framework.
+Not often possible in closed form.
+Then we have to use sampling to estimate the posteriori probability.
+
+The degree of belief is positive valued and adds up to one.
+It's the posteriori distribution.
+
+```{r bayesian, fig.cap = "Illustration of priori density that gets an update from the likelihood of the data to result in posteriori probability distribution."}
+library(ggplot2)
+library(tidyr)
+
+x = seq(from = -10, to = 35, length.out = 100)
+prior_theta = dnorm(x, mean = 20, sd = 3)
+likelihood = dnorm(x, mean = 5, sd = 3)
+posteriori = dnorm(x, mean = 10, sd = 3)
+
+df = data.frame(priori = prior_theta, likelihood = likelihood, posteriori = posteriori, x = x)
+df2 = pivot_longer(df, cols = c("priori", "likelihood", "posteriori"))
+ggplot(df2) +
+geom_polygon(aes(x = x, y = value, group = name, fill = name), alpha = 0.3) +
+geom_line(aes(x = x, y = value, group = name)) +
+coord_cartesian(xlim=c(-2, 28)) +
+scale_fill_discrete("") +
+theme_void()
+
+```
+
+
+## About the Prior
+
+But where does the prior distribution come from?
+And why is it one of the biggest critiques of the Bayesian modeling mindset?
+
+In theory, you can pick as prior anything that is a distribution and that makes sense for the range of your parameter.
+A function is a distribution function when it integrates to one over the permitted range.
+The prior is to pack knowledge that you already have into the estimation of your parameters.
+Knowledge that you have before actually looking at the data.
+So the prior should stem from outside your data.
+For example, external studies, or knowledge from experts.
+
+What if two experts disagree on which priors to use?
+Try both, and see how the posteriori differs between the two.
+
+
+A convenient case is using conjugate priors.
+Conjugate priors
+There are so-called conjugate priors.
+Suppose you model your data as Bernoulli distribution, which describes the  distribution as probabilities of being 1 with probability of $p$ and 0 otherwise.Then we measure a realization $X$ of this Bernoulli random variable.
+Further, if we assume to have a Beta distribution as prior distribution, then we also have a beta posteriori function.
+
+Sometimes it does not matter as much what prior we use.
+When the evidence, the data, is much stronger, the choice of the prior won't affect the results very much.
+
+But in many cases we are not so lucky.
+In many cases we have no name for the posteriori distribution.
+Worse, we often can't even write down the explicit formula of the posteriori function.
+
+
+
+## Posteriori Estimation with  Markov Chain Monte Carlo Sampling
+
+Especially tricky: The denomiator, as $P(D)$ requires knowing a high-dimensional joint distribution.
+This is not easily estimated.
+The trick is to obtain samples from the posteriori distribution.
+But how can you do it when you don't even know the posteriori distribution?
+
+We start with some initial values for our parameters.
+Then new values are proposed.
+This requires some prooposal function.
+These new values are either accepted or rejected.
+This decision depends on some acceptance function.
+The process is repeated many times, and produces a "chain" of values for each of the parameters.
+
+We cannot use the entire chain as samples from the posteriori distribution.
+First, the first view samples are likely far away from the true posteriori and should therfore be "burned", meaning you ignore them.
+Then, you want independent samples.
+But the samples in the chain are dependent on the ones that come before them.
+So we have to sample from the chain, and make sure that there are enough values between the samples.
+There are diagnosis tools to do this, but we won't go into the details here. 
+
+There are many other more sophisticated sampling methods, but for this introduction it is good enough to show MCMC.
+
+## Doing Inference
+
+When we are all done with estimating our posteriori probabilities, we want to actually learn something about the world.
+So, what do we get in the end?
+A brief summary here:
+We made some assumptions about which distribution our data follows.
+This distribution is parameterized.
+We make use of the likelihood function to understand how likely certain parameter values are given 
+
+We have to look the the posteriori distribution.
+We express with it the believe that we have about the parameter.
+
+
+In frequentist statistics, we get confidence intervals for our estimators.
+That's some uncertainty quantifycation telling us how sure we are about our estimation.
+But it's different with Bayesian inference.
+
+Since we get posterior probabilities for our parameters, and from the we can derive credibility or credible intervals.
+For example, a 95\% credibility interval contains 95\% of the mass of our parameter.
+With 95\% probability, the parameter falls within that interval.
+Not in the sense that there is some fixed value for the parameter.
+But it's a random variable that can take on different values.
+
+Technically, they work the same as confidence intervals in frequentist statistics.
+But they have a different philosophical interpretation. 
+
+## Some Examples of Bayesian inference
+
+What would a linear regression model look like in the Bayesian modeling approach?
+
+For that we have to assume that $Y$ follows a Gaussian distribution given $X$.
+The Bayesian mindset tells us that we are interested in the distribution of the parameters of this model.
+In this model, the relationship between the mean of the distribution of $Y$ and the features are represented by the model coefficients $\mathbf{\beta}$.
+
+So we would assume that y folllows a Normal distribution:
+
+$$y \sim N(\mathbf{\beta}^TX, \sigma^2 I)$$
+
+Since we are in the Bayesian mindset, we also assume a distribution for the parameters $\mathbf{\beta}$ and $\sigma$.
+
+This you can see by looking at how we would get the posterior probability:
+
+$$P(\beta|Y,X) = \frac{P(y|\beta,X) P(\beta|X)}{P(y|X)}$$
+
+* $P(y|X)$ is the data evidence
+* $P(\beta|X)$ is the prior probability for $\beta$
+* $P(y|\beta, X)$ is the likelihood function
+* $P(\beta|y,X)$ is the posteriori probability of the model parameters
+
+We carry arround the $X$ in the formulas the entire time in the conditioning statement.
+This is allowed.
+
+
+TODO: List some real applications
+
+TODO: List some models
+
 
 ## Limitations
 
--
 
+The most common reasons not to use Bayesian statistics:
 
+* The prior distributions are subjective
+* Bayesian methods are mathematically demanding and computationally expensive 

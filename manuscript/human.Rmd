@@ -1,0 +1,26 @@
+# Intuition, Anecdotes and Feelings
+
+Everyone has an opinion about probabilities and predictions.
+And we are quite bad at them.
+But it's important to revisit this hear, because IT IS an alternative to the other mindsets.
+And a pretty strong one.
+
+
+* maybe unusual to start with such a chapter
+* important to understand these facts about the human mind
+* all other mindsets are on top of the human one
+* you have to force your mind to accept other mindsets, but this one comes naturally
+
+
+
+* explain anecdotes
+* explain role of anecdotes for understanding probability
+* how good are people at making predictions?
+* usually very bad
+* no selection mechanisms for making bad predictions
+* how people make explanations
+* most explanations are wrong
+* what kind of explanations people like
+* how people understand probabilities 
+
+

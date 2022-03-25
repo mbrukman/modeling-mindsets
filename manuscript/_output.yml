@@ -1,6 +1,6 @@
 bookdown::gitbook:
   dev: svglite
-  split_by: section
+  split_by: chapter
   css: css/style.css
   fontfamily: arial
   includes:
@@ -11,7 +11,7 @@ bookdown::gitbook:
       github: yes
       facebook: yes
     toc:
-      collapse: subsection
+      collapse: section
       before: |
         <li><a href="./">Modeling Mindsets</a></li>
       after: |

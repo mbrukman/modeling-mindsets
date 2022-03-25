@@ -1,0 +1,148 @@
+# Frequentist Inference {#statistical-inference}
+
+<!-- TOOD: Explain alpha level -->
+
+
+For frequentists, we can find out about the world by approximating the true but unknown parameters of the assumed data distributions.
+To learn about the world, we have to learn about these parameters.
+To learn about these parameters, we have to collect data.
+The frequentist estimators will then converge to the true parameters.
+With these estimates, we can make decisions, using hypothesis tests, confidence intervals.
+The probability of some event or outcome can be computed by it's (relative) frequency the more data we gather.
+Frequentism is an interpretation of probability.
+So there is not only some technical difference to, e.g., Bayesian statistics, but a more deeper, philosophical understanding.
+Frequentists think of probability at the relative frequency of and event in the long-run.
+Hence the name "frequentist".
+
+Frequentism is the dominant way of thinking in most statistical applications.
+
+The probability for something, or also the true value, is therefore something that just exists and is fixed.
+This is different for [Bayesian statistics](#bayesian) which speaks of degrees of believe about a parameter.
+
+Frequentism means that to assess evidence, we look at how they would perform would they be used repeatedly.
+Like the alpha confidence interval.
+
+---
+
+TODO: A describing image
+
+
+## Assumptions
+
+First you have to assume a distribution of your data.
+For example, that your data follows a Normal distribution.
+Then the only thing you want to know are the parameters.
+
+But what are they?
+Are they constant values, like the speed of light?
+Or are they maybe random variables themselves?
+
+For frequentists, the answer is clearly that these parameters have some fixed but unkown value.
+To find out this true value $\theta$, we can observe data $X$.
+
+
+But where to the p-values and stuff come from?
+Don't they need some distribution?
+Yes, they do, but we are no longer looking at the true parameters.
+Instead, we are looking at the estimators $\hat{\theta}$!
+These are the guys with the little hats.
+
+The more data we observe, the closer our estimator $\hat{\theta}$ gets to the true parameter $\theta$.
+Given that our estimator for $\theta$ is unbiased.
+
+
+
+## Hypothesis tests, confidence intervals and  p-values
+
+<!-- starting condition for inference -->
+Alright, we have our assumed distribution, we have our data.
+We have an estimate $\theta$ for the unknown parameter $\theta$.
+How do we draw conclusions about the real world now?
+Can we just say that $\theta$ is what we think about the world?
+
+<!-- estimator variance and distribution -->
+Remember, we assume that $\theta$ is some fixed, but unkown value.
+So we just have to be sure that $\hat{\theta}$ approaches the true $\theta$ when our number of samples $n$ goes to infinity.
+This requires that the estimator is **unbiased**.
+A biased estimator would give us a wrong result, no matter how much data we collect.
+For a skewed distribution, like for income, the median would be a biased estimator for the mean $\mu$ of a distribution.
+But for symmetric distributions the median would be an unbiased estimator.
+We also want the estimator $\hat{\theta}$ to get closer to the true value $\theta$, the more data we gather.
+
+<!-- Confidence intervals  -->
+We might not know the true parameter, but we do know our estimator.
+And we do know the distribution of our estimator.
+This means that we can construct confidence intervals around that estimator.
+These confidence intervals can then tell us how certain we are about the results. 
+A confidence interval has to be always interpreted in the context of repeated experiments.
+If we were to repeat our experiment, a 95\% confidence interval would cover the true parameter with a probability of 95\% of the time.
+So if we were to do this analysis 100 times, each times with fresh data, but from the same distrribution of course,
+then we would get, in expectation 95 confidence intervals that cover the true paraemter.
+And we would expect 5 to miss the true parameter.
+Again, this is a core mindset of the frequentist perspective:
+It's all about repeated experiments or repeated data collection.
+And the mindset holds for when we increase the data or repeate everything.
+
+
+## Regression Models 
+
+We have to talk about regression models.
+Especially when we want to compare statistical inference from the frequentist view to machine learning.
+
+Regression or classification models take on a rather big portion of statistics.
+But form they are not so different from the maximum likelihood view.
+
+Usually we are not interested in just one variable.
+We are interest in how many variables are related to each other.
+
+For example, we want to know not only how often a disease is successfully treated.
+We might want to know if a certain drug played a part in the disease outcome.
+And other factors such as age of the patient, progression of the disease and so on might play a role as well.
+And we would have to consider such factors to answer the question on whether the drug helps.
+
+All this information is contained in the joint distribution of the data.
+The joint distribution can tell use whether patients who got the drug are more likely to have a good outcome regarding the disease.
+But estimating the full distribution is difficult.
+
+This would be
+
+$$P(Drug, Outcome, Age, ...)$$
+
+But to answer the question whether the drug helped, we don't need the full joint disribution.
+Instead, we can use the conditional probability:
+
+$$P(\text{Drug helped}|Drug)$$
+
+With the likelihood based modeling mindset, we build up a distribtun.
+For example, we could say that the outcome is binary (patient healthy or not in the end).
+And we model it with a binomial distribution, given the other variables.
+This model is of course parameterized.
+The probability of the patient healthy or not outcome depends on coefficients that are multiplied with the other covariables.
+
+In a typical frequentist manner, we can then fit this logistic regression model with data.
+Then we get estimates for the coefficients.
+These estimates can tell use how each variable affects the outcome.
+But we also get p-values and confidence intervals.
+These tell us whether the coefficients are significantly different from zero.
+
+
+## Frequentism and Likelihoodism
+
+We have to distinguish the two.
+While both are based on the likelihood, they have different approaches to evidence.
+
+
+
+## Comparison to Other Mindsets
+
+## What The Mindset is Good For
+
+- advantages can be computational, conceptual
+- match between goal and this mindset
+
+## Limitations
+
+-
+
+
+
