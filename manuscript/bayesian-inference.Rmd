@@ -198,6 +198,9 @@ TODO: List some real applications
 
 TODO: List some models
 
+## Justifications for Bayesian Inference
+
+https://en.wikipedia.org/wiki/Bayesian_probability#Justification_of_Bayesian_probabilities
 
 ## Limitations
 

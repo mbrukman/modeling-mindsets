@@ -13,7 +13,7 @@ description: "Statistics, machine learning, causality, ... The best data scienti
 always_allow_html: yes
 ---
 
-# Summary
+# Summary {-}
 
 Statistics, machine learning, causal inference, Bayesianism, ...
 There are many modeling mindset out there when it comes to learning from data about the world.

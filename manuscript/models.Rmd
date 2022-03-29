@@ -29,21 +29,22 @@ This excludes "designed" models such as simulations.
 
 
 <!-- What constitutes a model -->
-There are three ingredients to a model:
-`Model = Components + Relationship + Parameters`
+There are three ingredients to a mathematical model:
+<!-- in original text it's objects instead of variables -->
+A mathematical model contains *mathematical structures* that represent *variables* and puts them into *relation*. [^Weisberg2012]
+When a mathematical model is learned from data, it also contains *parameters* that make the mathematical formula adatable to data.
+If you further want to interpret models in place of the world, you also have to make assumptions about relation between model variables/relations and real world properties. 
 
-The aspects of the world are represented as *components* within the model.
+The aspects of the world are represented as *variables* within the model.
 Images are represented as tensors of pixels, for example.
 The blood pressure of a patient is represented with a number for the model to use.
 There are different names for these components:
-Random variables, covariates, predictor, latent variables, features, target, outcome, nodes, ...
+Random variables, covariates, predictor, latent variables, features, target, outcome,  ...
 Some of these names already carry information about our intent how to model relationships between the components.
-The components reflect an aspect of the real world that we are interested in, or that have an important relationship with an aspect that we are interested in.
-Some components are merely internal to the model and don't necessarily reflect any real world component.
-For example nodes in a neural network, nuisance parameter in statistical models and so on.
+The variables reflect an aspect of the real world that we are interested in, or that have an important relationship with an aspect that we are interested in.
 
 Within the model, the components are set mathematically or computationally in *relation* to each other.
-For example, the nodes in a neural network are functions of nodes at the lower level of the neural network.
+For example, the variables in a neural network are functions of nodes at the lower level of the neural network.
 The outcome variable in a linear regression model is the sum of the input variables.
 The nodes in a tree are mutually exclusive and exhaustively cover the feature space. 
 Sometimes we want these relations as reflection of the same relations in nature, but they don't have to be.
@@ -109,5 +110,5 @@ Because some mindsets are more concentrated on some of the tasks.
 
 -->
 
-
+[Weisberg2012]: Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.
 

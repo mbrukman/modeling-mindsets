@@ -1,6 +1,6 @@
 # Nonparametric Statistics
 
-
+Check intro from: http://erecursos.uacj.mx/bitstream/handle/20.500.11961/2064/Gibbons%2C%202003.pdf?sequence=14
 Nonparametric means that we don't make assumption of some parameterized distribution.
 Our goal is NOT to find the best parameters for some distribution.
 

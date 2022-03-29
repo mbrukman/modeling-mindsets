@@ -1,8 +1,44 @@
 # Frequentist Inference {#statistical-inference}
 
+<!-- where frequentist inference stand -->
+Frequentist interest is maybe the most dominant way to analyze data.
+Especially in science.
+
+<!-- origin of word -->
+It's called frequentist since it emphasizes the frequency or poportion of the data.
+
+<!-- Frequentist probability -->
+Frequentist inference is based on frequentist probability.
+It's an interpretation of probability.
+Probability is defined there as the relative frequency of an event in infinitly repeated trials.
+What's the probability that a coin toss reveals head?
+Toss it, record head. Repeat.
+Divide the number of heads by the number of tosses.
+The more tosses the closer you will get to the probability.
+
+<!-- repeatable experiment -->
+It means that you repeat an experiment under the exact same conditions.
+Only if we  can well-define a random experiment is the probability valid.
+The more experiments we do, the closer we get to the true value of the probability.
+So the probability is something that we get in the limiting value of relative frequencies.
+That's a quite special view on experiments.
+An experiment is seen as just one of infinite repetitions of the same experiment.
+And all these experiments should be able to produce independent results.
+
+<!-- Extended to all data -->
+But the data most not even come from an experiment.
+Let's say you want to measure if tall people buy less products from the lowest shelf.
+You observe one person, and observe if they bought something from the lowest shelf. Yes or No.
+In the frequentist mindset, we have to repeat this "experiment":
+We have to observe mutliple tall people and see whether they buy somethings from the lowest shelf.
+But the people better go shopping independently of each other.
+<!-- TODO: same example for Bayesian -->
+
+
+Frequentist statistics is not only dependent on the data, but also the experimental design.
+This we can observe in the [chapter on likelihoodism](#likelihoodism).
+
 <!-- TOOD: Explain alpha level -->
-
-
 For frequentists, we can find out about the world by approximating the true but unknown parameters of the assumed data distributions.
 To learn about the world, we have to learn about these parameters.
 To learn about these parameters, we have to collect data.
@@ -49,6 +85,20 @@ These are the guys with the little hats.
 
 The more data we observe, the closer our estimator $\hat{\theta}$ gets to the true parameter $\theta$.
 Given that our estimator for $\theta$ is unbiased.
+
+
+Miscellaneous snippet:
+
+* The assumption of the data distribution also tells us how the estimator $\hat{\mu}$ is distributed
+* This means we know that our estimator $\hat{\mu}$ has a standard deviation due to the fact that it was estimated with data.
+* Now we can derive hypothesis tests
+* We can derive confidence intervals
+
+Insights from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
+* Assumptions that the data comes from infinite population
+* Targets are the coefficients: They characterize this infinite population 
+* Fisher is about model-based inference
+* TODO: Think about moving model-based inference to statistical learning?
 
 
 
@@ -126,14 +176,12 @@ But we also get p-values and confidence intervals.
 These tell us whether the coefficients are significantly different from zero.
 
 
-## Frequentism and Likelihoodism
-
-We have to distinguish the two.
-While both are based on the likelihood, they have different approaches to evidence.
-
-
-
 ## Comparison to Other Mindsets
+
+Lindley Paradox https://en.wikipedia.org/wiki/Lindley%27s_paradox
+
+
+https://en.wikipedia.org/wiki/Foundations_of_statistics#Comparisons_of_characteristics
 
 ## What The Mindset is Good For
 
@@ -142,7 +190,7 @@ While both are based on the likelihood, they have different approaches to eviden
 
 ## Limitations
 
--
+- Violates likelihood principle that says that all information must be contained in the likelihood function. Reason: Frequentist inference also depends on the experiment design, see [likelihoodism](#likelihoodism). 
 
 
 

@@ -1,0 +1,121 @@
+# Design-based inference
+
+<!-- TODO: Malte zum reviewn schicken -->
+
+<!-- TODO: Read in detail https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/ -->
+
+<!-- TODO: Checkout Stichprobentheorie Material from LMU -->
+<!-- TODO: Checkout Experiment of Design material from LMU -->
+
+Instead of focus on model, focus on sampling data.
+Sample right data, have simple estimators for your quantities of interest.
+Design-based vs. model-based.
+
+Design-based: Researcher designs experiment which generates data. 
+
+
+Why does such a design-based approach reduce the need for complex modeling?
+
+e.g. want to know the effect of a nudge on eating behaviour of people.
+For example, do people buy more things if they cost 0.99 instead of 1?
+It's a simple question, at first.
+You have data from supermarkets.
+These set their prices themselves, so some have 0.99 prices, some have 1s.
+But they differ in many other things.
+Some are expensive, some are small, some have more customers, they have different products, ...
+So we have to adjust for all these things, as these might be confounders of relationship between price and amount sold.
+
+Version 2: You design an experiment.
+You randomize the products, the supermarkets, the days on which price is done and so on.
+Then you collect data.
+If done well, you can simply take the mean of number of products with 0.99 and subtract them from the 1 product amount sold.
+
+BUT: Still often both are combined: design-based inference and a model afterwards.
+Remember, this chapter is about the archetype of design-based inference.
+In reality, even when there is a good research design, researchers and data scientists still use more or less complex models.
+For example in social sciences (see http://thaddunning.com/wp-content/uploads/2010/05/Dunning_Rethinking-Social-Inquiry.pdf).
+
+Extreme view: We can ONLY make inference when we have completely random samples.
+That's an archetype of design-based view.
+
+## Assumptions
+
+* Variance comes from sampling alone
+* With good randomization, we can remove confounding
+* random sampling is the basis for inference
+* We don't have an infinite population, as we assume for model-based inference, like frequentism
+* Design-based inference assumes a finite population.
+* For example: Effect of treatment on disease outcome. Population: All patients with this disease. Goal: get good sample of these patients, do experiment, and that's that. 
+* Outcome is still random variable, but not due to epistemic randomness, but rather because of the sampling procedure
+* Finite population = all data points that have a chance of getting into the sample
+* Randomness of sampling is required 
+
+## Methods
+
+* Survey sampling
+* Randomized clinical trials
+
+## Compare to Other Mindsets
+
+
+
+Example: Predict outcome of an election (not sure if good example)
+
+* Statistics: Build model based on available data, maybe outcome of last election and so on
+* Machine Learning: Use various data, all thrown together. 
+* Design-based: Ask people. Do clever design. Call them about who they want to vote. 
+
+Design-based is the closest you can get to causal inference without specifically requiring a complete causal model.
+The causal is by randomization.
+So we can eliminate confounders.
+
+
+Hybrid-framework between frequentist model-based frameworks and design-based inference.
+
+
+What would a design-based modeler say to a image classification system with neural networks?
+This type of prediction is outside of design-based inference.
+It would say: What is the population of images?
+Maybe it's all images on the internet.
+It's finite.
+We can compute the share of all images that have cats on them.
+We just need a good sampling mechanism.
+The model does not rely on such a good sampling.
+I don't trust it therefore.
+Based on it's assumptions, the design-based mindset would reject the idea of machine leanring and prediction.
+Design-based requires a finit population.
+Machine learning says it works for new data, as long it follows the same distribution.
+Let's say a new cat is born.
+It's not part of the finite population with which the machine learning model was trained.
+Hence this sweet cat baby is not inside the population that we are interested in.
+From a design-based inference perspective, the new cat does not interest us.
+Heartless, but true.
+
+
+
+Design-based also works with bayesian approach.
+https://biostats.bepress.com/cgi/viewcontent.cgi?article=1004&context=umichbiostat
+Requires to specify a prior distribution for the population outcome $Y$.
+
+## Advantages
+
+* Can cancel out lots of confounders
+* Simpler models
+* No distributional assumptions are needed. All variance and such can be directly derived from the sampling approach.
+
+## Limitations
+
+* Experiments expensive, take long time
+* Less useful for predictive modeling
+* Only descriptive inference allowed: Because we can only describe the finite population. And nothing outside of it.
+* Only simple things can be estimated, such as means.
+* The sampling weights can carry implicit assumptions. Not so model-free after all.
+
+
+
+
+References
+
+* https://ies.ed.gov/ncee/pubs/20174025/pdf/20174025.pdf
+* http://thaddunning.com/wp-content/uploads/2010/05/Dunning_Rethinking-Social-Inquiry.pdf
+* Paper comparing model and design-based inference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/

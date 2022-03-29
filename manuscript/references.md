@@ -8,3 +8,4 @@
 - For agent-based modeling: https://economistwritingeveryday.com/2022/03/14/why-agent-based-modeling-never-happened-in-economics/
 - Book about Bayesian statistics. It seems quite comprehensive and interesting: https://www.bayesrulesbook.com/chapter-1.html#thinking-like-a-bayesian
 - Paper about non-parametrics stats: https://biostat.jhsph.edu/~mmccall/articles/efron_1991.pdf
+- Probability interpretatons: https://en.wikipedia.org/wiki/Probability_interpretations

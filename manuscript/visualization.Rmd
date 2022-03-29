@@ -1,0 +1,31 @@
+# Visualization
+
+
+Is visualization a modeling mindset?
+
+Let's revisit what's a model:
+
+* components
+* relationships between components
+* parameters
+
+In the visualization mindset, the visualization itself is a model of the data.
+The individual graphical elements (points, lines, bars, ...) are the components of this model.
+The relationships between the components are displayed via attributes of these components (color, size, shape, coordinates on plot, ...).
+Only the parameters are not important (except for some scaling of the figure and so on).
+Especially since we often just display the raw data.
+
+The mindset behind data visualization:
+
+* We can understand the data best by visualizing it
+* We don't put assumptions on how the data is distributed
+
+
+
+## Relation to other mindsets
+
+Quite orthogonal, and can extend other mindsets.
+
+Often visualization is the  first and the last step.
+First: Visualize raw data to form a mental model of the data, get some initial understanding.
+

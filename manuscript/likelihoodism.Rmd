@@ -1,5 +1,146 @@
 # Likelihoodism
 
-TODO: Move as subchapter to frequentism?
+But there is one, minor, statistical approach that solely builds on the likelihood function for relating to the real world.
+It's called likelihoodism and is an alternative to Bayesiansim and frequentism.
 
+The likelihood principle is central to likelihoodism.
+The likelihood principle says that the likelihood contains the strenght of evidence of our data.
+In more concrete terms, all information about the distributional parameters $\theta$ is contained in data $X$.
+Two likelihood functions contain the same evidence when they are proportional to each other.
+
+It's in contrast with frequentism, where we have a sampling-centric view, seeing data sampling as $n$ goes to infinity.
+
+Example, of how it differs from frequentism:
+
+Suppose we have a coin, and we want to figure out whether it's fair, or whether head turns up too often.
+Let $\theta$ be the probability of head.
+
+So: $H_0: \theta = 0.5$ und $H_1: \theta > 0.5$
+
+We say that $X$ is the number of heads.
+And $Y$ the number of trials.
+
+We conduct two different experiments:
+
+1. Toss coin 12 times. We observe 9 heads out of the 12 tosses.
+1. Toss coin until 3 times tail was observed. 
+
+Two experiments with the same outcome, but different procedures.
+In experiment 1) we fixed $Y$, the number of tosses.
+IN experiment 2), we fixed $X$ the number of heads.
+
+In the likelihoodist view, both experiments have the same likelihood, up to some constant factor.
+They are proportional to each other:
+
+$$L(\theta | X = 3) = \binom{12}{3} \theta^3 (1 - \theta)^9 (1 - \theta)^9 = 220 \theta^3 (1 - \theta)^9 $$
+
+And for experiment two:
+
+<!-- the 2 out of 11 results from the fact that the last toss must be a head -->
+$$L(\theta | Y = 12) = \binom{11}{2} \theta^3 (1 - \theta)^9 (1 - \theta)^9 = 55 \theta^3 (1 - \theta)^9$$
+
+<!-- The Likelihood Principle: https://www2.isye.gatech.edu/isyebayes/bank/handout2.pdf -->
+So the likelihoodists say that both experiments carry the same evidence.
+
+However, frequentists would come to a different conclusion. [^vidakovic9999]
+Before we dive into mathematics, how can it even be, from a point of intuition, that there are different results?
+Frequentists also incorporate results that did not happen.
+For hypothesis tests, $H_1$ often framed as some more extreme event to happen.
+But we never observed these, we just take what we observed (here 9 out of 12 are tail) and pretend that we observe the event more often.
+Due to the different framing on whether the 9 heads or the 12 trials are fixed, the $H_1$ hypothesis either includes probabilities of fictional experiments where 9,11, or 12 heads were observed.
+Or, in the other framing, it includes all experiments where we observed more than 12 repetitions.
+Remember number of tails = 3 is fixed, so more repetitions means in favor that $\theta > 0.5$.
+
+When testing $H_0$ vs. $H_1$, we can see:
+
+$$P(X \geq 9| H_0) = \sum_{x = 9}^{12} \binom{x}{12} 0.5^x (1 - 0.5)^{12 - x} = 0.073$$
+
+So when we set the significance level $\alpha = 0.05$ we would not reject the hypothesis of a fair coin.
+
+But for the other experiment:
+Here we have to assume a Negative Binomial distribution:
+
+$$P(Y \geq 9 | H_0) = \sum_{y=9}^{\infty}\binom{3 + y - 1}{2} 0.5^y 0.5^3 = 0.0327$$
+
+Why is that?
+Because in the second experiment, we have, in the frequentist view, consider all events where also $X==3$ but the numbr of trials running to infinity.
+
+
+Here we get a significant result and would reject the $H_0$-hypothesis of a fair coin.
+
+
+A special place in likelihoodism is for likelihood ratios:
+
+$$\frac{L(h_1|X)}{L(h_2|X)}$$
+
+This allows one to compare the likelihood of two hypothesis.
+These likelihood ratios are also used in Bayesianism and frequentism.
+IN Bayesianism as Bayes factor, also for model selection.
+IN frequentism likelihood rations are often used as test statistics for hypothesis tests.
+
+In likelihoodism we don't have test statistics, for example.
+There are only likelihoods of different hypothesis, and we use the one with LR larger than one.
+
+https://quod.lib.umich.edu/cgi/p/pod/dod-idx/why-i-am-not-a-likelihoodist.pdf?c=phimp;idno=3521354.0016.007;format=pdf
+
+Likelihoodism has been critizied [^gandenberger2016], because: no use of priors.
+
+Bayesianism also conforms to the likelihood principle, that evidence is in the likelihood.
+However, these likelihood ratios also involve the prior probabilities for the parameters $\theta$.
+But in addition they have prior probabilities and focus on the posterior probabilities of their parameters.
+
+
+Likelihoodists could say they use as decision rule when $H_1$ likelihood greater than $H_2$.
+But just when it's bigger?
+It should be bigger than some pre-specified threshold, since likelihoods are the results of esitmation with data and therefore have some variance.
+But there is no likelihoodist theory saying when we can do so.
+
+
+## Likelihood regions
+
+See https://en.wikipedia.org/wiki/Relative_likelihood#Likelihood_region
+
+"Likelihood intervals are interpreted directly in terms of relative likelihood, not in terms of coverage probability (frequentism) or posterior probability (Bayesianism). "
+
+## INference with Likelihoodism
+
+Not used by many likelihoodists.
+They reject inference.
+It's only about calculating evidence.
+
+## Advantages of Likelihoodism
+
+* No prior distribution needed
+* Likelihood sufficient
+* objectivity of frequentism, i.e. no subjective priors involved
+* 
+
+TODO: make likelihoodism extra chapter.
+TODO: continue reading Gandenberger, p. 11
+
+## Disadvantages of Likelkhoodism
+
+Let's take a silly example:
+
+You eat rice.
+It tastes funny. A bit like whiskey.
+It could be either because it had gone bad, or someone has put something in it.
+You have had bad rice, it had tasted differently.
+But the taste would be plausible if someone had put whiskey into the rice.
+So, two opposing hypotheses:
+
+$$P(funny rice | person added whiskey) > P(funny rice|rice bad)$$
+
+But it's much more likely that the rice has gone bad.
+Because whiskey-pouring rice-haters are one of the rarest people on earth.
+But without prior probabilites, it's not the right result.
+
+* Likelihood ratio favoring one hypothesis over another does not allow a decision for one model, or not a degree of belief.
+* No decision as in frequentism
+* No degree of believe as in Bayesianism
+* Therefore, little practical value
+
+[^vidakovic9999]: ISyE8843A, Brani Vidakovic Handout. "1 The Likelihood Principle."
+
+[^gandenberger2016]: Gandenberger, Greg. Why I am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library, 2016.
 

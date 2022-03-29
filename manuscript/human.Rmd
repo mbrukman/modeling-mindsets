@@ -1,5 +1,9 @@
 # Intuition, Anecdotes and Feelings
 
+https://en.wikipedia.org/wiki/Intuitive_statistics
+
+Alternative titles: Casual probability. Casual inference.
+
 Everyone has an opinion about probabilities and predictions.
 And we are quite bad at them.
 But it's important to revisit this hear, because IT IS an alternative to the other mindsets.

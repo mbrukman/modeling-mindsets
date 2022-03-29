@@ -69,16 +69,25 @@ As the main criterion for pronouncing something a distinct mindset, is when I th
 <!-- differentiators between mindsets -->
 I had a bit more objective criteria.
 
-* A mindset should have at least it's own Wikipedia entry.
-* A modeling mindset should be "holistic" in the sense that it encompasses a broad range of modeling tasks. Or at least expicitly exclude some tasks out of philosophical reasons.
+* A mindset should have it's own Wikipedia entry.
+* A modeling mindset should be "holistic" in the sense that it encompasses a broad range of modeling tasks. Or at least expicitly exclude some tasks out of philosophical reasons. 
 * Another, softer, criterion was that there are communities around modeling mindsets. For example, I dedicated a chapter to supervised machine learning, in addition to a chapter on machine learning. Supervised machine learning has such a big community, think of machine learning competitions a la Kaggle.
-* A mindset should have at least one aspect that is unique (except for the 'meta'-mindset chapters on [likelihood](#likelihood) and [risk-minimization](#risk-minimization).  
+* A mindset should have at least one unique aspect that distinguishes it from other mindsets (except for the 'meta'-mindset chapters on [likelihood](#likelihood) and [risk-minimization](#risk-minimization).  
+
+
+
+Mindsets are often not that conscious.
+If you are a statistician, you don't ACTIVELY focus on maximizing likelihoods.
+But this mindset is the foundation of all your later interpretations.
+
+
 
 <!--
 
 Other mindsets
 
-* Sampling theory ??
+* Sampling theory or survey sampling with design-based assumptions for modeling. Alternative name: design-based inference. Survey sound people oriented, and it is. But can also mean other samples. Normally, for statistical modeling, it's assumed that the model is unknown and the goal is to find the right model / distributions to represent the data-generating process. with survey sampling we start with the assumption that we know the model, but we have to collect the data with random sampling. It's a data sampling first approach. Very complementary of course. But it's own mindset bc. of the special sampling focus, and stating that sampling is the most important.   https://en.wikipedia.org/wiki/Statistical_assumption#Classes_of_assumptions and https://en.wikipedia.org/wiki/Survey_sampling
+  * https://ies.ed.gov/ncee/pubs/20174025/pdf/20174025.pdf
 * Generative models - machine learning
 * Discriminative models - machine learning
 * Symbolic AI
@@ -90,6 +99,24 @@ Other mindsets
 * Generative modeling: GANs, Naive Bayes, anything that produces samples. Modeling mindset: We want to replicate the data-generating process. Applications in art also. But can also be used for discriminative tasks. Models overlap with other approaches.
 * Neural networks: Own mindset because of some unique attributes that allow to think differently about modeling: embedding, transfer learning, generative modeling (link to the mindset at least), feature learning,  
 * Unsupervised learning / clustering / association rule learning / outlier detection: Mindset of finding general patterns inthe data. Not driven by a distinct $Y$, but instead by average big trends. 
+* Propensity probabilities? https://en.wikipedia.org/wiki/Propensity_probability not complete modeling mindset, but at least a different interpretation of probability
+* Data visualization: Just plot stuff. Humans are good at recognizing stuff. Also works for data that is not representative. No assumptions. You see much more than when only, e.g. hypothesis testing or predictive performance. You can see for example when errors happen.
+* Operations research: https://en.wikipedia.org/wiki/Operations_research . 
+ is focused on making decisions. sometimes interest in extreme value. tied to organization and systems.
+* Representation learning? https://en.wikipedia.org/wiki/Feature_learning
+* Semi-parametric models? Or at least mention it in liklelihood mindset. For example the cox model.
+
+TODO: Write about inductive vs deductive inference
 
 -->
 
+
+<!--
+## Linear Model as exampel
+
+
+The linear model is a mathematical model that represents a varaible Y as the weighted sum of other variables $X_1$, ..., $X_p$:
+
+$$Y = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p$$
+
+-->

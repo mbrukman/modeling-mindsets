@@ -1,107 +1,233 @@
-# Distributions and Likelihood
+# Statistical Modeling
 
-The likelihood modeling mindset:
-We can express the world through parameterized distributions.
-The parameters of these distribution can be estimated using the likelihood function.
-For example with maximum likelihood estimation.
+<!-- statistician modeling mindset ingredients
 
-The likelihood also builds the base for many other mindsets.
-Frequentism, Bayesianism, Causal inference.
-Also for machine learning it is sometimes used, but not as central as the for the other approaches.
+- Ingredients: Random variables, distributions,
+- Statistical estimators
+- https://en.wikipedia.org/wiki/Statistical_model
+- TODO: Distinguish between statistical model and statistical inference?
+- TODO: IID assumption: talk about it
+-->
+<!-- TODO: Figure out if reframing as Statistician mindset -->
 
-To draw conclusions, we need more assumptions.
-Either we make some assumptions about the long-run repetitions, and end up with [frequentist statistics](#frequentism), or we use the Bayes theorem and compute believes for [Bayesian inference](#bayesian).
+<!-- motivation -->
+Does drinking a lot of water make you more productive?
+How do these two things relate to each other?
+Can you find a simple rule that connects water intake with productivity?
+Like a physical law, or some logic rule?
+Unfortunately, you can't.
+Your productivity level not only depends on many other things, like sleep, distractions and so on, and it may even have some completely random element.
 
-<!-- A description based on intuition -->
-Many modeling approaches are based on assuming a distribution for your data and optimizing the likelihood of the distributions parameters.
+<!-- summary of likelihood mindset -->
+Welcome to the statisticians mindset.
+What you are about to read in this chapter is not a full description of a statistician.
+This would have to additionally include study and questionnaire design, data visualization, communicating results, checking data quality, and much more.
+It's a fun job, I can recommend it!
+But this chapter focuses on the basic modeling mindset of a statistician:
+how to mathematically represent properties of the world.
+How the statistician draws conclusions about the world is not part of this chapter, so this chapter is not a full "inference" chapter.
+Conclusions about the real world properties require further assumptions on the nature of probability and causality, see [frequentism](#frequentism), [Bayesianism](#bayesianism), [likelihoodism](#likelihoodism) and [causal inference](#causality).
+This chapter is the common denominator of all of these approaches.
+This chapter represents a likelihood-centric view, but not all approaches that statisticians use require a defined probability distributions with a defined likelihood function.
+[Semiparametric models](#semiparametric) and especially [distribution-free statistical modeling](#distribution-free) approach modelling with a different mindset, but are considered statistical modeling.
 
-Frequentist statistics, Bayesian statistics, likelihoodism and causal inference all rely on assuming a distribution for your data and optmizing the parameters of the distribution.
-This optimization happens through the likelihood.
+But all make this basic assumption: The world is stochastic.
 
-Your data has a distribution.
-If you have various variables, then we speak of the joint distribution.
+## Random Variables
 
-The distribution that was assumed has parameters, like the center of the mass and the variance.
-The goal of statistical inference is to fit the distribution to the data, by changing the parameters of the distribution.
-Also, we want to make assumptions about the entire population, where, ideally, our data is a representative sample from.
+<!-- Random Variables --> 
+Consequently, a model of the world has to capture this randomness and work with it.
+In the likelihood-based approach, the random variable is the elementary model component.
+A random variable is a mathematical object that depends on random events.
+A random variable does not have one fixed value, it has a distribution.
+The roll of a dice has a specific value, maybe "2".
+But a random variable representing a dice is a distribution of possible outcomes, from 1 to 6, each with a probability of $1/6$.
+Monthly sales of an ice cream truck can be seen as a random variable.
+Random variables can represent much more complex or abstract properties of the world, too.
+For example, the probability that a customer will quit their contract, or a personality / behavioural trait.
+Being a statistician who works with the likelihood mindset, means thinking systematically of the world as being random variables.
+So coming back to our example, a statistcian would represent water intake and productivity each  as a random variable.
+We have to be specific about how these variables are measured, so we say water intake in liters for entire day.
+And: productivity measured as self-reported number of productive hours per day.
+
+## Distributions
+
+<!-- Distributions -->
+A random variable is a construct, that we can't observe directly.
+So we get a bunch of realizations of a random varible.
+Like you can see in Figure \@ref(fig:likelihood) 1).
+That's only helpfull if you are a database.
+But people aren't databases.
+Instead, we want to create a model of the world, which simplify the world for us. 
+A construct to describe potential outcomes of the random variable are distributions.
+A probability distribution is a function which gives each possible outcome of a random variable a probability.
+
+<!-- How distributions really help -->
+We have the realizations of a random variable, we know that there is some distribution it follows.
+But which probability distribution are the data coming from?
+That's what statisticians try to find out.
+A common approach is to simply assume a certain distribution function, based on the type of random variable you have:
+A numerical outcome such as IQ? Normal distribution.
+A count outcome, like number of fish caught per hour? Poisson distribution.
+A binary outcome, like winning in the lottery? Binomial distribution.
+There are many, many distributions.
+The statistician picks one.
+Hold on a second! Why do we have to collect any data at all when the statistician just selects some data.
+
+<!-- parameters of the distribution -->
+The distributions have parameters.
+
+The parameters should have a well-defined meaning.
+This is an (intuitive) assumption that is violated for [semiparametric models](#semiparametric).
+
+<!-- TODO: Plot different distributions? -->
 
 
-## Probability function
+## Statistical Model
 
-<!-- what is frequentistic about it -->
-Here comes what differentiates frequentist statistics from the other mindsets.
-The assumption is that when the number of samples $n$ goes to infinity, we get perfectly close to the real model parameters.
-Again, only given that we made the  right assumptions.
+A statistical model is a mathematical model that sets the random variables into relation.
+Many hypothesis tests and estimators of properties of distributions can be motivated from statistical models.
+
+A statistical model is the combination of the sample space from which the data comes from, and a set of probability distributions on this sample space.
+That's it.
+
+The model should, intuitively, make sense.
+For example, the distributions are chosen based on theoretical assumptions.
 
 
-Central mathematical formula (maybe even create a box for it)
+<!-- on populations and stuff -->
 
+<!-- example for likelihood mindset -->
+How does this work? Let's go back to the water and productivity example.
+You want to answer this question of water vs. productivity  with data.
+Figure \@ref(fig:likelihood) illustrates this principle.
 
-This likelihood as discussed here is extended to use prior probabilities in [Bayesian statistics](#bayesian-statistics).
-Frequentist statistics, likelihoodism and causal inference directly work with likelihoods.
+First step: You collect lots of data, measure your daily water intake, and the number of tasks you get done.
+In the likelihood mindset, we express information as random variables.
+In this example, one variable is "water intake", let's call it $X_{water}$ the other is "Number of productive hours" $X_{hours}$.
 
-Three questions:
+Just sifting through the data can give you a first impression, but does not really give you an answer of whether water helps your productivity.
+In the likelihood mindset, we now assume that we can describe water intake + words using probability distributions.
+Note that this means that we assume some randomness in them.
 
-- What should I do? ->  Frequentist statistics, p-values
-- What should I believe? -> Bayesian stats, credibility intervals, posteriori stuff
-- What's the relative evidence? -> Likelihoodism
+So in the next step, you assume which distribution your data might follow.
+Figure \@ref(fig:likelihood) shows a Normal distribution.
+The multivariate Normal distribution now has 5 parameters that we have to get from data:
+Mean and variance of the univariate Normal distribution for the water intake.
+And the same for the number of productive hours.
+The fifth parameter is the covariance between water and hours.
+For our case, we have to variables, so we could assume that water and productivity follow a 2-dimensional Normal distribution.
 
-## Variable 
+The two-dimensional Normal distribution has two parameters: Mean and variance.
+This means you reduced your problem from understanding 365 individual data points to understanding a distribution that is parameterized with two parameters. 
+Now you only have to find out what those parameters are.
 
-First, consider a variable $X$:
+Now that we have identified the parameters, we can learn them from data.
+For this we can use the maximum likelihood approach:
+We write down the formula for the distributions.
+And then we maximize it for the parameters, given the data.
+The resulting parameters are then our estimates for the parameters.
+This now parameterized distribution is now the model of our little office world.
 
-```{r}
-x = c(2.0, 1.1, 0.3, -0.1, 0.9, 0.9, 1.5,  1.4, 0.1, 0.8, 2.4, -1)
+```{r likelihood, echo = FALSE, fig.cap = "The 4 steps from data to parameterized distribution: 1) Measure your random variable (for example water temperature). 2) Make an assumption about how it's distributed (for example Normal distribution). 3) Our goal is to find the optimal parameters for this distribution (here: mean of distribution) by 4) maximizing the (log) likelihood."}
+library("ggplot2")
+library("patchwork")
+set.seed(2)
+n = 25
+maxx = 7.5
+minx = -maxx 
+x = seq(from = minx, to = maxx, length.out = 100)
+y = dnorm(x)
+
+# just the distribution
+dat = data.frame(x,y, type = "0")
+p = ggplot(dat,aes(x=x,y=y, group = type)) +
+  geom_area(fill = "lightblue", alpha = 1) + 
+  geom_line(size = 1.5, color = "darkgrey") +
+  scale_x_continuous("Value of random variable") +
+  scale_y_continuous("Density", limits = c(0, 0.5)) +
+  theme_bw() +
+  ggtitle("2) Assume theoretical distribution")
+
+# non-parametric distribution of the data
+# note: just for visualization, we don't actually need this for likelihood approach
+xsample = rnorm(n, mean = 1, sd = 2)
+xx =  density(xsample)
+xx = data.frame(x = xx$x, y = xx$y, type = "real")
+#xx = rbind(xx, dat)
+
+xdat = data.frame(x = xsample, type = "egal", y = 0)
+
+# TODO: Beeplot
+
+#p2 = ggplot(xx, aes(x=x,y=y, group = type)) +
+#  geom_rug(data = data.frame(xdat)) +
+#  geom_area(fill = "lightblue", alpha = 0.3) + 
+#  geom_line(size = 2, lty= 2) +
+#  theme_void() +
+#  ggtitle("1) Data")
+
+p2 = ggplot(xdat) +
+  geom_dotplot(aes(x = x), binwidth = 0.5, stackdir = "up") +
+  theme_void() +
+  ggtitle("1) Measure Random Variable") +
+  theme(axis.text.x = element_text(),
+        axis.title.x = element_text()) +
+  scale_x_continuous("Value of random variable")
+
+# different means
+d1 = data.frame(x = x, y = dnorm(x, mean = -3, sd = 2), type = "1")
+d2 = data.frame(x = x, y = dnorm(x, mean = -0, sd = 2), type = "2")
+d3 = data.frame(x = x, y = dnorm(x, mean =  3, sd = 2), type = "3")
+dd = data.frame(data.table::rbindlist(list(d1, d2, d3)))
+
+p3 = ggplot(dd, aes(x=x,y=y, group = type)) +
+  geom_area(aes(fill = type), alpha = 0.3, position = "identity") + 
+  scale_fill_discrete(guide = "none") +
+  geom_line(size = 1, color = "darkgrey") +
+  ggtitle("3) Goal: Find parameters") +
+  geom_text(label = "?", x = -3, y = 0.15, size = 12) + 
+  geom_text(label = "?", x = 0, y = 0.15, size = 12) + 
+  geom_text(label = "?", x = 3, y = 0.15, size = 12) + 
+  geom_dotplot(aes(x = x), binwidth = 0.5, data = xdat, dotsize = 1) +
+  scale_y_continuous(limits = c(0, 0.2)) +
+  theme_void() 
+
+x = seq(from = -3, to = 3, length.out = 100)
+y =  - 0.5 - (x - 1)^2
+ldat = data.frame(x, y)
+p5 = ggplot(ldat) + 
+     geom_line(aes(x = x, y = y), size = 2) +
+     scale_x_continuous("Mean Parameter") +
+     scale_y_continuous("log Likelihood") +
+     theme_bw() +
+     ggtitle("4) Maximize likelihood function")
+print((p2 + p) / (p3 + p5))
 ```
 
-Now, we could simply compute the mean of this variable:
+<!-- semi-parametric approaches -->
+A note on step 2) in Figure \@ref(fig:likelihood).
+Some approaches don't assume a closed form distribution.
+For example the Cox proportional hazards model.
+For the Cox model, we optimize the parital likelihood.
+These approaches are called semiparametric.
 
-```{r}
-mean(x)
-```
+<!-- Central Formula for the mindset -->
+With this, I would say that the most central formula to this mindset is:
+$$\arg \max_{\theta} L(\theta, X),$$
+where $\theta$ is the parameters of the model, $L$ is the likelihood function, and $X$ the random variables involved.
+Note the emphasis I want to put on here is not that this is an optimization.
+The focus is that we want to have these parameters to describe the distributions.
+These are the most interesting parts.
+It's an optimization problem.
 
-However, this would not constitute statistical inference, but only descriptive statistics.
-I merely described the data, but made no assumptions about the distribution. 
+<!-- TODO: strongly shorten the maximum likelihood apprach and move it here -->
 
-So, now let's make an assumption about the data.
-Maybe it follows a Normal or Gaussian distribution?
-
-First, let's plot the data:
-
-```{r}
-hist(x)
-```
-
-## Likelihood
-
-Not looking that bad, but we actually need to fit the parameters of this distribution.
-The Normal distribution has two parameters, $\mu$ and $\sigma$.
-The center of the data is described by $\mu$, and the variance by $\sigma$.
-And this is what a Normal distribution with $\mu=0$ and $\sigma=1$ looks like:
-
-```{r}
-xx = seq(from = -3, to = 3, by = 0.1)
-dens = dnorm(xx)
-plot(xx, dens, type = "l")
-```
-
-
-As I said in the beginning, our goal is to fit a distribution.
-Fit means that we take the formula of the distribution, in which the parameters appear, and find the best set of parameters.
-Hold on! What is the "formula" of a distribution? And what is meant by "best"?
-Formula is the density of the distribution, which describes sloppily formulated how likely a certain value for the variable $X$ is.
-However, it's not a probability, but we speak of the density.
-For example, the density of $x=0$ for a Gaussian distribution with $\mu = 0$ and $\sigma = 1$ is `r dnorm(0)`, and for $x=1$ it's `r dnorm(1)`.
-Makes sense, since $x=0$ happens to be the center of the mass.
-Note that, while density is not the same as probability, the density also adds up to 1 (the integral).
-
-The density of the Gaussian distribution is described by
+For simplicity, we have a look at the 1-dimensional Normal distribution.
+The density function is described as:
 
 $$f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
 
----
-
-A little bit to unfold here:
 
 * $\pi$ is literally the pi as in 3.14... so just a constant
 * The term $\frac{1}{\sigma \sqrt{2\pi}}$ is just a scaling factor that makes the overall density smaller the larger the variance of the distribution is.
@@ -115,12 +241,7 @@ A little bit to unfold here:
 But as I said, the goal is not to find out the density for some point $x$.
 We couldn't find it out, because we don't even know $\mu$ and $\sigma$.
 But that is our original goal: Finding best fitting values for $\mu$ and $\sigma$.
-
 So, for which values of $\mu$ and $\sigma$ will the $f(x)$ be small?
-Keep in mind that we don't have only one data point $x$, but `r length(x)`.
-So we want to find parameters of the distribution that fit all the data well.
-
-## Maximum Likelihood Approach
 
 But what is the best $\mu$ and $\sigma$?
 How do we find out?
@@ -145,63 +266,149 @@ And we want to find the maximum for it:
 
 $$\arg \max_{\mu,\sigma} \prod_{i=1}^n f(x_i)$$
 
-But maximizing a product is really ugly.
-Good thing is: The logarithm of something has the same maximum as the original.
-So we can log-transform the likelihood and then search for the maximum.
-The following formula is also called the log-likelihood.
+What happens next is usally to take the logarithm of it.
+Then set it to zero.
+This only works when it's a simple problem.
+This approach is called maximum likelihood approach.
+Can also be other optimization algorithms.
 
-<!-- TODO: Check if its ok to write as optimization for both mu and sigma at the same time -->
-$$\arg \max_{\mu,\sigma} \sum_{i=1}^n log(f(x_i))$$
+But how can we speak about probabilities at all?
+It can seem natural.
+But it's based on some mathematical axioms.
 
-Good thing about the log: It also removes the exponent of the Gaussian density, making our lifes even easier.
+## Justification of Likelihood Mindset: Probability Theory
 
-$$log(f(x_i)) = log\left(\frac{1}{\sigma \sqrt{2\pi}}\right) \cdot \left(-\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2\right)$$
+Let's start VERY basic.
+What is a probability?
+It's axiomatic, meaning we have to make some assumptions to build a framework of interpretability.
+Introduced by Andrey Kolmogorov in 1933.
+There's an entire field called measurement theory, which lays the theoretical groundwork that we can even speak of "probabilities" and events.
+The idea is that we can describe a so-called probability space with $\Omega$, the set of all possible events that can happen, we call $B$ sub-spaces of $\Omega$ and $p$ is a measure on the event space.
+The clue is how we define $p$.
+And this is where axioms kick in: We have to build on axioms because we can't say what's right or wrong.
+Kolmogorov's axioms:
+For any event $b \in B$ we want $p(b) \in [0,1]$, and also $p(\Omega) = 1$.
+This looks a lot like a probability: The probability that any of the events happens is 1 ($\Omega$ is an exhaustive set) and the probability is always between 0 and 1.
+Also for disjunct events, the probability that any of them happens is the sum of their probability.
+The probality that a person a person rolls a dice with "1" or a "2" is the sum of probabilities for both numbers. 
 
-Ok, let's search for the optimal value for $\mu$.
-Good thing is that $log\left(\frac{1}{\sigma \sqrt{2\pi}}\right)$ falls right off, because there is no $\mu$ in there and therefore just a constant, at least when it comes to optimizing $\mu$
-.
-$$\arg \max_{\mu} \sum_{i=1}^n -\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2$$
+<!-- the data-generating process -->
 
-The $\frac{1}{2}$ and $\frac{1}{\sigma^2}$ can also be removed, since it's a constant value that does not change WHERE the maximum value is (just how large it is, but we are not interested in finding the actual maximum, just the parameters that bring us there).
+## Data-Generating Process
+
+A central theme to understand the mindset of statistical modeling is the data-generating process.
+If you already developed a feeling for the idea of random variables and distributions, you are already there.
+The data-generating process is a construct.
+An idea of how the data that we observed was generated.
+The thing with the data-generating process is: While it's just a model, you have to assume that the data-generating process really is how nature behaves, at least in an abstract way.
+The thing is: The data-generating process is unknown.
+It's almost an idealization of a process.
+We can define it when we do simulations ourselves, but we cannot know it in nature.
+The result of the data-generating process are distributions.
+These we can also not observed, but at least we can observe the realizations of the respective random variables.
+We can only observe its consequences by oberving data.
+
+I think the data-generating process is a central element to the statistician mindset.
+Proof: Also machine learning methods can rely on random variables and distributions.
+But machine learners make the stance that the data-generating process is best approximated by some function we don't necessarily have to understand.
+It's maybe not ever understandable.
+The machine learners don't even speak about the data-generating process.
+
+I think the data-generating process is a very powerful idea.
+It enrourages you to think about how the data was generated.
+When you explicitly have to model some hidden data-generating process, you take on the mindset of a detective uncovering the plot from clues.
+It's a mental model that encourages to look at detailed questions:
+How was a variable generated?
+Is there some hidden variable that influence whether another variable has missing values?
+
+<!-- examples of data-generating processes -->
+"Defining" the data-generating process is neither simple nor well-defined, but I'll give it a try:
+
+* For a dice roll, the data-generating process is the roll itself, and the fact that the dice has a symmetric shape, and enough randomness that we dismiss factors such as throwing angle, surface roughness and so on.
+* We study the income of computer scientists via survey. Instead of only reporting on the income distribution, we think about the entire data-generating process: For example, some income values are missing. Are the missing at random? Or are maybe people with higher incomes omitting the question? Are their imbalances regarding the companies, namely that one companies worker are much more often in the survey? 
+* We want to have rent index: A statistical model that sets the rent (per square meter) into relation with factors such as age of building, number of rooms, ...
+* A research team has collected chest x-ray images of patients with and without COVID-19. These are used to build a COVID-19 classifier based on inflammation of the lung. A closer look at the data-generating proces shows: non-COVID-19 and COVID-19 images do not only differ in the medical condition, but the x-ray images come from different data-generating processes. COVID-19 images are more likely from a horizontal position where the patient lies down because they are so exhausted. One of the non-COVID-19 dataets are even just children x-ray images. I picked this example, because it is a paper from a [machine learning mindset](#machine-learning). Statisticians would think much more about the data-generating process, and are, IMHO, more likely to spot such mistakes. TODO: CITE critique paper.
+
+If these thoughts relating to the data-generating process sound like common sense to you, it's because I think they are.
+Common among statisticians.
+Surprisingly uncommon among non-statistician mindsets.
+For example, for [machine learning](#machine-learning) considerations of the data-generating process play a subordinate or no role at all.
+For machine learning competitions, for example, the winner is, most of the times, solely determined by the lowest loss function.
+It's not considered when some approach has a more meaningful consideration of the data-generating process, and an understandable model.
+
+Sometimes we want to control the data-generating process.
+For example by using randomized clinical trials, or experiments with specific designs.
 
 
-$$\arg \max_{\mu} - \sum_{i=1}^n -\left(x - \mu\right)^2$$
+The idea of the data-generating process also plays an important role for statistical inference.
+Inference is about transporting the insights from the statistical model to the real world.
+A good statistician makes a good argument why this is allowed.
+For example, the mean income would be wrong to assume for all computer scientists when we identified that people with high income are more likely to omit their income.
+A statistician would have to adjust for that before we make inference.
 
-Already looking much more handable!
-Let's unweave the square:
+## Statistical Inference: Drawing Conclusions About the Real World
 
-$$\arg \max_{\mu} - \sum_{i=1}^n x^2 - 2x\mu - \mu^2$$
+Assumption: The data come from larger population.
 
-So since we are looking for the maximum, we can set this derivative of this equation with respect to $\mu$ to zero.
-The $x^2$ then falls away.
+TODO: This depends on the more detailed mindset.
 
 
-$$0 = - \sum_{i=1}^n  \left(2x - 2 \mu\right)$$
 
-By shuffling around the terms and dividing both sides by $2$, we get:
+<!-- Part 1: Representativeness -->
+TODO: Write about representative samples
 
-$$\hat{\mu} = \frac{1}{n} \sum_{i=1}^n x_i$$
+<!-- A description based on intuition -->
+Many modeling approaches are based on assuming a distribution for your data and optimizing the likelihood of the distributions parameters.
+To draw conclusions, we need more assumptions.
+Either we make some assumptions about the long-run repetitions, and end up with [frequentist statistics](#frequentism), or we use the Bayes theorem and compute believes for [Bayesian inference](#bayesian).
+Frequentist statistics, Bayesian statistics, likelihoodism and causal inference all rely on assuming a distribution for your data and optmizing the parameters of the distribution.
+This optimization happens through the likelihood.
 
-The little hat on $\hat{\mu}$ indicactes that our result is not the true $\mu$, but an estimate.
-The little hat marks it as an impostor.
-And that's a very neat result.
-So the result of this tedious derivation is just the average of the variable!
-And this is our best estimate for the mean of the Gaussian distribution, assuming that we think our data come from a Gaussian distribution.
-Hold on!
-Didn't I say right at the beginning that computing the mean is descriptive statistics?
-Yes, I did, you don't have to check again.
-The big difference is that now we made the assumption that the data comes from the Gaussian distribution.
-This is stronger than just using the mean to describe the data.
+The goal of statistical inference is to fit the distribution to the data, by changing the parameters of the distribution.
+Also, we want to make assumptions about the entire population, where, ideally, our data is a representative sample from.
 
-Because with the additional assumption of the Gaussian distribution we can do some neat tricks.
-For example
+<!-- probability interpretations -->
+There are different interpretations of probability.
+And that's why this chapter here is a meta mindset.
+We need further distinction to get into more concrete mindsets like frequentism or Bayesianism.
+Also machine learning uses likelihood-based approaches, but more on a technical level, not philosophical.
+The two big interpretations are "physical" and "evidential" probabilities.
+Frequentism follows the physical interpretation
+The assumption is that when the number of samples $n$ goes to infinity, we get perfectly close to the real model parameters.
+Again, only given that we made the  right assumptions.
 
-* The assumption of the data distribution also tells us how the estimator $\hat{\mu}$ is distributed
-* This means we know that our estimator $\hat{\mu}$ has a standard deviation due to the fact that it was estimated with data.
-* Now we can derive hypothesis tests
-* We can derive confidence intervals
+This likelihood as discussed here is extended to use prior probabilities in [Bayesian statistics](#bayesian-statistics).
+Frequentist statistics, likelihoodism and causal inference directly work with likelihoods.
 
-For $\sigma$ it's a bit more complicated, but also doable.
-You can do it at home if you are bored.
+Three questions:
+
+- What should I do? ->  Frequentist statistics, p-values
+- What should I believe? -> Bayesian stats, credibility intervals, posteriori stuff
+- What's the relative evidence? -> Likelihoodism
+- What's the cause? -> Causal inference + frequentist / Bayesian  
+
+For Bayesianism, for example, we not only assume a distribution for our data, but also for our parameters.
+
+<!-- Probability interpretation -->
+But how exactly we infer properties about the real world now depends on the interpretation of the probability.
+In frequentist statistics, we might ask the question: Is there are significant correlation between temperature and productivity?
+And the answer would involve confidence intervals and p-values.
+The Bayesian would be talking about belief and the posterior distribution of the covariance parameter.
+A causal inference person would be trying to figure out if it's allowed to interpret the correlation between temperature and productivity as causal.
+
+
+
+## Advantages
+
+* Solid theoretical foundation.
+* Data-generating process is a powerful mental model that encourages a mindful modeling approach, and asking detailed question.
+* DGP Also invites to work closely with experts.
+
+## Limitations
+
+* World not necessarily as neat and organizable into distributions.
+* Statistical modeling approaches (as defined here) don't work so well for images and text, for example.
+* Very "manual": You have to define distributions by yourself.
+* Needs a lot of assumptions: That you picked the right distributions, and so on.
 
 
