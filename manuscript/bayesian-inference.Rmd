@@ -290,6 +290,8 @@ TODO: finish up figure with credible interval, mean
 
 ```{r posteriori, fig.cap = "Describing the posterior distribution."}
 library("ggplot2")
+library("ggpattern")
+set.seed(2)
 n = 1000000
 datbeta = data.frame(x = c(rbeta(n/2, shape1 = 2, shape2 = 5), rbeta(n, shape1 = 5, shape2 = 2)))
 
@@ -298,21 +300,29 @@ qs = cumsum(datbeta$x) / sum(datbeta$x)
 lower = max(sort(datbeta$x)[qs < 0.025])
 upper = min(sort(datbeta$x)[qs > 0.975])
 
+dd = density(datbeta$x)
+dd = data.frame(x = dd$x, dens = dd$y)
+dd = dd[(dd$x > lower) & (dd$x < upper), ]
 
-db2 = datbeta[(datbeta$x > lower) & (datbeta$x < upper),, drop = FALSE]
 
 ggplot(datbeta, aes(x = x)) +
 geom_density(fill = "grey", size = 2) +
-annotate(x = 0.8, y = 2.3, geom = "label", label = "MAP") +
-annotate(x = lower, xend = lower, y = 0, yend = 2.3, geom = "segment") +
-annotate(x = upper, xend = upper, y = 0, yend = 2.3, geom = "segment")
-
+geom_area(aes(x = x, y = dens), data = dd) +
+annotate(x = 0.79, y = 2.3, geom = "text", label = "Maximum \n a posteriori \n probability estimate", size = 6, vjust = 1) +
+annotate(x = 0.79, y = 1.8, xend = 0.79, yend = 1.68, geom = "segment", arrow = arrow(), size = 2) + 
+geom_density(fill = "grey", size = 2, trim = TRUE, alpha = 0.5)  +
+annotate(x = lower + 0.01, y = 0.1, xend = upper - 0.01, yend = 0.1, geom = "segment", arrow = arrow(ends = "both"), size = 2) + 
+annotate(x = mean(c(lower, upper)), y = 0.1, geom = "label", label = "95% Credible Interval", size = 6) + 
+theme_void()
 ```
 
 
-
-
-* Maximum a posteriori estimation: This is the mode (the highest point) of the posteriori distribution. It represents the   
+<!-- options to describe the distribution -->
+Maximum a posteriori estimation: This is the mode (the highest point) of the posteriori distribution. It represents the most likely value.
+But there are other summaries:
+You could just compute the mean or the median of the posterior probability distribution.
+Or any other quantile of the distribution.
+Another option are credible intervals.
 
 <!-- Credible interval -->
 In frequentist statistics, we get confidence intervals for our estimators.
@@ -334,7 +344,7 @@ But they have a different philosophical interpretation.
 * There is also a prior predictive distribution: It's the distribution for a newly predicted data point. But instead of marginalized 
 *
 
-
+<!-- 
 ## Some Examples of Bayesian inference
 
 What would a linear regression model look like in the Bayesian modeling approach?
@@ -370,32 +380,33 @@ TODO: List some models
 
 https://en.wikipedia.org/wiki/Bayesian_probability#Justification_of_Bayesian_probabilities
 
+
 ## Empirical Bayes
 
 Combination of frequentism and Bayesianism
 
 https://efron.ckirby.su.domains//papers/2005BayesFreqSci.pdf
 
+-->
+
 ## Strengths
 
-* Incorporate prior knowledge.
-* Especially useful when expert knowledge has to be included in the approach.
-* Shares all advantages of [statistical models](#statistical-modeling).
-* Offers an expressive language to build up models
+* Bayesianism allows to make use of prior knowledge.
+* Priors are especially useful when expert knowledge has to be included in the approach.
+* Bayesian inference inherits all advantages of [statistical models](#statistical-modeling).
+* Bayesianism offers an expressive language to build up models
 * A natural propagation of variance if, for example, there are uncertainties in the measurement
 * A natural appraoch for hierarchical or multilevel modeling.
 * Allows a holistic probabilistic approach: Through Bayes' theorem, parameters and data can be chained into a probabilistic model. General solver programs can then automatically derive the posterior estimates using MCMC.
-* You get some results you would not get with other mindsets: Like certain kinds of variances
 * Thinking like a Bayesian makes you aware of DGP, uncertainties in your parameters, full probability models. Even more than in the frequentist mindset.
-* Great mindset for updating ones one belief, also outside the statistical inference with computer. A nice model how you should update your own belief.
+* As a more general benefit: Bayesianism is a great mental mdoel for how we update our own hypotheses about the world.
 
 ## Limitations
 
 The most common reasons not to use Bayesian statistics:
 
 * The prior distributions are subjective.
-* Bayesian methods are mathematically demanding and computationally expensive.
-* Always waiting for MCMC chains to finish up.
+* Bayesian methods are mathematically demanding and computationally expensive (Always waiting for MCMC chains to finish up).
 * Not as decisive as frequentism, but can be turned into such with MAP and so on.
 * Hard to implement
 
