@@ -186,17 +186,17 @@ It may be identical to the loss function, but it can also be a different metric.
 The metric should be aligned with the problem that one wants to solve.
 The better the metric is chosen, the better aligned the resulting model is with the use case.
 
+Interestingly, the evaluation of machine learning algorithms has a [frequentist](#frequentism) character, and is best approached with a frequentist mindset.
+Each evaluation of a model can be seen as an experiment.
+If repeated, but with a different sample of the data, we have exactly the condition of a repeated experiment.
 
-## Advantages
+## Strengths
 
 * Turns out that for classifying data like images and text, machine learning is a far superior approach to likelihood-based modeling.
 * Especially neural networks
 * Really good with images and other unstructured data
 * Very pragmatic
 * Best when prediction is the pure focus
-*
-
-
 
 ## Limitations
 
@@ -207,6 +207,7 @@ The better the metric is chosen, the better aligned the resulting model is with 
 * But no structure
 * Lack of interpretability
 * Lack of theory
+* What if you are not interested in the point estimate of the prediction? e.g. you don't want to have the forecast of train delays. But you want to know when the delays are above some threshold, because this would be quite catastrophic, in the sense of a domino-effect. With, e.g. [Bayesianism](#bayesian) it's perfectly possible.
 * While I stil believe that test performance is a good tool to quantify generalization, it can fail in the dumbest ways. There are many examples, like using an asthma diagnosis as a predictor for lower risk of pneumonia, classifying images because of watermarks [2], wrongly classifying dogs as wolfs because of snow in the background [3], or predicting a better pneumonia outcome for asthma patients [4]. And, of course, the big issue of adversarial attacks, where a change in even one pixel can derail an image classifier. It's convenient to only look at the test performance. But this can come at the prize of ignoring the data-generating process, not talking enough with people that understand the data, ensuring that the model does not behave in a stupid way.
 
 

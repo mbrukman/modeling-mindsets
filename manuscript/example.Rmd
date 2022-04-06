@@ -1,0 +1,15 @@
+# Example
+
+* Don't put in the examples for the MVP of the book yet, but keep looking for good example
+* TODO: Find an example that can be looked at from all mindsets.
+* Something every-day-relatable that everyone can understand, so not complicated cell biology or so
+* Something diverse enough that we can fit all mindset:
+  * Example should allow different types of questions to be asked (prediction, parameters, ...)
+  * Tabular, but also image data
+* Should the example be hypothetical? Or maybe with real data and therefore real code?
+* Real data and real code would, of course, be very attractive.
+* For every mindset: Find the most simple analysis that shows all aspects
+
+Candidates:
+
+* Red card based on skin color: http://econweb.umd.edu/~pope/crowdsourcing_paper.pdf

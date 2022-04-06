@@ -7,12 +7,15 @@
 <!-- TODO: Checkout Stichprobentheorie Material from LMU -->
 <!-- TODO: Checkout Experiment of Design material from LMU -->
 
+Design-based modeling favors strong research designs over complex statistical models. 
 Instead of focus on model, focus on sampling data.
 Sample right data, have simple estimators for your quantities of interest.
 Design-based vs. model-based.
 
 Design-based: Researcher designs experiment which generates data. 
-
+I see two things as design-based:
+* just sampling data in a designed, randomized way
+* also do experiment
 
 Why does such a design-based approach reduce the need for complex modeling?
 
@@ -38,6 +41,15 @@ For example in social sciences (see http://thaddunning.com/wp-content/uploads/20
 Extreme view: We can ONLY make inference when we have completely random samples.
 That's an archetype of design-based view.
 
+
+In model-based mindsets, like frequentism, we control for variables via the regression models.
+We want to remove the effect of age on the income for example, as we are interested only in the profession.
+So we have to include it into the model as a variable (predictor / covariate).
+For design-based modeling, we design our sampling / experiment to account for such things.
+For example by stratified sampling design in all age and and professions.
+
+
+
 ## Assumptions
 
 * Variance comes from sampling alone
@@ -53,7 +65,16 @@ That's an archetype of design-based view.
 ## Methods
 
 * Survey sampling
-* Randomized clinical trials
+* Randomized clinical trials (doesn't assumes finite population, so only in aspects design-based).
+
+
+
+## Neymann Causal Inference Model
+
+https://ies.ed.gov/ncee/pubs/20090061/chapter_2.asp
+
+
+
 
 ## Compare to Other Mindsets
 
@@ -93,13 +114,45 @@ Heartless, but true.
 
 
 
+
 Design-based also works with bayesian approach.
 https://biostats.bepress.com/cgi/viewcontent.cgi?article=1004&context=umichbiostat
 Requires to specify a prior distribution for the population outcome $Y$.
 
+
+
+<!-- how design-based mindset can enhance other mindsets -->
+But the finite population, it's a powerful idea.
+Let's extend this idea to the [supervised learning](#supervised) mindset.
+You want to build a classificaiton model for images.
+What is the entire population that you are looking at?
+Where do the images come from?
+How would you sample them?
+Which images would have a chance of zero to end up in the training data?
+By putting on this mindset, you can immediatly find flaws.
+You have an angle of thinking about the data.
+
+
+## Natural Experiments
+
+Sometimes we just have observational data.
+But it may be have like experiments.
+So we only need to sample from them.
+
+Natural experiments are "as-if" experiments.
+As if we did an experiment.
+As if the variables we are interested in (such as treatment) were randomly assigned.
+
+
+A bit exaggerated example:
+Company produces drugs.
+One production site accidentially produces placebo.
+So for a while, some patients receive placebo.
+Assuming we can identify placebo patients, we have a natural experiment.
+
 ## Advantages
 
-* Can cancel out lots of confounders
+* Can cancel out lots of confounders.Randomization is one way to remove confounding.
 * Simpler models
 * No distributional assumptions are needed. All variance and such can be directly derived from the sampling approach.
 
@@ -110,6 +163,9 @@ Requires to specify a prior distribution for the population outcome $Y$.
 * Only descriptive inference allowed: Because we can only describe the finite population. And nothing outside of it.
 * Only simple things can be estimated, such as means.
 * The sampling weights can carry implicit assumptions. Not so model-free after all.
+* And often, in reality, you need statistical models after all
+* For causal questions: You still need some form of causal model. Because this influences your sampling design.
+* "n practice, large, complex regression models are often fitted to the data  produced by these strong research designs" http://www.thaddunning.com/wp-content/uploads/2010/05/Dunning_Rethinking-Social-Inquiry.pdf 
 
 
 
@@ -119,3 +175,4 @@ References
 * https://ies.ed.gov/ncee/pubs/20174025/pdf/20174025.pdf
 * http://thaddunning.com/wp-content/uploads/2010/05/Dunning_Rethinking-Social-Inquiry.pdf
 * Paper comparing model and design-based inference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
+* Book on natural experiments, and the design-based approach: https://jonnyphillips.github.io/FLS6415/Class_5/Dunning%20Natural%20Experiments.pdf

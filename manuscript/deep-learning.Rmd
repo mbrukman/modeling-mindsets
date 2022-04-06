@@ -1,0 +1,34 @@
+# Deep Learning
+
+
+* Special case of risk-based mindset
+* It's own mindset because
+  * transfer learning
+  * feature learning
+  * modularity
+  * universe of its own. like only using lego to play.
+  * Some people would only use neural network
+  * universal function approximator
+  * any ml model can be distilled into neural network
+* Called deep learning instead of neural networks, because it's about how we learn about the world
+* Optimization does not matter really
+* especially works for images and text
+* prediction-focused
+*
+
+## Neural Networks
+
+* a bit about architecture
+
+
+## Transfer Learning
+
+
+## Advantages
+
+## Limitations
+
+
+References:
+
+* List of pre-trained models https://huggingface.co/models

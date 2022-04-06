@@ -1,4 +1,4 @@
-# Statistical Modeling
+# Statistical Modeling {#statistical-modeling}
 
 <!-- statistician modeling mindset ingredients
 
@@ -7,6 +7,7 @@
 - https://en.wikipedia.org/wiki/Statistical_model
 - TODO: Distinguish between statistical model and statistical inference?
 - TODO: IID assumption: talk about it
+- TODO: Mention that most models make simplifying assumptions, such as typical for the linear model
 -->
 <!-- TODO: Figure out if reframing as Statistician mindset -->
 
@@ -346,63 +347,126 @@ A good statistician makes a good argument why this is allowed.
 For example, the mean income would be wrong to assume for all computer scientists when we identified that people with high income are more likely to omit their income.
 A statistician would have to adjust for that before we make inference.
 
+<!-- TODO: Write a bit about regression and classification models as common example of statistical models -->
+<!-- TODO: Mention all the types of statistical models one can build with this mindset: clustering, classification, regression, outlier detection, ... -->
+
+<!-- 
+## Regression Models 
+
+We have to talk about regression models.
+Especially when we want to compare statistical inference from the frequentist view to machine learning.
+
+Regression or classification models take on a rather big portion of statistics.
+But form they are not so different from the maximum likelihood view.
+
+Usually we are not interested in just one variable.
+We are interest in how many variables are related to each other.
+
+For example, we want to know not only how often a disease is successfully treated.
+We might want to know if a certain drug played a part in the disease outcome.
+And other factors such as age of the patient, progression of the disease and so on might play a role as well.
+And we would have to consider such factors to answer the question on whether the drug helps.
+
+All this information is contained in the joint distribution of the data.
+The joint distribution can tell use whether patients who got the drug are more likely to have a good outcome regarding the disease.
+But estimating the full distribution is difficult.
+
+
+$$P(Drug, Outcome, Age, ...)$$
+
+But to answer the question whether the drug helped, we don't need the full joint disribution.
+Instead, we can use the conditional probability:
+
+$$P(\text{Drug helped}|Drug)$$
+
+With the likelihood based modeling mindset, we build up a distribtun.
+For example, we could say that the outcome is binary (patient healthy or not in the end).
+And we model it with a binomial distribution, given the other variables.
+This model is of course parameterized.
+The probability of the patient healthy or not outcome depends on coefficients that are multiplied with the other covariables.
+
+In a typical frequentist manner, we can then fit this logistic regression model with data.
+Then we get estimates for the coefficients.
+These estimates can tell use how each variable affects the outcome.
+But we also get p-values and confidence intervals.
+These tell us whether the coefficients are significantly different from zero.
+
+-->
+
+
+
+
 ## Statistical Inference: Drawing Conclusions About the Real World
 
 Assumption: The data come from larger population.
 
-TODO: This depends on the more detailed mindset.
-
-
-
 <!-- Part 1: Representativeness -->
-TODO: Write about representative samples
+TODO: Write about representative samples. or move that to the individual chapters frequentism, bayesianism
 
-<!-- A description based on intuition -->
-Many modeling approaches are based on assuming a distribution for your data and optimizing the likelihood of the distributions parameters.
-To draw conclusions, we need more assumptions.
-Either we make some assumptions about the long-run repetitions, and end up with [frequentist statistics](#frequentism), or we use the Bayes theorem and compute believes for [Bayesian inference](#bayesian).
-Frequentist statistics, Bayesian statistics, likelihoodism and causal inference all rely on assuming a distribution for your data and optmizing the parameters of the distribution.
-This optimization happens through the likelihood.
+<!-- goal: learn about the world -->
+Alright, we made our assumptions that the world can be described with a statistical model.
+So we have this direction: The world informs the model. World -> Model
+The statistical model is a simplified version of some properties of the world.
+Ideally, we want to infer properties of the world now from the model.
+We also know that our statistical model is subject to variance.
+Would we have different data, we would have gotten a different model.
+Hopefully only slightly different.
 
-The goal of statistical inference is to fit the distribution to the data, by changing the parameters of the distribution.
-Also, we want to make assumptions about the entire population, where, ideally, our data is a representative sample from.
+<!-- example of real world analysis -->
+A typical analysis would be:
+We want to know how some environmental policy affects, let's say water pollution.
+A statistician sets up linear regression model that relates water pollution and policy used yes/no for different lakes.
+Now we want these results to be translated again into real world properties.
+We have a coefficient for the effect of the policy.
+Let's say it is negative, indicating that the policy reduces pollution.
+Just one problem: Is it negative by randomness, or is it a reliable effect.
+There are now multiple approaches to deal with this problem.
+Each got their own chapter, but I want to tease here how these mindsets look like.
+The statistical modeling chapter you are currently reading is, as I mentioned, a meta-mindset, since it's not a complete mindset, but for the final step to infer properties, we need to extent this mindset.
+It depends on our idea of what a probability is, how we perceive our data sample and what we think of causality.
+They all have in common that they optimize likelihood functions and make most of the assumptions mention in this chapter.
 
-<!-- probability interpretations -->
-There are different interpretations of probability.
-And that's why this chapter here is a meta mindset.
-We need further distinction to get into more concrete mindsets like frequentism or Bayesianism.
-Also machine learning uses likelihood-based approaches, but more on a technical level, not philosophical.
-The two big interpretations are "physical" and "evidential" probabilities.
-Frequentism follows the physical interpretation
-The assumption is that when the number of samples $n$ goes to infinity, we get perfectly close to the real model parameters.
-Again, only given that we made the  right assumptions.
+<!-- statistical model of coin toss -->
+For example, we toss a coin 10 times, and want to know if it's fair, meaning probability for head is 0.5.
+A statistical model of this experiment can be a Binomial distribution.
+Can we just compute this and report the $p$ the probability for heads from the Binomial distribution?
+What if our best guess for $p = 0.6$?
+Does it mean the coin is not fair? 
 
-This likelihood as discussed here is extended to use prior probabilities in [Bayesian statistics](#bayesian-statistics).
-Frequentist statistics, likelihoodism and causal inference directly work with likelihoods.
+<!-- different mindsets -->
+To answer these question, we have to make assumptions of what a probability is.
 
-Three questions:
+[Frequentist inference](#frequentism) is the most prominent mindset for inferrring properties about the world from statistical models.
+Frequentist statistics sees probability as relative frequencies of events in long-run experiments.
+It's a physical interpretation of probability.
+Frequentism allows one to ask "What should I do?".
+And statisticians get yes or no type of answers through hypothesis tests and p-values for the model paramters.
 
-- What should I do? ->  Frequentist statistics, p-values
-- What should I believe? -> Bayesian stats, credibility intervals, posteriori stuff
-- What's the relative evidence? -> Likelihoodism
-- What's the cause? -> Causal inference + frequentist / Bayesian  
+[Bayesian inference](#bayesian) has a different interpretation of probability as belief about the world.
+Bayesianism says that also the parameters have a (prior) distribution.
+And the goal of the statistician is to update the prior distribution with data.
+The resulting posteriori distribution of the parameter expresses our belief of the parameter.
+The question is: "What should I believe?"
 
-For Bayesianism, for example, we not only assume a distribution for our data, but also for our parameters.
+[Likelihoodism](#likelihoodism) takes the likelihood-mindset quite literal by saying that all evidence for the data are in the likelihood function.
+Unlike the other two, we don't learn about decisions or beliefs.
+The likelihoodism mindset makes it impractical to use statistifal modeling in science, which makes this mindset less popular.
+But nonetheless it's an insightful mindset to explore.
 
-<!-- Probability interpretation -->
-But how exactly we infer properties about the real world now depends on the interpretation of the probability.
-In frequentist statistics, we might ask the question: Is there are significant correlation between temperature and productivity?
-And the answer would involve confidence intervals and p-values.
-The Bayesian would be talking about belief and the posterior distribution of the covariance parameter.
-A causal inference person would be trying to figure out if it's allowed to interpret the correlation between temperature and productivity as causal.
+A different, yet complimentary, approach is [design-based inference](#design).
+Design-based approaches focus on the data sampling and experiments, instead of models.
 
+## Strengths
 
+The statistical modeling mindset is a *language to see the world*.
+The language consists of random variables and probability distributions.
+Even if not used for inference, it can be beneficial to think in terms of variables and distributions.
 
-## Advantages
-
+* Especially good when, well, the true underlying process really is a long-run, repeated experiment. Like probabilities in casino such as roulette. 
 * Solid theoretical foundation.
 * Data-generating process is a powerful mental model that encourages a mindful modeling approach, and asking detailed question.
 * DGP Also invites to work closely with experts.
+* Conditional probability models can not only be used for learning the parameters of interest, but also for making predictions 
 
 ## Limitations
 
@@ -410,5 +474,5 @@ A causal inference person would be trying to figure out if it's allowed to inter
 * Statistical modeling approaches (as defined here) don't work so well for images and text, for example.
 * Very "manual": You have to define distributions by yourself.
 * Needs a lot of assumptions: That you picked the right distributions, and so on.
-
+* Not as good in making predictions as [supervised learning](#supervised).
 
