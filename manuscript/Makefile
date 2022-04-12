@@ -30,7 +30,7 @@ _book/$(bookname).pdf : bookfiles
 	rm -f $(bookname).Rmd
 	Rscript  -e "bookdown::render_book('./', 'bookdown::pdf_book')"
 
-_book/$(bookname).epub : bookfile
+_book/$(bookname).epub : bookfiles
 	# When build fails the bookfile Rmd is created and not removed. Next build will fail when file exists.
 	rm -f $(bookname).Rmd
 	Rscript  -e "bookdown::render_book('./', 'bookdown::epub_book')"

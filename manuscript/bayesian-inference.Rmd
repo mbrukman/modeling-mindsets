@@ -397,9 +397,11 @@ https://efron.ckirby.su.domains//papers/2005BayesFreqSci.pdf
 * Bayesianism offers an expressive language to build up models
 * A natural propagation of variance if, for example, there are uncertainties in the measurement
 * A natural appraoch for hierarchical or multilevel modeling.
-* Allows a holistic probabilistic approach: Through Bayes' theorem, parameters and data can be chained into a probabilistic model. General solver programs can then automatically derive the posterior estimates using MCMC.
+* Allows a holistic probabilistic approach: Through Bayes' theorem, parameters and data can be chained into a probabilistic model. General solver programs can then automatically derive the posterior estimates using MCMC. Everything is random variable: data and parameters. Everything is tied together by probabilistic operations.
 * Thinking like a Bayesian makes you aware of DGP, uncertainties in your parameters, full probability models. Even more than in the frequentist mindset.
 * As a more general benefit: Bayesianism is a great mental mdoel for how we update our own hypotheses about the world.
+* Arguable a more intuitive interpretation of probability: When practitioners make a wrong interpretation of frequentist confidence interval, what they actually do is interpret them as credible intervals. The interpretation of Bayesian probbility is easier: I believe / it's likely that the parameter is in this area.
+* Decoupling of inference and decision. You can first learn those posteriors, and then apply logic to make decision with this inference. Like MAP and credible intervals.
 
 ## Limitations
 
@@ -408,7 +410,8 @@ The most common reasons not to use Bayesian statistics:
 * The prior distributions are subjective.
 * Bayesian methods are mathematically demanding and computationally expensive (Always waiting for MCMC chains to finish up).
 * Not as decisive as frequentism, but can be turned into such with MAP and so on.
-* Hard to implement
+* Hard to implement.
+* No causal interpretations, just associations.
 
 <!-- Software
 

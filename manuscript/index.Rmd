@@ -13,7 +13,7 @@ description: "Statistics, machine learning, causality, ... The best data scienti
 always_allow_html: yes
 ---
 
-```{r global-knitr}
+```{r global-knitr, echo=FALSE}
 library("knitr")
 # Setting global knitr options
 output <- opts_knit$get("rmarkdown.pandoc.to")
@@ -35,13 +35,14 @@ opts_chunk$set(
   fig.width = 7,
   dev.args = list(pointsize = 20)
 )
-
-
 ```
 
 
-
 # Summary {-}
+
+```{r cover}
+knitr::include_graphics("../cover/cover-html.png")
+```
 
 Statistics, machine learning, causal inference, Bayesianism, ...
 There are many modeling mindset out there when it comes to learning from data about the world.

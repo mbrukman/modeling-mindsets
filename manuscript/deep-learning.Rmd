@@ -3,7 +3,7 @@
 
 * Special case of risk-based mindset
 * It's own mindset because
-  * transfer learning
+  * transfer learning. Especially foundation models.
   * feature learning
   * modularity
   * universe of its own. like only using lego to play.
@@ -23,6 +23,8 @@
 
 ## Transfer Learning
 
+
+Combine different models: SM Socrates models: https://arxiv.org/pdf/2204.00598.pdf
 
 ## Advantages
 

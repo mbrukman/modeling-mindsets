@@ -10,6 +10,7 @@
 - TODO: Mention that most models make simplifying assumptions, such as typical for the linear model
 -->
 <!-- TODO: Figure out if reframing as Statistician mindset -->
+<!-- TODO: Mention all the types of statistical models one can build with this mindset: clustering, classification, regression, outlier detection, ... -->
 
 <!-- motivation -->
 Does drinking a lot of water make you more productive?
@@ -347,54 +348,61 @@ A good statistician makes a good argument why this is allowed.
 For example, the mean income would be wrong to assume for all computer scientists when we identified that people with high income are more likely to omit their income.
 A statistician would have to adjust for that before we make inference.
 
-<!-- TODO: Write a bit about regression and classification models as common example of statistical models -->
-<!-- TODO: Mention all the types of statistical models one can build with this mindset: clustering, classification, regression, outlier detection, ... -->
+## Regression Models
 
-<!-- 
-## Regression Models 
+<!-- motivation: regression models -->
+The distribution of our data would be fully described by the joint distribution.
+But often there are too many variables.
+And further, you might only be interested in one of the variables (like the outcome of an experiment).
+And how other random variables influence this variable.
 
-We have to talk about regression models.
-Especially when we want to compare statistical inference from the frequentist view to machine learning.
+<!-- regression models -->
+Regression  models take on a specific position in statistical modeling.
+But they are severely reduced in their statistical ambition, but make it manageable to desribe indivudal variables distribution. 
+Regression models are statistical models.
+But instead of the joint distribution, they model the conditional distribution of a random variable.
+This variable is often called $Y$.
+But it's just a random variable, like the others.
+Except that we have some special interest.
+Then we have $\mathbf{X}$ the random variables that might influence $Y$, or where we are also interested in how they affect $Y$.
+It's actually not true that regression models model the conditional distribution of $Y$.
+Regression models usually just model an aspect of this distribution: the expected value of $Y$: $E(Y | X)$.
 
-Regression or classification models take on a rather big portion of statistics.
-But form they are not so different from the maximum likelihood view.
-
-Usually we are not interested in just one variable.
-We are interest in how many variables are related to each other.
-
+<!-- an example -->
 For example, we want to know not only how often a disease is successfully treated.
 We might want to know if a certain drug played a part in the disease outcome.
 And other factors such as age of the patient, progression of the disease and so on might play a role as well.
 And we would have to consider such factors to answer the question on whether the drug helps.
 
-All this information is contained in the joint distribution of the data.
-The joint distribution can tell use whether patients who got the drug are more likely to have a good outcome regarding the disease.
-But estimating the full distribution is difficult.
-
-
-$$P(Drug, Outcome, Age, ...)$$
-
-But to answer the question whether the drug helped, we don't need the full joint disribution.
-Instead, we can use the conditional probability:
-
-$$P(\text{Drug helped}|Drug)$$
-
-With the likelihood based modeling mindset, we build up a distribtun.
-For example, we could say that the outcome is binary (patient healthy or not in the end).
-And we model it with a binomial distribution, given the other variables.
+<!-- how it works -->
 This model is of course parameterized.
-The probability of the patient healthy or not outcome depends on coefficients that are multiplied with the other covariables.
+We give parameters to the random variables.
+And an equation that links the weighted random variables with the expectation of the target $Y$.
+The simplest is a linear model:
 
-In a typical frequentist manner, we can then fit this logistic regression model with data.
-Then we get estimates for the coefficients.
-These estimates can tell use how each variable affects the outcome.
-But we also get p-values and confidence intervals.
-These tell us whether the coefficients are significantly different from zero.
+$$Y = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p + \epsilon, \epsilon \sim N(0, \sigma)$$
 
--->
+<!-- Regression model = conditional distribution -->
+So we say that the target can be expressed as a weighted sum of the other random variables.
+And there is some random error $\epsilon$ (also a random variable) that follows a Normal distribution with unknown variance $\sigma$.
+And with this regression model, we specified the conditional distribution of our target $Y$: $Y|X \sim N(\beta_0 + \beta_1 X_1 + \ldots + \beta_p, X_p, \sigma)$.
+In words: $Y$ given $\mathbf{X}$ follows a Normal distribution.
+The mean or expected value of this conditional distribution is the weighted some of the other variables.
+And the variance is inherited from the $\epsilon$.
 
+<!-- goal: frequentist parameters -->
+The goal in this regression modeling are the coefficients vector $\mathbf{\beta}$.
+Parameters make the model interpretable.
+Like the estimators of the mean or variance in the sections above, they are random variables.
+So [frequentists](#frequentism) can derive confidence intervals, p-values and hypothesis tests for them ("Is coefficient $\beta_j$ significantly different from $0$?").
+[Bayesians](#bayesian) would additionally assume a prior distribution for $\mathbf{\beta}$ and we would get as a result the posterior distributions of the coefficients to analyze. 
 
-
+<!-- bridge to ML -->
+They also build the bridge to [machine learning](#machine-learning), since they are framed in a similar way.
+However in machine learning, the focus is not necessarily on building a probabilistic model.
+But just to frame $Y$ in terms of a preditive target.
+The regression models can also be used for making predictions.
+But I would say that at least a focus is on the interpretation of the parameters and drawing conclusions from them about the world.
 
 ## Statistical Inference: Drawing Conclusions About the Real World
 
@@ -433,6 +441,9 @@ Can we just compute this and report the $p$ the probability for heads from the B
 What if our best guess for $p = 0.6$?
 Does it mean the coin is not fair? 
 
+
+It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel. [^savage1972] 
+
 <!-- different mindsets -->
 To answer these question, we have to make assumptions of what a probability is.
 
@@ -467,6 +478,7 @@ Even if not used for inference, it can be beneficial to think in terms of variab
 * Data-generating process is a powerful mental model that encourages a mindful modeling approach, and asking detailed question.
 * DGP Also invites to work closely with experts.
 * Conditional probability models can not only be used for learning the parameters of interest, but also for making predictions 
+* Probability distributions give us a language to express uncertainty. Arguably [Bayesianism](#bayesianism) has the most coherent and emphasized focus on expressing uncertainty.
 
 ## Limitations
 
@@ -476,3 +488,4 @@ Even if not used for inference, it can be beneficial to think in terms of variab
 * Needs a lot of assumptions: That you picked the right distributions, and so on.
 * Not as good in making predictions as [supervised learning](#supervised).
 
+[^savage1972]: Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.

@@ -123,7 +123,7 @@ Estimators, estimands and estimates: Sounds similar, but those are different thi
 The estimate is the "true" parameter we are interested in, such as the coefficient for alcohol's effect on diabetes.
 The estimator is the mathematical rule to estimate the estimand from data.
 The estimate is the number we get in the end.
-Frequentists assume the estimatand as a fixed and unkown value
+Frequentists assume the estimand as a fixed and unkown value
 That's also a big difference to Bayesians who assume that the parameters are random variables themselves.
 The estimator, is a function of the data, and therefore random variable itself.
 
@@ -142,7 +142,6 @@ The assumption of the data distribution also tells us how the estimator $\hat{\m
 
 <!-- other parameters are also random variables -->
 You fit a logistic regression model to predict diabetes from alcohol intake? The coefficient in a logistic regression model is a random variable.
-
 
 ## Hypothesis Tests
 
@@ -369,7 +368,8 @@ Connection to Bayesianism: Bayesian priors can be set equal to regularization in
 * Computationally simpler than [Bayesian inference](#bayesian) or [machine learning](#ml).
 * No prior information about the parameters required, compared to [Bayesianism](#bayesian), and therefore seemingly more objective.
 * Frequentism allows binary decisions (accept/reject hypothesis). This is one of the reasons why it's so popular for scientists and why managers love it.
-*  Of course frequentism inherits all the advantages of the [statistical models](#statistical-modeling) in general: A solid theoretical foundation and the tight feedback loop of working with the data-generating process.
+* Of course frequentism inherits all the advantages of the [statistical models](#statistical-modeling) in general: A solid theoretical foundation and the tight feedback loop of working with the data-generating process.
+
 
 
 ## Limitations
@@ -382,6 +382,9 @@ As much as frequentism is used, it is also criticized.
 * Frequentism does not give us the probabiliy that a hypothesis is correct, but only how unlikely the $H_0$ hypothesis seems. Frequentism can only show that a hypothesis is false, but not show which one is true.
 * Frequentist statistics is not only dependent on the data, but also the experimental design. This we can observe in the [chapter on likelihoodism](#likelihoodism).  Frequentism therefore violates likelihood principle that says that all information must be contained in the likelihood function.
 * Frequentist statistics can fail in simple scenarios with unbalanced data: Imagine modeling the probability of rain in August. But your data only has 5 August days, and there was no rain. So it's automatically 0\% of rain with the frequentist probability undertstainding. Frequentist solution to the problem: We need more data, so we get those juicy relative  frequencies running. [Bayesianism](#bayesian) offers solution here.
+* Many use just maximum likelihood estimators. And not care too much for the uncertainty that is delivered.
+* Encourages "off-the-shelf" behaviour: Just taking some generalized linear model and applying it. No deeper dive into the modeling. <!-- https://bookdown.org/content/4857/generalized-linear-madness.html -->
+* No causal interpretation, just associations.
 
 
 [^Kao2001]: Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. "Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study." American journal of epidemiology 154, no. 8 (2001): 748-757.

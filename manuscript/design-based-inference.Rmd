@@ -150,11 +150,39 @@ One production site accidentially produces placebo.
 So for a while, some patients receive placebo.
 Assuming we can identify placebo patients, we have a natural experiment.
 
-## Advantages
+
+
+<!-- designed experiments -->
+So the critique of $P(Y|X,T)$ is that this is a mere association between $X$ and $Y$.
+Let's challenge this by designing an experiment where we have control over the variable that interests us!
+This is what happens in clinical trials, which is a randomized and controlled study.
+We have control over whom we give treatment and who a placebo.
+The randomization ensures that the other variables are, more or less, balanced.
+For example, age and so on should follow the same distribution.
+Thanks to this variable balance, we can equate the mere assocation $P(Y|X)$ with causation $P(Y|do(X))$.
+To make sure that we have as little confounding as possible, we randomize who gets treatment and placebo.
+In this case, $P(Y|X, do(T))$ and $P(Y|X,T)$ are the same.
+
+<!-- observational data -->
+But we are far away from these designed experiments being applicable everywhere.
+Randomized controlled trials are expensive.
+Sometimes it's not even ethical to do a clinical trial.
+Does smoking kill?
+"You, you and you! You are in the smoker group. One pack per day, for the next ten years. Thanks for signing up."
+Sometimes it's not possible.
+What's the effect of a gene on a disease?
+You can't just go and change the gene in a person.
+Not yet at least, and even then we might jump into the "unethical" category.
+You can't just go ahead and change the GDP of a country.
+
+
+## Strengths
 
 * Can cancel out lots of confounders.Randomization is one way to remove confounding.
 * Simpler models
 * No distributional assumptions are needed. All variance and such can be directly derived from the sampling approach.
+* Less opportunities for p-hacking and false modeling. For example not always clear which factors to control for. Can be tempting to choose the one the deliver smaller p-value for your hypothesis.
+* More realistic assumptions than statistical models.
 
 ## Limitations
 

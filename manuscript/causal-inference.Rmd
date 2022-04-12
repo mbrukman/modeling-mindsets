@@ -1,88 +1,154 @@
 # Causal Inference
 
-<!-- causal inference framework in a nutshell -->
-Causal inference is about finding out the causal effect a variable has on an outcome.
-Causal means: If I could force a change in the variable, how would the output change? 
-It does not mean: If I would observe a change in the variable, how would the output change?
-The intervention can be a treatment, a policy, a change in the environment and so on.
-For example: Effect of some treatment on disease outcome.
-Or how some environment policy affects water pollution.
-Or effect of marketing campaign on sales.
+<!-- TODO 
 
-<!-- Motivation for this mindset -->
-But isn't inferring effects also what other mindsets do?
-Both frequentism and Bayesianism can tell me the probability for an event $Y$ given some treatment $T$.
-It's called the conditional expectation $E(Y|T)$.
-The core problem: correlation does not imply causation.
-For example, does drug $T$ cure a disease (Y=1 if cured, Y=0 if not)?
-What if I tell you that $P(Y=1|T=1) = 0.92$ and $P(Y=1|T=0) = 0.95$?
-It seems that the patients would be better of without the drug.
-What I did not tell you: Some patients have a mild disease, the others have a severe disease.
-The patients with the severe disease were much more likely to get a prescription for the drug, since it has strong side effects.
-So disease severeness $X$ influences both the outcome, the cure, $Y$ and the treatment $T$.
-Disease severeness is a confounder.
-Would we condition as well on disease severeness, we would get:
-$P(Y=1|T=0,X=mild) = 0.98$, $P(Y=1|T=1,X=mild) = 0.99$, so  an improvement.
-And $P(Y=1|T=0,X=severe) = 0.80$ and $P(Y=1|T=1, X=severe)$ = 0.94$, so also an improvement for severe patients.
-This is called the Simpons Paradox.
-
-
-<!-- Causal reasoning -->
-This is a big shift in mindset!
-With causal inference, we claim that we can understand what causes something. 
-
-<!-- TODO: Maybe remove Simpsons Paradox  and replace with: 
-
-We can expect rain $Y$ when many people carry umbrellas $T$.
-That doesn't mean that carrying umbrellas causes rain.
-But with other mindsets we even lack the mathematical notation to differentiate mere conditions and interventions.
+- add personal story at the beginning
 -->
 
+<!-- Motivation -->
+Does eating chicken broth fasten your recovery when your have cold?
+Did the tax reform lead to more new businesses?
+Why were the sales so low yesterday?
+These questions ask for causes to certain events or facts.
+I would go as far as saying that most of the times when we learn a model from data, we want it to encode causal relationship.
+Models that don't might yield misleading insights and might make false predictions.
+
+<!-- what is causality ? -->
+We say that a variable $X$ causes $Y$ if $Y$ would not have occurred without $X$.
+That's an interpretation that requires $X$ and $Y$ to be binary and not so probabilistic.
+But can be extended to:
+$X$ is a cause of $Y$ if changing $X$ changes the probability distribution of $Y$.
+Later we will see that "changing" is different from merely observing a change.
+
+<!-- causal inference framework in a nutshell -->
+The causal inference mindset has causality at the core: The goal is to identify and quantify the effect that random variables have on the random variable of interest.
+Cause here means: If you could **force** a random variable to have a certain value, how would the distribution of another random variable change?
+A cause is different from a mere association: If you would merely **observe** a certain value for a random variable, how would the distribution of another random variable look like?  
+We know that a wet lawn does not *cause* rain.
+How do we know it? Try watering your lawn for one year, every day,  and see whether the probability for rain has changed.
+But the two are associated:
+When you observe that your lawn is wet, the probability that it rains is higher than without that observation.
+
+<!-- Relation to other mindsets -->
+As you could have guessed, causal inference is a [statistical modeling mindset](#statistical-modeling):
+It relies on probability distributions and random variables.
+Causal inference could be seen as an "add-on" to other mindsets like [frequentist](#frequentism) or [Bayesian](#bayesian) inference, but also for [machine leanring](#machine-learning).
+But causal inference is more than that.
+By bringing causality to the table, it challenges the culture of statistical modeling that only speaks of associations.
+As an anecdote: I have a Bachelor's and Master's degree in Statistics.
+What I learned about causality in those 5 years can be summarized in two statements: 1) Always add all confounders when building a statistical model [^confounders], and 2) correlation is not causation [so don't interpret your models in a causal way.
+Or in short: We students were taught to not speak of the elephant in the room.
+
+<!-- Motivation for this mindset: simpsons paradox -->
+Let's dive a bit deeper why associations between random variables is not enough.
+For example, frequentism and Bayesianism can tell me the probability for curing a disease ($Y$) given some drug treatment ($T$).
+It's the conditional expectation $E(Y|T)$.
+Let's say that 92\% of treated patient are cured ($P(Y=1|T=1) = 0.92$).
+Of the untreated patients 95\%  are cured $P(Y=1|T=0) = 0.95$.
+Wait, are patients would be better off without the drug?
+That's what the (naive) application of statistics would tell us.
+
+<!-- simpsons paradox continued -->
+What I didn't tell you: Some patients have a mild, some a severe disease course.
+Patients with the severe disease were much more likely to get a prescription for the drug, since the drug has strong side effects.
+So disease severeness $X$ influences both the probability for cure  $Y$ and the treatment probability $T$.
+Such a cause of both the variable of interest and of the outcome is called a confounder.
+By conditioning the model on the confounder variable disease severeness, we get these new conditional probabilities:
+
+* For mild disease:  $P(Y=1|T=0,X=mild) = 0.98$, $P(Y=1|T=1,X=mild) = 0.99$.
+* For severe disease:  $P(Y=1|T=0,X=severe) = 0.80$ and $P(Y=1|T=1, X=severe)$ = 0.94$
+
+By adjusting for the confounder we found that the treatment does help.
+This example is a typical example called the Simpsons paradox.
+As I said before, adding confounders is something statistical modeling classes typically teach.
+But there are other causal constellations of random variables that can break causality in your model.
+
 <!-- Causal inference solves causality -->
-But we even lack the mathematical language to express the difference between condition and intervention.
-Causal inference changes this.
+Besides the idea of confounding, classical statistics lacks the mental models and mathematical language to address questions of causality.
+Causalists don't accept this.
 When we write $P(Y|X)$, what comes after the '|' can be read as "given that we observed X".
 But as we saw, mere observation is not proof of cause.
 Causal inference allows to make statements about the causal effect of a variable.
-While frequentism and Bayesianism says Y given X (Y|X), in causal inference you say causal effect of X on Y: X -> Y.
-One way to express this is with the so-called do()-operator: $P(Y|do(X))$.
-The 'do' can be interpreted as in: What is the distribution of Y given we had full control over X (not only observe).
-
-<!-- central formula -->
-I find the central formula to be the following:
-$$P(Y | X, do(T))$$
-
-The 'do'-operator signifies that we don't only want to know the probability of $Y$ to happen given that some event $X$ happened.
-This is already notation that is specific to a sub-mindset of causality, namely causal inference a la Pearl with the do-calculus.
-But it serves as an example of what all approaches do:
-Introduce (mathematical) language and procedures that distinguishes between observation and causation.
-Sometimes the causation of X is referred to as intervention.
-
+While frequentism and Bayesianism says $Y$ given $X$ ($Y|X$), in causal inference you say causal effect of X on Y ($X -> Y$).
+There are many "schools" or frameworks of causal inference, each with their own notation and approaches. [^hernan2010]
+One way to express this is with the so-called do()-operator: $P(Y|do(X))$. [^pearl2012]
+I'll make use of the do-operator here, but try to otherwise keep this causality chapter general, and not specific to a school of causality.
+We can interpret $P(Y|do(X))$ as the probability distribution of $Y$ given we had control over random variable $X$.
+Going back to the rain example, we can see that $P(Y|X) \neq P(Y|do(X))$, since the rain probability changes when we observe that the lawn is wet, but it stays the same when we intentionally water the lawn. 
+The $do(X)$ is, in the causality literature, often referred to intervention on X.
 
 <!-- generalization mindset -->
-The generalization mindset of causal inference is the following:
-A model generalizes well when we found the right causal structure.
-Only then can the relationships between variables hold true, also for other data settings.
+Causalists think of causality as the central ingredient to learning about the world. 
+So the model generalizes well when it encodes the correct causal relationships.
+Because then it can also be applied in other circumstances.
+Another important part of the causalist mindset: Data does not speak for itself.
+We have to put in causal assumptions.
+
+<!-- various frameworks -->
+There are multiple frameworks within causal inference: The most important ones are the potential outcomes framework, the do-calculus, structural causal models.
+Each comes with it's own mathematical notation and estimation approaches.
+
+<!-- encoding causality -->
+As I said, at the core causality is a statistical modeling mindset.
+As such it employs probability distributions.
+But, as we learned, in the causal mindset, these distributions cannot capture the causal structures.
+The joint distribution of lawn wet and rain can tell us about associations between the two, but not the causal directions.
+Causal inference put's a causal model *on top* of the joint distribution.
+A causal model can be expressed in visual form: the directed acyclical graph.
 
 ## Directed Acyclical Graphs
 
 <!-- short DAG intro -->
-The causal inference mindset naturally comes with a visual language to lay out the causal relationships of the variables.
+The causal inference mindset naturally comes with a visual language to lay out the causal relationships of the random variables.
 Directed Acyclical Graphs (DAGs) are graphical models of variables and their causal relationships.
-From DAGs you can directly see which variable is a cause to another.
-Each node represents a variable, each arrow representing the causal direction.
+From DAGs you can directly see which variable is a cause of another variable.
+Variables are nodes.
+Causal directions are arrows.
 It's an acyclic graph, meaning we are not allowed to have arrows going in circles.
 For example, another arrow from $Y$ to $X_1$ would make this a cyclic graph.
 Acyclicality is an assumption needed for causal inference.
 
-```{r dag, fig.cap = "A Directed Acyclic Graph (DAG) with 6 variables.", out.width = "\\textwidth", echo = FALSE}
-knitr::include_graphics("images/dag.png")
+```{r dag, fig.cap = "A Directed Acyclic Graph (DAG) with 5 variables.", out.width = "\\textwidth", cache = TRUE}
+library(ggplot2)
+arr = arrow()
+nodes = data.frame(x = c(1, 3, 2, 2, 2),
+                   y = c(2, 2, 3, 2, 1),
+                   label = c("Y", "X1", "X2", "X3", "X4"),
+                   role = c("target", "include", "include", "exclude", "exclude"))
+
+edges = data.frame(x =    c(2, 2, 2, 3, 1, 3),
+                   xend = c(1, 3, 1, 2, 2, 2),
+                   y =    c(3, 3, 2, 2, 2, 2),
+                   yend = c(2, 2, 2, 2, 1, 1))
+multi = 1.2
+radius = 0.2 
+lmts = c(0.9, 3.1)
+edges$xend2 = edges$xend + c(radius, -radius, multi * radius, multi * radius, -radius, radius)
+edges$yend2 = edges$yend + c(radius, radius, 0, 0, radius, radius)
+edges$x2 = edges$x - c(radius, -radius, multi * radius, multi * radius, -radius, radius)
+edges$y2 = edges$y -  c(radius, radius, 0, 0, radius, radius)
+
+ggplot(nodes, aes(x = x, y = y)) +
+  geom_segment(aes(xend = xend2, yend = yend2, x = x2, y = y2), data = edges, arrow = arr, color = "black", size = 1) +
+  geom_point(size = 21, color = "black") +
+  geom_point(size = 20, color = "darkgrey") +
+  geom_text(aes(label = label), color = 'white') +
+  scale_x_continuous(limits = lmts) +
+  scale_y_continuous(limits = lmts) +
+  theme_void()
+
 ```
+
 <!-- Structures in a DAG -->
 What can we see from the DAG in Figure \@ref(fig:dag)?
 Variables $X_2$ and $X_3 are direct causes for target $Y$.
 We can also see that $X_5$ does not directly influence $Y$.
 So the DAG already shows us a lot about the dependencies and independencies.
+
+<!-- DAG in Bayesian -->
+DAGs are simple visual tools, not specific to causal inference: These graphs are basically a bunch of circles that are connected with arrows, and you are not allowed to go in circles.
+DAGs also make an appearance in [Bayesianism](#bayesian), or more specifically in Bayesian networks aka probabilistic graphical models.
+There they *might* represent causality, but they don't have to.
 
 <!--
 * Elements: chain, fork, collider
@@ -100,129 +166,144 @@ So the DAG already shows us a lot about the dependencies and independencies.
 * We can see that $X_3$ is not only a cause of $Y$, but also of $X_2$, therefore being a confounder to $Y$.
 -->
 
-<!-- Where do DAGs come from? -->
-Where do DAGs come from?
-There are two ways:
-Together with experts, you can try to build one.
-It's subjective.
-But thanks to DAGs, it's also visible and discussable.
-Causal structure discovery offers approaches to detect such graphs automatically -- up to a degree.
-Through conditional independence we can conclude that some variables should not be connected.
-$X_1$ and $Y$ are independent when conditioned on $X_2$: This mean no diret arrow between $X_1$ and $Y$.
+## Causal Models
+
+DAGs visually encode the causal model.
+
+<!-- Source of causal model -->
+But how do we know which variables to include, where to place the arrows and in which directions they have to point?
+For the rain/lawn example it's clear, because we know it from experience.
+There are a bunch of indicators that help us build up the causal model:
+
+* Direction of time: If one variable comes earlier, it might be the cause of the other. But confounders could be problematic here.
+* Domain experts: In many cases layman knowledge does not suffice. But respective experts such as  medical doctors, engineers and ecologists have a good idea how the graph should look like (once they have been introduced to the graph language).
+* Causal structure learning: There are numerous approaches to detect the causal structure from the data. We can't perfectly deduct all relationships, but there is a lot: For example if two variables are completely independent from each other, we know that there is no arrow between the two. Causal structure learning can identify sets of plausible DAGs, sometimes leaving out which ways the arrows have to point.
+* Everyday knowledge. See rain/lawn example.
+
+<!-- subjectivity -->
+The causal model has substantial subjectivity built in.
+It's a criticism of the causal mindset as well.
+But thanks to DAGs, these causal decisions are made explicit.
+This makes it possible to discuss them.
 
 <!-- how to calculate P(Y|do(X)) -->
-Neat, we can visualizes with DAGs.
+So, causalists got themselves a language to talk about causality.
+They have a tools to visualize causal structures.
 But how do we learn something about the world?
-How can I acutally CALCULATE the causal effect of, say, $X_2$ on $Y$?
-
-<!-- designed experiments -->
-So the critique of $P(Y|X,T)$ is that this is a mere association between $X$ and $Y$.
-Let's challenge this by designing an experiment where we have control over the variable that interests us!
-This is what happens in clinical trials, which is a randomized and controlled study.
-We have control over whom we give treatment and who a placebo.
-The randomization ensures that the other variables are, more or less, balanced.
-For example, age and so on should follow the same distribution.
-Thanks to this variable balance, we can equate the mere assocation $P(Y|X)$ with causation $P(Y|do(X))$.
-To make sure that we have as little confounding as possible, we randomize who gets treatment and placebo.
-In this case, $P(Y|X, do(T))$ and $P(Y|X,T)$ are the same.
-
-<!-- observational data -->
-But we are far away from these designed experiments being applicable everywhere.
-Randomized controlled trials are expensive.
-Sometimes it's not even ethical to do a clinical trial.
-Does smoking kill?
-"You, you and you! You are in the smoker group. One pack per day, for the next ten years. Thanks for signing up."
-Sometimes it's not possible.
-What's the effect of a gene on a disease?
-You can't just go and change the gene in a person.
-Not yet at least, and even then we might jump into the "unethical" category.
-You can't just go ahead and change the GDP of a country.
-
-<!-- give up on causality? -->
-For such cases where a designed experiments is a bad idea, we have to rely on observational data.
-Data in the wild, where all types of confounding happens.
-There we have to hope that it's possible to compute $P(Y|do(T))$.
-There are different approaches for this case, like the potential outcomes framework, graphical models, do-calculus and structural causal models.
-
+How do we estimate the causal effect of a variable on some outcome we are interested in?
+And is it even always possible to calculate causal effects?
 
 ## From Causal to Conditional
 
+<!-- option 1: experiments  -->
+Based on our DAG, we could start designing an experiment, in which we control the variable of interest $X$.
+That's being done already, of course.
+For example, that's what randomized clinical trials do:
+The goal of these trials is to understand the *causal* effect of a treatment on a disease.
+So in those trials the random variable "treatment" is controlled.
+I considered this as a distinct mindset in [design-based inference](#design-based).
+Anyways, controlled experiments are expensive, time-consuming.
+Sometimes they are not feasible, unethical or outright impossible.
+Imagine you study data on the country level.
+You couldn't just interfere with a countries GDP or number of new births.
+
+<!-- observational data it is -->
+Observational data it is, in so many cases.
+With observational data, the first casualty is causality -- at least from the point of view of non-causalists.
+But observational data is when causalists become excited and start stretch-exercises for their hand-wrists to warm up for the statistical programming ahead.
+
 <!-- from causal to observational -->
-With all approaches, the goal is to get from a causal model to a purely statistical model.
-With that I mean again on the level of associations, a level of conditionanl probabilities.
-If we manage to translate a causal question from a causal model into a set of conditional probabilities, we have won! 
-To exaggerate:
-Causal modeling is like inventing Photoshop where all the paint brushes are translated to commands in Microsoft Paint. 
-Goal is always to translate a causal quantity into a purely statistical, i.e. associational quantity.
+But causalists claim to have a way to calculate causal effects, even without experiments.
+It's a bit of an industry secret, but I am willing to spill it: The secret is LHC.
+LHC stands for large hadron collider.
+The causalists collide particles at a high-energy -- producing black holes in the process.
+Each black hole contains a parallel universe, and with enough of those we can study what-if scenarios.
+Joke aside, there is no magical ingredient for the estimation.
+The "secret": We can't estimate causal estimands directly.
+Causalists translate causal estimands into statistical expressions that can be estimated using observational data.
+In the end, causal inference is just boring old stats.
 
-<!-- Working with causal inference on causal data -->
-How does this work in the causal modeling mindset?
+<!-- recipe -->
+But one step after another: How do we answer causal questions with models and data?
+Causalists follow these steps [^pearl2010]:
 
+1. Formulate causal estimand, something like $P(Y|do(X))$
+1. Build causal model: Draw DAG.
+1. Identify whether question $P(Y|do(X))$ can be estimated, given the causal model. Requires translating it into conditional probability statements.
+1. Estimate the (translated) target quantity.
 
+CONTINUE HERE
 
-<!-- Step 1: Causal Model -->
-First we have to define a causal model.
-This can be with the help of visual tools like a DAG.
-Or by specifying the conditional independencies.
-Or by identifying all confounders and so on.
-This causal modeling step involves experts, as they can say which causal directions make sense from prior knowledge.
-The DAG can also be computed automatically using causal discovery tools.
-The causal model also includes making assumptions about distributions, just like any likelihood-based mindset.
-We also have to specify which of the variables is our $Y$, and which of the variables we want to study for their effect on $Y$.
+<!-- Step 1: Causal estimand-->
+The causalists are motivated, of course, by some hypothesis they want to answer.
+So in the first step, the causalists frame the question as a causal estimand ($P(Y|do(X))$).
+The causal estimand dictates how to proceed in the next step: Building the causal model.
+
+<!-- Step 2: Causal Model -->
+The causal model can be build using visual tools like the DAG.
+The causalists choose all the random variables that are relevant to the causal estimand.
+They draw them as nodes in the DAG and make assumptions about the causal arrows.
+For the causal relationships, various techniques, as discussed, such as expert opinions or causal structure learning can be applied.
+
+<!-- Step 3: Identify -->
+In the identification step the causalists find out whether the causal estimand can be even answered with the observational data at hand.
+If the answer is yes, then the causal estimand is turned into a purely statistical estimand.
+So the causalists goal is to turn ($P(Y|do(T))$) into  $E_X[P(Y,T,X))]$.
+How does this identification even work?
+It can be a complicated process, there are things like "backdoor" and "frontdoor" criteria.
+But there are also many "simple" rules that tell you how to turn a causal estimand into a conditional estimand.
+It's important to know that in the end we usually have some regression model, and our goal is to pick the right subset of random variables to use in the model (to adjust for).
+The simpler rules are visualized in Figure \@ref(fig:dag-rules).
+
+* Include confounders. Confounder are variables that cause both the variable of interest and the outcome. For example in Figure \@ref(fig:dag) $X_3$ confounds $X_2$ and $Y$. So we have to include it in our statistical estimand.
+* Exclude mediators. When we want to measure the causal effect of $X_1$ on $Y$, we have make sure not to include $X_2$. If we include $X_2$ it will completely block the path, meaning we will find out that $X_1$ does not influence $Y$. But it does. Just via $X_2$. In general don't condition on descendants of treatment variable.
+* Exclude colliders. If not $Y$ were our target, but $X_2$ and $X_3$ the effect of interest, then $Y$ would be a collider. Adding colliders adds a fake causal path. For example: sweating -> wet shirt <- it's raining. sweating and rain not correlated (or just weakly). But when we condition on wet shirt, they suddenly are strongly correlated! Bc. when shirt wet, but no rain, we can conclude that the person is likely to be sweating.
+* There are more such rules, but by doing the above, you already exclude some bad non-causal paths.
+
+```{r dag-rules, dependson = "dag", fig.cap = "To understand the causal effect of X1 on Y, we have to build a regression model with $Y$ as target and X1 and X2 as predictor variables. Roles: Y is the target, X1 the variable of interest, X2 a confounder of X1 and X2, X3 a mediator to the effect of X1 on Y, and X4 is a collider."}
+library(ggplot2)
+ggplot(nodes, aes(x = x, y = y)) +
+  geom_segment(aes(xend = xend2, yend = yend2, x = x2, y = y2), data = edges, arrow = arr, color = "black", size = 1) +
+  geom_point(size = 22, color = "black") +
+  geom_point(size = 20, aes(color = role)) +
+  geom_text(aes(label = label), color = 'white') +
+  scale_x_continuous(limits = lmts) +
+  scale_y_continuous(limits = lmts) +
+  scale_color_manual(values = c("darkred", "darkgreen", "darkgrey"), guide = "none") +
+  theme_void()
+```
+Result after this step: A statistical estimand that we can estimate with plain old statistical models: $E_X[P(Y,T,X)]$
+
+<!-- Step 3: Estimation -->
+For the estimation, we need to make assumptions about how the random variable are (conditionally) distributed.
+But really, we are in the frequentist/Bayesian mindset again.
+But it could also be supervised machine learning.
+And you can read up on those chapters again, so I don't have to repeat myself here.
+Then, usually for the interpretation, you interpret the regressin coefficient as you normally would.
+Except that you may interpret the effect as a cause.
 If you are interested in different variables, you have to repeat all the steps for all variables, as you might need different models.
 After this first step, we have a causal estimand $P(Y|do(T),X)$.
 
-                 Identification                   Estimation
-Causal estimand -----------> Statistical Estimand ----------> Estimate
-P(Y|do(T), X)                $E_X[P(Y,T,X))]$                 
+## Strengths
 
-
-
-<!-- Step 2: Identification -->
-But you can't really solve this estimand, unless you could really manipulate variable $T$.
-Based on the causal graph, we have to do a step called identification.
-First, we nee to figure out whether at all with the given graph we can answer a causal question.
-Sometimes it's not possible.
-The result of this step is a statistical estimand where no manipulation of variables is assumed.
-Instead we only work with conditional expectiations or probabilities.
-How does this work?
-Lots of things:
-
-* Make sure to always include the confounders. These are variables that cause both the variable of interest and the outcome. For example in Figure \@ref(fig:dag) $X_3$ confounds $X_2$ and $Y$. So we have to include it in our statistical estimand.
-* We also have to make sure to exclude mediators. When we want to measure the causal effect of $X_1$ on $Y$, we have make sure not to include $X_2$. If we include $X_2$ it will completely block the path, meaning we will find out that $X_1$ does not influence $Y$. But it does. Just via $X_2$. In general don't condition on descendants of treatment variable.
-* We also have to make sure we don't include colliders in the statistical estimands. If not $Y$ were our target, but $X_2$ and $X_3$ the effect of interest, then $Y$ would be a collider. Adding colliders adds a fake causal path. For example: sweating -> wet shirt <- it's raining. sweating and rain not correlated (or just weakly). But when we condition on wet shirt, they suddenly are strongly correlated! Bc. when shirt wet, but no rain, we can conclude that the person is likely to be sweating.
-* There are more such rules, but by doing the above, you already exclude some bad non-causal paths.
-
-Result after this step: A statistical estimand.
-Like $E_X[P(Y,T,X)]$
-
-<!-- Step 3: Estimation -->
-The last step is now the estimation.
-This depends on the distribution assumptions.
-But now we are more or less in the mindset of frequentism and Bayesianism again.
-Just fit some model.
-We could even use machine learning models, but there we have the problem that we usually don't get one effect for the variable of interest.
-Maybe interpretable machine learning would be an ok choice.
-
-## Assumptions
-<!-- Assumptions -->
-Assumptions to make causal inference work:
-
-* Same distributional assumptions as in frequentist and Bayesianism: we have the right family of distributions. maybe linearity
-* we found the correct causal structure
-* We identified the right confoudners. Bc. uncounfoundedness is an untestable assumption
-
-## Advantages
-
-* Only mindset with causality
-* You can answer causal question
-* Allows reusing stats stuff, and even machine learning
-* In so many cases, causality is wanted.
-* DAGs make causal assumptions explicit
-
+* Arguably, causality is central to modeling the world. Causal inference is the mindset that takes causes to heart.
+* Causal inference allows to argue causal questions: An important ingredient for generalization.
+* I'd say in most cases the modeler actually wants causality. Scientists make causal interpretations. In marketing you want to know how measures impact customers causally.  
+* Causal models are more robust against changes in the environment. Or rather: Models that use non-causal, merely associative information might break more easily. For example: Google had a flu detector which predicted flu waves based on searches for flu-related terms. But searches are not causal, so the model broke.
+* The mindset is flexible and can enhance many other mindsets such as frequentism, Bayesianism, machine learning. Inherits strengths from the statistical modeling approach it builds upon.
+* DAGs make causal assumptions explicit. I would go as far and say that the subtext of many frequentist and Bayesian analyses is already a causal one. Or at least once the results get out of the hand of the modeller, the journalists, manager, decision maker and so on are likely to make causal interpretation anyway. Causal inference talks explicitly about causality, and especially about the causal structure assumptions that were made for the model. These can then be challenged and discussed.
+ 
 ## Limitations
 
-* Have to assume so causal structure
-* Can't proof it's the correct causal structure
+* Building the causal model is an inherently subjective task. The causalist can never be sure whether the causal model is correct.
+* Confounders, causes of both variable of interest and target,  are especially tricky. For a causal interpretation, you have to assume that you found all the confounders. But you can't proove that you have.
+* Inherits limitations from the statistical modeling approach it builds upon (except for lack of causality).
+* Using non-causal variables can enhance predictive performance, but make your model non-causal. So causal inference is not with predictive power first.
+* Causal inference assumes directionality, as becomes very visual in DAGs, which even have the word directed in it. So, no feedback loops are allowed. This is a strong restrictions. Often potential feedback loops can be built around by introducing time: Instead of saying that the populations of predators and prey are in a feedback loop, you operationalize these two variables as four: Predator at time $t-1$ causally affects predator at time $t$; prey at time $t-1$ also causally affects predator and prey at time $t$ .
 
 
+[^hernan2010]: Hernán, Miguel A., and James M. Robins. "Causal inference." (2010): 2.
+
+[^pearl2012]: Pearl, Judea. "The do-calculus revisited." arXiv preprint arXiv:1210.4852 (2012).
+
+[^pearl2010]: Judea, Pearl. "An introduction to causal inference." The International Journal of Biostatistics 6, no. 2 (2010): 1-62..
