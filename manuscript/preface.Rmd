@@ -18,3 +18,17 @@ Also when teaching happens, at least in my teaching I think different mindsets s
 
 For example, I think that distribution-free statistics is very different from likelihood-based mindset.
 
+
+TODO: Write about my own journey:
+
+* studied frequentist
+* also worked a lot with frequentist stats
+* learned a bit about bayesian and machine learning
+* later self-taught a lot of machine learning
+* worked as frequentist
+* worked as machine learner
+* did phd in interpretable machine learning
+* self-taught on causality
+* had one frequentist project where causality mindset saved the project
+* learned a lot from Bayesian podcast
+

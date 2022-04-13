@@ -44,17 +44,45 @@ opts_chunk$set(
 knitr::include_graphics("../cover/cover-html.png")
 ```
 
+<!-- TODO:
+
+Write about how this book is unique:
+
+- usually books/resources are about one mindset
+- sometimes only comparing two: stats/ml, freq/bayes, ...
+- parts of mindset are implicit in how community works
+- lots of reading between the lines
+- but this book makes it explicit and saves you years
+-->
+
+<!-- this book -->
+Modeling Mindsets is an introduction to the many modeling mindsets that you can use to understand and predict your data.
+
+<!-- Many mindsets available -->
 Statistics, machine learning, causal inference, Bayesianism, ...
-There are many modeling mindset out there when it comes to learning from data about the world.
+The best modelers, researchers and data scientists don't stubbornly stick to only one mindset.
+The best choose the right mindset for the right data task.
 
-Sometimes people have just one of these mindset to approach all types of modeling problems.
-But the best data modelers and data scientists have many of these mindsets.
-They don't just model the world with the mindset they happened to grow up with.
-But they pick the mindset that fits the job best.
+<!-- but difficult to do so 
+It can take years to grasp what a mindset is all about.
+Why?
+Learning about a mindset is often method-driven
+But I don't think it has to take that long.
 
-This book serves as an overview of various mindsets.
-Each modeling mindset has strengths and weaknesses, tasks it's good at, and tasks that are outright excluded for philosophical reasons.
-This book invites to dive into these different modeling mindsets.
-Broaden your horizon when it comes to modeling.
-The book is the first step of becoming a jack-of-all-trades of creating models of the real world with data.
+Forming this mindset is often implicit, and people really don't tell you.
+-->
+
+<!-- content -->
+The book covers various mindsets, and each one gives you another superpower:
+Statistical modeling, the foundation for many mindsets built on probability.
+Frequentist inference as a decision-oriented tool.
+Bayesian inference, a holistic probabilistic modeling approach.
+Causal inference, a mindset that builds causality into your models.
+Supervised machine learning, a mindset focused on prediction.
+And many more.
+
+<!-- this book -->
+Modeling Mindsets gives an introduction to all these different mindsets.
+The book is packed with intuition, memorable illustrations, and strengths and limitations for each modeling mindset.
+Expand your horizons in modeling and become a jack-of-all-trades in learning from data.
 

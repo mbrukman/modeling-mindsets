@@ -1,5 +1,5 @@
 # Mindsets {#mindsets}
-
+CONTINUE HERE
 <!-- from models to mindsets -->
 Models are just a bunch of components, relationships and parameters.
 Defined this way, models alone can't tell us how to interpret the world.
@@ -24,11 +24,71 @@ Mindsets differ in how they interpret probabilities -- or whether probabilites a
 While mindsets shall include many different modeling tasks, they have some tasks where they truly shine.
 Each mindset invites you to ask different questions, and therefore form how you view the world through modeling.
 
+```{r mindset}
+library(ggplot2)
+library(patchwork)
+
+circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
+    r = diameter / 2
+    tt <- seq(0,2*pi,length.out = npoints)
+    xx <- center[1] + r * cos(tt)
+    yy <- center[2] + r * sin(tt)
+    return(data.frame(x = xx, y = yy))
+}
+
+# by how much the world circle is shifted
+shift = 6
+
+# Data for drawing model circle
+dat = circleFun(c(2,2.3), 3, 100)
+dat$circle = "c1"
+# Data for drawing world circle
+dat2 = circleFun(c(2 + shift, 2.3), 3, 100)
+dat2$circle = "c2"
+dat = rbind(dat, dat2)
+
+p = ggplot(dat, aes(x = x, y = y)) +
+ annotate("rect", xmin = 0, xmax = 10, ymin = 0, ymax = 5, color = "black", fill = "grey") +
+ annotate("label", x = 2 +  shift / 2, y = 5, label = "Mindset", size = 12) + 
+ geom_path(size = 2, aes(group = circle)) +
+ annotate(x = 2, y = 3.7, geom = "label", label = "Model", size = 9, label.size = 1) +
+ annotate(x = 8, y = 3.7, geom = "label", label = "World", size = 9, label.size = 1) +
+ annotate("text", x = 8, y = 2.3, label = "?", size = 18) +
+ annotate("segment", x = 4, xend = 6, y = 2.3, yend = 2.3, arrow = arrow(ends = "both"), size = 2) +
+ theme_void() 
+
+nodes = data.frame(x = c(1, 3, 2),
+                   y = c(2, 2, 3))
+
+edges = data.frame(x =    c(2, 2, 3),
+                   xend = c(1, 3, 1),
+                   y =    c(3, 3, 2),
+                   yend = c(2, 2, 2))
+multi = 1.5
+radius = 0.22 
+edges$xend2 = edges$xend + c(radius, -radius, multi * radius)
+edges$yend2 = edges$yend + c(radius, radius, 0)
+edges$x2 = edges$x - c(radius, -radius, multi * radius)
+edges$y2 = edges$y -  c(radius, radius, 0)
+
+pmodel = p +
+  geom_segment(aes(xend = xend2, yend = yend2, x = x2, y = y2), data = edges, color = "black", size = 0.5) +
+  geom_point(size = 10, color = "darkgrey", data = nodes) +
+  annotate("text", label = "alpha", x = 1.4, y = 2.65, parse = TRUE,  size = 5) +
+  annotate("text", label = "beta",  x = 2.6, y = 2.65, parse = TRUE, size = 5) +
+  annotate("text", label = "gamma", x = 2, y = 1.85, parse = TRUE, size = 5) +
+  theme_void() +
+  coord_fixed()
+
+pmodel
+
+```
+
 <!-- a normative frame -->
 **Modeling mindsets** are normative:
 They tell you what a good model is and what not.
 A modeling mindset also encompasses the set of questions we are allowed to ask with it, and which are out of reach.
-If you grew up with the mindset of a frequentist statistian, a good model for you is one that has a high goodness-of-fit.
+If you grew up with the mindset of a frequentist statistician, a good model for you is one that has a high goodness-of-fit.
 Performance of your model on unseen test data is not important to you.
 Also you are not interested in learning about posterior probabilities of your data.
 You reject the idea of using prior probabilities as recommended by Bayesian statistics.
@@ -79,6 +139,10 @@ I had a bit more objective criteria.
 Mindsets are often not that conscious.
 If you are a statistician, you don't ACTIVELY focus on maximizing likelihoods.
 But this mindset is the foundation of all your later interpretations.
+
+Mindsets $\neq$ methods:
+Frequentist statistics is not linear models and t-tests;
+Supervised machine learning is not random forests and neural networks.
 
 
 

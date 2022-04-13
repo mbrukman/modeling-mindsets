@@ -1,10 +1,16 @@
 # Supervised Machine Learning
 
 Supervised machine learning is a sub-mindset of the machine learning or risk-minimization mindset.
+Supervised machine learning is a mindset focused on providing accurate predictions for new data.
+The entire philophy of "learning" in machine learning is finding a prediction function that minimizes a loss function.
 
 <!-- what is supervised mindset -->
 The supervised ML mindset is a risk-minimization mindset, where the goals is to minimize some loss function across data.
 It shares all the goals presented in [chapter machine learning](#machine-learning).
+This prediction and loss focus stands in contrast to likelihood-based mindsets, where the emphasis is on learning the parameters of a distribution.
+A good predictive performance is more important than trying to make individual parameters of the model match components in the real world -- a neuron in the neural network does not really match a specific concept.
+
+The generalization error is another kind of loss function, but using data that were not used to train the machine learning model. 
 
 <!-- why own mindset -->
 But why is supervised ML it's own mindset, and not just one specific task of machine learning?
@@ -38,5 +44,164 @@ Not so with machine learning.
 This makes it a prime candidate for automating processes.
 But it's also a weakness of the approach.
 The mindless optimization leads to big flaws.
+
+
+<!-- supervised vs. risk-minimization -->
+Also, a part of the supervised ML mindset is that we always need the ground truth.
+Machine learning in general, or risk-minimization mindset is not about ground truth, but about formulating a loss function involving data that get's optimized by training a model.
+The distinction is that with supervised ML, we require a label.
+A ground truth.
+And, in modeling mindset, that makes a tremendous difference.
+It means that you try to stay away from problems that don't have a ground truth.
+Like clustering.
+You can cluster your data, but you have no means to verify that your clusters represent anything.
+I have met people like this.
+More in academic settings where you can choose the problems you work on.
+Less in industry settings.
+But supervised ML as a  risk-minimization mindset exclusively for problems with labeled data exists as an archetype out there.
+
+
+<!-- generalization mindset -->
+The generalization minset of machine learning is the following:
+A model generalizes well to the real world when the generalization error is low.
+The generalization error is the the loss evaluated with data not used for training or tuning the model.
+This stands in contrast with likelihood-motivated mindsets that encourage to think in distributions and variables.
+A note here: Likelihoods also have a central role in machine learning -- but only as a tool not the the defining mindset.
+A true machine learner will opt for a non-likelihood based model when the generalization mindset is substantially lower.
+
+<!-- generalization mindset part II -->
+The machine learning mindset somewhat differs in the ultimate aim.
+Most likelihood-based mindsets try to uncover relationships, like how a variable affects the outcome.
+But with machine learning, the focus shifts to the prediction.
+It's not clear cut, often interest for likelihood-based methods is the prediction as well.
+
+## Learning = Searching the Hypothesis Space
+
+Now that we are clearer about the goal of machine learning, what does constitute learning in the machie learning case?
+To recap learning in the likelihood-world:
+Learning means finding the parameters of the assumed distributions.
+
+But for machine learning?
+Learning means finding the function $f$ with the best generalization error.
+And where do we find $f$?
+Of course, we have to visit the place where all the $f$'s live.
+That's the hypothesis space.
+The hypothesis space is the set of all possible functions $f$.
+It's a large space, and it's difficult to find the right function.
+For example, let's say we have only one feature $X_1$, and only look at linear models.
+Then we could describe the hypothesis space with just two numbers: $\beta_0$, the intercept for that linear model and $\beta_1$, the coefficient for $X_1$. 
+The hypothesis becomes more complicated for more complex model classes like neural networks, random forests and so on.
+The hypothesis space for decision trees are all possible trees.
+The hypothesis space for neural networks is defined by all weights of the neural networks.
+If the neural network has 100 weights, the hypothesis space can be desribed with 100 dimensions.
+
+So, a complex hyptothesis space with infinite $f$'s.
+Great.
+Good thing is that we don't have to try out all the $f$'s.
+Instead we need a procedure that allows us to search for a good $f$.
+Anyway, to define a good f, we first need a function that can tell us whether a hypothesis, or function $f$ is good or bad.
+That's the loss function that we already spoke of.
+With a loss function, we can say for any function $f$ (= any position in the hypothesis space) how well it works.
+
+Now we need some procedure to search through this space effectively.
+Each model class has it's own way to do so.
+Neural networks usually use gradient descent based backpropagation.
+But there are of course many optimization options for neural networks (Adam, ...).
+Decision trees use a combination of greedy search (for split points) and then simple loss optimization.
+
+Still one problem remains.
+The evaluation of the hypothesis with the loss function depends on the training data.
+Because we compute the loss on the training data.
+So our function that decides what's a good $f$ is biased towards favoring $f$'s that are good for the training data.
+But these $f$'s might not be good for new data, as the $f$ that is learned is overfitted.
+Different model classes handle this differently.
+There might be some constraints in the model.
+They hypothesis space might be restricted so that the functions learned are somewhat general.
+This is called regularization.
+
+<!-- Validation -->
+This brings us also to the outer loop of optimization.
+Evaluation with unseen data.
+Not yet talking about test data, but rather the validation data.
+This requires some evaluation loss.
+Might be the same as optimization loss, but does not have to be.
+Some parts of the model are not learnable.
+Like architecture or hyperparameter settings.
+So now we can additionally search for $f$'s that generalize well. 
+This requires unseen data as well.
+
+<!-- evaluation -->
+Then last step is the evaluation.
+For this step, we have to use again another unseen dataset. 
+Ultimately, the only way we can know how well that model works is by evaluating it with unseen test data.
+
+<!-- many ways for splits -->
+Simplest would be to have a split in training, validation and test data.
+But in reality, multiple such splits are made so that the data is reused in the best way.
+
+
+## Types of Machine Learning
+
+But there are so many different types of machine learning!
+
+For starters, there is supervised and unsupervised learning.
+Supervised learning focuses on labeled data.
+We want to predict a variable.
+
+There, are, in general two types of models: Generative and discriminative models.
+I would see mostly discriminative mindset here, which aims to distinguish between classes.
+The discriminative approach models: P(Y|X).
+The generative models P(X,Y) create the joint distribution and often allow to sample new data points.
+Often generative models can be used to derive P(Y|X), using the Bayes theorem.
+
+We also have classification vs. regression.
+They can be distinguished in framing of the task, loss functions and so on.
+
+<!-- TODO: Visualization of different $f$'s? SVM, tree, neural network -->
+
+Otherwise the models that are used in the supervised machine learning mindset are very different from each other.
+Decision trees split the feature space into rectangles.
+We even find methods from frequentism and Bayesianism that model $P(Y|X)$.
+Support vector machines try to cut the plane using support vectors.
+Neural networks are brain inspired chained multiplications and other mathematical operations.
+
+
+## Evaluation
+
+Most important part: Use unseen test data for the evaluation.
+This distinguishes machine learning from the other mindsets.
+Especially all the likelihood-based approaches evaluate the models in terms of goodness-of-fit and diagnostic plots.
+Both are to see how well the data match the distribution and its assumptions.
+Not so with machine learning.
+Machine learning requries an evaluation with unseen data.
+And some performance metric.
+It may be identical to the loss function, but it can also be a different metric.
+The metric should be aligned with the problem that one wants to solve.
+The better the metric is chosen, the better aligned the resulting model is with the use case.
+
+Interestingly, the evaluation of machine learning algorithms has a [frequentist](#frequentism) character, and is best approached with a frequentist mindset.
+Each evaluation of a model can be seen as an experiment.
+If repeated, but with a different sample of the data, we have exactly the condition of a repeated experiment.
+
+## Strengths
+
+* Turns out that for classifying data like images and text, machine learning is a far superior approach to likelihood-based modeling.
+* Especially neural networks
+* Really good with images and other unstructured data
+* Very pragmatic
+* Best when prediction is the pure focus
+
+## Limitations
+
+
+* Beyond prediction, not as useful as others
+* We don't learn much about the relationships in the world
+* Relationship is reduced to a number, the prediction
+* But no structure
+* Lack of interpretability
+* Lack of theory
+* What if you are not interested in the point estimate of the prediction? e.g. you don't want to have the forecast of train delays. But you want to know when the delays are above some threshold, because this would be quite catastrophic, in the sense of a domino-effect. With, e.g. [Bayesianism](#bayesian) it's perfectly possible.
+* While I stil believe that test performance is a good tool to quantify generalization, it can fail in the dumbest ways. There are many examples, like using an asthma diagnosis as a predictor for lower risk of pneumonia, classifying images because of watermarks [2], wrongly classifying dogs as wolfs because of snow in the background [3], or predicting a better pneumonia outcome for asthma patients [4]. And, of course, the big issue of adversarial attacks, where a change in even one pixel can derail an image classifier. It's convenient to only look at the test performance. But this can come at the prize of ignoring the data-generating process, not talking enough with people that understand the data, ensuring that the model does not behave in a stupid way.
+
 
 

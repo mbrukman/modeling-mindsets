@@ -1,77 +1,134 @@
 # Models 
 
+<!-- motivation -->
+Imagine you sit in front of some data and some questions that you are supposed to answer with help of the data.
+You are asked to predict which patients might get side effects from this a drug.
+How do bee colonies react to changing climate conditions?
+Which supermarket products are always out-of-stock?
+Data alone can tell you what happened: patients 124 and 22 got acne; 2/3 of bee colonies had troubles during drought in year 2018; on this one Tuesday the flour was sold out;
+But usually you want to find general rules and relationships in the data.
+Is flour low on stock at the beginning of the week in general?
+Even better, these rules and relationships would extend not only to your sample, but to all patients / bee colonies / supermarkets.
+To get from data to generalizable relationships, we have to simplify the real world and make assumptions.
+The thing that helps us answer all the questions about our data is called a model.
+
 <!-- summary: what is a model -->
 A model is a simplified representation of something.
-In the context of learning from data about the real world, a model represents a simplified aspects of the world.
-The reasons to have such a model is that it allows us to answer questions and make predictions.
+In the context of learning from data about the world, a model represents simplified aspects of the world.
+The motivation to build or learn a model is that it allows us to answer questions and make predictions.
 
-<!-- Examples for problem + model --> 
-For example, when we want to test the effectivity of a drug, we design randomized clinical trials.
-We have the question whether the drug is better than the placebo.
-How do we know that the drug is better? But there is variance.
-We have to build a model.
-
-A telecommunication company wants to know why customers quit their mobile contracts.
-They have data on those customers, but just by looking at the thousands of data they can't tell.
-The model can take factors into account that are related to customer churn.
-So they need a model to predict this.
-
-<!-- TODO: A third example -->
-
-
-<!-- Exlusion criteria -->
-In this book, I made two restrictions on the type of models that we study:
-First, it's a computational or mathematical model.
-That excludes, for example, physical models, such as the tiny houses that architects might produce. 
-Or biological models of cells and so on.
+<!-- Exclusion criteria -->
+In this book we study specific types of models:
+The models have to be computational or mathematical models.
+This excludes, for example, physical models, like the tiny houses that architects build.
 The second restriction: The models are learned from data.
-This excludes "designed" models such as simulations.
-
+This excludes "designed" models such as pure simulations like cellular automata.
 
 <!-- What constitutes a model -->
 There are three ingredients to a mathematical model:
 <!-- in original text it's objects instead of variables -->
-A mathematical model contains *mathematical structures* that represent *variables* and puts them into *relation*. [^Weisberg2012]
-When a mathematical model is learned from data, it also contains *parameters* that make the mathematical formula adatable to data.
-If you further want to interpret models in place of the world, you also have to make assumptions about relation between model variables/relations and real world properties. 
+A mathematical model contains *mathematical structures* that represent *variables* and put them in *relation* (Figure \@ref(fig:model)). [^Weisberg2012]
+When a mathematical model is learned from data, it also contains *parameters* that make the mathematical formula adaptable to data.
+Furthermore, if you want to interpret models instead of the world, you have to make assumptions about the relationship between the model and aspects of the world.
+But more on that in the [mindsets chapter](#mindsets).
 
-The aspects of the world are represented as *variables* within the model.
-Images are represented as tensors of pixels, for example.
+```{r model, cache = TRUE, fig.cap = "Model"}
+library(ggplot2)
+
+circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
+    r = diameter / 2
+    tt <- seq(0,2*pi,length.out = npoints)
+    xx <- center[1] + r * cos(tt)
+    yy <- center[2] + r * sin(tt)
+    return(data.frame(x = xx, y = yy))
+}
+
+dat = circleFun(c(2,2.3), 3, 100)
+
+
+p = ggplot(dat, aes(x = x, y = y)) +
+ geom_path(size = 2) +
+ annotate(x = 2, y = 3.7, geom = "label", label = "Model", size = 20, label.size = 2) +
+ theme_void() 
+
+nodes = data.frame(x = c(1, 3, 2),
+                   y = c(2, 2, 3))
+
+edges = data.frame(x =    c(2, 2, 3),
+                   xend = c(1, 3, 1),
+                   y =    c(3, 3, 2),
+                   yend = c(2, 2, 2))
+multi = 1.5
+radius = 0.15 
+edges$xend2 = edges$xend + c(radius, -radius, multi * radius)
+edges$yend2 = edges$yend + c(radius, radius, 0)
+edges$x2 = edges$x - c(radius, -radius, multi * radius)
+edges$y2 = edges$y -  c(radius, radius, 0)
+
+pmodel = p +
+  geom_segment(aes(xend = xend2, yend = yend2, x = x2, y = y2), data = edges, color = "black", size = 1) +
+  geom_point(size = 20, color = "darkgrey", data = nodes) +
+  annotate("text", label = "alpha", x = 1.4, y = 2.6, parse = TRUE,  size = 10) +
+  annotate("text", label = "beta",  x = 2.6, y = 2.6, parse = TRUE, size = 10) +
+  annotate("text", label = "gamma", x = 2, y = 1.9, parse = TRUE, size = 10) +
+  theme_void() +
+  coord_fixed()
+
+pmodel
+```
+
+<!-- variables -->
+The aspects of the world are represented within the model as *variables*.
+Images, for example, are represented as tensors of pixels.
 The blood pressure of a patient is represented with a number for the model to use.
-There are different names for these components:
-Random variables, covariates, predictor, latent variables, features, target, outcome,  ...
-Some of these names already carry information about our intent how to model relationships between the components.
-The variables reflect an aspect of the real world that we are interested in, or that have an important relationship with an aspect that we are interested in.
+Variables can also represent a latent, hidden or abstract aspect.
+Like happiness or introversion.
+There are different names for these variables:
+Random variables, covariates, predictors, latent variables, features, target, outcome,  ...
+These names sometimes reveal the role a variable takes on in our model, and are dependent on the modeling mindset we are in.
+For example, in machine learning the word feature and target are used.
+In statistics for similar variable roles, we would use independent and dependent variable, or covariates and outcome, ...
 
-Within the model, the components are set mathematically or computationally in *relation* to each other.
-For example, the variables in a neural network are functions of nodes at the lower level of the neural network.
-The outcome variable in a linear regression model is the sum of the input variables.
-The nodes in a tree are mutually exclusive and exhaustively cover the feature space. 
-Sometimes we want these relations as reflection of the same relations in nature, but they don't have to be.
-While the input features often have a natural represntation, the "inward-facing" parts of the model, such as weights, 
+<!-- relation -->
+Within the model, the components are mathematically or computationally set in *relation* to each other.
+For example, causal models represent relations between variables as directed acyclic graph that can be translated into conditional (in-)dependencies.
+The joint distribution of variables describes the occurrence of certain variable values in a probabilist sense.
+A predictive model represents the output variable as a function of the input variables, in the case of a linear regression model as the sum of the input variables.
 
-The expresiveness of such relationships really depends on the class of the model.
-It can be a simple linear relationship like $Y = 5 \cdot X$, or we can have multiple compoents in complex relationships.
+<!-- TODO: visualize different functions? -->
+
+<!-- expressiveness of relations -->
+The expressive power of such relationships really depends on the class of the model.
+A relationship can be a simple linear equation like $Y = 5 \cdot X$ involving two or more variables.
 For example we might model the probability of a stroke as a function of blood pressure and age. 
-However, these relationships are not fixed, at least not before the model was instantiated with data.
+A relationship can also be a long chain of mathematical operations, involving thousands of variables, for example deep neural networks for image classification.
 
-Usually these relationships are *parameterized*.
-Meaning, we don't fully know the relationship in advance.
-The relationship has some adjustable knobs with which you can make the relationship "fit" the real world.
-We know that we can buy carrots with money.
-I know that I can get carrots with 1 EUR.
-But how many grams will I get?
+<!-- parameters and structures -->
+We don't know the relationships in advance, so we use data to learn them.
+For some models, learning these relationships is a matter of finding the right *parameters*.
+This is true for neural networks and generalized additive models, for example.
+For other models, the model structure is "grown", as in decision trees or support vector machines.
+
+<!-- instantiation -->
+You can think of a model as having an uninstantiated state and an instantiated state.
+An uninstantiated model is not yet fitted to the data.
+Uninstantiated models form families of models.
+For example the neural network ResNet architecture, or the family of Poisson regression models.
+An instantiated model is trained / learned / fitted using data: It's parameterized and/or the structure has been learned.
+
+<!-- parameters example -->
+I can buy carrots with money.
+How many grams of carrots can I get for 1 euro?
 Let's call this unknown parameter in our equation $\beta$:
+$1 \text{ EUR} = \beta \text{ Carrots}$.
+I could figure out the $\beta$ by going to the supermarket and checking the price.
+Maybe $\beta = 500$, so I get half a kilogram of carrots for 1 euro.
+But that's only for one supermarket!
+Maybe I have to add more relationships to the model.
+Maybe I need to consider the supermarket chain, whether there are special offers for carrots , whether I buy organic carrots, ...
+All these choices add parameters to the model. 
 
-$$1 \text{ EUR} = \beta \text{ Carrots}$$
-
-This part of my equation I could learn by going to the supermarket and checking the price.
-Maybe $\beta = 500$, so I get half a kilogram of carrots for 1 Euro.
-But that's just for one supermarket!
-Maybe I have to add more relationships into the model.
-Some properties about the supermarket, like the chain from which the supermarket is.
-You see, all these choice are already shaping very different models.
-
+<!-- 
 There are many different types and names for parameters.
 Sometimes they just describe a distribution, like the mean of distribution.
 Or they describe the relationship between two variables, like regression coefficient.
@@ -80,15 +137,13 @@ Or it's a weight in a neural network.
 What's different is hyperparameters.
 In a sense, they exist outside of what the model describes.
 Hyperparameters set how the learning from data takes place.
+-->
 
-We can also think about two states of a model: uninstantiated and instantiated.
-An instantiated model is one where we have already found some values for our parameters.
-An uninstantiated model is one where the parameters are not yet found.
-Uninstantiated models thereby form the family of models.
-You can have an instantiated linear regression model, with coefficients and so on.
 
-The models are parameterized, meaning the relationship between components are flexibly modelable.
-These *parameters* are adjusted using data, in the training or fitting process.
+<!-- making use of the relationship -->
+What we do with the relationships depends on the mindset.
+In supervised machine learning, we take advantage of the relationship to make predictions.
+In causal inference, we use the modeled relationship to derive statistical estimators and estimate causal effects.
 
 
 <!--
@@ -110,5 +165,5 @@ Because some mindsets are more concentrated on some of the tasks.
 
 -->
 
-[Weisberg2012]: Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.
+[^Weisberg2012]: Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.
 
