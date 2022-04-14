@@ -1,5 +1,7 @@
 # Frequentist Inference {#statistical-inference}
 
+CONTINUE HERE
+
 <!-- TODOs:
 
 - mention other critiques of the mindset

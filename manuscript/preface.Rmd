@@ -32,3 +32,10 @@ TODO: Write about my own journey:
 * had one frequentist project where causality mindset saved the project
 * learned a lot from Bayesian podcast
 
+
+I studied statistics.
+It was almost purely the likelihood-based frequentist mindsets.
+We did have a bit of Bayesian statistics, nonparametric statistics and machine learning.
+Later on I dove deep into machine learning, so that my two primary mindsets are frequentism and supervised machine learning.
+But I also made some strides into causality.
+
