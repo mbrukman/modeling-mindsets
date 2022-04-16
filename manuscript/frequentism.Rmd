@@ -1,6 +1,5 @@
 # Frequentist Inference {#statistical-inference}
 
-CONTINUE HERE
 
 <!-- TODOs:
 
@@ -21,14 +20,19 @@ In a nutshell, the basic assumptions and their consequences:
 
 <!-- example of frequentist study -->
 <!-- source of study:  https://academic.oup.com/aje/article/154/8/748/131397 -->
-Does drinking alcohol increase your risk of getting diabetes?
-A study found that for middle-aged men a high intake of alcohol significantly increases the diabetes risk by a factor of $1.81$ [^Kao2001].
-This scientific results comes out of a statistical model, which predicts the probability that someone develops type II diabetes, given various risk factors such as alcohol intake.
-There is no special reason why I picked this study, except for how conclusions about the world were made from data: frequentist inference.
+Alcohol intake is associated with an increased risk of diabetes in middle-aged men.
+This is at least the result of a study [^Kao2001] that modeled type II diabetes risk as a function of various risk factors.
+Alcohol was found to significantly increase the diabetes risk by a factor of $1.81$.
+
+"Significant" and "associated with" are familiar terms when reading about scientific results.
+The researchers in the alcohol study used a popular modeling mindset to draw conclusions from data: frequentist inference.
+There is no particular reason why I chose this study other than it is not exceptional.
+
+CONTINUE HERE
 
 <!-- dominant mindset -->
 Frequentist inference is the dominant mindset with which many scientific insight.
-Frequentist inferene is not without criticism and has been the vehicle of many false or unreliable findings.
+Frequentist inference is not without criticism and has been the vehicle of many false or unreliable findings.
 When someone thinks in significance levels, p-values, hypothesis tests, null hypothesis and confidence intervals, they are likely in the frequentist mindset.
 
 <!-- frequentism is statistical model -->

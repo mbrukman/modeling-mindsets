@@ -39,6 +39,9 @@ I think bootstrap here is one central idea, that shows that nonparametric statis
 
 TODO: Is bootstrap really based on sound theory?
 
+Conflict: bootstrap is for approximating distributions. aka Verteilungsfreie verfahren
+But the other non-parameteric stuff is for replacing rigid parameters with more flexible constructs.
+
 
 ## Advantages
 
