@@ -375,7 +375,7 @@ Connection to Bayesianism: Bayesian priors can be set equal to regularization in
 * No prior information about the parameters required, compared to [Bayesianism](#bayesian), and therefore seemingly more objective.
 * Frequentism allows binary decisions (accept/reject hypothesis). This is one of the reasons why it's so popular for scientists and why managers love it.
 * Of course frequentism inherits all the advantages of the [statistical models](#statistical-modeling) in general: A solid theoretical foundation and the tight feedback loop of working with the data-generating process.
-
+* Especially good when, well, the true underlying process really is a long-run, repeated experiment. Like probabilities in casino such as roulette. 
 
 
 ## Limitations
