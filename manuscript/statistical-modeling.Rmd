@@ -399,24 +399,7 @@ This now parameterized distribution is the statistical model of our little offic
 
 ## Types of Statistical Models
 
-CONTINUE HERE WRITING
-
-All statistical models have some form of probability distributions at it's core.
-For most of the chapter, we talked about simpler cases, like having the distribution of a single variable and fitting a distribution.
-So the case was of learning $P(X)$.
-But we could have the case of multiple random variables $X_1, \ldots, X_p$.
-
-We have two options (bit oversimplifying here):
-Fit the joint distribution, or a conditional distribution.
-For example for Gaussian mixture models, we would learn the entire distribution.
-Gaussian mixture models are a form of clustering model, where the data forms clusters.
-
-* Difference between joint and conditional
-* In other terms: conditional is supervised (at least if only for one variable)
-* joint is a form of unsupervised learning.
-
 <!-- 
-
 - 1D distributions
 - but also mulitvariate
 - with more than one variable, we have two options
@@ -427,7 +410,247 @@ Gaussian mixture models are a form of clustering model, where the data forms clu
 - ANOVA, regression models, survival model / cox model, Justification
 -->
 
+All statistical models target an aspect of a probability distribution.
+For most of the chapter, we talked about simpler cases, like having the distribution of a single variable and fitting a distribution.
+So the case was of learning $P(X)$.
+But we could have the case of multiple random variables $X_1, \ldots, X_p$.
 
+<!-- targets of the statistical models -->
+We have two options (bit oversimplifying here) for the probability distribution:
+Fit the joint distribution, or a conditional distribution.
+Depending on the problem that we want to solve, there are different properties of the distribution that we might want to find out.
+Very often, it's a conditional mean: "What do we expect for a random variable $Y$ given $X= \mathbf{x}$?
+But it can also be other parts of the distribution: "What's the 90\% quantile for $Y$ given $X = \mathbf{x}$?
+Consequently, 10\% of the values for $Y$, given $X=\mathbf{x}$, would be greater than the 90\% quantile.
+Think of insurance: An insurance company is noy only interested in the expected damages they have to cover, but also how much they would have to cover in the extreme case. 
+
+<!-- Gaussian mixture, joint example -->
+A Gaussian mixture model, for example, requires learning the entire distribution. 
+Gaussian mixture models can be used for identifying clusters in the data, which are assumed to stem from a mixture of Normal distributions.
+With Gaussian mixture models we also seen an example where maximum likelihood is not the sole optimization approach.
+Instead, the expectation-maximization algorithm is used, which iteratively jumps between optimizing the model parameters and predicting the "mixture" of cluster centers for each data point.
+
+<!-- motivation: regression models -->
+The joint distribution is not always of interest.
+So often, the modeler is only interested in the conditional distribution:
+How does the probability distribution of a variable depend on other variables?
+For example:
+
+<!-- example of conditional outcomes -->
+* What are risk factors that influence the probability of getting lung cancer?
+* How do climatic conditions like temperature and humidity affect the occurence of bonobos?
+* On which days is a hospital likely to be understaffed?  
+
+<!-- advantages of conditional -->
+The conditional distribution is the natural form for prediction tasks and usually simpler to estimate than the joint distribution.
+Models of the conditional distribution are central to statistical modeling.
+They are also known as regression models. 
+
+## Regression Models
+
+<!-- regression models -->
+Regression models are statistical models that don't learn the joint distribution, but a conditional distribution.
+Let's say we have two variables: $Y$ and $X$.
+With the join distribution $P(Y,X)$ we could answer "How likely is a certain combination of $X=x$, and $Y=y$.
+But with the joint distribution, we can ask: "Given $X=x$, what is the probability distribution of $Y$"?
+
+<!-- an example -->
+For example, we want to know not only how often a disease is successfully treated.
+We might want to know if a certain drug played a part in the disease outcome.
+And other factors such as age of the patient, progression of the disease and so on might play a role as well.
+And we would have to consider such factors to answer the question on whether the drug helps.
+
+<!-- how it works -->
+Our target is the distribution of outcome variable $Y$ conditionanl on variables $X_1, \ldots, X_p$.
+That means that within the regression model the parameters of the distribution of $Y$ are linked to the other variables.
+How exactly this link looks like depends on the distribution that the modeler assumed for $Y$ and the link they chose to connect the two.
+The simplest case is a linear model.
+We assume that $Y$ follows a Normal distribution and link the mean of $Y$'s distribution to a weighted sum of the other variables:
+
+$$Y \sim N(\mu, \sigma)$$
+
+$$\mu = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p$$
+
+<!-- Regression model = conditional distribution -->
+The linear regression model expresses the mean of the target $Y$ as the weighted sum of the other variables. 
+$Y$ given $\mathbf{X}$ follows a Normal distribution.
+We only link the mean $\mu$ to the variables.
+A typical assumption is that the $\sigma$ is independent of the value of the other variables.
+
+<!-- what can we do with model -->
+What can we do now with a regression model?
+<!-- goal: prediction -->
+We can make predictions.
+We just have to fill in values for $X$ and get the expected value of the probability distribution of $X$.
+<!-- goal: interpretation -->
+Another typical goal is interpreting the relationship between the target with the other variables.
+The coefficients in the regression model are subject to interpretation.
+For the linear regression model, a positive coefficient $\beta_j$ means that increasing the value of variable $X_j$ increases the expected value of $Y$. 
+
+<!-- glm and gam -->
+
+
+<!--
+So [frequentists](#frequentism) can derive confidence intervals, p-values and hypothesis tests for them ("Is coefficient $\beta_j$ significantly different from $0$?").
+[Bayesians](#bayesian) would additionally assume a prior distribution for $\mathbf{\beta}$ and we would get as a result the posterior distributions of the coefficients to analyze. 
+-->
+
+<!-- bridge to ML -->
+Thinking in regression models brings you closer to the [supervised machine learning](#mindset).
+However, in supervised  machine learning, the focus is usually on getting a good predictive model.
+Not on finding a finding a probabilistic representation of your data with random variables and distributions.
+
+<!-- on classification models -->
+But what if the outcome is a category, and our task is classification?
+When you come from the [supervised machine learning](#supervised-ml) mindset, always the distinction between classification and regression models is made.
+In statistical modeling, we don't model the categories, but their probability distribution.
+From the statistical modeling mindset, a categorical variable is nothing special.
+Like for all other variables, we model the conditional distribution of the variable.
+And if we make predictions with our model, we get the probabilities for the categories.
+
+
+
+## Model Evaluation
+
+<!-- importance of evaluation for understanding mindset -->
+Statistical models can be evaluated.
+The evaluation is very revealing to understand the mindset.
+And especially how the statistical modeling mindset differs from the [supervised machine learning](#supervised-ml) mindset.
+Evaluation consists of model diagnostics and goodness-of-fit measures.
+
+<!--  diagnostics -->
+The role of model diagnostics is to check whether the modeling assumptions were meaningful.
+If we assumed that a random variable follows a Normal distribution, we can visually check whether that's really the case using, for example, the Q-Q plot.
+An assumption for linear regression model that I mentioned : The variance of the outcome does not depend on the values of the other variables.
+This can be checked visually by plotting the residuals (value of $Y$ minus predicted value of $Y$) against each of the other variables.
+
+<!-- goodness-of-fit -->
+The role of goodness-of-fit measures is model comparison and evaluating modeling choices.
+Typical measures here are the (adjusted) R-squared, Akaikes Information Criterion (AIC), the Bayes factor, and likelihood ratios.
+Goodness-of-fit are, quite literally, measures that tell us how well our model fits the data.
+Goodness-of-fit metrics can guide the model building process and decide which model to choose in the end.
+
+<!-- compare evaluation to ML -->
+Goodness-of-fit metrics are typically computed with the same data that were used for fitting the statistical models.
+This choice may look like a minor detail, but it says a lot about the statistical modeling mindset.
+The critical factor here is overfitting: The more flexible a model is, the better it adapts to ALL the randomness in the data instead of learning patterns that generalize.
+Many goodness-of-fit metrics therefore account for model complexity, like the AIC or adjusted R-squared.
+For the [supervised machine learning](#supervised-ml) mindset, you would always use new, unseen data for the evaluation.
+
+## Data-Generating Process (DGP)
+
+<!-- what is the DGP -->
+A quite central, but fuzzy topic of the statistical modeling mindset is the data-generating process.
+The statistical modeler thinks about the data-generating process all the time.
+The data-generating process is a construct, an unknowable ideal of how the data was generated.
+The data-generating process produces the unknown distributions that than produce the data.
+We can only observe the data-generating indirectly by oberving data.
+And we can come closer to the DGP by reasoning about it.
+You won't find this in any statistics book explicitly.
+But it's the mindset of statistical modeling to have this idea of the DGP.
+It's a natural consequence when you think about the world as random variables and distributions.
+
+<!-- DGP detective -->
+I think the DGP is a very powerful idea, even when it's not well defined.
+Assuming a DGP encourages you to intellectually dive deep into your data.
+Having this image of a DGP in your mind let's you take on the mindset of a detective:
+Statisticians are like detectives reconstructing a crime.
+You can't observe the crime directly.
+But the crime has generated a lot of "data" at the scene.
+The stats detective then tries to uncover the data-generating process by making assumptions and learning from data.
+
+<!-- examples of data-generating processes -->
+"Defining" the data-generating process is neither simple nor well-defined, but I'll give it a try:
+
+* Dice roll: the throw of the dice is the data-generating process. The dice is symmetric, which makes each side equally likely. We could factor in throwing angle, surface roughness and so on, but the chaotic behaviour of the dice jumping and spinning over the table makes us dismiss all these factors.
+* We study the income of computer scientists via a survey. Instead of only reporting on the income distribution, we think about the entire data-generating process: For example, some income values are missing. Are they missing at random? Or are maybe people with higher incomes omitting the question? Are some companies overrepresentated in the survey? Is the sample truly random?
+* A research team has collected chest x-ray images of patients with and without COVID-19 for building a COVID-19 prediction model. A closer look at the data-generating proces shows: the images not only differ in COVID-19 status, but they come from different data-generating processes. COVID-19 images are more likely from a horizontal position where the patient lies down because they are so exhausted. One of the non-COVID-19 datasets are even just children x-ray images. [^Wynants2020] I picked this example, because it is a paper from a [machine learning mindset](#machine-learning). Statisticians would think much more about the data-generating process, and are, IMHO, more likely to spot such mistakes.
+
+If these examples of data-generating process sound like common sense to you, it's because they are.
+But it's surprisingly uncommon among non-statistician mindsets.
+For example, for [machine learning](#machine-learning) considerations of the data-generating process play a subordinate .
+For machine learning competitions, for example, the winner is, most of the times, solely determined by the lowest loss function.
+It's not considered when some approach has a more meaningful consideration of the data-generating process, and an understandable model.
+
+Sometimes we want to control at least parts of the data-generating process.
+In randomized clinical trials, for example, we control who gets the drug and who get the placebo.
+In other controlled experiments we even control more factors.
+
+CONTINUE HERE WRITING 
+
+## Statistical Inference: Drawing Conclusions About the Real World
+
+<!-- from world to model -->
+Statisticians collect data about the world, and use this data to learn a statistical model.
+The statistical model connects the world and the data through random variables:
+The world can be simplified by probability distributions;
+the data are seen as realizations of the random variables.
+
+<!-- from model to world -->
+Statistical modeling is a practical endeavour.
+Most of the times, statistical models built out of practical reasons:
+To make a decision, to understand some properties of the world a bit better, or to make a prediction.
+These goals requires that we interpret the model in place of the world.
+But it's not for free.
+After all the model building and evaluation, the statistical modeler has to consider two things: representativeness of the model (and the data), the interpretation of probability and causality.
+
+<!-- Part 1: Representativeness -->
+Part of thinking about the data-generating process is thinking about representativeness of your data and therefore the model.
+Are the data a good sample and representative for the property of the world that you study?
+Let's say a statistical modeler analysis data about whether a sepsis screening tool successfully reduced the occurrence of sepsis in a hospital.
+They come to the conclusion that the sepsis screening tool helped reduce sepsis-related deaths in this hospital.
+Are the data representative for all hospitals in the region, the country, or even the world?
+Are the data not even representative for all patients in the hospital, because the tool was only tested with patients in intensive care?
+In the statistical modeling mindset, defining the "population" from which your data are a sample of and discussing how representative the data are of this population is crucial for any conclusions drawn from the model.
+[Design-based inference](#design-based) fully embraces this mindset of the data being a sample from a larger population.
+
+
+<!-- Part 2: Interpretation of probability -->
+More philosophical is the modelers attitude towards causality, prior probabilities and the likelihood principle.
+And also the interpretation of how probability should be interpreted.
+
+>> "It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel." [^savage1972] 
+
+
+Statistical modeling is just the foundation, and we have to decide for one of the following statistical sub-mindsets for making the statistical models useful:
+
+[Frequentist inference](#frequentism) is the most prominent mindset for inferring properties about the world from statistical models.
+Frequentist statistics sees probability as relative frequencies of events in long-run experiments.
+
+[Bayesian inference](#bayesian) has a different interpretation of probability as belief about the world.
+Bayesianism says that also the parameters have a (prior) distribution.
+And the goal of the statistician is to update the prior distribution with data.
+The resulting posteriori distribution of the parameter expresses our belief of the parameter.
+The question is: "What should I believe?"
+
+[Likelihoodism](#likelihoodism) is a lesser known modeling mindset. Like Bayesianism, it adheres to the likelihood principle that says that all the likelihood function captures all evidence from the data (which frequentist inference violates).
+However, it comes without prior probabilities.
+
+[Causal inference](#causality) adds causality to statistical modeling. It can be built onto any of the other three mindsets.
+
+A different, yet complimentary, approach is [design-based inference](#design), which focuses on data sampling and experiments, instead of models.
+
+## Strengths
+
+* The statistical modeling mindset is a *language to see the world*. Even if not used for inference, random variables and probability distributions are a useful mental model to perceive the world. 
+* Statistical modeling has a long tradition and an immense amount of theoretical foundation, from measurement theory as the basis of probability theory to convergence properties of statistical estimators.
+* The data-generating process is an underestimated, yet powerful mental model that encourages mindful modeling and asking the right questions.
+* Conditional probability models can not only be used for learning the parameters of interest, but also for making predictions 
+* Probability distributions give us a language to express uncertainty. Arguably [Bayesianism](#bayesianism) has the most coherent and emphasized focus on expressing uncertainty.
+
+## Limitations
+
+* Statistical modeling reaches its limits quickly when defining probability distributions becomes difficult. Images and text don't fall neatly into the mindset, and that's where [supervised machine learning](#supervised-ml) shines instead.
+* Working in the statistical modeling mindset can be quite "manual" and tedious. Always thinking about the DGP is not easy, and sometimes more automatable mindsets such as supervised machine learning take over.
+* Statistical models need a lot of assumptions. Sometimes more, sometimes less. Here are just a few: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, ...
+* Statistical modeling mindset, when used for prediction, is often outperformed by [supervised machine learning](#supervised-ml). To be fair, that's only true when judging a model originating from the statistical modeling mindset with evaluation approaches from the supervised machine learning mindset. But it also says that high goodness-of-fit and passing all diagnostics is a guarantee for being the best model on all metrics.
+*
+
+[^savage1972]: Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.
+
+[^density]: For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.
+
+[^semiparametric]: Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric.
 
 <!--
 ## Justification of Likelihood Mindset: Probability Theory
@@ -447,229 +670,5 @@ Also for disjunct events, the probability that any of them happens is the sum of
 The probality that a person a person rolls a dice with "1" or a "2" is the sum of probabilities for both numbers. 
 -->
 
-## Regression Models
 
-<!-- motivation: regression models -->
-The distribution of our data would be fully described by the joint distribution.
-But often there are too many variables.
-And further, you might only be interested in one of the variables (like the outcome of an experiment).
-And how other random variables influence this variable.
-
-<!-- regression models -->
-Regression  models take on a specific position in statistical modeling.
-But they are severely reduced in their statistical ambition, but make it manageable to desribe indivudal variables distribution. 
-Regression models are statistical models.
-But instead of the joint distribution, they model the conditional distribution of a random variable.
-This variable is often called $Y$.
-But it's just a random variable, like the others.
-Except that we have some special interest.
-Then we have $\mathbf{X}$ the random variables that might influence $Y$, or where we are also interested in how they affect $Y$.
-It's actually not true that regression models model the conditional distribution of $Y$.
-Regression models usually just model an aspect of this distribution: the expected value of $Y$: $E(Y | X)$.
-
-<!-- an example -->
-For example, we want to know not only how often a disease is successfully treated.
-We might want to know if a certain drug played a part in the disease outcome.
-And other factors such as age of the patient, progression of the disease and so on might play a role as well.
-And we would have to consider such factors to answer the question on whether the drug helps.
-
-<!-- how it works -->
-This model is of course parameterized.
-We give parameters to the random variables.
-And an equation that links the weighted random variables with the expectation of the target $Y$.
-The simplest is a linear model:
-
-$$Y = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p + \epsilon, \epsilon \sim N(0, \sigma)$$
-
-<!-- Regression model = conditional distribution -->
-So we say that the target can be expressed as a weighted sum of the other random variables.
-And there is some random error $\epsilon$ (also a random variable) that follows a Normal distribution with unknown variance $\sigma$.
-And with this regression model, we specified the conditional distribution of our target $Y$: $Y|X \sim N(\beta_0 + \beta_1 X_1 + \ldots + \beta_p, X_p, \sigma)$.
-In words: $Y$ given $\mathbf{X}$ follows a Normal distribution.
-The mean or expected value of this conditional distribution is the weighted some of the other variables.
-And the variance is inherited from the $\epsilon$.
-
-<!-- goal: frequentist parameters -->
-The goal in this regression modeling are the coefficients vector $\mathbf{\beta}$.
-Parameters make the model interpretable.
-Like the estimators of the mean or variance in the sections above, they are random variables.
-So [frequentists](#frequentism) can derive confidence intervals, p-values and hypothesis tests for them ("Is coefficient $\beta_j$ significantly different from $0$?").
-[Bayesians](#bayesian) would additionally assume a prior distribution for $\mathbf{\beta}$ and we would get as a result the posterior distributions of the coefficients to analyze. 
-
-<!-- bridge to ML -->
-They also build the bridge to [machine learning](#machine-learning), since they are framed in a similar way.
-However in machine learning, the focus is not necessarily on building a probabilistic model.
-But just to frame $Y$ in terms of a preditive target.
-The regression models can also be used for making predictions.
-But I would say that at least a focus is on the interpretation of the parameters and drawing conclusions from them about the world.
-
-## Statistical Inference: Drawing Conclusions About the Real World
-
-Assumption: The data come from larger population.
-
-<!-- Part 1: Representativeness -->
-TODO: Write about representative samples. or move that to the individual chapters frequentism, bayesianism
-
-<!-- goal: learn about the world -->
-Alright, we made our assumptions that the world can be described with a statistical model.
-So we have this direction: The world informs the model. World -> Model
-The statistical model is a simplified version of some properties of the world.
-Ideally, we want to infer properties of the world now from the model.
-We also know that our statistical model is subject to variance.
-Would we have different data, we would have gotten a different model.
-Hopefully only slightly different.
-
-<!-- example of real world analysis -->
-A typical analysis would be:
-We want to know how some environmental policy affects, let's say water pollution.
-A statistician sets up linear regression model that relates water pollution and policy used yes/no for different lakes.
-Now we want these results to be translated again into real world properties.
-We have a coefficient for the effect of the policy.
-Let's say it is negative, indicating that the policy reduces pollution.
-Just one problem: Is it negative by randomness, or is it a reliable effect.
-There are now multiple approaches to deal with this problem.
-Each got their own chapter, but I want to tease here how these mindsets look like.
-The statistical modeling chapter you are currently reading is, as I mentioned, a meta-mindset, since it's not a complete mindset, but for the final step to infer properties, we need to extent this mindset.
-It depends on our idea of what a probability is, how we perceive our data sample and what we think of causality.
-They all have in common that they optimize likelihood functions and make most of the assumptions mention in this chapter.
-
-<!-- statistical model of coin toss -->
-For example, we toss a coin 10 times, and want to know if it's fair, meaning probability for head is 0.5.
-A statistical model of this experiment can be a Binomial distribution.
-Can we just compute this and report the $p$ the probability for heads from the Binomial distribution?
-What if our best guess for $p = 0.6$?
-Does it mean the coin is not fair? 
-
-
-It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel. [^savage1972] 
-
-<!-- different mindsets -->
-To answer these question, we have to make assumptions of what a probability is.
-
-[Frequentist inference](#frequentism) is the most prominent mindset for inferrring properties about the world from statistical models.
-Frequentist statistics sees probability as relative frequencies of events in long-run experiments.
-It's a physical interpretation of probability.
-Frequentism allows one to ask "What should I do?".
-And statisticians get yes or no type of answers through hypothesis tests and p-values for the model paramters.
-
-[Bayesian inference](#bayesian) has a different interpretation of probability as belief about the world.
-Bayesianism says that also the parameters have a (prior) distribution.
-And the goal of the statistician is to update the prior distribution with data.
-The resulting posteriori distribution of the parameter expresses our belief of the parameter.
-The question is: "What should I believe?"
-
-[Likelihoodism](#likelihoodism) takes the likelihood-mindset quite literal by saying that all evidence for the data are in the likelihood function.
-Unlike the other two, we don't learn about decisions or beliefs.
-The likelihoodism mindset makes it impractical to use statistifal modeling in science, which makes this mindset less popular.
-But nonetheless it's an insightful mindset to explore.
-
-A different, yet complimentary, approach is [design-based inference](#design).
-Design-based approaches focus on the data sampling and experiments, instead of models.
-
-
-## Model Evaluation
-
-* Evaluation important to understand the mindset
-* Evaluation has following parts
-  * Goodness-of-fit
-  * Diagnostics
-* Diagnostics are for checking whether basic assumptions are okay
-* Diagnostics examples: QQPlot, Analyzing residuals. It's often visual.
-* Diagnostics is for checking whether the assumptions made were ok.
-* Assumptions are about distribution.
-* Goodness-of-fit can compare models
-* Models might encode different assumptions
-* Maybe assumption of linearity violated?
-* Try model with splines, see if (adjusted) goodness-of-fit better for thenew model.
-* Part of "evaluation" is also just having good argumentation for why c
-* For Bayrs there are more evaluations
-* Evaluation here only for the likelihood, but which is also relevant to Bayes
-* Goodness-of-fit evaluation usually with the same data
-* AIC and such can account for flexibility of the model
-* If not accounted for, then model with more flexiblity will have higher goodness-of-fit
-* Vastly different appraoch than machine learning, where new data has to be used
-* Note here again: it's archetype. Some might even use other data.
-* 
-
-## Data-Generating Process
-
-A central theme to understand the mindset of statistical modeling is the data-generating process.
-If you already developed a feeling for the idea of random variables and distributions, you are already there.
-The data-generating process is a construct.
-An idea of how the data that we observed was generated.
-The thing with the data-generating process is: While it's just a model, you have to assume that the data-generating process really is how nature behaves, at least in an abstract way.
-The thing is: The data-generating process is unknown.
-It's almost an idealization of a process.
-We can define it when we do simulations ourselves, but we cannot know it in nature.
-The result of the data-generating process are distributions.
-These we can also not observed, but at least we can observe the realizations of the respective random variables.
-We can only observe its consequences by oberving data.
-
-I think the data-generating process is a central element to the statistician mindset.
-Proof: Also machine learning methods can rely on random variables and distributions.
-But machine learners make the stance that the data-generating process is best approximated by some function we don't necessarily have to understand.
-It's maybe not ever understandable.
-The machine learners don't even speak about the data-generating process.
-
-I think the data-generating process is a very powerful idea.
-It enrourages you to think about how the data was generated.
-When you explicitly have to model some hidden data-generating process, you take on the mindset of a detective uncovering the plot from clues.
-It's a mental model that encourages to look at detailed questions:
-How was a variable generated?
-Is there some hidden variable that influence whether another variable has missing values?
-
-<!-- examples of data-generating processes -->
-"Defining" the data-generating process is neither simple nor well-defined, but I'll give it a try:
-
-* For a dice roll, the data-generating process is the roll itself, and the fact that the dice has a symmetric shape, and enough randomness that we dismiss factors such as throwing angle, surface roughness and so on.
-* We study the income of computer scientists via survey. Instead of only reporting on the income distribution, we think about the entire data-generating process: For example, some income values are missing. Are the missing at random? Or are maybe people with higher incomes omitting the question? Are their imbalances regarding the companies, namely that one companies worker are much more often in the survey? 
-* We want to have rent index: A statistical model that sets the rent (per square meter) into relation with factors such as age of building, number of rooms, ...
-* A research team has collected chest x-ray images of patients with and without COVID-19. These are used to build a COVID-19 classifier based on inflammation of the lung. A closer look at the data-generating proces shows: non-COVID-19 and COVID-19 images do not only differ in the medical condition, but the x-ray images come from different data-generating processes. COVID-19 images are more likely from a horizontal position where the patient lies down because they are so exhausted. One of the non-COVID-19 dataets are even just children x-ray images. I picked this example, because it is a paper from a [machine learning mindset](#machine-learning). Statisticians would think much more about the data-generating process, and are, IMHO, more likely to spot such mistakes. TODO: CITE critique paper.
-
-If these thoughts relating to the data-generating process sound like common sense to you, it's because I think they are.
-Common among statisticians.
-Surprisingly uncommon among non-statistician mindsets.
-For example, for [machine learning](#machine-learning) considerations of the data-generating process play a subordinate or no role at all.
-For machine learning competitions, for example, the winner is, most of the times, solely determined by the lowest loss function.
-It's not considered when some approach has a more meaningful consideration of the data-generating process, and an understandable model.
-
-Sometimes we want to control the data-generating process.
-For example by using randomized clinical trials, or experiments with specific designs.
-
-
-The idea of the data-generating process also plays an important role for statistical inference.
-Inference is about transporting the insights from the statistical model to the real world.
-A good statistician makes a good argument why this is allowed.
-For example, the mean income would be wrong to assume for all computer scientists when we identified that people with high income are more likely to omit their income.
-A statistician would have to adjust for that before we make inference.
-
-
-
-
-## Strengths
-
-The statistical modeling mindset is a *language to see the world*.
-The language consists of random variables and probability distributions.
-Even if not used for inference, it can be beneficial to think in terms of variables and distributions.
-
-* Especially good when, well, the true underlying process really is a long-run, repeated experiment. Like probabilities in casino such as roulette. 
-* Solid theoretical foundation.
-* Data-generating process is a powerful mental model that encourages a mindful modeling approach, and asking detailed question.
-* DGP Also invites to work closely with experts.
-* Conditional probability models can not only be used for learning the parameters of interest, but also for making predictions 
-* Probability distributions give us a language to express uncertainty. Arguably [Bayesianism](#bayesianism) has the most coherent and emphasized focus on expressing uncertainty.
-
-## Limitations
-
-* World not necessarily as neat and organizable into distributions.
-* Statistical modeling approaches (as defined here) don't work so well for images and text, for example.
-* Very "manual": You have to define distributions by yourself.
-* Needs a lot of assumptions: That you picked the right distributions, and so on.
-* Not as good in making predictions as [supervised learning](#supervised).
-
-[^savage1972]: Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.
-
-[^density]: For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.
-
-[^semiparametric]: Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric.
-
+[^Wynants2020]: Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. "Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal." bmj 369 (2020).
