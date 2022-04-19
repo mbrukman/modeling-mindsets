@@ -33,7 +33,8 @@ opts_chunk$set(
   dpi = 150, 
   fig.height = 5, 
   fig.width = 7,
-  dev.args = list(pointsize = 20)
+  dev.args = list(pointsize = 20),
+  fig.path = "figures/"
 )
 ```
 
