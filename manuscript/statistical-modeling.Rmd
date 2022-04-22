@@ -12,6 +12,24 @@
 -->
 <!-- TODO: Mention all the types of statistical models one can build with this mindset: clustering, classification, regression, outlier detection, ... -->
 
+<!-- 
+TODO: write about
+
+- interpretation of parameters important
+- but also expected values and such, but that's often what the parameters stand for.
+
+The parameters should have a well-defined meaning.
+This is an (intuitive) assumption that is violated for [semiparametric models](#semiparametric).
+
+
+Choosing a distribution is not enough.
+The probability distributions have parameters.
+And those parameters can be adapted so that the distributions fit to the data.
+
+- more elaborate way than just have some distribution and paramters: statistical models pull these things together and there are many ways to fit 
+-->
+
+
 <!-- motivation -->
 Do you become more productive when you drink a lot of water?
 Is there a fixed "law", like a mathematical function, that expresses productivity as a function of water intake?
@@ -22,6 +40,7 @@ Uncertainty remains.
 Even the water intake varies from day to day and from person to person.
 
 <!-- summary of likelihood mindset -->
+Statistics is changing your mind under uncertainty.
 One way to deal with the uncertainty of the world is to abstract aspects of the world as random variables and ascribe a probability distribution to them.
 Daily water intake could be a random variable.
 For productivity we would need some clever idea on how to best measure this abstract concept.
@@ -265,24 +284,6 @@ The answer is **statistical models**.
 
 ## Statistical Model
 
-CONTINUE HERE DEEPL
-
-<!-- 
-TODO: write about
-
-- interpretation of parameters important
-- but also expected values and such, but that's often what the parameters stand for.
-
-The parameters should have a well-defined meaning.
-This is an (intuitive) assumption that is violated for [semiparametric models](#semiparametric).
-
-
-Choosing a distribution is not enough.
-The probability distributions have parameters.
-And those parameters can be adapted so that the distributions fit to the data.
-
-- more elaborate way than just have some distribution and paramters: statistical models pull these things together and there are many ways to fit 
--->
 
 
 <!-- definition of a statistical model -->
@@ -576,82 +577,73 @@ Sometimes we want to control at least parts of the data-generating process.
 In randomized clinical trials, for example, we control who gets the drug and who get the placebo.
 In other controlled experiments we even control more factors.
 
-CONTINUE HERE WRITING 
-
-## Statistical Inference: Drawing Conclusions About the Real World
+## Drawing Conclusions About the World
 
 <!-- from world to model -->
-Statisticians collect data about the world, and use this data to learn a statistical model.
-The statistical model connects the world and the data through random variables:
+Statisticians collect data about the world and use that data to fit a statistical model.
+The statistical model links the world and the data through random variables:
 The world can be simplified by probability distributions;
-the data are seen as realizations of the random variables.
+the data are viewed as realizations of the random variables.
 
 <!-- from model to world -->
 Statistical modeling is a practical endeavour.
-Most of the times, statistical models built out of practical reasons:
-To make a decision, to understand some properties of the world a bit better, or to make a prediction.
-These goals requires that we interpret the model in place of the world.
-But it's not for free.
-After all the model building and evaluation, the statistical modeler has to consider two things: representativeness of the model (and the data), the interpretation of probability and causality.
+In most cases, statistical models are built for practical reasons:
+To make a decision, to better understand some property of the world, or to make a prediction.
+These goals requires us to interpret the model instead of the world.
+But this interpretation does not come for free.
+After all the model building and evaluation, the statistical modeler must consider the representativeness of the data, the interpretation of probability and causality.
 
 <!-- Part 1: Representativeness -->
-Part of thinking about the data-generating process is thinking about representativeness of your data and therefore the model.
-Are the data a good sample and representative for the property of the world that you study?
-Let's say a statistical modeler analysis data about whether a sepsis screening tool successfully reduced the occurrence of sepsis in a hospital.
-They come to the conclusion that the sepsis screening tool helped reduce sepsis-related deaths in this hospital.
-Are the data representative for all hospitals in the region, the country, or even the world?
-Are the data not even representative for all patients in the hospital, because the tool was only tested with patients in intensive care?
-In the statistical modeling mindset, defining the "population" from which your data are a sample of and discussing how representative the data are of this population is crucial for any conclusions drawn from the model.
-[Design-based inference](#design-based) fully embraces this mindset of the data being a sample from a larger population.
+Considering the data-generating process also means thinking about the representativeness of the data, and thus the model.
+Are the data a good sample and representative of the quantity of the world you are interested in?
+Let's say a statistical modeler analyzes data on whether a sepsis screening tool successfully reduced the incidence of sepsis in a hospital.
+They conclude that the sepsis screening tool has helped reduce sepsis-related deaths at that hospital.
+Are the data representative of all hospitals in the region, the country, or even the world?
+Are the data even representative of all patients at the hospital, or are data only available from patients in intensive care unit?
+In the statistical modeling mindset, defining the "population" from which the data are a sample and discussing how representative the data are of that population is critical to any conclusions drawn from the model.
+[Design-based inference](#design-based) fully embraces this mindset that the data are sampled from a larger population.
 
 
 <!-- Part 2: Interpretation of probability -->
-More philosophical is the modelers attitude towards causality, prior probabilities and the likelihood principle.
-And also the interpretation of how probability should be interpreted.
+More philosophical is the modeler's attitude to causality, prior probabilities and the likelihood principle.
+And, more general, how  probability is to be interpreted.
 
->> "It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel." [^savage1972] 
+> "It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel."
 
+-- Leonard Savage, 1972 [^savage1972] 
 
-Statistical modeling is just the foundation, and we have to decide for one of the following statistical sub-mindsets for making the statistical models useful:
+Statistical modeling is the foundation for learning from data.
+But we need another mindset on top of that to make the models useful.
 
 [Frequentist inference](#frequentism) is the most prominent mindset for inferring properties about the world from statistical models.
-Frequentist statistics sees probability as relative frequencies of events in long-run experiments.
+Frequentist statistics sees probability as the relative frequencies of events in long-run experiments.
 
-[Bayesian inference](#bayesian) has a different interpretation of probability as belief about the world.
-Bayesianism says that also the parameters have a (prior) distribution.
-And the goal of the statistician is to update the prior distribution with data.
-The resulting posteriori distribution of the parameter expresses our belief of the parameter.
-The question is: "What should I believe?"
+[Bayesian inference](#bayesian) is based on an interpretation of probability as a degree belief about the world.
+Bayesianism states that the model parameters also have a (prior) distribution.
+And the goal of the statistician is to update the prior distribution by learning from data.
+The resulting posteriori distribution of the parameter expresses our belief about the the parameter.
 
-[Likelihoodism](#likelihoodism) is a lesser known modeling mindset. Like Bayesianism, it adheres to the likelihood principle that says that all the likelihood function captures all evidence from the data (which frequentist inference violates).
-However, it comes without prior probabilities.
+[Likelihoodism](#likelihoodism) is a lesser known modeling mindset. Like Bayesianism, it adheres to the likelihood principle, which states that the likelihood function captures all evidence from the data (which frequentist inference violates).
+However, it does not require prior probabilities.
 
-[Causal inference](#causality) adds causality to statistical modeling. It can be built onto any of the other three mindsets.
+[Causal inference](#causality) adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.
 
-A different, yet complimentary, approach is [design-based inference](#design), which focuses on data sampling and experiments, instead of models.
+A different but complimentary approach is [design-based inference](#design), which focuses on data sampling and experiments instead of models.
 
 ## Strengths
 
-* The statistical modeling mindset is a *language to see the world*. Even if not used for inference, random variables and probability distributions are a useful mental model to perceive the world. 
-* Statistical modeling has a long tradition and an immense amount of theoretical foundation, from measurement theory as the basis of probability theory to convergence properties of statistical estimators.
-* The data-generating process is an underestimated, yet powerful mental model that encourages mindful modeling and asking the right questions.
-* Conditional probability models can not only be used for learning the parameters of interest, but also for making predictions 
-* Probability distributions give us a language to express uncertainty. Arguably [Bayesianism](#bayesianism) has the most coherent and emphasized focus on expressing uncertainty.
+* The statistical modeling mindset is a *language to see the world*. Even when not used for inference, random variables and probability distributions are useful mental models for perceiving the world. 
+* Statistical modeling has a long tradition and extensive theoretical foundation, from measurement theory as the basis of probability theory to convergence properties of statistical estimators.
+* The data-generating process is an underestimated mental model. But it's a powerful mental model that encourages mindful modeling and asking the right questions.
+* Conditional probability models can be used not only to learn about the parameters of interest, but also to make predictions 
+* Probability distributions give us a language to express uncertainty. [Bayesianism](#bayesianism) arguably has the most principled focus on formalizing and modeling uncertainty.
 
 ## Limitations
 
-* Statistical modeling reaches its limits quickly when defining probability distributions becomes difficult. Images and text don't fall neatly into the mindset, and that's where [supervised machine learning](#supervised-ml) shines instead.
-* Working in the statistical modeling mindset can be quite "manual" and tedious. Always thinking about the DGP is not easy, and sometimes more automatable mindsets such as supervised machine learning take over.
-* Statistical models need a lot of assumptions. Sometimes more, sometimes less. Here are just a few: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, ...
-* Statistical modeling mindset, when used for prediction, is often outperformed by [supervised machine learning](#supervised-ml). To be fair, that's only true when judging a model originating from the statistical modeling mindset with evaluation approaches from the supervised machine learning mindset. But it also says that high goodness-of-fit and passing all diagnostics is a guarantee for being the best model on all metrics.
-*
-
-[^savage1972]: Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.
-
-[^density]: For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.
-
-[^semiparametric]: Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric.
-
+* Statistical modeling quickly reaches its limits when defining probability distributions becomes difficult. Images and text don't easily fit into this mindset, and this where [supervised machine learning](#supervised-ml) and especially [deep learning](#deep-learning) shine.
+* Working with the statistical modeling mindset can be quite "manual" and tedious. It's not easy to always think about the DGP, and sometimes more automatable mindsets such as supervised machine learning are more convenient.
+* Statistical models require a lot of assumptions. Sometimes more, sometimes less. Just to name a few common assumptions: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, ... For most violations, there is a special version of a statistical model without the critical assumption whose estimation and interpretation is often more complicated.
+* Statistical modeling, when used for prediction, is often outperformed by [supervised machine learning](#supervised-ml). To be fair, outperforming here requires an evaluation based on the supervised learning mindset. However, this means that a goodness-of-fit and diagnostics are no guarantee that a model will performs well on all metrics. <!-- requires citation. kaggle? -->
 <!--
 ## Justification of Likelihood Mindset: Probability Theory
 
@@ -671,4 +663,22 @@ The probality that a person a person rolls a dice with "1" or a "2" is the sum o
 -->
 
 
+<!-- representativeness -->
+<!--
+So to make claims about the world, we also have to make claims about what our sample represents.
+Insights from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
+* Assumptions that the data comes from infinite population
+* Targets are the coefficients: They characterize this infinite population 
+* Fisher is about model-based inference
+* TODO: Think about moving model-based inference to statistical learning?
+-->
+
+[^savage1972]: Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972. 
+
 [^Wynants2020]: Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. "Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal." bmj 369 (2020).
+
+[^density]: For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.
+
+[^semiparametric]: Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric.
+
+

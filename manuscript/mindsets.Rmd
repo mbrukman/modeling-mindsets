@@ -1,5 +1,10 @@
 # Mindsets {#mindsets}
 
+<!-- CONTENT TO ADD
+
+* Mindsets are not coherent philosophies
+* There are Bayesian versions of p-values and hypothesis tests, but I would consider these approaches a core of the Bayesian mindset. It's subjective.
+-->
 
 <!-- from models to mindsets -->
 Models such as the linear regression model are made up of components, relationships, and parameters.
