@@ -1,5 +1,13 @@
 # Statistical Modeling {#statistical-modeling}
 
+
+* Goal: Changing your mind under uncertainty.
+* Assumes the world is best described by probability distributions.
+* Statistical modeling fits probability distributions to data.
+* Requires further assumptions for drawing conclusions. See [frequentism](#frequentism), [Bayesianism](#bayesian) and [likelihoodism](#likelihoodism).
+
+
+
 <!-- statistician modeling mindset ingredients
 
 - Ingredients: Random variables, distributions,

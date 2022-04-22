@@ -1,0 +1,10 @@
+# Supervised Machine Learning {#supervised-ml}
+
+* Focus on prediction rather than understanding the data-generating process.
+* Focus on loss minimization and evaluation with unseen data.
+* Alternative to the random variable focused [statistical modeling mindset](#statistical-modeling), but also draws heavily from it, method-wise.
+
+```{r, results = "asis"}
+cat(under_construction)
+```
+

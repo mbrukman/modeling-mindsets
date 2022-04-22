@@ -1,0 +1,11 @@
+# Deep Learning {#deep-learning}
+
+* Neural networks based on stacking various layers of neurons.
+* World of feature embeddings, transfer learning and foundation models.
+* A machine learning mindset, can also be used for [supervised learning](#supervised-ml).
+
+
+```{r, results = "asis"}
+cat(under_construction)
+```
+

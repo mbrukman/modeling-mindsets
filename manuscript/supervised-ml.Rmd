@@ -1,5 +1,32 @@
 # Supervised Machine Learning
 
+
+<!-- my story from twitter -->
+2012. One of my first Kaggle competitions.
+Me, statistics students, who had just learned about GAMs. "Powerful models"
+I uploaded the results. High hopes. I mean GAM can even handle non-linearity!
+But then the disappointment. The submission was far  from the top.
+
+I realized I needed a different mindset for these competitions. Thinking about the data-generating process, manually deciding how features are modeled and interact ... that would not be enough.
+That's when I learned about boosting, random forests, benchmarking, ...
+
+
+My final leaderboard position was 59/145.
+No price money for me, but I "won" something even better: A new mindset, or at least my first steps.
+The supervised machine learning mindset was fundamentally different from the frequentist statistics  I had learned.
+
+I didn't realize it before, because classical statistical modeling and supervised ML share methods and math. Prediction exists in both mindsets.
+But the way you model the world, and especially how you evaluate the models, are very different in these two mindsets.
+
+Machine learning competitions are probably the fastest way to get into the supervised machine learning mindset.
+Because you get instant feedback through the leaderboard.
+You understand the importance of evaluation with resampling methods.
+
+That said, supervised machine learning is not inherently better or more useful than the statistical modeling I  learned.
+Different mindsets should be applied to different tasks.
+
+But if that task involves evaluation with unseen data on against well-defined performance metrics,  it's more important that you perform cross-validation etc. instead of rather than using  a qqplot to justify that the Gaussian distribution is a good choice.
+
 Supervised machine learning is a sub-mindset of the machine learning or risk-minimization mindset.
 Supervised machine learning is a mindset focused on providing accurate predictions for new data.
 The entire philophy of "learning" in machine learning is finding a prediction function that minimizes a loss function.

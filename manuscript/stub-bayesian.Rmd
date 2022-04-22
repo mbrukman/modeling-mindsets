@@ -1,0 +1,11 @@
+# Bayesian Inference {#bayesian}
+
+* Interprets probability as degree of belief and learning from data as updating that belief.
+* Model parameters are random variables with a prior distribution. Goal: estimate posterior distribution.
+* A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentism) and [likelihoodism](#likelihoodism) as alternatives.
+
+
+```{r, results = "asis"}
+cat(under_construction)
+```
+

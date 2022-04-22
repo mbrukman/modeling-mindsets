@@ -1,5 +1,13 @@
 # Frequentist Inference {#statistical-inference}
 
+
+* The most popular modeling mindset to answer scientific questions.
+* Interprets probability as long run frequencies -- from which hypothesis tests, confidence intervals and p-values are derived.
+* A statistical mindset, with [Bayesian inference](#bayesian) and [likelihoodism](#likelihoodism) as alternatives.
+
+
+
+
 CONTINUE HERE DEEPL
 <!-- TODOs:
 

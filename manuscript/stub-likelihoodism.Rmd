@@ -1,0 +1,11 @@
+# Likelihoodism {#likelihoodism}
+
+* Focused on the likelihood, follows the likelihood principle.
+* Does not assume that parameters are random variables.  
+* A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentism) and [Bayesianism](#bayesianism) as alternatives.
+
+
+```{r, results = "asis"}
+cat(under_construction)
+```
+

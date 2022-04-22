@@ -36,6 +36,9 @@ opts_chunk$set(
   dev.args = list(pointsize = 20),
   fig.path = "figures/"
 )
+
+
+under_construction = "**This chapter is under construction! Stay tuned.**"
 ```
 
 
