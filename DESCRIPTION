@@ -3,3 +3,6 @@ Title: Packages for book
 Version: 0.0.1
 Depends:
   knitr
+  rmarkdown
+  ggplot2
+  dplyr

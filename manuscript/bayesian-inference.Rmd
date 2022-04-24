@@ -290,7 +290,6 @@ TODO: finish up figure with credible interval, mean
 
 ```{r posteriori, fig.cap = "Describing the posterior distribution."}
 library("ggplot2")
-library("ggpattern")
 set.seed(2)
 n = 1000000
 datbeta = data.frame(x = c(rbeta(n/2, shape1 = 2, shape2 = 5), rbeta(n, shape1 = 5, shape2 = 2)))
