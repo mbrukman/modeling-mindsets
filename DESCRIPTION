@@ -11,4 +11,5 @@ Depends:
   knitr,
   patchwork,
   readr,
-  rmarkdown
+  rmarkdown,
+  tidyr
