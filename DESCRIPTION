@@ -9,5 +9,6 @@ Depends:
   dplyr,
   ggplot2,
   knitr,
+  patchwork,
   readr,
   rmarkdown
