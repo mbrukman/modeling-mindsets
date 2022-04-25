@@ -6,4 +6,5 @@ Depends:
   dplyr,
   ggplot2,
   knitr,
+  readr,
   rmarkdown

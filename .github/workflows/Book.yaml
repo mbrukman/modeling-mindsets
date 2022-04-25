@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - main
-      - master
+      - staging
   pull_request:
     branches:
       - main
-      - master
 
 name: Build and deploy book
 
@@ -78,14 +77,8 @@ jobs:
 
       - name: Deploy new book version
         run: |
-          cd out
-          git rm -rf ./*
-          cp -r ../manuscript/_book/* ./
-          touch .nojekyll
-          git add .nojekyll
-          git add --all ./*
+          git add _book/*
           git commit -m "Update Book" --allow-empty
-          git push origin gh-pages
+          git push
         if: ${{ github.event_name == 'push' }}
-
 
