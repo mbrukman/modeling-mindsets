@@ -80,14 +80,12 @@ jobs:
           git add _book/*
           git commit -m "Update Book" --allow-empty
           git push origin    
-        if: ${{ github.event_name == 'push' }}
-        if: github.ref == 'refs/heads/main'
+        if: (${{ github.event_name == 'push' }} && github.ref == 'refs/heads/main')
 
       - name: Deploy book to staging
         run: |
           git add _book/*
           git commit -m "Update Book" --allow-empty
-          git push origin    
-        if: ${{ github.event_name == 'push' }}
-        if: github.ref == 'refs/heads/staging'
+          git push origin
+        if: (${{ github.event_name == 'push' }} && github.ref == 'refs/heads/main')
 
