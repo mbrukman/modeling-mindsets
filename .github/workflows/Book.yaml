@@ -14,7 +14,7 @@ name: Build and deploy book
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: ubuntu20.04
     timeout-minutes: 20
 
     env:
