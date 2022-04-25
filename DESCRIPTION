@@ -2,7 +2,8 @@ Package: book
 Title: Packages for book
 Version: 0.0.1
 Depends:
-  knitr,
-  rmarkdown,
+  data.table,
+  dplyr,
   ggplot2,
-  dplyr
+  knitr,
+  rmarkdown
