@@ -3,6 +3,7 @@ Title: Packages for book
 Version: 0.0.1
 Depends:
   bookdown,
+  Cairo,
   data.table,
   devtools,
   dplyr,
