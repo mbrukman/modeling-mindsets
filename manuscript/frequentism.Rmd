@@ -1,128 +1,113 @@
 # Frequentist Inference {#statistical-inference}
 
 
-* The most popular modeling mindset to answer scientific questions.
-* Interprets probability as long run frequencies -- from which hypothesis tests, confidence intervals and p-values are derived.
+* The most popular modeling mindset for scientific questions.
+* The world consists of probability distributions with fixed parameters that have to be uncovered.
+* Interprets probability as long-run relative frequencies from which hypothesis tests, confidence intervals and p-values are derived.
 * A statistical mindset, with [Bayesian inference](#bayesian) and [likelihoodism](#likelihoodism) as alternatives.
 
 
-
-
-CONTINUE HERE DEEPL
 <!-- TODOs:
 
 -->
 
 <!-- CONTENT TO ADD 
 *  Write about difficulty of writing this chapter: I grew up with frequentist mindset, so it was an act to frame what is really special about this mindset. like growing up in a city and being asked what is special about this city: you have to know other cities well to do it. you then have to question what you take for granted.
+*  Power of statistical tests
 -->
 
-<!-- TODO: what you will learn in chapter
-
-In this chapter you will learn about frequentism.
-In a nutshell, the basic assumptions and their consequences:
-
-* Frequentists assume a true, non-random parameters exist in nature
-* Probability is understood in terms of relative long-run frequencies.
-* Frequentist focus on using statistics to generate decisions     
-
--->
 
 <!-- example of frequentist study -->
 <!-- source of study:  https://academic.oup.com/aje/article/154/8/748/131397 -->
-Alcohol intake is associated with an increased risk of diabetes in middle-aged men.
-Or so a study claims [^Kao2001] that modeled type II diabetes risk as a function of various risk factors.
-Alcohol was found to significantly increase the diabetes risk by a factor of $1.81$.
+Drinking alcohol is associated with a higher risk of diabetes in middle-aged men.
+At least this is what a study claims [^Kao2001].
+The study modeled type II diabetes risk as a function of various risk factors.
+The researchers found out that alcohol significantly increases the diabetes risk by a factor of $1.81$.
 
 <!-- familiar frequentist terms -->
 "Significant" and "associated with" are familiar terms when reading about scientific results.
-The researchers in the alcohol study used a popular modeling mindset to draw conclusions from data: frequentist inference.
+The researchers in the study used a popular modeling mindset to draw conclusions from the data: frequentist inference.
 There is no particular reason why I chose this study other than it is not exceptional.
-When someone thinks in significance levels, p-values, hypothesis tests, null hypothesis and confidence intervals, they are likely in the frequentist mindset.
+When someone thinks in significance levels, p-values, hypothesis tests, null hypotheses, and confidence intervals, they are probably frequentist.
 
 <!-- dominant mindset -->
-Frequentist inference is the dominant mindset in many scientific fields, such as medicine and psychology.
-All the frequentist scientific papers follow similar patterns, make similar assumptions, and present the same types of tables and figures.
-Knowing how to interpret model coefficients , confidence intervals and p-values is like a key to the scientific inflow of insights.
-Frequentism dominates not only science, but has a place in industry:
-Statistician, data scientists, and whatever the role will be called in the future, use frequentist inference to create value for their employing business:
-From analyzing A/B-tests for website to calculating portfolio risks and monitoring quality in production lines.
+In many scientific fields, such as medicine and psychology, frequentist inference is the dominant mindset. 
+All frequentist scientific papers follow similar patterns, make similar assumptions, and contain similar tables and figures.
+Knowing how to interpret model coefficients, confidence intervals and p-values is like a key to contemporary scientific progress.
+Or at least a good part of it.
+Frequentism not only dominates science, but has a firm foothold in industry as well:
+Statistician, data scientists, and whatever the role will be called in the future, use frequentist inference to create value to their businesses:
+From analyzing A/B tests for website to calculating portfolio risk to monitoring quality on production lines.
 
 <!-- frequentist criticized -->
-<!-- TODO: Move further down? -->
-As much as frequentism dominates the world of data, as much it's criticized.
-Frequentist inference has been the vehicle of many scientific "findings" that turned out to be a waste of research time.
-Maybe you have heard about the replication crisis. [^Ioannidis2005]
-Many scientific findings in psychology, medicine, the social sciences and other fields could not be replicated.
-But replication is at the center of science and experiments.
-While many causes contributed to the replication crisis, frequentist statistics is in the thick of it.
+As much as frequentism dominates the world of data, it's also criticized.
+Frequentist inference has been the analysis method for scientific "findings" that turned out to be a waste of research time.
+You may have heard about the replication crisis. [^Ioannidis2005]
+Many scientific findings in psychology, medicine, social sciences and other fields could not be replicated.
+The problem is that replication is at the center of the scientific method.
+While many causes have contributed to the replication crisis, frequentist statistics is right in the middle of it.
 The frequentist mindset enables practices such as multiple testing and p-hacking.
-Mix this with the pressure for academics to publish or perish, and you incentivize an entire community to squeeze out some "significant" results.
-Frequentism is a decision-focused mindset and can seemingly give simple Yes/No answers.
+Mix this with the pressure on academics to "publish or perish", and an entire community is incentivized to squeeze out "significant" results.
+Frequentism is a decision-focused mindset and can give seemingly simple yes/no answers.
 Lazy as most of us are, we then tend to forget all the footnotes and remarks that come with the model.
 
 
 <!-- frequentism is statistical model -->
 Frequentist inference is a statistical modeling mindset.
-As such, it depends on random variables, probability distributions and statistical models.
-But as mentioned in the [statistical modeling chapter](#statistical-modeling), these ingredients are not enough to make statements about the world.
+As such, it depends on random variables, probability distributions, and statistical models.
+But as mentioned in the chapter [Statistical Modeling](#statistical-modeling), these ingredients are not sufficient to make statements about the world.
+
+<!-- probability interpretation --> 
 Frequentism comes with a specific interpretation of probability:
-Probability is defined there as the relative frequency of an event in infinitely repeated trials.
-That's why it's called frequentist: it emphasizes the (relative) frequency of events.
-But how do these long-run frequencies help with getting insights from the model?
+Probability is seen as the relative frequency of an event in infinitely repeated trials.
+That's why it's called frequentism: frequentist inference emphasizes the (relative) frequency of events.
+But how do these long-run frequencies help to gain insights from the model?
 
 <!-- wine example continued -->
-Consider the $1.81$ increase in diabetes risk for men with high alcohol intake.
-That's bigger than $1$, so their seems to be a difference between men drinking alcohol or not.
-But how can the researchers be sure that the $1.81$ is not just due to randomness?
-<!-- dice example excourse -->
-For fair dice, the average eyes are 3.5 in the long run of experiments.
-If I throw a dice 10 times, and it averages to 4, would you say it's an unfair dice?
-No? Would you say it's unfair if the average is 4.5? 5? Or if 6 shows up 10 times?
-What's a somewhat neat example with dice becomes more difficult with real data.
+Let's go back to the $1.81$ increase in diabetes risk among men who drink a lot of alcohol.
+$1.81$ is larger more than $1$, so there seems to be a difference between men who drink alcohol and the ones who don't.
+But how can the researchers be sure that the $1.81$ is not a random result?
+<!-- dice example -->
+For fair dice, the average eyes in the long run series of experiments is 3.5.
+If I roll a die 10 times and the average is 4, would you say it's an unfair die?
+No? Would you say it's unfair if the average is 4.5? 5? Or if a 6 shows up 10 times?
 
 <!-- uncertainty in the wine example -->
-The researchers engaged the frequentist mindset to decide between randomness and true effects.
+The researchers applied frequentist thinking to decide between randomness and true effects.
 The parameter of interest is a coefficient in a logistic regression model.
 The logistic regression model links variables such as alcohol intake to the occurrence of diabetes.
-The diabetes paper reports a 95\% confidence interval for the alcohol coefficient of $1.14 - 2.92$.
+In the diabetes study, a 95\% confidence interval for the alcohol coefficient is reported from $1.14$ to $2.92$.
 This interval settles the question of randomness versus signal: 
-The interval doesn't cover $1$ and so the researchers concluded that alcohol is a risk factor for diabetes (in men).
+The interval doesn't contain $1$, and so the researchers concluded that alcohol is a risk factor for diabetes (in men).
 This confidence interval describes uncertainty regarding the alcohol coefficient.
-If we would repeat the experiment including modeling many times, 95% of the times the respective 95\% confidence interval would cover the "true" parameter.
-Always with the footnote that our model assumptions were correct. 
+If we were to repeat the experiment, including the modeling, many times, the respective 95\% confidence interval would cover the "true" parameter 95% of the time. 
+Always with the footnote that the model assumptions were correct. 
 
 ## Frequentist probability
 
 <!-- frequentist interpretation of example -->
-This interpretation reveals the core philosophy of frequentism:
+The interpretation of the confidence interval reveals the core philosophy of frequentism:
 The world can be described by probability distributions;
-The parameters of these distributions are constant and unknown;
+The parameters of the probability distributions are constant and unknown;
 Repeated measurements/experiments reveal the true parameter values in the long-run.
 In contrast, [Bayesianism](#bayesian) assumes that the parameters of the distributions are themselves random variables.
-As the frequentists collect ever more data ($n \to \infty$) their parameter estimators gets arbitrarily close to the true parameter (if the estimator is unbiased).
-With each more data point, the uncertainty of the estimated parameter shrinks:
-confidence intervals get narrower.
+As the frequentists collect more and more data ($n \to \infty$), their parameter estimators gets closer and closer to the true parameter (if the estimator is unbiased).
+With each additional data point, the uncertainty of the estimated parameter shrinks and the confidence interval becomes narrower.
 
-<!-- casual/intuitive use of probability -->
-<!-- 
-In our everyday lives, we speak casually about probabilities.
-"How unlikely is it that we meet in this foreign city?!";
-"It's probably going to rain tomorrow!";
-"It's probably just a cold, and over in a few days.".
--->
 
 <!-- other examples -->
 The frequentist interpretation of probability requires imagination.
-Imagine we have an infinite population.
-For example of people, or of days observing a river, or of screws on a production line.
-What's the probability that a middle-aged man develops diabetes, say in the next 12 months?
-Frequentists would say: There is some unknown and fixed probability for diabetes.
-The more people we observe, the more accurate our estimate of the diabetes probability will be.
+Frequentists start with a population in mind.
+The population can be adults between 20 and 29 living in Iceland, daily measurements of water quality of the Nile River, or 1-inch wood screws manufactured in a factory in U.S. state of Texas.
+These populations can be described by finding out their probability distributions.
+Going back to the initial example:
+What's the probability that a middle-aged man will develop diabetes in the next 12 months?
+Frequentists would say: There is an unknown and fixed probability for diabetes.
+The more people we observe, the more accurate our estimate of the probability of diabetes becomes.
 We estimate the probability of diabetes as the relative frequency of diabetes in the population.
-Probabilities only have meaning as a limit in the long run: $P(X=1) = \lim_{n \mapsto \infty} \frac{\sum_{i=1}^{n} I(x_i = 1)}{n}$.
+Probabilities are frequencies in the long run: $P(X=1) = \lim_{n \mapsto \infty} \frac{\sum_{i=1}^{n} I(x_i = 1)}{n}$.
 
-```{r dice, fig.cap = "Throwing a dice 100 times and calculating the frequency 6 eyes occuring as n increases (left to right).", fig.height = 2, fig.width = 9, cache = TRUE}
+```{r dice, fig.cap = "The line shows how the relative frequency of 6 eyes changes as the number of dice roles increases from 1 to 100 (left to right).", fig.height = 2, fig.width = 9, cache = TRUE}
 library(ggplot2)
 set.seed(6)
 n = 150
@@ -141,113 +126,110 @@ theme_void()
 
 <!-- imagined repetition of the experiment -->
 <!-- TODO: Move further down? -->
-Imagining experiments that will never happen -- essential for the frequentist mindset.
-By defining probability in terms of long-run frequencies, the entire mindset works requires imagining that the experiment or samples runs again and again.
-These "imagined" experiments are central to the interpretation of confidence intervals, p-values and hypothesis tests.
+Imagining experiments that will never take place is essential to the frequentist mindset.
+By defining probability in terms of long-run frequencies, the entire mindset requires imagining that the sampling and experiment will be done many times.
+These "imagined" experiments are central to the interpretation of confidence intervals, p-values, and hypothesis tests.
 
 <!-- likelihood principle violated -->
-These imagined experiments have a curious effect on frequentism.
-Frequentist violates the likelihood principle that says that all evidence about the data is captured in the likelihood function.
-But with frequentism, it becomes important to know which experiments we are further imagining.
-See a simple coin toss example in the [likelihoodism chapter](#likelihoodism).
-[Likelihoodism](#likelihoodism) and [Bayesianism](#bayesianism), in contrast, adhere to the likelihood principle.
+These imagined experiments have a curious implication for frequentism.
+Frequentism violates the likelihood principle, which says that all evidence about the data is contained in the likelihood function.
+But with frequentism, it's important to know what experiments we are further imagining.
+You can find a simple example involving coin tosses in the [Likelihoodism chapter](#likelihoodism).
+In contrast, both [Likelihoodism](#likelihoodism) and [Bayesianism](#bayesianism) adhere to the likelihood principle.
 
 
 ## Estimators are Random Variables
 
 <!-- estimands are fixed -->
-We can learn a lot about frequentist inference, especially in contrast to Bayesian inference, when understanding which "things" is a random variable and when not.
-The estimand, nature's "true" parameter is assumed as fixed in the frequentist's mindset.
-Mean, variance and other distribution parameters, model coefficients, nuisance parameters, all are seen as having some unknown constant value.
-Bayesians, in contrast, see these parameter just as random variables.
+We can learn a lot about frequentist inference, especially in contrast to Bayesian inference, by understanding which "things" are random variables and which are not.
+In the frequentist mindset, the estimand, the "true" but unknown parameter is assumed to be fixed.
+Mean, variance and other distribution parameters, model coefficients, nuisance parameters, all are seen as having some unknown but fixed value.
+And the values can be uncovered with frequentist inference.
+Bayesians, in contrast, view all these parameter as random variables.
 
 <!-- estimators are random variables -->
-Since the quantities of interest are seen as fixed, the frequentists job is to estimate which value it has.
-The estimation is done with an estimator: A mathematical procedure to infer the estimand from data.
-The estimator is a function of the data, which are assumed to be random variables, the estimator becomes a random variable itself!
-Again, we can contrast the Bayesian approach:
-Bayesians assume parameters to be random variables, so it does not come to this dualism of estimator and estimand.
-In the process of Bayesian inference, we simply update the (prior) probability distribution of the parameters and get new (posterior) probability distributions.
+Since the quantities of interest are seen as fixed but unkown, the frequentist's job is to estimate them from data. 
+The estimation is done with a statistical estimator: A mathematical procedure for inferring the estimand from data.
+The estimator is a function of the data.
+And data are realizations of random variables.
+The consequence is that also the estimators themselves are random variables.
+Again, we can contrast this with Bayesian mindset:
+Bayesians assume that the  parameters are random variables.
+Bayesians simply update the (prior) probability distribution of the parameters and get new (posterior) probability distributions.
 
 <!-- other parameters -->
-But there is more.
-Typical frequentist constructs such as confidence intervals, test statistics and p-values are random variables as well!
-Mix this with the long-run frequencies and you get a special interpretation of, for example for [confidence intervals](#confidence-intervals).
+Typical frequentist constructs like confidence intervals, test statistics and p-values are also random variables.
+Mix this with the long-run frequencies and you get a special interpretation, for example, for [confidence intervals](#confidence-intervals).
 
 <!-- example -->
-Let's say you want to know the average number of teas that you drink in a month.
-If you are frequentist, you assume that there is some true mean number of teas, which we can call $\lambda$.
-The monthly tea average might depend on other variables, such as season, because you drink more tea in the winter.
-We could assume that the monthly number of teas follows a Poisson distribution.
-A Poisson distribution can be described by the parameter $\lambda$, the "intensity" with which events happen.
-The "tea intensity" in our example.
-Conveniently, the intensity parameter $\lambda$ is also the expected number of events (teas).
-We could estimate the tea intensity with the maximum likelihood estimator: $\hat{\lambda}_{tea} = \frac{1}{n} \sum_{i=1}^n k_i$ <!-- vim_ -->, where $k_i$ is the number of teas in month $i$.
-Our $\hat{\lambda}_{tea}$ <!-- vim_ --> is a random variable.
-If our model assumptions are correct, then we know that, as we get more and more data (months) $n \to infty$ our estimator $\hat{\lambda}_{tea}$ <!-- vim_ --> will get closer and closer to the true $\lambda_{tea}$.
-And the $\hat{\lambda}$ approximately follows a Normal distribution.
+Let's say you want to know how many teas you drink on average per day.
+If you were frequentist, you would assume that there is a true but unknown average number of teas.
+Let's call this estimand $\lambda$.
+The frequentist might assume that the daily number of teas follows a Poisson distribution.
+The Poisson distribution can handle count data well, and is described by the "intensity" $\lambda$ with which events happen.
+Conveniently, the intensity parameter $\lambda$ is also the expected number of events.
+Teas in our case.
+We could estimate the tea intensity using the maximum likelihood estimator: $\hat{\lambda}= \frac{1}{n} \sum_{i=1}^n k_i$, where $k_i$ is the number of teas on day $i$.
+Our estimator $\hat{\lambda}$ is a random variable.
+If the model assumptions are correct and if the world is truly frequentist, then the estimator $\hat{\lambda}$ will get closer and closer to the true $\lambda$ as $n$ increases.
+$\hat{\lambda}$ approximately follows a Normal distribution.
 
 <!-- connecting estimators with the real world -->
-Frequentist build on the fact that the estimators are random variables.
-In combination with the idea of fixed true parameters, it becomes possible to connect the analysis with the real world.
-A common tool used to go from estimator variables to insights is null hypothesis significance testing. 
-Commonly this happens via a 
+Frequentist inference builds on the fact that the estimators are random variables.
+Combined with the idea of fixed true parameters, it becomes possible to connect the analysis results to the real world.
+A commonly used tool to derive insights about the world is null hypothesis significance testing. 
 
 ## Null Hypothesis Significance Testing
 
 <!-- example of decision under frequentism -->
-Let's say, your estimator says that you drink 25 teas per month on average.
-Initially you had the hypothesis that you have 30 teas per month.
-Obviously $25 \neq 30$, so "NO", case closed.
-But that would be a too simplistic answer, wouldn't it?
-You also wouldn't say that a coin is unfair because we observed 51 heads out of 100 tosses, and $51 \neq 50$.
-But when would we reject our initial hypothesis of 30 teas?
-Would we reject the hypothesis when observing $<29$, or $<25$ or maybe must it be much lower, like $<15$?
-With only the [statistical modeling mindset](#statistical-modeling) we can't answer this question.
+Let's say, your estimator $\hat{\lambda}$ says that you drink 2.5 teas per month on average.
+Initially you had the hypothesis that you drink 3.0 teas per month.
+Obviously $2.5 \neq 3.0$, so the initial hypothesis is incorrect.
+Case closed.
+But that would be too simple an answer, wouldn't it?
+You also wouldn't say that a coin is unfair if heads come up in 51/100 tosses just because $51 \neq 50$.
+But when would a frequentist reject the initial hypothesis of 3.0 teas?
+Would we reject the hypothesis if we get $\hat{\lambda}<2.9$, or $\hat{\lambda}<2.5$ or maybe must it be much lower, like $\hat{\lambda}<1.5$?
+Only with the [statistical modeling mindset](#statistical-modeling) we can't answer this question.
 
 <!-- frequentist answer: NHST -->
-The frequentist mindset has an answer to the question.
+The frequentist mindset has an answer to this question of whether to accept or reject a hypothesis.
 The frequentist estimator for the number of teas is a random variable that is supposed to approximate the true number of teas.
-We can make (frequentist) probabilistic statements about our estimator.
-And while the true value for $\lambda$ is unknown, we can study our hypothesis of $\lambda = 30$ in the context of random variable $\hat{\lambda}$.
+We can make (frequentist) probabilistic statements about this estimator.
+And while the true value for $\lambda$ is unknown, we can study the hypothesis of $\lambda = 3.0$ by examining the random variable $\hat{\lambda}$.
 
 <!-- central idea of frequentism -->
-This idea of proposing some hypothesis, and then accepting or rejecting it based on the statistical model is called null hypothesis significance testing.
-Hypothesis testing is a central ingredient to the frequentist modeling mindset.
-Hypothesis testing allows binary decisions: The frequentist either accepts or rejects the null hypothesis based on results from the statistical model.
-Note: A statistical model can also include the simplest of models, like assuming that your data follows a Normal distribution, and you compare two means with a Student t-test.
+This idea of proposing a hypothesis, and then accepting or rejecting it based on a statistical model or test is called null hypothesis significance testing.
+Hypothesis testing is a central method in the frequentist modeling mindset.
+Hypothesis tests simplify decisions:
+The frequentist accepts or rejects the so-called null hypothesis based on the results of the statistical model.
+A statistical model can be very simple:
+It can be as simple as assuming that the data follow a Normal distribution and comparing two means with a Student t-test.
 
 <!-- NHST example -->
 How do these hypothesis tests work?
 
-* Start with hypothesis that you have.
-* Formulate the alternative null hypothesis.
-* Decide which statistical test to use. This step includes modeling your data.
-* Calculate the distribution of the parameter estimate under the null hypothesis (or rather, the test statistic $T$).
-* Choose significance level $alpha$, which is the probability threshold at which we would be willing to reject the null hypothesis even if it's true. Typical choice $\alpha = 0.05$.
-* Calculate the p-value: the probability of observing a more extreme estimate that the one you actually observed. See Figure \@ref(fig:hypothesis).
-* If $\text{p-value} <\alpha$, then we reject the null hypothesis.
+* Start with a hypothesis.
+* Formulate the **alternative/null hypothesis**.
+* Decide which statistical test to use. This step includes modeling the data.
+* Calculate the distribution of the parameter estimates under the null hypothesis (or rather, the test statistic $T$).
+* Choose the significance level $\alpha$. $\alpha$ is the probability threshold at which to reject the null hypothesis even if it's true. Often $\alpha = 0.05$.
+* Calculate the p-value: p is the probability of observing a more extreme estimate than what is actually observed. See figure \@ref(fig:hypothesis).
+* If $\text{p-value} <\alpha$, then the null hypothesis is rejected.
 
-
-How do these hypothesis tests work?
-
-* Compute test statistic $T$ from your data.
-* Choose significance level $alpha$, which is the probability threshold at which we would be willing to reject the null hypothesis even if it's true. Typical choice $\alpha = 0.05$.
-* Calculate the p-value: the probability of observing a more extreme estimate that the one you actually observed. See Figure \@ref(fig:hypothesis).
-* If $\text{p-value} <\alpha$, then we reject the null hypothesis.
 
 Some examples of tests and test statistics:
 
-* Comparing the means of two distributions, like do Germans consume more pretzels (Bretzen) than U.S. Americans. Our "model" of the data is just assuming Normal distributions for average pretzels per person. The null hypothesis that Germans and U.S. Americans consume the same amount. Then we can do a t-test, and the test statistic is the difference of the two means, scaled by a factor involving the variances. Maybe it's a bad example of a statistical test, because everyone knows that Germans eat more pretzels.
-* Estimating the effect of one variable on another, like does physiotherapy work as well as knee surgery? Here, the base model is a linear regression model, where we predict, for example knee pain and one of the variables is whether the patient had physiotherapy or surgery. The null hypothesis would be that there is no difference, meaning a model coefficient of zero. The test statistic $T$ would be the coefficient divided by its standard deviation.
+* Comparing the means of two distributions. Do Germans consume more pretzels than U.S. Americans? Hypothesis: Germans eat more pretzels. The "model" of the data simply assumes a Normal distribution for average pretzels consumption per person. The null hypothesis would be that Germans and U.S. Americans consume the same amount. Then we would run a t-test. The test statistic in the t-test is the (scaled) difference of the two means.
+* Estimating the effect of one variable on another. Is surgery better than physiotherapy for treating a torn meniscus in your knee? The statistical model can a linear regression model. The model could predict knee pain dependent on whether a patient had physiotherapy or surgery. The null hypothesis would be that there is no difference in pain, so a model coefficient of zero for surgery/physiotherapy. The test statistic $T$ would be the coefficient divided by its standard deviation.
 
 <!-- the p-value -->
-The p-value has a frequentist interpretation, because it again relies on long run frequencies.
-The p-value is interpreted as the probability that, under the null hypothesis, we would observe the estimated outcome or more extreme event.
-Again, this requires imagining future experiments.
-A p-value of 0.03 would mean the following:
-If we repeated the analysis many times, in 3% of the cases we would get a more extreme value than we actually observed.
-But only under the null hypothesis.
+The p-value has a frequentist interpretation because it is based on long run frequencies.
+The p-value is interpreted as the probability that we would observe a more extreme outcome than the one we observed under the null hypothesis.
+Again, the frequentist interprets probability with imagined future experiments.
+A p-value of 0.03 for an estimated average of 3.0 daily teas would mean the following:
+If we repeat the analysis many times and the null hypothesis $\lambda = 2$ is correct, 3% of the time we would observe an estimate of $\hat{\lambda} \geq 3$.
+If $\alpha = 0.05$ was chosen, the null hypothesis would be rejected.
 
 ```{r hypothesis, fig.cap = "Frequentists make binary decisions based on hypothesis tests. Assuming the null distribution, the null hypothesis is rejected if the observed estimand is extreme.", fig.height = 3, fig.width = 9}
 library(dplyr)
@@ -318,37 +300,38 @@ p2 = ggplot(dat, aes(x = x, y = dens)) +
 
 <!-- Weirdness of H_0 -->
 Null hypothesis testing is very weird.
-It feels like they are answering your question around two corners.
-Let's say a researcher wants to show that a drug improves the disease outcome.
-They test the drug because they expect it to work.
+It's like answering the question around two corners.
+Let's say a researcher wants to prove that a drug prevents migraines.
+They test the drug because they expect it to work, so the hypothesis they assume to be true is that patients that take the drug have fewer migraines.
 But the null hypothesis is formulated the other way around:
 The null hypothesis assumes that the drug has no effect.
-Suddenly the goal of the researcher becomes to show that this hypothesis is false, instead of showing that their hypothesis is correct.
-We can't proof that something is true, we can only proof that something is not true.
+Suddenly the goal of the researcher becomes to show that the null hypothesis is false, rather than showing that their hypothesis is correct.
+The problem with statistical models is: We can't prove that they are true because our assumptions are not testable.
+With frequentist inference, however, we can tell how likely a model result is under a given hypothesis and given the data.
+That's why hypothesis tests work by rejection.
 
 <!-- significance, and problem with p-values -->
-P-values enable simple decisions: Is the parameter different from zero?
-If yes, frequentist speak of significant effects.
-Unfortunately, the entire modeling process is, in the end, often reduced to the question of statistical significance.
-Getting a significant result, a small enough p-value, becomes the ultimate goal of a researchers analysis.
-And significant p-values can become criteria of acceptance for publications.
+P-values allow simple decisions: Is the parameter different from zero?
+If yes, frequentists speak of significant effects.
+Unfortunately, the entire modeling process is often ultimately reduced to the question of statistical significance.
+Achieving a significant result becomes the ultimate goal of a researcher's analysis.
+Chasing those small p-values.
 
 
 ## Confidence Intervals {#confidence-intervals}
 
 <!-- Alternative, but equivalent: Confidence interval -->
 Frequentists use confidence intervals as an alternative to statistical tests.
-There is some equivalence between the two, and they will lead to the same decisions.
-But confidence intervals are more informative and therefore more liked by statisticians than the practice of just reporting p-values.
-But what is a confidence interval?
+Hypothesis tests and confidence intervals ultimately lead to the same decisions, but confidence intervals are more informative.
+Many statisticians prefer confidence intervals over mere p-values.
 
 <!-- CI ingredients -->
-Remember that estimators such as model parameters are random variables?
-This means that estimators have probability distributions.
-A confidence interval describes where the mass of this distribution lies.
-How much mass we want to have in the confidence interval is again decided by the modeler using an $\alpha$-level.
+Remember that estimators, such as model parameters, are random variables?
+That means that estimators have probability distributions.
+A confidence interval describes where the mass of that distribution lies.
+What percentage of the distribution we want in the confidence interval is again decided by the modeler using an $\alpha$-level.
 If $\alpha = 0.05$, then we get a 95\%-confidence interval.
-The construction of the confidence interval depends on the probability distribution we derived for the quantity of interest (coefficient, mean estimate, ...).
+The construction of the confidence interval depends on the probability distribution we have derived for the quantity of interest (coefficient, mean estimate, ...).
 
 ```{r dice-confint, fig.cap = "Dice roll example with 95\\% confidence intervals.", fig.height = 4, fig.width = 10, dependson="dice", eval = FALSE}
 library("epitools")
@@ -367,22 +350,25 @@ geom_line(aes(y = upper))
 ```
 
 <!-- Interpretation of confidence intervals -->
-How are confidence intervals to be interpreted?
-Well, of course in a frequentist manner.
-The "true" value is fixed, and therefore no random variable.
-Saying that the true parameter is in the confidence interval with a 95\% probability would be wrong.
-The true parameter is either in the interval or not, we just don't know.
-The confidence itself is a random variable since it is derived from data and therefore from other random variables.
+How are the confidence intervals to be interpreted?
+Well, in a frequentist manner, of course!
+The "true" parameter value is fixed, so it's not a random variable.
+To say that the true parameter is in the confidence interval with a 95\% probability would be false.
+The true parameter is either in the interval or it's  not, we just don't know.
+The confidence itself is a random variable since it's derived from data and therefore from other random variables.
 So the interpretation of a 95\% confidence interval is:
-If we repeated the analysis many times, the CI would cover the true value of the quantity of interest 95% of the time.
-Of course only given that our model made the correct assumptions.
+If we were to repeat the analysis many times, the confidence interval would cover the true value of the quantity of interest 95% of the time.
+Only given that the model assumptions are correct.
 As you can see, this is a very frequentist point of view: the confidence interval is interpreted in the context of repeated experiments.
 
 <!-- Compared CI to tests -->
-Confidence intervals, at first glance, look different from tests.
-But they are equivalent to the tests, in the sense that, for the same significance level, you get the same accept/reject result.
-But the confidence interval gives you more information then the simple hypothesis test.
-Rejecting the null hypothesis is equivalent to the null hypothesis lying outside of the confidence interval.
+Confidence intervals look different from tests at first glance.
+But they are equivalent to the tests:
+At least you get the same accept/reject result for the same significance level $\alpha$.
+But the confidence interval contains more information than a simple hypothesis test.
+The interval gives the estimate, and lower and upper bounds.
+This gives the modeler a better sense of the estimate and its uncertainty.
+Rejection of the null hypothesis is equivalent to the null hypothesis being outside of the confidence interval.
 
 ```{r ci, fig.cap = "100 95\\% confidence intervals and the true value."}
 library(ggplot2)
@@ -458,25 +444,24 @@ Connection to Bayesianism: Bayesian priors can be set equal to regularization in
 
 ## Strengths
 
-* When you understand frequentist inference, you have the key to understanding most modern research findings. I studied statistics, and I am now able to quickly grasp research findings. For example, to understand whether I should have knee surgery for my torn meniscus, I read papers comparing knee surgery and pure physiotherapy. All of those papers used frequentist methods, and while I didn't understand everything, I could quickly get an idea of their analyses and results.
-* Frequentist methods are usually quicker to compute than [Bayesian inference](#bayesian) or [machine learning](#ml).
-* No prior information about the parameters required, compared to [Bayesianism](#bayesian), and therefore seemingly more objective.
+* Once you understand frequentist inference, you have the key to understanding most modern research findings. I studied statistics and can now quickly grasp many research papers. For example, to figure out whether I should have knee surgery for my torn meniscus, I read papers comparing knee surgery and physiotherapy alone. All of those papers used frequentist methods, and although I didn't understand everything, I was able to quickly get an idea of their analyses and results.
+* Frequentist methods are generally faster to compute than [Bayesian inference](#bayesian) or [machine learning](#supervised-ml).
+* Compared to [Bayesianism](#bayesian), no prior information about the parameters is required. This makes frequentism more objective.
 * Frequentism allows binary decisions (accept/reject hypothesis). This simplicity one of the reasons why it's so popular for scientists and why managers love it.
-* Frequentism inherits all the advantages of the [statistical models](#statistical-modeling) in general: A solid theoretical foundation and the appreciation of the data-generating process.
-* When the underlying process is a long run, repeated experiment, frequentist inference shines. Casino games, model benchmarks, ...
+* Frequentism has all the advantages of the [statistical models](#statistical-modeling) in general: a solid theoretical foundation and an appreciation of the data-generating process.
+* When the underlying process is a long-run, repeated experiment, frequentist inference shines. Casino games, model benchmarks, ...
 
 
 ## Limitations
 
-* Oversimplification: Frequentism invites a simplification of any problem into the question whether it "significantly" deviates from the null hypothesis. The reduction of models to binary results hides the critical model assumptions and difficult trade-offs that were made.
-* The focus on p-values encourages p-hacking: The either deliberate or subconscious search for "positive" results. Guided by the lure of of a significant result, researcher and data scientists might adapt their analysis until the p-value in question is small enough. But with a $\alpha$-level of 0.05, we would expect that in  cases where the null hypothesis is true, still 5% would be reported as significant. P-hacking increases this percentage of false positive findings.. 
-* Similarly, when the analysis is exploratory and not question-driven,  a frequentist approach  might run into many false positive findings. Have a look again at Figure \@ref(fig:ci): Imagine these were not repeated confidence intervals, but confidence intervals for different variables. Again, for $\alpha = 0.05$ we would expect 1 in 20 hypothesis tests to give false positive results. Now imagine a data scientist testing hundreds of hypothesis tests. This problem is called the multiple testing problem. There are solutions, but they are not always used and multiple testing can be very subtle.
-* The frequentist interpretation of probability is very awkward when it comes to confidence intervals and p-values. They are commonly misinterpreted. Arguably, frequentist confidence intervals are not what practitioners want. [Bayesian](#bayesian) credibility intervals are more aligned with the natural interpretation of the uncertainty regarding model parameters and statistical results.
-* The frequentist analysis depends not only on the data, but also on the experimental design. It's a violation of the likelihood principle that says that all information about the data must be contained in the likelihood, see example in [chapter on likelihoodism](#likelihoodism).
-* Frequentist probability can fail in the simplest scenarios: Imagine modeling the probability of rain in August. But your data only has 20 August days, all without rain. The frequentist answer therefore is 0% rain and the frequentist recommendation is that we just need to collect more data. [Bayesianism](#bayesian) offers a solution here.
-* There is a big "off-the-shelf"-mentality among users of frequentist inference. Instead of carefully adapting a probability model to the data, an off-the-shelf statistical test or statistical model is selected based on just a few properties of the data. For example, there are popular flow charts of choosing an appropriate statistical test. <!-- https://bookdown.org/content/4857/generalized-linear-madness.html -->
-* Frequentist statistics has nothing to say about causality except that "correlation does not imply causation". At least how I learned statistics, the only thing that was emphasized was to include confounders. 
-<!-- * Many use just maximum likelihood estimators. And not care too much for the uncertainty that is delivered. -->
+* Frequentism invites **over-simplification of answers**into simple yes/no-answers. Simplification into the question of results "significantly" deviate from the null hypothesis. Reducing models to binary decisions obscures critical model assumptions and the difficult trade-offs that had to be made for the analysis.
+* Focusing on p-values encourages **p-hacking**: the either conscious or unconscious search for "positive" results. Guided by the lure of a significant result, researchers and data scientists may play around with their analysis until the p-value in question is small enough. With $\alpha$-level of 0.05, 1 in 20 null hypotheses are falsely rejected. P-hacking increases this percentage of false positive findings. 
+* Similarly, if the analysis is exploratory rather than hypothesis-driven, a naive frequentist approach may produce many false positive findings. Look again at figure \@ref(fig:ci): Imagine these were confidence intervals for different variables. Again, for $\alpha = 0.05$, we would expect 1 in 20 hypothesis tests to yield false positives. Now imagine a data scientist testing hundreds of hypothesis tests. This problem is called the multiple testing problem. There are solutions, but they are not always used and multiple testing can be very subtle.
+* The frequentist interpretation of probability is very awkward when it comes to confidence intervals and p-values. They are commonly misinterpreted. Arguably, frequentist confidence intervals are not what practitioners want. [Bayesian](#bayesian) credibility intervals are more aligned with the natural interpretation of uncertainty.
+* Frequentist analysis depends not only on the data, but also on the experimental design. This is a violation of the likelihood principle that says that all information about the data must be contained in the likelihood, see example in [chapter on likelihoodism](#likelihoodism).
+* Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. [Bayesianism](#bayesian) offers a solution to involve prior information for such estimates.
+* There is an "off-the-shelf"-mentality among users of frequentist inference. Instead of carefully adapting a probability model to the data, an off-the-shelf statistical test or statistical model is chosen. The choice is based on just a few properties of the data. For example, there are popular flow charts of choosing an appropriate statistical test. <!-- https://bookdown.org/content/4857/generalized-linear-madness.html -->
+* Frequentist statistics says nothing about causality except that "correlation does not imply causation".
 
 
 [^Kao2001]: Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. "Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study." American journal of epidemiology 154, no. 8 (2001): 748-757.
