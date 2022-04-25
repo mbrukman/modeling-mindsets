@@ -82,7 +82,7 @@ jobs:
            ref: gh-pages
            path: out
 
-    - name: Deploy new book version
+      - name: Deploy new book version
         run: |
           cd out
           git rm -rf ./*
@@ -92,17 +92,16 @@ jobs:
           git add --all ./*
           git commit -m "Update Book" --allow-empty
           git push origin gh-pages
-	if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' }}
 
-    - name: Push to gh-pages
-         run: |
-          git commit -m "Update Book" --allow-empty
-          git push origin gh-pages
-         if: github.ref == 'refs/heads/main'
+      - name: Push to gh-pages
+        run: |
+            git commit -m "Update Book" --allow-empty
+            git push origin gh-pages
+        if: github.ref == 'refs/heads/main'
 
-    - name: Push to gh-pages (staging)
-         run: |
+      - name: Push to gh-pages (staging)
+        run: |
           git commit -m "Update Book" --allow-empty
           git push origin gh-pages-staging
-         if: github.ref == 'refs/heads/staging'
-
+        if: github.ref == 'refs/heads/staging'
