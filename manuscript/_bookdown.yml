@@ -38,5 +38,6 @@ rmd_files: ["index.Rmd",
             #"symbolic-artificial-intelligence.Rmd",
             #"interpretable-ml.Rmd",
             #            "visualization.Rmd",
-            #"information-theory.Rmd"
+            #"information-theory.Rmd",
+            "references.Rmd"
             ]

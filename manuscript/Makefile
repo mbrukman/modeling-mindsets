@@ -35,7 +35,7 @@ _book/$(bookname).epub : bookfiles
 	rm -f $(bookname).Rmd
 	Rscript  -e "bookdown::render_book('./', 'bookdown::epub_book')"
 
-11-references.Rmd : *.Rmd
+references.Rmd : *.Rmd
 	Rscript ../scripts/references.R
 
 sbrl:
