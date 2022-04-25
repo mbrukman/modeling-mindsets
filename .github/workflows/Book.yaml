@@ -98,11 +98,11 @@ jobs:
          run: |
           git commit -m "Update Book" --allow-empty
           git push origin gh-pages
-         if: github.ref == 'refs/heads/main')
+         if: github.ref == 'refs/heads/main'
 
     - name: Push to gh-pages (staging)
          run: |
           git commit -m "Update Book" --allow-empty
           git push origin gh-pages-staging
-         if: github.ref == 'refs/heads/staging')
+         if: github.ref == 'refs/heads/staging'
 
