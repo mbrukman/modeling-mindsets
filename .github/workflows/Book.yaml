@@ -53,13 +53,6 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      - name: Install OS dependencies
-        run: |
-          brew update
-          brew install --cask xquartz
-          brew install gsl
-          brew install --cask calibre 
-
       - name: Install R dependencies for book
         run: |
           remotes::install_deps(dependencies = TRUE)
