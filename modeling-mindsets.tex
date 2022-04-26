@@ -38,7 +38,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Modeling Mindsets for Data Scientists},
+  pdftitle={Modeling Mindsets},
   pdfauthor={Christoph Molnar},
   colorlinks=true,
   linkcolor={Maroon},
@@ -130,7 +130,14 @@
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 
-\title{Modeling Mindsets for Data Scientists}
+\title{Modeling Mindsets}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{The Many Cultures of Learning From Data}
 \author{Christoph Molnar}
 \date{2022-04-26}
 
