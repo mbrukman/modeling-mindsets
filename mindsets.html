@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Mindsets | Modeling Mindsets for Data Scientists</title>
+  <meta name="description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Mindsets | Modeling Mindsets for Data Scientists" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Mindsets | Modeling Mindsets for Data Scientists" />
+  
+  <meta name="twitter:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  
+
+<meta name="author" content="Christoph Molnar" />
+
+
+<meta name="date" content="2022-04-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="models.html"/>
+<link rel="next" href="statistical-modeling.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+  'anonymizeIp': true
+  , 'storage': 'none'
+  , 'clientId': window.localStorage.getItem('ga_clientId')
+});
+ga(function(tracker) {
+  window.localStorage.setItem('ga_clientId', tracker.get('clientId'));
+});
+ga('send', 'pageview');
+</script>
+
+<link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+<script src="javascript/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#f1d600"
+    }
+  },
+  "position": "bottom-right",
+  "content": {
+    "message": "This website uses cookies for Google Analytics so that I know how many people are reading the book and which chapters are the most popular. The book website doesn't collect any personal data."
+  }
+})});
+</script>
+
+<style>
+
+#cta-button-desktop:hover, #cta-button-device:hover {
+  background-color:   #ffc266; 
+  border-color:   #ffc266; 
+  box-shadow: none;
+}
+#cta-button-desktop, #cta-button-device{
+  color: white;
+  background-color:  #ffa31a;
+  text-shadow:1px 1px 0 #444;
+  text-decoration: none;
+  border: 2px solid  #ffa31a;
+  border-radius: 10px;
+  position: fixed;
+  padding: 5px 10px;
+  z-index: 10;
+  }
+
+#cta-button-device {
+  box-shadow: 0px 10px 10px -5px rgba(194,180,190,1);
+  display:none;
+  right: 20px;
+  bottom: 20px;
+  font-size: 20px;
+ }
+
+#cta-button-desktop {
+  box-shadow: 0px 20px 20px -10px rgba(194,180,190,1);
+  display:display;
+  padding: 8px 16px;
+  right: 40px;
+  bottom: 40px;
+  font-size: 25px;
+}
+
+@media (max-width : 450px) {
+  #cta-button-device {display:block;}
+  #cta-button-desktop {display:none;}
+}
+
+
+</style>
+
+
+<a id="cta-button-desktop" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank"> Buy Book </a>
+
+<a id="cta-button-device" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank">Buy</a>
+  
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Modeling Mindsets</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="1" data-path="what-this-book-is-about.html"><a href="what-this-book-is-about.html"><i class="fa fa-check"></i><b>1</b> What This Book is About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-this-book-is-about.html"><a href="what-this-book-is-about.html#who-this-book-is-for"><i class="fa fa-check"></i><b>1.1</b> Who This Book is For</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="models.html"><a href="models.html"><i class="fa fa-check"></i><b>2</b> Models</a></li>
+<li class="chapter" data-level="3" data-path="mindsets.html"><a href="mindsets.html"><i class="fa fa-check"></i><b>3</b> Mindsets</a></li>
+<li class="chapter" data-level="4" data-path="statistical-modeling.html"><a href="statistical-modeling.html"><i class="fa fa-check"></i><b>4</b> Statistical Modeling</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="statistical-modeling.html"><a href="statistical-modeling.html#random-variables"><i class="fa fa-check"></i><b>4.1</b> Random Variables</a></li>
+<li class="chapter" data-level="4.2" data-path="statistical-modeling.html"><a href="statistical-modeling.html#probability-distributions"><i class="fa fa-check"></i><b>4.2</b> Probability Distributions</a></li>
+<li class="chapter" data-level="4.3" data-path="statistical-modeling.html"><a href="statistical-modeling.html#assuming-a-distribution"><i class="fa fa-check"></i><b>4.3</b> Assuming a Distribution</a></li>
+<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a></li>
+<li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
+<li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
+<li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.8" data-path="statistical-modeling.html"><a href="statistical-modeling.html#data-generating-process-dgp"><i class="fa fa-check"></i><b>4.8</b> Data-Generating Process (DGP)</a></li>
+<li class="chapter" data-level="4.9" data-path="statistical-modeling.html"><a href="statistical-modeling.html#drawing-conclusions-about-the-world"><i class="fa fa-check"></i><b>4.9</b> Drawing Conclusions About the World</a></li>
+<li class="chapter" data-level="4.10" data-path="statistical-modeling.html"><a href="statistical-modeling.html#strengths"><i class="fa fa-check"></i><b>4.10</b> Strengths</a></li>
+<li class="chapter" data-level="4.11" data-path="statistical-modeling.html"><a href="statistical-modeling.html#limitations"><i class="fa fa-check"></i><b>4.11</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="statistical-inference.html"><a href="statistical-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
+<li class="chapter" data-level="5.2" data-path="statistical-inference.html"><a href="statistical-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
+<li class="chapter" data-level="5.3" data-path="statistical-inference.html"><a href="statistical-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
+<li class="chapter" data-level="5.4" data-path="statistical-inference.html"><a href="statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.5" data-path="statistical-inference.html"><a href="statistical-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
+<li class="chapter" data-level="5.6" data-path="statistical-inference.html"><a href="statistical-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
+<li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
+<li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> 
+<li><a href="https://christophmolnar.com/impressum/" target="_blank">Impressum</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling Mindsets for Data Scientists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mindsets" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Mindsets<a href="mindsets.html#mindsets" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- CONTENT TO ADD
+
+* Mindsets are not coherent philosophies
+* There are Bayesian versions of p-values and hypothesis tests, but I would consider these approaches a core of the Bayesian mindset. It's subjective.
+-->
+<!-- from models to mindsets -->
+<p>Models such as the linear regression model are made up of components, relationships, and parameters.
+A model alone can’t tell us how to interpret the world.
+The use and interpretation of the model depends on the mindset from which the model arose.
+We need to make further assumptions about the model and how to infer insights about the world from those models.
+Consider a linear regression model that predicts regional rice yield as a function of rainfall, temperature, and fertilizer use.
+It’s a model, not a mindset.
+How may we interpret the model?
+Can we interpret the effect of fertilizer as causal to rice yield? Or is it just a correlation? <!-- causal inference -->
+Would we trust the model to make accurate predictions for the future as well? <!-- supervised ML mindset -->
+Can we say anything about the statistical significance of the effect of the fertilizer? <!-- frequentism -->
+Or have we just updated prior information about the effect of fertilizer with new data? <!-- Bayesianism --></p>
+<p>Welcome to <strong>Modeling Mindsets</strong>.</p>
+<p>A modeling mindset is a specification of how to model the world using data.
+<!-- lenses analogy-->
+Modeling mindsets are like different lenses.
+All lenses show us the world, but with a different focus.
+Some lenses magnify things that are close, some that are far away.
+Some glasses are tinted so you can see in bright environments.
+When you look through a lens, you see the world in a certain way.
+<!-- mindsets -->
+With different modeling mindsets, you can look at the modeling task, but the model will focus on different things.
+Bayesianism, frequentism, supervised machine learning, generative models, … these are all different mindsets when it comes to building models from data.
+<!-- more detailed differences of mindsets -->
+Mindsets differ in how they interpret probabilities – or whether probabilities are part of the language at all.
+While mindsets cover many different modeling tasks, they have some tasks where they really shine.
+Each mindset invites you to ask different questions, and so shapes the way you view the world through your model.
+In supervised machine learning, for example, everything becomes a prediction or classification problem, while Bayesian inference focuses on estimating posterior probability distributions of model parameters.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mindset"></span>
+<img src="figures/mindset-1.png" alt="Only when a model is embedded in a mindset can we put it into context with the world." width="\textwidth" />
+<p class="caption">
+FIGURE 3.1: Only when a model is embedded in a mindset can we put it into context with the world.
+</p>
+</div>
+<!-- a normative frame -->
+<p><strong>Modeling mindsets</strong> are normative:
+A modeling mindset distinguishes between good and bad models.
+Even if model evaluations are partly based on objective criteria, the decision in favor of a criteria is subjective.
+For a frequentist statistician, a good model of the world is probabilistic and has a high goodness-of-fit to the assumed distributions.
+The residuals of the model also pass diagnostic checks.
+The frequentist rejects the use of prior probabilities.
+The frequentist would also not switch to a random forest just because it has a lower mean squared error on test data.
+And why would the statistician switch?
+From their point of view, the random forest is a poor model of the world.
+We learn nothing about the probability distribution of our variables.
+We can’t do frequentist hypothesis testing of the effects of variables.
+The performance of the frequentist’s model on unseen test data is not as important to the frequentist.
+Each mindset has their own set of accepted models and evaluation procedures.</p>
+<!-- permissible questions -->
+<p>A modeling mindset limits the questions that can be asked.
+Consequently, some questions or tasks are out of scope of the mindset.
+Often the questions are out of scope because they just don’t make sense in a particular modeling mindset.
+Supervised machine learners formulate tasks as prediction or classification problems.
+Questions about probability distributions are out of reach since the mindset is: choose the model that has the lowest generalization error given new data.
+So the best model could be any function, such as the average prediction of a random forest, a neural network, and a linear regression model.
+If the best model can be any function, questions that a statistician would normally ask (hypothesis testing, parameter estimation, …) become irrelevant to the machine learner.
+In machine learning, the best models are usually not classical statistical models.
+If the machine learner started asking questions a statistician would ask, they would have to choose a suboptimal model, which is a violation of the mindset.</p>
+<!-- cultural -->
+<p><strong>Modeling mindsets are cultural</strong>.
+Modeling mindsets are not just theories; they shape and are shaped by communities of people who model the world based on the mindset.
+In many scientific communities, the frequentist mindset is very common.
+I once consulted a medical student for his doctoral thesis.
+I helped him visualize some data.
+A few days later he came back, “I need p-values with this visualization.”
+His advisor told him that any data visualization needed p-values.
+His advisor’s advice was a bit extreme, and not advice that a real statistician would have given.
+However, it serves as a good example of how a community perpetuates a certain mindset.
+Likewise, if you were trying to publish a machine learning model in a journal that publishes mostly Bayesian analysis, I would wish you good luck.
+And I’d bet 100 bucks that the paper would be rejected.</p>
+<!-- culturally accepted -->
+<p>The people within a shared mindset also accept the assumptions of that mindset.
+And these assumptions are usually not challenged, but mutually agreed upon, at least implicitly.
+If you work in a team that has been using Bayesian statistics for some time, you won’t be questioning each model anew about whether using priors is good or whether the Bayesian interpretation of probability is legit.
+In machine learning competitions, the model with the lowest prediction error on new data wins.
+You will have a hard time arguing that your model should have won because it’s the only causal model.
+If you believe that causality is important, you would simply not participate.
+You can only thrive on those machine learning competition platform if you have accepted the supervised machine learning mindset.</p>
+<!-- archetypes -->
+<p>The modeling mindsets as I present them in this book are archetypes: pure forms of these mindsets.
+In reality, the boundaries between mindsets are much more fluid.
+These archetypes of mindsets intermingle within individuals, communities and approaches:
+A data scientist who primarily builds machine learning models might also use some simple regression models with hypothesis tests – without cross-validating the models’ generalization error.
+A research community could accept analyses that use both frequentist and Bayesian statistics.
+A machine learning competition could include a human jury who wards additional points if the model is interpretable and incorporates causal reasoning.</p>
+<!-- sometimes 100% archetypes -->
+<p>Have you ever met anyone who is really into supervised machine learning?
+The first question they ask is “Where is the labeled data?”.
+The supervised machine learner turns every problem into a prediction or classification problem.
+Or perhaps you’ve worked with a statistician who always wants to run hypothesis tests and regression models?
+Or you had intense discussion about probability with a hardcore Bayesian?
+Some people really are walking archetypes. 100% of one archetype.
+But I would say that most people learned one or two mindsets when they start out.
+And later they got glimpses of other mindsets here and there.
+Most people’s mindset is already a mixture of multiple modeling mindsets.</p>
+<!-- not clear cut: mindset subsets, mindset overlaps 
+This book does not claim to have a sharp scientific taxonomy or ontology of mindsets.
+Instead, I was quite liberal in deciding when something could be considered as a mindset.
+This means that mindsets can overlap, they can be an extension or subsets of other mindsets.
+As the main criterion for pronouncing something a distinct mindset, is when I thought that it's a useful view of the world, and you enhance your knowledge by seeing a particular thing as a modeling mindset.
+-->
+<!-- differentiators between mindsets 
+I had a bit more objective criteria.
+
+* A mindset should have it's own Wikipedia entry.
+* A modeling mindset should be "holistic" in the sense that it encompasses a broad range of modeling tasks. Or at least expicitly exclude some tasks out of philosophical reasons. 
+* Another, softer, criterion was that there are communities around modeling mindsets. For example, I dedicated a chapter to supervised machine learning, in addition to a chapter on machine learning. Supervised machine learning has such a big community, think of machine learning competitions a la Kaggle.
+* A mindset should have at least one unique aspect that distinguishes it from other mindsets (except for the 'meta'-mindset chapters on [likelihood](#likelihood) and [risk-minimization](#risk-minimization).  
+-->
+<!--
+
+Other mindsets
+
+* Sampling theory or survey sampling with design-based assumptions for modeling. Alternative name: design-based inference. Survey sound people oriented, and it is. But can also mean other samples. Normally, for statistical modeling, it's assumed that the model is unknown and the goal is to find the right model / distributions to represent the data-generating process. with survey sampling we start with the assumption that we know the model, but we have to collect the data with random sampling. It's a data sampling first approach. Very complementary of course. But it's own mindset bc. of the special sampling focus, and stating that sampling is the most important.   https://en.wikipedia.org/wiki/Statistical_assumption#Classes_of_assumptions and https://en.wikipedia.org/wiki/Survey_sampling
+  * https://ies.ed.gov/ncee/pubs/20174025/pdf/20174025.pdf
+* Generative models - machine learning
+* Discriminative models - machine learning
+* Symbolic AI
+* Logic Programming
+* ML + IML
+* Non-parametric statistics: Own mindset bc we don't assume the distributions any longer, which are elementary to frequentists and bayesians. Instead we do bootstrap, permutation tests and so on. computationally expensive, but fewer explicit choices for distributions.
+* Experiment of design / randomized trials: Mindset is that you don't work with observational data. Your modeling starts with data collection process. Modeling after not as important as collecting data. even comparison of means possible afterwards.
+* Interpretable machine learning and sensitivity analysis
+* Generative modeling: GANs, Naive Bayes, anything that produces samples. Modeling mindset: We want to replicate the data-generating process. Applications in art also. But can also be used for discriminative tasks. Models overlap with other approaches.
+* Deep Learning: Own mindset because of some unique attributes that allow to think differently about modeling: embedding, transfer learning, generative modeling (link to the mindset at least), feature learning,  
+* Unsupervised learning / clustering / association rule learning / outlier detection: Mindset of finding general patterns inthe data. Not driven by a distinct $Y$, but instead by average big trends. 
+* Propensity probabilities? https://en.wikipedia.org/wiki/Propensity_probability not complete modeling mindset, but at least a different interpretation of probability
+* Data visualization: Just plot stuff. Humans are good at recognizing stuff. Also works for data that is not representative. No assumptions. You see much more than when only, e.g. hypothesis testing or predictive performance. You can see for example when errors happen.
+* Operations research: https://en.wikipedia.org/wiki/Operations_research . 
+ is focused on making decisions. sometimes interest in extreme value. tied to organization and systems.
+* Representation learning? https://en.wikipedia.org/wiki/Feature_learning
+* Semi-parametric models? Or at least mention it in liklelihood mindset. For example the cox model.
+* Decision theory: As alternative to frequentism, Bayesianism, likelihoodism. Focus is on decisions even more so than on frequentism. Strongly builds on statistical mdeling mindsets. Contra argument: not very unified field https://people.kth.se/~soh/decisiontheory.pdf   https://en.wikipedia.org/wiki/Decision_theory
+
+TODO: Write about inductive vs deductive inference
+
+-->
+<!--
+## Linear Model as exampel
+
+
+The linear model is a mathematical model that represents a varaible Y as the weighted sum of other variables $X_1$, ..., $X_p$:
+
+$$Y = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p$$
+
+-->
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/mindsets.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["modeling-mindsets.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

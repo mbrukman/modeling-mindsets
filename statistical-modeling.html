@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Statistical Modeling | Modeling Mindsets for Data Scientists</title>
+  <meta name="description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Statistical Modeling | Modeling Mindsets for Data Scientists" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Statistical Modeling | Modeling Mindsets for Data Scientists" />
+  
+  <meta name="twitter:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  
+
+<meta name="author" content="Christoph Molnar" />
+
+
+<meta name="date" content="2022-04-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mindsets.html"/>
+<link rel="next" href="statistical-inference.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+  'anonymizeIp': true
+  , 'storage': 'none'
+  , 'clientId': window.localStorage.getItem('ga_clientId')
+});
+ga(function(tracker) {
+  window.localStorage.setItem('ga_clientId', tracker.get('clientId'));
+});
+ga('send', 'pageview');
+</script>
+
+<link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+<script src="javascript/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#f1d600"
+    }
+  },
+  "position": "bottom-right",
+  "content": {
+    "message": "This website uses cookies for Google Analytics so that I know how many people are reading the book and which chapters are the most popular. The book website doesn't collect any personal data."
+  }
+})});
+</script>
+
+<style>
+
+#cta-button-desktop:hover, #cta-button-device:hover {
+  background-color:   #ffc266; 
+  border-color:   #ffc266; 
+  box-shadow: none;
+}
+#cta-button-desktop, #cta-button-device{
+  color: white;
+  background-color:  #ffa31a;
+  text-shadow:1px 1px 0 #444;
+  text-decoration: none;
+  border: 2px solid  #ffa31a;
+  border-radius: 10px;
+  position: fixed;
+  padding: 5px 10px;
+  z-index: 10;
+  }
+
+#cta-button-device {
+  box-shadow: 0px 10px 10px -5px rgba(194,180,190,1);
+  display:none;
+  right: 20px;
+  bottom: 20px;
+  font-size: 20px;
+ }
+
+#cta-button-desktop {
+  box-shadow: 0px 20px 20px -10px rgba(194,180,190,1);
+  display:display;
+  padding: 8px 16px;
+  right: 40px;
+  bottom: 40px;
+  font-size: 25px;
+}
+
+@media (max-width : 450px) {
+  #cta-button-device {display:block;}
+  #cta-button-desktop {display:none;}
+}
+
+
+</style>
+
+
+<a id="cta-button-desktop" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank"> Buy Book </a>
+
+<a id="cta-button-device" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank">Buy</a>
+  
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Modeling Mindsets</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="1" data-path="what-this-book-is-about.html"><a href="what-this-book-is-about.html"><i class="fa fa-check"></i><b>1</b> What This Book is About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-this-book-is-about.html"><a href="what-this-book-is-about.html#who-this-book-is-for"><i class="fa fa-check"></i><b>1.1</b> Who This Book is For</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="models.html"><a href="models.html"><i class="fa fa-check"></i><b>2</b> Models</a></li>
+<li class="chapter" data-level="3" data-path="mindsets.html"><a href="mindsets.html"><i class="fa fa-check"></i><b>3</b> Mindsets</a></li>
+<li class="chapter" data-level="4" data-path="statistical-modeling.html"><a href="statistical-modeling.html"><i class="fa fa-check"></i><b>4</b> Statistical Modeling</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="statistical-modeling.html"><a href="statistical-modeling.html#random-variables"><i class="fa fa-check"></i><b>4.1</b> Random Variables</a></li>
+<li class="chapter" data-level="4.2" data-path="statistical-modeling.html"><a href="statistical-modeling.html#probability-distributions"><i class="fa fa-check"></i><b>4.2</b> Probability Distributions</a></li>
+<li class="chapter" data-level="4.3" data-path="statistical-modeling.html"><a href="statistical-modeling.html#assuming-a-distribution"><i class="fa fa-check"></i><b>4.3</b> Assuming a Distribution</a></li>
+<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a></li>
+<li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
+<li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
+<li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.8" data-path="statistical-modeling.html"><a href="statistical-modeling.html#data-generating-process-dgp"><i class="fa fa-check"></i><b>4.8</b> Data-Generating Process (DGP)</a></li>
+<li class="chapter" data-level="4.9" data-path="statistical-modeling.html"><a href="statistical-modeling.html#drawing-conclusions-about-the-world"><i class="fa fa-check"></i><b>4.9</b> Drawing Conclusions About the World</a></li>
+<li class="chapter" data-level="4.10" data-path="statistical-modeling.html"><a href="statistical-modeling.html#strengths"><i class="fa fa-check"></i><b>4.10</b> Strengths</a></li>
+<li class="chapter" data-level="4.11" data-path="statistical-modeling.html"><a href="statistical-modeling.html#limitations"><i class="fa fa-check"></i><b>4.11</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="statistical-inference.html"><a href="statistical-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
+<li class="chapter" data-level="5.2" data-path="statistical-inference.html"><a href="statistical-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
+<li class="chapter" data-level="5.3" data-path="statistical-inference.html"><a href="statistical-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
+<li class="chapter" data-level="5.4" data-path="statistical-inference.html"><a href="statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.5" data-path="statistical-inference.html"><a href="statistical-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
+<li class="chapter" data-level="5.6" data-path="statistical-inference.html"><a href="statistical-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
+<li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
+<li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> 
+<li><a href="https://christophmolnar.com/impressum/" target="_blank">Impressum</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling Mindsets for Data Scientists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistical-modeling" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Statistical Modeling<a href="statistical-modeling.html#statistical-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li>Goal: Changing your mind under uncertainty.</li>
+<li>Assumes the world is best described by probability distributions.</li>
+<li>Statistical modeling fits probability distributions to data.</li>
+<li>Requires further assumptions for drawing conclusions. See <a href="#frequentism">frequentism</a>, <a href="bayesian.html#bayesian">Bayesianism</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a>.</li>
+</ul>
+<!-- statistician modeling mindset ingredients
+
+- Ingredients: Random variables, distributions,
+- Statistical estimators
+- https://en.wikipedia.org/wiki/Statistical_model
+- TODO: Distinguish between statistical model and statistical inference?
+- TODO: IID assumption: talk about it
+- TODO: Mention that most models make simplifying assumptions, such as typical for the linear model
+- TODO: Write a paragraph about evaluation
+-->
+<!-- TODO: Mention all the types of statistical models one can build with this mindset: clustering, classification, regression, outlier detection, ... -->
+<!-- 
+TODO: write about
+
+- interpretation of parameters important
+- but also expected values and such, but that's often what the parameters stand for.
+
+The parameters should have a well-defined meaning.
+This is an (intuitive) assumption that is violated for [semiparametric models](#semiparametric).
+
+
+Choosing a distribution is not enough.
+The probability distributions have parameters.
+And those parameters can be adapted so that the distributions fit to the data.
+
+- more elaborate way than just have some distribution and paramters: statistical models pull these things together and there are many ways to fit 
+-->
+<!-- motivation -->
+<p>Do you become more productive when you drink a lot of water?
+Is there a fixed “law”, like a mathematical function, that expresses productivity as a function of water intake?
+No.
+No, because productivity depends on many factors: sleep duration and quality, distractions, noise pollution, …
+Because of all these factors and other contingencies, we won’t get a perfect equation relating water intake to productivity.
+Uncertainty remains.
+Even the water intake varies from day to day and from person to person.</p>
+<!-- summary of likelihood mindset -->
+<p>Statistics is changing your mind under uncertainty.
+One way to deal with the uncertainty of the world is to abstract aspects of the world as random variables and ascribe a probability distribution to them.
+Daily water intake could be a random variable.
+For productivity we would need some clever idea on how to best measure this abstract concept.
+A not so clever example: Daily time spent in front of the computer.
+To further relate these variables to each other, we can make assumptions on how the data were generated and connect the random variables in a statistical model.
+Welcome to the statistical modeling mindset.</p>
+<!-- parent mindset -->
+<p>Statistical modeling is a parent to these other mindsets: <a href="#frequentism">frequentism</a>, <a href="#bayesianism">Bayesianism</a>, <a href="likelihoodism.html#likelihoodism">likelihoodism</a> and <a href="#causality">causal inference</a>.
+These mindsets provide different ideas for how to do inference – drawing conclusions about the world from data.
+The mindsets differ in their interpretation of probability, their stance on causality and their faithfulness to the likelihood principle.
+Their use of statistical models unites these mindsets.</p>
+<!-- What is statistical model -->
+<p>A statistical model consists of a set of probability distributions.
+A probability distribution describes the frequency with which we expect to see certain values of random variables.
+The second ingredient to a statistical model is the data, from which we estimate those probability distributions.
+Random variables are capture some aspect of the world.
+But let’s start with the most elementary unit: the random variable.</p>
+<!-- 
+[Semiparametric models](#semiparametric) and especially [distribution-free statistical modeling](#distribution-free) approach modelling with a different mindset, but are considered statistical modeling.
+-->
+<!-- 
+Assumptions:
+
+- Data are iid:
+- independently drawn
+- identically distributed
+- no confounding effects
+- linearity (commonly)
+- 
+-->
+<div id="random-variables" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Random Variables<a href="statistical-modeling.html#random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- Random Variables -->
+<p>A random variable is a mathematical object that carries uncertainty.
+Daily water intake can be a random variable.
+Observed data are seen as <strong>observations</strong> or realizations of random variables.
+If someone drank 2.5 liters of water, that is a realization of the random variable “daily water intake”.</p>
+<p>Other random variables:</p>
+<ul>
+<li>Outcome of a dice roll.</li>
+<li>Monthly sales of an ice cream truck.</li>
+<li>Whether or not a customer has canceled their contract last month.</li>
+<li>Daily amount of rain in Europe.</li>
+<li>Pain level of patients arriving at the emergency room.</li>
+</ul>
+<!-- TOOD: Visualize World+random variable -> Data/Observations -> Model/estimated probability distributions -->
+<p>People with a statistical modeling mindset <strong>think</strong> in random variables.
+Any problem related to data is translated into a set of random variables and solved based on that representation.
+A random variable is a construct that we can’t observe directly.
+But we can observe the realizations of a random variable, as shown in Figure <a href="statistical-modeling.html#fig:variable">4.1</a>.
+But the raw data are not that useful to humans.
+Because humans aren’t databases, we need a model that simplifies the noisy data for us.
+Statisticians came up with probability distributions: a mathematical construct that describes potential outcomes of the random variable.</p>
+<!--
+There are usually many choice how we translate a world property into a random variable : 
+Should water intake be measured per week, day or even hour?
+Do we respect the water contained in consumed food?
+What about sweating?
+
+Sometimes what later becomes a random variable is already dictated by the data we collected:
+When the water intake was measured daily, then that's also the random variable.
+-->
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:variable"></span>
+<img src="figures/variable-1.png" alt="Each dot represents a data point, a realizations of a random variable. The x-axis shows the value of the variable. Dots are stacked up for frequently occurring values. " width="\textwidth" />
+<p class="caption">
+FIGURE 4.1: Each dot represents a data point, a realizations of a random variable. The x-axis shows the value of the variable. Dots are stacked up for frequently occurring values.
+</p>
+</div>
+</div>
+<div id="probability-distributions" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Probability Distributions<a href="statistical-modeling.html#probability-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- Definition of a distribution -->
+<p>A probability distribution is a function which gives each possible outcome of a random variable a probability.
+Value in, probability out. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+Not all functions can be used as probability functions.
+A probability function must be larger or equal to zero for the entire range of the random variable.
+For discrete variables such as the number of fish caught, the probability distribution must sum up to 1 over all possible outcomes.
+And for continuous outcomes such as water intake, the probability distribution, also called density function, must integrate to 1 over the possible range of values.</p>
+<!-- examples of probability distributions -->
+<p>For the outcome <span class="math inline">\(x\)</span> of a fair dice, we can write the following probability function:</p>
+<p><span class="math display">\[
+P(x) =
+\begin{cases}
+1/6 &amp; x \in \{1, \ldots, 6\} \\
+0 &amp; x \notin \{1, \ldots, 6\} \\
+\end{cases}
+\]</span></p>
+<p>The Normal distribution is for continuous variables and defined from minus to plus infinity:</p>
+<p><span class="math display">\[f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\]</span></p>
+<!-- what each part means -->
+<p>In this equation, <span class="math inline">\(\pi\)</span> and <span class="math inline">\(e\)</span> are the famous constants <span class="math inline">\(pi \approx 3.14\)</span> and <span class="math inline">\(e \approx 2.7\)</span>.
+The distribution has two parameters: mean <span class="math inline">\(mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<!-- the parameters -->
+<p>These parameters called location (<span class="math inline">\(\mu\)</span>) and scale (<span class="math inline">\(\sigma\)</span>) parameters, since they determine where on the x-axis the center of the Normal distribution is and how flat or sharp the distribution is.
+The larger the standard deviation <span class="math inline">\(\sigma\)</span>, the flatter the distribution.</p>
+<!-- how it works -->
+<p>Let’s try it out and set <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>, as visualized in Figure <a href="statistical-modeling.html#fig:distributions">4.2</a>, leftmost curve.
+Now we can use this probability distribution function for telling us how probable certain values of our random variable are.
+We get <span class="math inline">\(f(1) \approx 0.24\)</span> and for <span class="math inline">\(f(2) \approx 0.05\)</span>, making <span class="math inline">\(x=1\)</span> much more likely then <span class="math inline">\(x=2\)</span>.
+We may not interpret <span class="math inline">\(f(x)\)</span> as probability directly.
+But we can integrate <span class="math inline">\(f\)</span> over a region of the random variable to get a probability.
+The probability for <span class="math inline">\(x \in [0.9, 1.1]\)</span> is 4.8%.</p>
+<!-- supermarket of distributions -->
+<p>There is huge arsenal of probability distributions: The Normal distribution, the Binomial distribution, the Poisson distribution, …
+And there is an infinite number of probability distributions that you could invent yourself.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:distributions"></span>
+<img src="figures/distributions-1.png" alt="Distributions" width="\textwidth" />
+<p class="caption">
+FIGURE 4.2: Distributions
+</p>
+</div>
+</div>
+<div id="assuming-a-distribution" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Assuming a Distribution<a href="statistical-modeling.html#assuming-a-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- back to data -->
+<p>An important step in the statistical modeling mindset is to connect the random variables that we are interested in to distributions.
+A common approach is to choose a distribution that matches the “nature” of your data:</p>
+<ul>
+<li>A numerical outcome such as IQ? That’s Normal distribution.</li>
+<li>A count outcome, like number of fish caught per hour? The Poisson distribution is a solid choice.</li>
+<li>A binary repeated outcome, like the number of successful free throws in basketball? It follows a Binomial distribution.</li>
+</ul>
+<!-- assumption vs. estimation -->
+<!-- multidimensional distributions -->
+<p>These were all examples of the distributions of single random variables.
+The world is more complex than that:
+Distributions of random variables can be intertwined.
+The distribution of one variable can depend on the value that another random value takes on.
+Fortunately, it’s possible to define so-called multivariate distributions.
+A multivariate distribution is a function that takes more than one value and returns a density (still a single number).
+We might assume that the joint distribution of water intake and productivity (measured in minutes) follows a 2-dimensional Normal distribution.
+<!-- conditional distribution -->
+Or we could assume that the productivity, conditional on water intake, follows a Normal distribution.
+We can be very creative in defining distributions and so on.</p>
+<!-- dream land -->
+<p>With these probability distributions, we are still in the realm of abstraction and assumptions.
+On one side we have the data: messy and untamed.
+On the other side, we have the probability distributions: clean and idealized.
+Statistician ideologically connect the two via random variables:
+The data are the realizations of the random variables.
+And the distributions summarize the stochastic behaviour of random variables.
+But we still need to mathematically connect data and theoretical distributions.
+How do we bring data and distributions together?</p>
+<p>The answer is <strong>statistical models</strong>.</p>
+</div>
+<div id="statistical-model" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Statistical Model<a href="statistical-modeling.html#statistical-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- definition of a statistical model -->
+<p>A statistical model connects theoretical distributions with observed data.
+Statistical models are mathematical models that make assumptions about how the data are generated, and are estimated using data.
+More formally, a statistical model is the combination of the sample space from which the data comes from, and a set of probability distributions on this sample space.</p>
+<!-- TODO: Visualize statistical model as connection between data and distributions -->
+<!-- Parameters -->
+<!-- 
+Other distributions have other parameters. [^semiparametric]
+-->
+<!-- TODO: regressino models, non- and semi-parametric -->
+<!-- Estimation intuition -->
+<p>The distributions are “fitted” to the data by changing the parameters.
+Imagine the distribution as a cat.
+And your data is a box.
+Your cat fits it’s shape and position to match the box.</p>
+<!-- Likelihood function -->
+<p>How do we know which parameters to set in our distribution?
+Here we can work with the probability distribution.
+As I said, the probability distribution is a function that gives the probability or density, given the value of a data point.
+And it’s parameterized, for example by the mean and variance for the Normal distribution.
+We can use the same function to also find our parameters – by switching the point of view.
+The likelihood function <span class="math inline">\(L(\theta | X)\)</span> is the probability function, but seeing the parameters as changeable, and the data as fixed.
+For each data point, we can compute the likelihood function.
+And we can multiply these likelihoods, which gives us the likelihood for all of our data.
+This is a function where we now can fill in some parameters, for example <span class="math inline">\(\mu = 1\)</span> and <span class="math inline">\(\sigma = 2\)</span> and get a value in return.
+The larger the value, the better the distribution fits the data.</p>
+<!-- maximum likelihood -->
+<p>We have ourselves an optimization problem at hand: Maximize the likelihood function <span class="math inline">\(L\)</span> with respect to the parameters, and given the data.
+We want to maximize the likelihood for all of our data, so first we form the likelihood for our entire dataset <span class="math inline">\(L(\mathbf{x}_1, \ldots, \mathbf{x}_n) = \prod_{i=1}^n f(\mathbf{x}_i)\)</span>. <!-- vim_ -->
+Emphasizing that <span class="math inline">\(\mathbf{x}_1\)</span> <!-- x_ --> can be a vector multiple variables, in this case for data point 1.
+And we maximize the data likelihood:</p>
+<p><span class="math display">\[\arg \max_{\theta} L(\theta | \mathbf{x}_1, \ldots, \mathbf{x}_n)\]</span> <!-- vim_ --></p>
+<!-- Estimation technically -->
+<p>Maximum likelihood estimation is a classic optimization problem.
+For simpler cases this can even be solved analytically, for example for the Normal distribution, we know that the ideal <span class="math inline">\(mu\)</span> is the mean of the data: <span class="math inline">\(\frac{1}{n} \sum_{i=1}^n x_i\)</span>.
+For likelihood maximization where the analytical solution is not possible, other optimization methods exists.</p>
+<!-- maximum likelihood mental model -->
+<p>If you have understood the idea of maximum likelihood, you understand a key element the statistical modeling mindset.
+Maximizing the likelihood means bringing together the theoretical probability distributions and the observed data.
+We fit the distributions, aka our statistical model, to the data.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fit"></span>
+<img src="figures/fit-1.png" alt="Fitting distributions to data" width="\textwidth" />
+<p class="caption">
+FIGURE 4.3: Fitting distributions to data
+</p>
+</div>
+<!-- role of the parameters -->
+<p>The role of the distribution parameters goes well beyond a technical one.
+The parameters are central to the statistical modeling mindset.
+We can interpret the parameters as summarization of our data!
+Statistical modeling is about understanding our data better.
+The nice consequence of modeling our data with probability distributions is that we summarize our data with a few numbers, the parameters.
+In the case of the Gaussian distribution, we can describe the distribution of a single variable with only two numbers, the mean and the standard deviation.
+Also for other types of statistical models, parameters are central to interpretation.</p>
+<!-- example for likelihood mindset -->
+<!--
+Let's go back to the water and productivity example.
+You want to answer this question of water versus productivity  with data.
+
+First step: You collect lots of data, measure your daily water intake, and the number of tasks you get done.
+Fully embracing the statistical modeling mindset, we express information as random variables.
+One variable is "water intake" $X_{water}$ and the other is "Number of productive hours" $X_{hours}$.
+Next, we assume that water intake + words follow a 2-dimensional Normal distribution.
+The multivariate Normal distribution has 5 parameters.
+Mean and variance for water intake, and the same for productivity.
+The fifth parameter is the covariance between water and productivity.
+
+Our statistical model is now ready for parameter estimation.
+We can use maximum likelihood to solve find the optimal parameter.
+Optimal means: the values for the five parameters that maximize the likelihood function.
+We write down the formula for the probability distribution of our data.
+And then we maximize it for the parameters, given the data.
+The resulting parameters are then our estimates for the parameters.
+This now parameterized distribution is the statistical model of our little office world.
+-->
+<!-- end of example -->
+<!-- what types of models are possible -->
+</div>
+<div id="types-of-statistical-models" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Types of Statistical Models<a href="statistical-modeling.html#types-of-statistical-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- 
+- 1D distributions
+- but also mulitvariate
+- with more than one variable, we have two options
+- full joint distribution
+- conditional distribution
+- conditional distribution ->  build regression models
+- also clustering is possible
+- ANOVA, regression models, survival model / cox model, Justification
+-->
+<p>All statistical models target an aspect of a probability distribution.
+For most of the chapter, we talked about simpler cases, like having the distribution of a single variable and fitting a distribution.
+So the case was of learning <span class="math inline">\(P(X)\)</span>.
+But we could have the case of multiple random variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.</p>
+<!-- targets of the statistical models -->
+<p>We have two options (bit oversimplifying here) for the probability distribution:
+Fit the joint distribution, or a conditional distribution.
+Depending on the problem that we want to solve, there are different properties of the distribution that we might want to find out.
+Very often, it’s a conditional mean: “What do we expect for a random variable <span class="math inline">\(Y\)</span> given <span class="math inline">\(X= \mathbf{x}\)</span>?
+But it can also be other parts of the distribution:”What’s the 90% quantile for <span class="math inline">\(Y\)</span> given <span class="math inline">\(X = \mathbf{x}\)</span>?
+Consequently, 10% of the values for <span class="math inline">\(Y\)</span>, given <span class="math inline">\(X=\mathbf{x}\)</span>, would be greater than the 90% quantile.
+Think of insurance: An insurance company is noy only interested in the expected damages they have to cover, but also how much they would have to cover in the extreme case.</p>
+<!-- Gaussian mixture, joint example -->
+<p>A Gaussian mixture model, for example, requires learning the entire distribution.
+Gaussian mixture models can be used for identifying clusters in the data, which are assumed to stem from a mixture of Normal distributions.
+With Gaussian mixture models we also seen an example where maximum likelihood is not the sole optimization approach.
+Instead, the expectation-maximization algorithm is used, which iteratively jumps between optimizing the model parameters and predicting the “mixture” of cluster centers for each data point.</p>
+<!-- motivation: regression models -->
+<p>The joint distribution is not always of interest.
+So often, the modeler is only interested in the conditional distribution:
+How does the probability distribution of a variable depend on other variables?
+For example:</p>
+<!-- example of conditional outcomes -->
+<ul>
+<li>What are risk factors that influence the probability of getting lung cancer?</li>
+<li>How do climatic conditions like temperature and humidity affect the occurence of bonobos?</li>
+<li>On which days is a hospital likely to be understaffed?</li>
+</ul>
+<!-- advantages of conditional -->
+<p>The conditional distribution is the natural form for prediction tasks and usually simpler to estimate than the joint distribution.
+Models of the conditional distribution are central to statistical modeling.
+They are also known as regression models.</p>
+</div>
+<div id="regression-models" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Regression Models<a href="statistical-modeling.html#regression-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- regression models -->
+<p>Regression models are statistical models that don’t learn the joint distribution, but a conditional distribution.
+Let’s say we have two variables: <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>.
+With the join distribution <span class="math inline">\(P(Y,X)\)</span> we could answer “How likely is a certain combination of <span class="math inline">\(X=x\)</span>, and <span class="math inline">\(Y=y\)</span>.
+But with the joint distribution, we can ask:”Given <span class="math inline">\(X=x\)</span>, what is the probability distribution of <span class="math inline">\(Y\)</span>“?</p>
+<!-- an example -->
+<p>For example, we want to know not only how often a disease is successfully treated.
+We might want to know if a certain drug played a part in the disease outcome.
+And other factors such as age of the patient, progression of the disease and so on might play a role as well.
+And we would have to consider such factors to answer the question on whether the drug helps.</p>
+<!-- how it works -->
+<p>Our target is the distribution of outcome variable <span class="math inline">\(Y\)</span> conditionanl on variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.
+That means that within the regression model the parameters of the distribution of <span class="math inline">\(Y\)</span> are linked to the other variables.
+How exactly this link looks like depends on the distribution that the modeler assumed for <span class="math inline">\(Y\)</span> and the link they chose to connect the two.
+The simplest case is a linear model.
+We assume that <span class="math inline">\(Y\)</span> follows a Normal distribution and link the mean of <span class="math inline">\(Y\)</span>’s distribution to a weighted sum of the other variables:</p>
+<p><span class="math display">\[Y \sim N(\mu, \sigma)\]</span></p>
+<p><span class="math display">\[\mu = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p\]</span></p>
+<!-- Regression model = conditional distribution -->
+<p>The linear regression model expresses the mean of the target <span class="math inline">\(Y\)</span> as the weighted sum of the other variables.
+<span class="math inline">\(Y\)</span> given <span class="math inline">\(\mathbf{X}\)</span> follows a Normal distribution.
+We only link the mean <span class="math inline">\(\mu\)</span> to the variables.
+A typical assumption is that the <span class="math inline">\(\sigma\)</span> is independent of the value of the other variables.</p>
+<!-- what can we do with model -->
+<p>What can we do now with a regression model?
+<!-- goal: prediction -->
+We can make predictions.
+We just have to fill in values for <span class="math inline">\(X\)</span> and get the expected value of the probability distribution of <span class="math inline">\(X\)</span>.
+<!-- goal: interpretation -->
+Another typical goal is interpreting the relationship between the target with the other variables.
+The coefficients in the regression model are subject to interpretation.
+For the linear regression model, a positive coefficient <span class="math inline">\(\beta_j\)</span> means that increasing the value of variable <span class="math inline">\(X_j\)</span> increases the expected value of <span class="math inline">\(Y\)</span>.</p>
+<!-- glm and gam -->
+<!--
+So [frequentists](#frequentism) can derive confidence intervals, p-values and hypothesis tests for them ("Is coefficient $\beta_j$ significantly different from $0$?").
+[Bayesians](#bayesian) would additionally assume a prior distribution for $\mathbf{\beta}$ and we would get as a result the posterior distributions of the coefficients to analyze. 
+-->
+<!-- bridge to ML -->
+<p>Thinking in regression models brings you closer to the <a href="#mindset">supervised machine learning</a>.
+However, in supervised machine learning, the focus is usually on getting a good predictive model.
+Not on finding a finding a probabilistic representation of your data with random variables and distributions.</p>
+<!-- on classification models -->
+<p>But what if the outcome is a category, and our task is classification?
+When you come from the <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> mindset, always the distinction between classification and regression models is made.
+In statistical modeling, we don’t model the categories, but their probability distribution.
+From the statistical modeling mindset, a categorical variable is nothing special.
+Like for all other variables, we model the conditional distribution of the variable.
+And if we make predictions with our model, we get the probabilities for the categories.</p>
+</div>
+<div id="model-evaluation" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Model Evaluation<a href="statistical-modeling.html#model-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- importance of evaluation for understanding mindset -->
+<p>Statistical models can be evaluated.
+The evaluation is very revealing to understand the mindset.
+And especially how the statistical modeling mindset differs from the <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> mindset.
+Evaluation consists of model diagnostics and goodness-of-fit measures.</p>
+<!--  diagnostics -->
+<p>The role of model diagnostics is to check whether the modeling assumptions were meaningful.
+If we assumed that a random variable follows a Normal distribution, we can visually check whether that’s really the case using, for example, the Q-Q plot.
+An assumption for linear regression model that I mentioned : The variance of the outcome does not depend on the values of the other variables.
+This can be checked visually by plotting the residuals (value of <span class="math inline">\(Y\)</span> minus predicted value of <span class="math inline">\(Y\)</span>) against each of the other variables.</p>
+<!-- goodness-of-fit -->
+<p>The role of goodness-of-fit measures is model comparison and evaluating modeling choices.
+Typical measures here are the (adjusted) R-squared, Akaikes Information Criterion (AIC), the Bayes factor, and likelihood ratios.
+Goodness-of-fit are, quite literally, measures that tell us how well our model fits the data.
+Goodness-of-fit metrics can guide the model building process and decide which model to choose in the end.</p>
+<!-- compare evaluation to ML -->
+<p>Goodness-of-fit metrics are typically computed with the same data that were used for fitting the statistical models.
+This choice may look like a minor detail, but it says a lot about the statistical modeling mindset.
+The critical factor here is overfitting: The more flexible a model is, the better it adapts to ALL the randomness in the data instead of learning patterns that generalize.
+Many goodness-of-fit metrics therefore account for model complexity, like the AIC or adjusted R-squared.
+For the <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> mindset, you would always use new, unseen data for the evaluation.</p>
+</div>
+<div id="data-generating-process-dgp" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Data-Generating Process (DGP)<a href="statistical-modeling.html#data-generating-process-dgp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- what is the DGP -->
+<p>A quite central, but fuzzy topic of the statistical modeling mindset is the data-generating process.
+The statistical modeler thinks about the data-generating process all the time.
+The data-generating process is a construct, an unknowable ideal of how the data was generated.
+The data-generating process produces the unknown distributions that than produce the data.
+We can only observe the data-generating indirectly by oberving data.
+And we can come closer to the DGP by reasoning about it.
+You won’t find this in any statistics book explicitly.
+But it’s the mindset of statistical modeling to have this idea of the DGP.
+It’s a natural consequence when you think about the world as random variables and distributions.</p>
+<!-- DGP detective -->
+<p>I think the DGP is a very powerful idea, even when it’s not well defined.
+Assuming a DGP encourages you to intellectually dive deep into your data.
+Having this image of a DGP in your mind let’s you take on the mindset of a detective:
+Statisticians are like detectives reconstructing a crime.
+You can’t observe the crime directly.
+But the crime has generated a lot of “data” at the scene.
+The stats detective then tries to uncover the data-generating process by making assumptions and learning from data.</p>
+<!-- examples of data-generating processes -->
+<p>“Defining” the data-generating process is neither simple nor well-defined, but I’ll give it a try:</p>
+<ul>
+<li>Dice roll: the throw of the dice is the data-generating process. The dice is symmetric, which makes each side equally likely. We could factor in throwing angle, surface roughness and so on, but the chaotic behaviour of the dice jumping and spinning over the table makes us dismiss all these factors.</li>
+<li>We study the income of computer scientists via a survey. Instead of only reporting on the income distribution, we think about the entire data-generating process: For example, some income values are missing. Are they missing at random? Or are maybe people with higher incomes omitting the question? Are some companies overrepresentated in the survey? Is the sample truly random?</li>
+<li>A research team has collected chest x-ray images of patients with and without COVID-19 for building a COVID-19 prediction model. A closer look at the data-generating proces shows: the images not only differ in COVID-19 status, but they come from different data-generating processes. COVID-19 images are more likely from a horizontal position where the patient lies down because they are so exhausted. One of the non-COVID-19 datasets are even just children x-ray images. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> I picked this example, because it is a paper from a <a href="#machine-learning">machine learning mindset</a>. Statisticians would think much more about the data-generating process, and are, IMHO, more likely to spot such mistakes.</li>
+</ul>
+<p>If these examples of data-generating process sound like common sense to you, it’s because they are.
+But it’s surprisingly uncommon among non-statistician mindsets.
+For example, for <a href="#machine-learning">machine learning</a> considerations of the data-generating process play a subordinate .
+For machine learning competitions, for example, the winner is, most of the times, solely determined by the lowest loss function.
+It’s not considered when some approach has a more meaningful consideration of the data-generating process, and an understandable model.</p>
+<p>Sometimes we want to control at least parts of the data-generating process.
+In randomized clinical trials, for example, we control who gets the drug and who get the placebo.
+In other controlled experiments we even control more factors.</p>
+</div>
+<div id="drawing-conclusions-about-the-world" class="section level2 hasAnchor" number="4.9">
+<h2><span class="header-section-number">4.9</span> Drawing Conclusions About the World<a href="statistical-modeling.html#drawing-conclusions-about-the-world" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- from world to model -->
+<p>Statisticians collect data about the world and use that data to fit a statistical model.
+The statistical model links the world and the data through random variables:
+The world can be simplified by probability distributions;
+the data are viewed as realizations of the random variables.</p>
+<!-- from model to world -->
+<p>Statistical modeling is a practical endeavour.
+In most cases, statistical models are built for practical reasons:
+To make a decision, to better understand some property of the world, or to make a prediction.
+These goals requires us to interpret the model instead of the world.
+But this interpretation does not come for free.
+After all the model building and evaluation, the statistical modeler must consider the representativeness of the data, the interpretation of probability and causality.</p>
+<!-- Part 1: Representativeness -->
+<p>Considering the data-generating process also means thinking about the representativeness of the data, and thus the model.
+Are the data a good sample and representative of the quantity of the world you are interested in?
+Let’s say a statistical modeler analyzes data on whether a sepsis screening tool successfully reduced the incidence of sepsis in a hospital.
+They conclude that the sepsis screening tool has helped reduce sepsis-related deaths at that hospital.
+Are the data representative of all hospitals in the region, the country, or even the world?
+Are the data even representative of all patients at the hospital, or are data only available from patients in intensive care unit?
+In the statistical modeling mindset, defining the “population” from which the data are a sample and discussing how representative the data are of that population is critical to any conclusions drawn from the model.
+<a href="#design-based">Design-based inference</a> fully embraces this mindset that the data are sampled from a larger population.</p>
+<!-- Part 2: Interpretation of probability -->
+<p>More philosophical is the modeler’s attitude to causality, prior probabilities and the likelihood principle.
+And, more general, how probability is to be interpreted.</p>
+<blockquote>
+<p>“It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel.”</p>
+</blockquote>
+<p>– Leonard Savage, 1972 <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>Statistical modeling is the foundation for learning from data.
+But we need another mindset on top of that to make the models useful.</p>
+<p><a href="#frequentism">Frequentist inference</a> is the most prominent mindset for inferring properties about the world from statistical models.
+Frequentist statistics sees probability as the relative frequencies of events in long-run experiments.</p>
+<p><a href="bayesian.html#bayesian">Bayesian inference</a> is based on an interpretation of probability as a degree belief about the world.
+Bayesianism states that the model parameters also have a (prior) distribution.
+And the goal of the statistician is to update the prior distribution by learning from data.
+The resulting posteriori distribution of the parameter expresses our belief about the the parameter.</p>
+<p><a href="likelihoodism.html#likelihoodism">Likelihoodism</a> is a lesser known modeling mindset. Like Bayesianism, it adheres to the likelihood principle, which states that the likelihood function captures all evidence from the data (which frequentist inference violates).
+However, it does not require prior probabilities.</p>
+<p><a href="#causality">Causal inference</a> adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.</p>
+<p>A different but complimentary approach is <a href="#design">design-based inference</a>, which focuses on data sampling and experiments instead of models.</p>
+</div>
+<div id="strengths" class="section level2 hasAnchor" number="4.10">
+<h2><span class="header-section-number">4.10</span> Strengths<a href="statistical-modeling.html#strengths" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>The statistical modeling mindset is a <em>language to see the world</em>. Even when not used for inference, random variables and probability distributions are useful mental models for perceiving the world.</li>
+<li>Statistical modeling has a long tradition and extensive theoretical foundation, from measurement theory as the basis of probability theory to convergence properties of statistical estimators.</li>
+<li>The data-generating process is an underestimated mental model. But it’s a powerful mental model that encourages mindful modeling and asking the right questions.</li>
+<li>Conditional probability models can be used not only to learn about the parameters of interest, but also to make predictions</li>
+<li>Probability distributions give us a language to express uncertainty. <a href="#bayesianism">Bayesianism</a> arguably has the most principled focus on formalizing and modeling uncertainty.</li>
+</ul>
+</div>
+<div id="limitations" class="section level2 hasAnchor" number="4.11">
+<h2><span class="header-section-number">4.11</span> Limitations<a href="statistical-modeling.html#limitations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Statistical modeling quickly reaches its limits when defining probability distributions becomes difficult. Images and text don’t easily fit into this mindset, and this where <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> and especially <a href="deep-learning.html#deep-learning">deep learning</a> shine.</li>
+<li>Working with the statistical modeling mindset can be quite “manual” and tedious. It’s not easy to always think about the DGP, and sometimes more automatable mindsets such as supervised machine learning are more convenient.</li>
+<li>Statistical models require a lot of assumptions. Sometimes more, sometimes less. Just to name a few common assumptions: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, … For most violations, there is a special version of a statistical model without the critical assumption whose estimation and interpretation is often more complicated.</li>
+<li>Statistical modeling, when used for prediction, is often outperformed by <a href="supervised-ml.html#supervised-ml">supervised machine learning</a>. To be fair, outperforming here requires an evaluation based on the supervised learning mindset. However, this means that a goodness-of-fit and diagnostics are no guarantee that a model will performs well on all metrics. <!-- requires citation. kaggle? -->
+<!--
+## Justification of Likelihood Mindset: Probability Theory
+
+Let's start VERY basic.
+What is a probability?
+It's axiomatic, meaning we have to make some assumptions to build a framework of interpretability.
+Introduced by Andrey Kolmogorov in 1933.
+There's an entire field called measurement theory, which lays the theoretical groundwork that we can even speak of "probabilities" and events.
+The idea is that we can describe a so-called probability space with $\Omega$, the set of all possible events that can happen, we call $B$ sub-spaces of $\Omega$ and $p$ is a measure on the event space.
+The clue is how we define $p$.
+And this is where axioms kick in: We have to build on axioms because we can't say what's right or wrong.
+Kolmogorov's axioms:
+For any event $b \in B$ we want $p(b) \in [0,1]$, and also $p(\Omega) = 1$.
+This looks a lot like a probability: The probability that any of the events happens is 1 ($\Omega$ is an exhaustive set) and the probability is always between 0 and 1.
+Also for disjunct events, the probability that any of them happens is the sum of their probability.
+The probality that a person a person rolls a dice with "1" or a "2" is the sum of probabilities for both numbers. 
+--></li>
+</ul>
+<!-- representativeness -->
+<!--
+So to make claims about the world, we also have to make claims about what our sample represents.
+Insights from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
+* Assumptions that the data comes from infinite population
+* Targets are the coefficients: They characterize this infinite population 
+* Fisher is about model-based inference
+* TODO: Think about moving model-based inference to statistical learning?
+-->
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.<a href="statistical-modeling.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. “Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal.” bmj 369 (2020).<a href="statistical-modeling.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.<a href="statistical-modeling.html#fnref4" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mindsets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/statistical-modeling.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["modeling-mindsets.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
