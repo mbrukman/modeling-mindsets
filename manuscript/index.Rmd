@@ -45,7 +45,7 @@ under_construction = "**This chapter is under construction! Stay tuned.**"
 # Summary {-}
 
 ```{r cover, out.width = "400", eval = is.html}
-knitr::include_graphics("../cover/cover-html.png")
+knitr::include_graphics("images/cover-html.png")
 ```
 
 <!-- TODO:
