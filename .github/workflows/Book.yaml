@@ -21,6 +21,11 @@ jobs:
       R_KNITR_OPTIONS: "knitr.chunk.tidy=TRUE"
 
     steps:
+      - name: Extract branch name
+          shell: bash
+          run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          id: extract_branch
+
       - name: Checkout Repo
         uses: actions/checkout@v2
 
@@ -81,14 +86,14 @@ jobs:
         with:
            ref: gh-pages
            path: out
-        if: github.ref == 'refs/head/main'
+        if: steps.extract_branch.outputs.branch == 'main'
 
       - name: Checkout gh-pages-staging
         uses: actions/checkout@v2
         with:
            ref: gh-pages-staging
            path: out
-        if: github.ref == 'refs/head/staging'
+        if: steps.extract_branch.outputs.branch == 'staging'
 
       - name: Deploy new book version
         run: |
@@ -105,13 +110,13 @@ jobs:
         run: |
           cd out
           git push origin gh-pages
-        if: github.ref == 'refs/heads/main'
+        if: steps.extract_branch.outputs.branch == 'main'
 
       - name: Push to staging
         run: |
           cd out
           git push origin gh-pages-staging
-        if: github.ref == 'refs/heads/staging'
+        if: steps.extract_branch.outputs.branch == 'staging'
 
 
 
