@@ -99,4 +99,11 @@ jobs:
           git push origin gh-pages
         if: github.ref == 'refs/heads/main'
 
+      - name: Push to staging
+        run: |
+          cd out
+          git push origin gh-pages-staging
+        if: github.ref == 'refs/heads/staging'
+
+
 
