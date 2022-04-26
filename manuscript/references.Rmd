@@ -1,0 +1,30 @@
+# References {-}
+<!-- Generated automatically, please don't edit manually! -->
+
+Blei, David M., Alp Kucukelbir, and Jon D. McAuliffe. "Variational inference: A review for statisticians." Journal of the American statistical Association 112, no. 518 (2017): 859-877.
+
+For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.
+
+Gandenberger, Greg. Why I am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library, 2016.
+
+Hernán, Miguel A., and James M. Robins. "Causal inference." (2010): 2.
+
+ISyE8843A, Brani Vidakovic Handout. "1 The Likelihood Principle."
+
+Ioannidis, John PA. "Why most published research findings are false." PLoS medicine 2, no. 8 (2005): e124.
+
+Judea, Pearl. "An introduction to causal inference." The International Journal of Biostatistics 6, no. 2 (2010): 1-62..
+
+Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. "Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study." American journal of epidemiology 154, no. 8 (2001): 748-757.
+
+Pearl, Judea. "The do-calculus revisited." arXiv preprint arXiv:1210.4852 (2012).
+
+Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972. 
+
+Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric.
+
+Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.
+
+Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. "Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal." bmj 369 (2020).
+
+Yang, Ruoyong, and James O. Berger. A catalog of noninformative priors. Durham, NC, USA: Institute of Statistics and Decision Sciences, Duke University, 1996.

@@ -1,6 +1,6 @@
 ---
-title: "Modeling Mindsets for Data Scientists"
-subtitle: ""
+title: "Modeling Mindsets"
+subtitle: "The Many Cultures of Learning From Data"
 author: "Christoph Molnar"
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"

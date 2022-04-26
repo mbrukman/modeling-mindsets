@@ -6,10 +6,12 @@ bookdown::gitbook:
   includes:
     in_header: html/header.html
   config:
-    edit: https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/%s
+    edit: https://github.com/christophM/modeling-mindsets/edit/master/manuscript/%s
+    download: false
     sharing:
-      github: yes
-      facebook: yes
+      linkedin: true
+      twitter: true
+      facebook: false
     toc:
       collapse: section
       before: |
