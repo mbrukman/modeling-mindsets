@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Models | Modeling Mindsets for Data Scientists</title>
+  <meta name="description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Models | Modeling Mindsets for Data Scientists" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Models | Modeling Mindsets for Data Scientists" />
+  
+  <meta name="twitter:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  
+
+<meta name="author" content="Christoph Molnar" />
+
+
+<meta name="date" content="2022-04-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="what-this-book-is-about.html"/>
+<link rel="next" href="mindsets.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+  'anonymizeIp': true
+  , 'storage': 'none'
+  , 'clientId': window.localStorage.getItem('ga_clientId')
+});
+ga(function(tracker) {
+  window.localStorage.setItem('ga_clientId', tracker.get('clientId'));
+});
+ga('send', 'pageview');
+</script>
+
+<link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+<script src="javascript/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#f1d600"
+    }
+  },
+  "position": "bottom-right",
+  "content": {
+    "message": "This website uses cookies for Google Analytics so that I know how many people are reading the book and which chapters are the most popular. The book website doesn't collect any personal data."
+  }
+})});
+</script>
+
+<style>
+
+#cta-button-desktop:hover, #cta-button-device:hover {
+  background-color:   #ffc266; 
+  border-color:   #ffc266; 
+  box-shadow: none;
+}
+#cta-button-desktop, #cta-button-device{
+  color: white;
+  background-color:  #ffa31a;
+  text-shadow:1px 1px 0 #444;
+  text-decoration: none;
+  border: 2px solid  #ffa31a;
+  border-radius: 10px;
+  position: fixed;
+  padding: 5px 10px;
+  z-index: 10;
+  }
+
+#cta-button-device {
+  box-shadow: 0px 10px 10px -5px rgba(194,180,190,1);
+  display:none;
+  right: 20px;
+  bottom: 20px;
+  font-size: 20px;
+ }
+
+#cta-button-desktop {
+  box-shadow: 0px 20px 20px -10px rgba(194,180,190,1);
+  display:display;
+  padding: 8px 16px;
+  right: 40px;
+  bottom: 40px;
+  font-size: 25px;
+}
+
+@media (max-width : 450px) {
+  #cta-button-device {display:block;}
+  #cta-button-desktop {display:none;}
+}
+
+
+</style>
+
+
+<a id="cta-button-desktop" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank"> Buy Book </a>
+
+<a id="cta-button-device" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank">Buy</a>
+  
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Modeling Mindsets</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="1" data-path="what-this-book-is-about.html"><a href="what-this-book-is-about.html"><i class="fa fa-check"></i><b>1</b> What This Book is About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-this-book-is-about.html"><a href="what-this-book-is-about.html#who-this-book-is-for"><i class="fa fa-check"></i><b>1.1</b> Who This Book is For</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="models.html"><a href="models.html"><i class="fa fa-check"></i><b>2</b> Models</a></li>
+<li class="chapter" data-level="3" data-path="mindsets.html"><a href="mindsets.html"><i class="fa fa-check"></i><b>3</b> Mindsets</a></li>
+<li class="chapter" data-level="4" data-path="statistical-modeling.html"><a href="statistical-modeling.html"><i class="fa fa-check"></i><b>4</b> Statistical Modeling</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="statistical-modeling.html"><a href="statistical-modeling.html#random-variables"><i class="fa fa-check"></i><b>4.1</b> Random Variables</a></li>
+<li class="chapter" data-level="4.2" data-path="statistical-modeling.html"><a href="statistical-modeling.html#probability-distributions"><i class="fa fa-check"></i><b>4.2</b> Probability Distributions</a></li>
+<li class="chapter" data-level="4.3" data-path="statistical-modeling.html"><a href="statistical-modeling.html#assuming-a-distribution"><i class="fa fa-check"></i><b>4.3</b> Assuming a Distribution</a></li>
+<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a></li>
+<li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
+<li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
+<li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.8" data-path="statistical-modeling.html"><a href="statistical-modeling.html#data-generating-process-dgp"><i class="fa fa-check"></i><b>4.8</b> Data-Generating Process (DGP)</a></li>
+<li class="chapter" data-level="4.9" data-path="statistical-modeling.html"><a href="statistical-modeling.html#drawing-conclusions-about-the-world"><i class="fa fa-check"></i><b>4.9</b> Drawing Conclusions About the World</a></li>
+<li class="chapter" data-level="4.10" data-path="statistical-modeling.html"><a href="statistical-modeling.html#strengths"><i class="fa fa-check"></i><b>4.10</b> Strengths</a></li>
+<li class="chapter" data-level="4.11" data-path="statistical-modeling.html"><a href="statistical-modeling.html#limitations"><i class="fa fa-check"></i><b>4.11</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="statistical-inference.html"><a href="statistical-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
+<li class="chapter" data-level="5.2" data-path="statistical-inference.html"><a href="statistical-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
+<li class="chapter" data-level="5.3" data-path="statistical-inference.html"><a href="statistical-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
+<li class="chapter" data-level="5.4" data-path="statistical-inference.html"><a href="statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.5" data-path="statistical-inference.html"><a href="statistical-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
+<li class="chapter" data-level="5.6" data-path="statistical-inference.html"><a href="statistical-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bayesian.html"><a href="bayesian.html#bayes-theorem"><i class="fa fa-check"></i><b>6.1</b> Bayes Theorem</a></li>
+<li class="chapter" data-level="6.2" data-path="bayesian.html"><a href="bayesian.html#prior-probability"><i class="fa fa-check"></i><b>6.2</b> Prior Probability</a></li>
+<li class="chapter" data-level="6.3" data-path="bayesian.html"><a href="bayesian.html#likelihood"><i class="fa fa-check"></i><b>6.3</b> Likelihood</a></li>
+<li class="chapter" data-level="6.4" data-path="bayesian.html"><a href="bayesian.html#evidence"><i class="fa fa-check"></i><b>6.4</b> Evidence</a></li>
+<li class="chapter" data-level="6.5" data-path="bayesian.html"><a href="bayesian.html#posterior-probability-estimation"><i class="fa fa-check"></i><b>6.5</b> Posterior Probability Estimation</a></li>
+<li class="chapter" data-level="6.6" data-path="bayesian.html"><a href="bayesian.html#bayesian-inference"><i class="fa fa-check"></i><b>6.6</b> Bayesian Inference</a></li>
+<li class="chapter" data-level="6.7" data-path="bayesian.html"><a href="bayesian.html#strengths-2"><i class="fa fa-check"></i><b>6.7</b> Strengths</a></li>
+<li class="chapter" data-level="6.8" data-path="bayesian.html"><a href="bayesian.html#limitations-2"><i class="fa fa-check"></i><b>6.8</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
+<li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> 
+<li><a href="https://christophmolnar.com/impressum/" target="_blank">Impressum</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling Mindsets for Data Scientists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="models" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Models<a href="models.html#models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- motivation -->
+<p>Imagine you sit in front of some data and some questions that you are supposed to answer with help of the data.
+You are asked to predict which patients might get side effects from this a drug.
+How do bee colonies react to changing climate conditions?
+Which supermarket products are always out-of-stock?
+Data alone can tell you what happened: patients 124 and 22 got acne; 2/3 of bee colonies had troubles during drought in year 2018; on this one Tuesday the flour was sold out;
+But usually you want to find general rules and relationships in the data.
+Is flour low on stock at the beginning of the week in general?
+Even better, these rules and relationships would extend not only to your sample, but to all patients / bee colonies / supermarkets.
+To get from data to generalizable relationships, we have to simplify the real world and make assumptions.
+The thing that helps us answer all the questions about our data is called a model.</p>
+<!-- summary: what is a model -->
+<p>A model is a simplified representation of something.
+In the context of learning from data about the world, a model represents simplified aspects of the world.
+The motivation to build or learn a model is that it allows us to answer questions and make predictions.</p>
+<!-- Exclusion criteria -->
+<p>In this book we study specific types of models:
+The models have to be computational or mathematical models.
+This excludes, for example, physical models, like the tiny houses that architects build.
+The second restriction: The models are learned from data.
+This excludes “designed” models such as pure simulations like cellular automata.</p>
+<!-- What constitutes a model -->
+<p>There are three ingredients to a mathematical model:
+<!-- in original text it's objects instead of variables -->
+A mathematical model contains <em>mathematical structures</em> that represent <em>variables</em> and put them in <em>relation</em> (Figure <a href="models.html#fig:model">2.1</a>). <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+When a mathematical model is learned from data, it also contains <em>parameters</em> that make the mathematical formula adaptable to data.
+Furthermore, if you want to interpret models instead of the world, you have to make assumptions about the relationship between the model and aspects of the world.
+But more on that in the <a href="mindsets.html#mindsets">mindsets chapter</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:model"></span>
+<img src="figures/model-1.png" alt="A mathematical model sets variables (dots) into relation (lines) using parameters." width="\textwidth" />
+<p class="caption">
+FIGURE 2.1: A mathematical model sets variables (dots) into relation (lines) using parameters.
+</p>
+</div>
+<!-- variables -->
+<p>The aspects of the world are represented within the model as <em>variables</em>.
+Images, for example, are represented as tensors of pixels.
+The blood pressure of a patient is represented with a number for the model to use.
+Variables can also represent a latent, hidden or abstract aspect.
+Like happiness or introversion.
+There are different names for these variables:
+Random variables, covariates, predictors, latent variables, features, target, outcome, …
+These names sometimes reveal the role a variable takes on in our model, and are dependent on the modeling mindset we are in.
+For example, in machine learning the word feature and target are used.
+In statistics for similar variable roles, we would use independent and dependent variable, or covariates and outcome, …</p>
+<!-- relation -->
+<p>Within the model, the components are mathematically or computationally set in <em>relation</em> to each other.
+For example, causal models represent relations between variables as directed acyclic graph that can be translated into conditional (in-)dependencies.
+The joint distribution of variables describes the occurrence of certain variable values in a probabilist sense.
+A predictive model represents the output variable as a function of the input variables, in the case of a linear regression model as the sum of the input variables.</p>
+<!-- TODO: visualize different functions? -->
+<!-- expressiveness of relations -->
+<p>The expressive power of such relationships really depends on the class of the model.
+A relationship can be a simple linear equation like <span class="math inline">\(Y = 5 \cdot X\)</span> involving two or more variables.
+For example we might model the probability of a stroke as a function of blood pressure and age.
+A relationship can also be a long chain of mathematical operations, involving thousands of variables, for example deep neural networks for image classification.</p>
+<!-- parameters and structures -->
+<p>We don’t know the relationships in advance, so we use data to learn them.
+For some models, learning these relationships is a matter of finding the right <em>parameters</em>.
+This is true for neural networks and generalized additive models, for example.
+For other models, the model structure is “grown”, as in decision trees or support vector machines.</p>
+<!-- instantiation -->
+<p>You can think of a model as having an uninstantiated state and an instantiated state.
+An uninstantiated model is not yet fitted to the data.
+Uninstantiated models form families of models.
+For example the neural network ResNet architecture, or the family of Poisson regression models.
+An instantiated model is trained / learned / fitted using data: It’s parameterized and/or the structure has been learned.</p>
+<!-- parameters example -->
+<p>I can buy carrots with money.
+How many grams of carrots can I get for 1 euro?
+Let’s call this unknown parameter in our equation <span class="math inline">\(\beta\)</span>:
+<span class="math inline">\(1 \text{ EUR} = \beta \text{ Carrots}\)</span>.
+I could figure out the <span class="math inline">\(\beta\)</span> by going to the supermarket and checking the price.
+Maybe <span class="math inline">\(\beta = 500\)</span>, so I get half a kilogram of carrots for 1 euro.
+But that’s only for one supermarket!
+Maybe I have to add more relationships to the model.
+Maybe I need to consider the supermarket chain, whether there are special offers for carrots , whether I buy organic carrots, …
+All these choices add parameters to the model.</p>
+<!-- 
+There are many different types and names for parameters.
+Sometimes they just describe a distribution, like the mean of distribution.
+Or they describe the relationship between two variables, like regression coefficient.
+Or it's a weight in a neural network.
+
+What's different is hyperparameters.
+In a sense, they exist outside of what the model describes.
+Hyperparameters set how the learning from data takes place.
+-->
+<!-- making use of the relationship -->
+<p>What we do with the relationships depends on the mindset.
+In supervised machine learning, we take advantage of the relationship to make predictions.
+In causal inference, we use the modeled relationship to derive statistical estimators and estimate causal effects.</p>
+<!--
+
+## Tasks
+
+There are different tasks
+
+* Regression:
+* Classification:
+* Clustering:
+* Outlier detection:
+* Pattern recognition:
+
+The tasks are not perfectly seperable from the models and mindsets.
+Because some mindsets are more concentrated on some of the tasks.
+
+
+
+-->
+
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.<a href="models.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="what-this-book-is-about.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mindsets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/models.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["modeling-mindsets.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

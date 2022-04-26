@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Bayesian Inference | Modeling Mindsets for Data Scientists</title>
+  <meta name="description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Bayesian Inference | Modeling Mindsets for Data Scientists" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Bayesian Inference | Modeling Mindsets for Data Scientists" />
+  
+  <meta name="twitter:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
+  
+
+<meta name="author" content="Christoph Molnar" />
+
+
+<meta name="date" content="2022-04-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="statistical-inference.html"/>
+<link rel="next" href="likelihoodism.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+  'anonymizeIp': true
+  , 'storage': 'none'
+  , 'clientId': window.localStorage.getItem('ga_clientId')
+});
+ga(function(tracker) {
+  window.localStorage.setItem('ga_clientId', tracker.get('clientId'));
+});
+ga('send', 'pageview');
+</script>
+
+<link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
+<script src="javascript/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#f1d600"
+    }
+  },
+  "position": "bottom-right",
+  "content": {
+    "message": "This website uses cookies for Google Analytics so that I know how many people are reading the book and which chapters are the most popular. The book website doesn't collect any personal data."
+  }
+})});
+</script>
+
+<style>
+
+#cta-button-desktop:hover, #cta-button-device:hover {
+  background-color:   #ffc266; 
+  border-color:   #ffc266; 
+  box-shadow: none;
+}
+#cta-button-desktop, #cta-button-device{
+  color: white;
+  background-color:  #ffa31a;
+  text-shadow:1px 1px 0 #444;
+  text-decoration: none;
+  border: 2px solid  #ffa31a;
+  border-radius: 10px;
+  position: fixed;
+  padding: 5px 10px;
+  z-index: 10;
+  }
+
+#cta-button-device {
+  box-shadow: 0px 10px 10px -5px rgba(194,180,190,1);
+  display:none;
+  right: 20px;
+  bottom: 20px;
+  font-size: 20px;
+ }
+
+#cta-button-desktop {
+  box-shadow: 0px 20px 20px -10px rgba(194,180,190,1);
+  display:display;
+  padding: 8px 16px;
+  right: 40px;
+  bottom: 40px;
+  font-size: 25px;
+}
+
+@media (max-width : 450px) {
+  #cta-button-device {display:block;}
+  #cta-button-desktop {display:none;}
+}
+
+
+</style>
+
+
+<a id="cta-button-desktop" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank"> Buy Book </a>
+
+<a id="cta-button-device" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank">Buy</a>
+  
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Modeling Mindsets</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Summary</a></li>
+<li class="chapter" data-level="1" data-path="what-this-book-is-about.html"><a href="what-this-book-is-about.html"><i class="fa fa-check"></i><b>1</b> What This Book is About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-this-book-is-about.html"><a href="what-this-book-is-about.html#who-this-book-is-for"><i class="fa fa-check"></i><b>1.1</b> Who This Book is For</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="models.html"><a href="models.html"><i class="fa fa-check"></i><b>2</b> Models</a></li>
+<li class="chapter" data-level="3" data-path="mindsets.html"><a href="mindsets.html"><i class="fa fa-check"></i><b>3</b> Mindsets</a></li>
+<li class="chapter" data-level="4" data-path="statistical-modeling.html"><a href="statistical-modeling.html"><i class="fa fa-check"></i><b>4</b> Statistical Modeling</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="statistical-modeling.html"><a href="statistical-modeling.html#random-variables"><i class="fa fa-check"></i><b>4.1</b> Random Variables</a></li>
+<li class="chapter" data-level="4.2" data-path="statistical-modeling.html"><a href="statistical-modeling.html#probability-distributions"><i class="fa fa-check"></i><b>4.2</b> Probability Distributions</a></li>
+<li class="chapter" data-level="4.3" data-path="statistical-modeling.html"><a href="statistical-modeling.html#assuming-a-distribution"><i class="fa fa-check"></i><b>4.3</b> Assuming a Distribution</a></li>
+<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a></li>
+<li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
+<li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
+<li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.8" data-path="statistical-modeling.html"><a href="statistical-modeling.html#data-generating-process-dgp"><i class="fa fa-check"></i><b>4.8</b> Data-Generating Process (DGP)</a></li>
+<li class="chapter" data-level="4.9" data-path="statistical-modeling.html"><a href="statistical-modeling.html#drawing-conclusions-about-the-world"><i class="fa fa-check"></i><b>4.9</b> Drawing Conclusions About the World</a></li>
+<li class="chapter" data-level="4.10" data-path="statistical-modeling.html"><a href="statistical-modeling.html#strengths"><i class="fa fa-check"></i><b>4.10</b> Strengths</a></li>
+<li class="chapter" data-level="4.11" data-path="statistical-modeling.html"><a href="statistical-modeling.html#limitations"><i class="fa fa-check"></i><b>4.11</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="statistical-inference.html"><a href="statistical-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
+<li class="chapter" data-level="5.2" data-path="statistical-inference.html"><a href="statistical-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
+<li class="chapter" data-level="5.3" data-path="statistical-inference.html"><a href="statistical-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
+<li class="chapter" data-level="5.4" data-path="statistical-inference.html"><a href="statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.5" data-path="statistical-inference.html"><a href="statistical-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
+<li class="chapter" data-level="5.6" data-path="statistical-inference.html"><a href="statistical-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bayesian.html"><a href="bayesian.html#bayes-theorem"><i class="fa fa-check"></i><b>6.1</b> Bayes Theorem</a></li>
+<li class="chapter" data-level="6.2" data-path="bayesian.html"><a href="bayesian.html#prior-probability"><i class="fa fa-check"></i><b>6.2</b> Prior Probability</a></li>
+<li class="chapter" data-level="6.3" data-path="bayesian.html"><a href="bayesian.html#likelihood"><i class="fa fa-check"></i><b>6.3</b> Likelihood</a></li>
+<li class="chapter" data-level="6.4" data-path="bayesian.html"><a href="bayesian.html#evidence"><i class="fa fa-check"></i><b>6.4</b> Evidence</a></li>
+<li class="chapter" data-level="6.5" data-path="bayesian.html"><a href="bayesian.html#posterior-probability-estimation"><i class="fa fa-check"></i><b>6.5</b> Posterior Probability Estimation</a></li>
+<li class="chapter" data-level="6.6" data-path="bayesian.html"><a href="bayesian.html#bayesian-inference"><i class="fa fa-check"></i><b>6.6</b> Bayesian Inference</a></li>
+<li class="chapter" data-level="6.7" data-path="bayesian.html"><a href="bayesian.html#strengths-2"><i class="fa fa-check"></i><b>6.7</b> Strengths</a></li>
+<li class="chapter" data-level="6.8" data-path="bayesian.html"><a href="bayesian.html#limitations-2"><i class="fa fa-check"></i><b>6.8</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
+<li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> 
+<li><a href="https://christophmolnar.com/impressum/" target="_blank">Impressum</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling Mindsets for Data Scientists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bayesian" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Bayesian Inference<a href="bayesian.html#bayesian" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- summary of Bayesian inference -->
+<p>Bayesian inference sees the world as parameterized distributions.
+To learn about the world, we have to learn about the best fitting parameters.
+But for Bayesians, the parameters themselves are random variables with a probability distribution.
+So to learn about the parameters, we have to assume some prior distribution, and update our belief about the our parameters with data.
+This is then the posteriori distribution.</p>
+<!-- relation to others -->
+<p>Bayesian inference is a likelihood-based apprach that builds on the Bayes theorem:
+The distribution parameters do not only depend on the data, but we assume some prior distribution.
+In Bayesian statistics, probability can be interpreted as the plausibility of an event.
+Bayesian statistics is about the degree of beliefs we have about our parameters.
+Bayesianism is therefore found on the idea of subjective probabilities.
+If you haven’t read the <a href="statistical-inference.html#statistical-inference">chapter on statistical inference</a>, I recommend you do it first, since Bayesian inference is easier understood when you have a good grasp on statistical inference.
+The core difference to frequentism are: Heavy use of Bayes’ theorem; assumption of prior distribution of parameters; interpretation of probability as degrees of beliefs and not as long-run frequencies.</p>
+<!-- Bayesian updating -->
+<p>Bayesian inference is about changing your mind.
+We update our knowledge about the world when new information comes in.
+You already know some stuff to the world.
+Prior to getting some new information.
+Then you update your knowledge, based on data / evidence.
+Then you go about your life with this udpated knowledge.</p>
+<!-- Example of knowledge update in real life -->
+<p>Imagine you are at a snack machine.
+You have a general idea how much you like snack machines.
+You rate most snack vending machines 6/10 - 9/10.
+Without further knowledge, you would expect the new machine that you just encountered to be somewhere in that range too.
+But this newly installed machine is directly at the train station, and it has your favorite chips.
+So you give it a rating of 9/10.
+But then two big betrayals.
+First, the chips got stuck one day, between the tray and the window pane.
+This happens, but it’s always very annoying.
+But directly the day after, the machine refused to give you change.
+These betrayals made you change your rating to 5/10.</p>
+<div id="bayes-theorem" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Bayes Theorem<a href="bayesian.html#bayes-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- Bayes' theorem has many applications -->
+<p>At the very center of Bayesian inference is the Bayes’ theorem.
+The Bayes’ theorem expresses a conditional probability in terms of other probabilities.
+As such, the theorem has many applications.</p>
+<!-- The Bayes' theorem -->
+<p>In the case of Bayesian modelling, we are interested in the distribution of the parameters <span class="math inline">\(\theta\)</span> conditional on the data <span class="math inline">\(D\)</span>, which is <span class="math inline">\(P(\theta | D)\)</span>.
+So far, equivalent to <a href="#frequentism">frequentism</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a>, with the difference that Bayesians explicitly say that the model parameters <span class="math inline">\(\theta\)</span> are random variables and therefore have probability distributions.
+To
+Applying the Bayes’ theorem:</p>
+<p><span class="math display">\[\underbrace{P(\theta|D)}_{\text{posteriori}} = \frac{\overbrace{P(D | \theta)}^{\text{likelihood}} \cdot  \overbrace{P(\theta)}^{\text{priori}}}{\underbrace{P(D)}_{\text{evidence}}}\]</span></p>
+<p>The Bayes’ theorem in the context of Bayesian inference contains the idea of belief updates, as also visualized in Figure <a href="bayesian.html#fig:bayesian">6.1</a>.
+<span class="math inline">\(P(\theta)\)</span>, also called the prior, is the probability distribution of <span class="math inline">\(\theta\)</span> before we have collected any data.
+The probability distribution gets updated by multiplying the prior with the likelihood <span class="math inline">\(P(D | \theta)\)</span> of the data.
+This product is scaled by the probability of the data <span class="math inline">\(P(D)\)</span>, also called evidence.
+The result is the posteriori probability distribution, an updated belief about our parameters <span class="math inline">\(\theta\)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:bayesian"></span>
+<img src="figures/bayesian-1.png" alt="Illustration of priori density that gets an update from the likelihood of the data to result in posteriori probability distribution." width="\textwidth" />
+<p class="caption">
+FIGURE 6.1: Illustration of priori density that gets an update from the likelihood of the data to result in posteriori probability distribution.
+</p>
+</div>
+<p>Next, let’s dive deeper into the individual components of the Bayes’ theorem, so that we can update our own beliefs about Bayesianism.</p>
+</div>
+<div id="prior-probability" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Prior Probability<a href="bayesian.html#prior-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- prerequisites -->
+<p>The Bayes’ theorem tells us that we have to know <span class="math inline">\(P(\theta)\)</span> to calculate the posterior probability distribution.
+This implies that the model parameters themselves are random variables, or otherwise <span class="math inline">\(P(\theta)\)</span> is a meaningless statement.
+For example, the mean of a distribution has a distribution itself.
+Let’s sat we randomly choose a person and want to know how long they worked today.
+The number of daily working hours, the random variable of interest, follow some probability distribution that have parameters.
+For example, it might follow a Gaussian distribution, which is described with mean and variance parameters.
+Bayesians would assume that the mean parameter is itself a random variable.</p>
+<!-- how to pick a prior -->
+<p>How would we know how the model parameter is distributed, when we haven’t even observed any data yet?
+Bayesians assume some prior distribution.
+The factors going into the choice of prior distribution are manifold.
+<!-- parameter space reasons -->
+The clearest factor are constraints on the space the parameter lives in:
+Is the parameter the mean of distribution? Then we need a continuous distribution, for example Gaussian.
+Maybe you know that the mean is positive, so you pick a prior distribution that only contains positive values, for example the Gamma distribution.
+<!-- expert knowledge reasons -->
+Furthermore, expert knowledge can be used to inform the choice.
+Maybe we know from other experiments that the mean of the data distribution should be near 1.
+So we could assume a Normal distribution for <span class="math inline">\(\theta\)</span>: <span class="math inline">\(\theta \sim N(1, 1)\)</span>.
+In the case of Binomial distribution of your data, for binary outcomes, the Beta distribution is a good prior (see Figure <a href="bayesian.html#fig:priors">6.2</a>).
+Depending on your belief about the parameter <span class="math inline">\(\pi\)</span> you might choose a very different parameteriziation of the Beta distribution.
+Maybe you belief the parameter to be symmetrically distributed around 0.5.
+Or maybe the parameter is more drawn to 0.25?
+Another Beta prior might put emphasis on <span class="math inline">\(\pi\)</span> being one.
+<!-- intuition for alpha = beta = 0.5: https://stats.stackexchange.com/questions/362728/whats-the-intuition-for-a-beta-distribution-with-alpha-and-or-beta-less-than -->
+But it’s also possible to have a prior that puts most probability on 0 and 1 symmetrically.
+When there are no specific prior beliefs about the parameter the Bayesian can use an “uninformative” or “objective” priors, meaning <a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>
+<!-- convenience reasons -->
+Another factor is mathematical convenience.
+It’s convenient to pick conjugate priors.
+A convenient case is using conjugate priors.
+Conjugate priors are probability distributions that remain of the same family when combined with certain likelihood functions.
+Suppose you model your data as Bernoulli distribution, which describes the distribution as probabilities of being 1 with probability of <span class="math inline">\(p\)</span> and 0 otherwise.Then we measure a realization <span class="math inline">\(X\)</span> of this Bernoulli random variable.
+Further, if we assume to have a Beta distribution as prior distribution, then we also have a beta posteriori function.</p>
+<!-- priors are criticized -->
+<p>The reliance on choosing prior probability functions is the Achilles’ heel of Bayesianism, or at least the biggest target of critique.
+The subjective choice of a prior probability influences all results coming from Bayesian inference.
+It clashes especially with the frequentist mindset that there is some true and constant parameters out there.
+And frequentist aim to be very objective, by only operating on long-run frequencies.
+Also likelihoodism says that all information is in the likelihood, which clashes with the idea of a prior distribution influencing the outcome.</p>
+<!-- don't exagerate -->
+<p>However, there are two major objections to this criticism.
+First, the more data we have, the less influential the prior distribution becomes.
+And second, the prior is not hidden or anything, influencing the analysis from the shadows.
+Let’s say two experts disagree on which prior to use.
+You can run Bayesian inference twice, and compare the results.</p>
+<p>To get to the posterior likelihood of our parameters, our ultimate goal in Bayesian inferene, we have to update our prior belief with data, or rather: the likelihood function.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:priors"></span>
+<img src="figures/priors-1.png" alt="Various prior distributions for the success probability p in a Binomial ditribution. Priors here are Beta distributions with shape parameters $\alpha$ and $\beta$." width="\textwidth" />
+<p class="caption">
+FIGURE 6.2: Various prior distributions for the success probability p in a Binomial ditribution. Priors here are Beta distributions with shape parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.
+</p>
+</div>
+</div>
+<div id="likelihood" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Likelihood<a href="bayesian.html#likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- likelihood recap -->
+<p>If you have read the <a href="statistical-modeling.html#statistical-modeling">chapter about statistical modeling</a>, you should be familiar with the likelihood function <span class="math inline">\(P(\theta | D)\)</span>.
+The likelihood is the probability function of the data, but with a twist:
+We switch the role of data and parameters.
+The probability function is a function of the data: We put in a data point and the probability function tells us how probable this data point is. Parameters are assumed to be fixed.
+The likelihood function is a function of the parameters: We put in the model parameters, and it tells us how likely the observed data is. Data are assumed to be fixed.</p>
+<!-- where does the likelihood come from -->
+<p>To get to the likelihood, we have to make assumptions about how our data is distributed.
+Like any <a href="statistical-modeling.html#statistical-modeling">statistical model</a>!
+So we assume parameterized distributions for our data and turn it into a maximization problem: Finding the right parameter that maximize the likelihood.
+That’s true at least for <a href="#frequentism">frequentism</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a>.
+But for Bayesians, it’s just part of the equation.
+But if you are already familiar with likelihoods and so on, then this part of the Bayesian mindset should be very familiar to you.
+Another part of the equation is the evidence <span class="math inline">\(P(D)\)</span>, but as we will see, it does not matter that much:</p>
+</div>
+<div id="evidence" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Evidence<a href="bayesian.html#evidence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The evidence is the marginalized probability of our data.
+It’s sometimes called model evidence.
+Marginalized means that we integrate over all possible parameter values.
+It’s a bit difficult to interpret, but that’s not a problem at all.
+Due to the marginalization, <span class="math inline">\(P(D)\)</span> does not depend on the parameters <span class="math inline">\(\theta\)</span> at all.
+Which means that in terms of maximizing the posterior probability, it’s just a constant factor.
+As we will see later on, we can work around <span class="math inline">\(P(D)\)</span>.
+We don’t have to compute it to get to the posterior probability.
+But it means that we have to employ sampling techniques instead of computing the posterior directly.
+That’s why the posterior probability is often written as being proportional to the numerator:</p>
+<p><span class="math display">\[\underbrace{P(\theta|D)}_{\text{posteriori}} \propto \overbrace{P(D | \theta)}^{\text{likelihood}} \cdot  \underbrace{P(\theta)}_{\text{priori}}\]</span></p>
+<p>So, how do we finally estimate the posterior probability?</p>
+</div>
+<div id="posterior-probability-estimation" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Posterior Probability Estimation<a href="bayesian.html#posterior-probability-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- Goal of Bayesian -->
+<p>The goal of the Bayesian is to estimate the posterior distributions of the parameters.
+Once they have that, they can interpret those distributions, make predictions with the model, draw conclusions.</p>
+<!-- Problem: Posterior estimation -->
+<p>But how do we estimate the posterior?
+Ideally you’d want to have a closed form expression to calculate the posterior.
+That’s possible in simple cases, for example when you used conjugate priors.
+But in many modelling cases, it’s not possible to get a closed form expression to calculate the posterior probability distribution.
+The problem here is the <span class="math inline">\(P(D)\)</span>.
+The evidence is too difficult to compute.
+Not only is <span class="math inline">\(P(D)\)</span> a problem:
+Also there can be many parameters, and we have a high-dimensional optimization problem.
+So we need to be clever about optimizing it.</p>
+<!-- Don't solve exactly, but sample -->
+<p>We don’t HAVE to compute it.
+Another option is to just sample from it.
+Special sampling techniques from the posterior distribution is the go-to solution to fit the posterior distribution.
+A method called Markov Chain Monte Carlo (MCMC) is typically employed for this sampling task</p>
+<!-- shortest MCMC explanation -->
+<p>We start with some initial values for our parameters.
+Then new parameter values are proposed.
+This requires some prooposal function.
+These new values are either accepted or rejected, based on prior and likelihood.
+If jump is accepted, adapt parameters.
+In any case, go back to step 2 of new parameter proposals.
+The process is repeated many times, and produces a “chain” of samples for each of the parameters.</p>
+<!-- MCMC interpretation -->
+<!-- https://twiecki.io/blog/2015/11/10/mcmc-sampling/ -->
+<p>How does MCMC make any sense?
+During the “jumping” between parameters, we are actually comparing models.
+This if the acceptance function.
+The comparison happens by dividing the posteriors of the model with “old” parameter values and the one with the newly proposed parameter values.
+The evidence <span class="math inline">\(P(D)\)</span> cancels out.</p>
+<!-- from sample to distributions -->
+<p>We cannot use the entire chain as samples from the posteriori distribution.
+First, the first view samples are likely far away from the true posteriori and should therfore be “burned”, meaning you ignore them.
+So, maybe the first 1000 of samples are thrown away.
+Then, you want independent samples.
+But the samples in the chain are dependent on the ones that come before them.
+So we have to sample from the chain, and make sure that there are enough values between the samples.
+There are diagnosis tools to do this, but we won’t go into the details here.
+Then you have samples from your posterior distribution.
+Those you can visualize with histogram or density plots.</p>
+<!-- more to know about MCMC -->
+<p>There are many other more sophisticated sampling methods, but for this introduction it is good enough to show MCMC.
+Gibbs sampler, Metropolis-Hastings, …
+All have in common that they are computationally expensive.
+So a big part of the daily job as a Bayesian is to wait for those MCMC chains to converge.
+At least compared to a frequentist.</p>
+<p>A shorter alternative is variational inference <a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.
+But while MCMC deliver approximately exact estimates of the posterior probability, variational inference is more of a heuristic.</p>
+<p>TODO: Visualize the process that is implied by saying that parameters are random variables</p>
+</div>
+<div id="bayesian-inference" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Bayesian Inference<a href="bayesian.html#bayesian-inference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- raising questions about inference -->
+<p>As said before, getting the posterior distribution is the core of Bayesian mindset.
+What can we then do with the posterior probability?
+What insights can be drawn from the posterior, and how do we link it with the world?</p>
+<!-- statistical model -->
+<p>Remember that Bayesians build <a href="statistical-modeling.html#statistical-modeling">statistical models</a>:
+So they try to approximate the data-generating process with a construct of probability distributions of random variables.
+These distributions are parameterized, and Bayesians say that these parameters are random variable themselves.
+Also, Bayesians think of probability as degrees of belief.
+The posterior represents an updated belief about the parameters that represent the real world.</p>
+<!-- learning about the world -->
+<p>A parameter might reveal to us the distribution of the treatment effect of a cancer drug.
+Or a parameter represents the probability distribution of the mean size of a person.
+Visualizing the posterior distributions fully reveals the information that we have.
+But there are plenty of options as well to summarize the posterior distributions:</p>
+<p>TODO: finish up figure with credible interval, mean</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:posteriori"></span>
+<img src="figures/posteriori-1.png" alt="Describing the posterior distribution." width="\textwidth" />
+<p class="caption">
+FIGURE 6.3: Describing the posterior distribution.
+</p>
+</div>
+<!-- options to describe the distribution -->
+<p>Maximum a posteriori estimation: This is the mode (the highest point) of the posteriori distribution. It represents the most likely value.
+But there are other summaries:
+You could just compute the mean or the median of the posterior probability distribution.
+Or any other quantile of the distribution.
+Another option are credible intervals.</p>
+<!-- Credible interval -->
+<p>In frequentist statistics, we get confidence intervals for our estimators.
+That’s some uncertainty quantifycation telling us how sure we are about our estimation.
+But it’s different with Bayesian inference.
+Since we get posterior probabilities for our parameters, and from the we can derive credibility or credible intervals.
+For example, a 95% credibility interval contains 95% of the mass of our parameter.
+With 95% probability, the parameter falls within that interval.
+Not in the sense that there is some fixed value for the parameter.
+But it’s a random variable that can take on different values.
+Technically, they work the same as confidence intervals in frequentist statistics.
+But they have a different philosophical interpretation.</p>
+<!-- Bayesian prediction -->
+<ul>
+<li>Since the parameters have a distribution, also the prediction is not just a point-wise prediction.</li>
+<li>posterior predictive distribution: The distribution for a newly predicted data point. To get there, we have to marginalize over the posterior</li>
+<li>IN frequentist statistis, the uncertainty of the model parameters is not regarded in the prediction f a new data point. So it underestimates the variability of the prediction.</li>
+<li>There is also a prior predictive distribution: It’s the distribution for a newly predicted data point. But instead of marginalized</li>
+<li></li>
+</ul>
+<!-- 
+## Some Examples of Bayesian inference
+
+What would a linear regression model look like in the Bayesian modeling approach?
+
+For that we have to assume that $Y$ follows a Gaussian distribution given $X$.
+The Bayesian mindset tells us that we are interested in the distribution of the parameters of this model.
+In this model, the relationship between the mean of the distribution of $Y$ and the features are represented by the model coefficients $\mathbf{\beta}$.
+
+So we would assume that y folllows a Normal distribution:
+
+$$y \sim N(\mathbf{\beta}^TX, \sigma^2 I)$$
+
+Since we are in the Bayesian mindset, we also assume a distribution for the parameters $\mathbf{\beta}$ and $\sigma$.
+
+This you can see by looking at how we would get the posterior probability:
+
+$$P(\beta|Y,X) = \frac{P(y|\beta,X) P(\beta|X)}{P(y|X)}$$
+
+* $P(y|X)$ is the data evidence
+* $P(\beta|X)$ is the prior probability for $\beta$
+* $P(y|\beta, X)$ is the likelihood function
+* $P(\beta|y,X)$ is the posteriori probability of the model parameters
+
+We carry arround the $X$ in the formulas the entire time in the conditioning statement.
+This is allowed.
+
+
+TODO: List some real applications
+
+TODO: List some models
+
+## Justifications for Bayesian Inference
+
+https://en.wikipedia.org/wiki/Bayesian_probability#Justification_of_Bayesian_probabilities
+
+
+## Empirical Bayes
+
+Combination of frequentism and Bayesianism
+
+https://efron.ckirby.su.domains//papers/2005BayesFreqSci.pdf
+
+-->
+</div>
+<div id="strengths-2" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Strengths<a href="bayesian.html#strengths-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Bayesianism allows to make use of prior knowledge.</li>
+<li>Priors are especially useful when expert knowledge has to be included in the approach.</li>
+<li>Bayesian inference inherits all advantages of <a href="statistical-modeling.html#statistical-modeling">statistical models</a>.</li>
+<li>Bayesianism offers an expressive language to build up models</li>
+<li>A natural propagation of variance if, for example, there are uncertainties in the measurement</li>
+<li>A natural appraoch for hierarchical or multilevel modeling.</li>
+<li>Allows a holistic probabilistic approach: Through Bayes’ theorem, parameters and data can be chained into a probabilistic model. General solver programs can then automatically derive the posterior estimates using MCMC. Everything is random variable: data and parameters. Everything is tied together by probabilistic operations.</li>
+<li>Thinking like a Bayesian makes you aware of DGP, uncertainties in your parameters, full probability models. Even more than in the frequentist mindset.</li>
+<li>As a more general benefit: Bayesianism is a great mental mdoel for how we update our own hypotheses about the world.</li>
+<li>Arguable a more intuitive interpretation of probability: When practitioners make a wrong interpretation of frequentist confidence interval, what they actually do is interpret them as credible intervals. The interpretation of Bayesian probbility is easier: I believe / it’s likely that the parameter is in this area.</li>
+<li>Decoupling of inference and decision. You can first learn those posteriors, and then apply logic to make decision with this inference. Like MAP and credible intervals.</li>
+</ul>
+</div>
+<div id="limitations-2" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> Limitations<a href="bayesian.html#limitations-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The most common reasons not to use Bayesian statistics:</p>
+<ul>
+<li>The prior distributions are subjective.</li>
+<li>Bayesian methods are mathematically demanding and computationally expensive (Always waiting for MCMC chains to finish up).</li>
+<li>Not as decisive as frequentism, but can be turned into such with MAP and so on.</li>
+<li>Hard to implement.</li>
+<li>No causal interpretations, just associations.</li>
+</ul>
+<!-- Software
+
+- STAN
+- PyMC3
+
+-->
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p>Yang, Ruoyong, and James O. Berger. A catalog of noninformative priors. Durham, NC, USA: Institute of Statistics and Decision Sciences, Duke University, 1996.<a href="bayesian.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Blei, David M., Alp Kucukelbir, and Jon D. McAuliffe. “Variational inference: A review for statisticians.” Journal of the American statistical Association 112, no. 518 (2017): 859-877.<a href="bayesian.html#fnref8" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="statistical-inference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="likelihoodism.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/bayesian-inference.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["modeling-mindsets.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
