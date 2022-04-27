@@ -7,10 +7,10 @@
 -->
 
 <!-- from models to mindsets -->
-Models such as the linear regression model are made up of components, relationships, and parameters.
+A model is only a bunch of variables, relations, and parameters.
 A model alone can't tell us how to interpret the world.
 The use and interpretation of the model depends on the mindset from which the model arose.
-We need to make further assumptions about the model and how to infer insights about the world from those models.
+In order to derive knowledge about the world from the model, we need to make further assumptions.
 Consider a linear regression model that predicts regional rice yield as a function of rainfall, temperature, and fertilizer use.
 It's a model, not a mindset.
 How may we interpret the model?
@@ -35,7 +35,7 @@ Bayesianism, frequentism, supervised machine learning, generative models, ... th
 Mindsets differ in how they interpret probabilities -- or whether probabilities are part of the language at all.
 While mindsets cover many different modeling tasks, they have some tasks where they really shine.
 Each mindset invites you to ask different questions, and so shapes the way you view the world through your model.
-In supervised machine learning, for example, everything becomes a prediction or classification problem, while Bayesian inference focuses on estimating posterior probability distributions of model parameters.
+In supervised machine learning, for example, everything becomes a prediction or classification problem, while in Bayesian inference, the goal is to update our beliefs about the world using probability theory.
 
 ```{r mindset, fig.cap = "Only when a model is embedded in a mindset can we put it into context with the world."}
 library(ggplot2)
@@ -101,17 +101,19 @@ pmodel
 <!-- a normative frame -->
 **Modeling mindsets** are normative:
 A modeling mindset distinguishes between good and bad models.
-Even if model evaluations are partly based on objective criteria, the decision in favor of a criteria is subjective.
-For a frequentist statistician, a good model of the world is probabilistic and has a high goodness-of-fit to the assumed distributions.
-The residuals of the model also pass diagnostic checks.
-The frequentist rejects the use of prior probabilities.
+Even though model evaluations are partly based on objective criteria, the choice of a criterion is subjective.
+Each mindset has their own set of accepted models and evaluation procedures.
+
+<!-- example: frequentist statistician -->
+For a frequentist statistician, a good model of the world is probabilistic and has a high goodness-of-fit to the data.
+The residual errors of the model also pass diagnostic checks.
+The frequentist rejects the use of prior probabilities as they appear to be subjective.
 The frequentist would also not switch to a random forest just because it has a lower mean squared error on test data.
 And why would the statistician switch?
 From their point of view, the random forest is a poor model of the world.
 We learn nothing about the probability distribution of our variables.
 We can't do frequentist hypothesis testing of the effects of variables.
 The performance of the frequentist's model on unseen test data is not as important to the frequentist.
-Each mindset has their own set of accepted models and evaluation procedures.
 
 <!-- permissible questions -->
 A modeling mindset limits the questions that can be asked.
@@ -140,12 +142,13 @@ And I'd bet 100 bucks that the paper would be rejected.
 
 <!-- culturally accepted -->
 The people within a shared mindset also accept the assumptions of that mindset.
-And these assumptions are usually not challenged, but mutually agreed upon, at least implicitly.
+And these assumptions are usually not challenged, but mutually agreed upon
+At least implicitly.
 If you work in a team that has been using Bayesian statistics for some time, you won't be questioning each model anew about whether using priors is good or whether the Bayesian interpretation of probability is legit.
 In machine learning competitions, the model with the lowest prediction error on new data wins.
 You will have a hard time arguing that your model should have won because it's the only causal model.
 If you believe that causality is important, you would simply not participate.
-You can only thrive on those machine learning competition platform if you have accepted the supervised machine learning mindset.
+You can only thrive in machine learning competitions if you have accepted the supervised machine learning mindset.
 
 <!-- archetypes -->
 The modeling mindsets as I present them in this book are archetypes: pure forms of these mindsets.
@@ -153,7 +156,7 @@ In reality, the boundaries between mindsets are much more fluid.
 These archetypes of mindsets intermingle within individuals, communities and approaches:
 A data scientist who primarily builds machine learning models might also use some simple regression models with hypothesis tests -- without cross-validating the models' generalization error.
 A research community could accept analyses that use both frequentist and Bayesian statistics.
-A machine learning competition could include a human jury who wards additional points if the model is interpretable and incorporates causal reasoning.
+A machine learning competition could include a human jury who would award additional points if the model is interpretable and includes causal reasoning.
 
 <!-- sometimes 100% archetypes -->
 Have you ever met anyone who is really into supervised machine learning?
@@ -165,6 +168,8 @@ Some people really are walking archetypes. 100\% of one archetype.
 But I would say that most people learned one or two mindsets when they start out.
 And later they got glimpses of other mindsets here and there.
 Most people's mindset is already a mixture of multiple modeling mindsets.
+And that's a good thing.
+Having an open mind about modeling ultimately makes you a better modeler.
 
 
 <!-- not clear cut: mindset subsets, mindset overlaps 
