@@ -317,32 +317,46 @@ But I can promise you that the book is not too heavy on the math side.
 \hypertarget{models}{%
 \chapter{Models}\label{models}}
 
-Imagine you sit in front of some data and some questions that you are supposed to answer with help of the data.
-You are asked to predict which patients might get side effects from this a drug.
-How do bee colonies react to changing climate conditions?
-Which supermarket products are always out-of-stock?
-Data alone can tell you what happened: patients 124 and 22 got acne; 2/3 of bee colonies had troubles during drought in year 2018; on this one Tuesday the flour was sold out;
-But usually you want to find general rules and relationships in the data.
-Is flour low on stock at the beginning of the week in general?
-Even better, these rules and relationships would extend not only to your sample, but to all patients / bee colonies / supermarkets.
-To get from data to generalizable relationships, we have to simplify the real world and make assumptions.
-The thing that helps us answer all the questions about our data is called a model.
+You gaze at the screen.
+The screen shows a table with some data.
+Based on this data, you are to answer some questions.
+These questions could be:
 
-A model is a simplified representation of something.
-In the context of learning from data about the world, a model represents simplified aspects of the world.
-The motivation to build or learn a model is that it allows us to answer questions and make predictions.
+\begin{itemize}
+\tightlist
+\item
+  Which patients might get side effects from a certain drug?
+\item
+  How do bee hives react to a change in climate?
+\item
+  Which supermarket products are often out-of-stock?
+\end{itemize}
 
-In this book we study specific types of models:
-The models have to be computational or mathematical models.
+In the data you can see in detail what happened: patients with ID 124 and 22 got acne; 2/3 of bee colonies had trouble during drought in 2018; on that one Tuesday the flour was sold out;
+But with data, you can't immediately see general rules and relationships.
+Is flour generally in low supply at the beginning of the week?
+It would be even better if these rules and relationships applied not only to your specific data sample, but to a more general population of patients/hives/supermarkets.
+To move from data to generalizable relationships, we have to simplify the world and make assumptions.
+The end result is a model of the world based on data.
+
+A model is a simplified representation of some aspect of the world.
+For example, how bee colonies depend on climate.
+With a model we can answer questions and make predictions that we couldn't with the raw data.
+
+In this book, we talk about certain types of models:
+Models must be computational or mathematical models.
 This excludes, for example, physical models, like the tiny houses that architects build.
 The second restriction: The models are learned from data.
-This excludes ``designed'' models such as pure simulations like cellular automata.
+This excludes ``designed'' models such cellular automata.
 
-There are three ingredients to a mathematical model:
-A mathematical model contains \emph{mathematical structures} that represent \emph{variables} and put them in \emph{relation} (Figure \ref{fig:model}). \footnote{Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.}
-When a mathematical model is learned from data, it also contains \emph{parameters} that make the mathematical formula adaptable to data.
-Furthermore, if you want to interpret models instead of the world, you have to make assumptions about the relationship between the model and aspects of the world.
-But more on that in the \protect\hyperlink{mindsets}{mindsets chapter}.
+There is no philosophical consensus on what makes a model.
+For our purpose, let's say that \textbf{a mathematical model consists of three ingredients: variables, relations and parameters}.
+A mathematical model contains mathematical structures that represent \emph{variables} and put them in \emph{relation} (Figure \ref{fig:model}). \footnote{Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.}
+The relations are often expressed as parameterized functions of the variables.
+The model \textbf{parameters} make the mathematical structure adaptable.
+When the model is learned from data, in the learning process the parameters and sometimes relations (functions) are adapted to the data.
+If you want to interpret models instead of the world, you have to make assumptions about the relationship between the model and aspects of the world.
+But more about this in the chapter \protect\hyperlink{mindsets}{Mindsets}.
 
 \begin{figure}
 
@@ -354,30 +368,45 @@ But more on that in the \protect\hyperlink{mindsets}{mindsets chapter}.
 \end{figure}
 
 The aspects of the world are represented within the model as \emph{variables}.
+The blood pressure of a patient is represented with a numerical value.
 Images, for example, are represented as tensors of pixels.
-The blood pressure of a patient is represented with a number for the model to use.
 Variables can also represent a latent, hidden or abstract aspect.
 Like happiness or introversion.
-There are different names for these variables:
+There are different names for variables:
 Random variables, covariates, predictors, latent variables, features, target, outcome, \ldots{}
-These names sometimes reveal the role a variable takes on in our model, and are dependent on the modeling mindset we are in.
-For example, in machine learning the word feature and target are used.
-In statistics for similar variable roles, we would use independent and dependent variable, or covariates and outcome, \ldots{}
+These names sometimes reveal the role of a variable in the model.
+For example, the ``target'' is the variable that we want to predict.
+In different mindsets, variables have different names and roles:
+In machine learning, for example, the terms feature and target are used.
+In statistics, people might say dependent and independent variable or covariates and outcome instead.
 
 Within the model, the components are mathematically or computationally set in \emph{relation} to each other.
-For example, causal models represent relations between variables as directed acyclic graph that can be translated into conditional (in-)dependencies.
-The joint distribution of variables describes the occurrence of certain variable values in a probabilist sense.
-A predictive model represents the output variable as a function of the input variables, in the case of a linear regression model as the sum of the input variables.
+These relations are usually expressed as parameterized functions.
+For example:
+
+\begin{itemize}
+\tightlist
+\item
+  Causal models represent relations between variables in a directed acyclic graph that can be translated into conditional (in-)dependencies.
+\item
+  The joint distribution of variables describes the occurrence of certain variable values in a probabilist sense.
+\item
+  A predictive model represents the output variable as a parameterized function of the input variables.
+\item
+  In the case of a linear regression model, the output variable is a weighted sum of the input variables.
+\end{itemize}
 
 The expressive power of such relationships really depends on the class of the model.
-A relationship can be a simple linear equation like \(Y = 5 \cdot X\) involving two or more variables.
+A relation can be a simple linear equation like \(Y = 5 \cdot X\) involving two or more variables.
 For example we might model the probability of a stroke as a function of blood pressure and age.
-A relationship can also be a long chain of mathematical operations, involving thousands of variables, for example deep neural networks for image classification.
+A relation can also be a long chain of mathematical operations involving thousands of variables.
+Deep neural networks are an example of such a complicated relation.
 
-We don't know the relationships in advance, so we use data to learn them.
+We don't know the relations between variables in advance, so we use data to learn them.
 For some models, learning these relationships is a matter of finding the right \emph{parameters}.
 This is true for neural networks and generalized additive models, for example.
 For other models, the model structure is ``grown'', as in decision trees or support vector machines.
+Growing the structure means not only learning parameters, but also learning the structure of the mathematical function.
 
 You can think of a model as having an uninstantiated state and an instantiated state.
 An uninstantiated model is not yet fitted to the data.
@@ -392,21 +421,22 @@ Let's call this unknown parameter in our equation \(\beta\):
 I could figure out the \(\beta\) by going to the supermarket and checking the price.
 Maybe \(\beta = 500\), so I get half a kilogram of carrots for 1 euro.
 But that's only for one supermarket!
-Maybe I have to add more relationships to the model.
-Maybe I need to consider the supermarket chain, whether there are special offers for carrots , whether I buy organic carrots, \ldots{}
-All these choices add parameters to the model.
+Maybe I have to add more variables and relations to the model.
+Maybe I need to consider the supermarket chain, special deals, organic / non-organic, \ldots{}
+All these choices add variables, relations and parameters to the model.
 
-What we do with the relationships depends on the mindset.
-In supervised machine learning, we take advantage of the relationship to make predictions.
-In causal inference, we use the modeled relationship to derive statistical estimators and estimate causal effects.
+What we can do with the model depends on the modeling mindset.
+In supervised machine learning, we take advantage of the modeled relations to make predictions.
+In causal inference, we use our model to estimate causal effects.
+In likelihoodism, we can compare the likelihoods between models.
 
 \hypertarget{mindsets}{%
 \chapter{Mindsets}\label{mindsets}}
 
-Models such as the linear regression model are made up of components, relationships, and parameters.
+A model is only a bunch of variables, relations, and parameters.
 A model alone can't tell us how to interpret the world.
 The use and interpretation of the model depends on the mindset from which the model arose.
-We need to make further assumptions about the model and how to infer insights about the world from those models.
+In order to derive knowledge about the world from the model, we need to make further assumptions.
 Consider a linear regression model that predicts regional rice yield as a function of rainfall, temperature, and fertilizer use.
 It's a model, not a mindset.
 How may we interpret the model?
@@ -428,7 +458,7 @@ Bayesianism, frequentism, supervised machine learning, generative models, \ldots
 Mindsets differ in how they interpret probabilities -- or whether probabilities are part of the language at all.
 While mindsets cover many different modeling tasks, they have some tasks where they really shine.
 Each mindset invites you to ask different questions, and so shapes the way you view the world through your model.
-In supervised machine learning, for example, everything becomes a prediction or classification problem, while Bayesian inference focuses on estimating posterior probability distributions of model parameters.
+In supervised machine learning, for example, everything becomes a prediction or classification problem, while in Bayesian inference, the goal is to update our beliefs about the world using probability theory.
 
 \begin{figure}
 
@@ -441,17 +471,18 @@ In supervised machine learning, for example, everything becomes a prediction or 
 
 \textbf{Modeling mindsets} are normative:
 A modeling mindset distinguishes between good and bad models.
-Even if model evaluations are partly based on objective criteria, the decision in favor of a criteria is subjective.
-For a frequentist statistician, a good model of the world is probabilistic and has a high goodness-of-fit to the assumed distributions.
-The residuals of the model also pass diagnostic checks.
-The frequentist rejects the use of prior probabilities.
+Even though model evaluations are partly based on objective criteria, the choice of a criterion is subjective.
+Each mindset has their own set of accepted models and evaluation procedures.
+
+For a frequentist statistician, a good model of the world is probabilistic and has a high goodness-of-fit to the data.
+The residual errors of the model also pass diagnostic checks.
+The frequentist rejects the use of prior probabilities as they appear to be subjective.
 The frequentist would also not switch to a random forest just because it has a lower mean squared error on test data.
 And why would the statistician switch?
 From their point of view, the random forest is a poor model of the world.
 We learn nothing about the probability distribution of our variables.
 We can't do frequentist hypothesis testing of the effects of variables.
 The performance of the frequentist's model on unseen test data is not as important to the frequentist.
-Each mindset has their own set of accepted models and evaluation procedures.
 
 A modeling mindset limits the questions that can be asked.
 Consequently, some questions or tasks are out of scope of the mindset.
@@ -476,19 +507,20 @@ Likewise, if you were trying to publish a machine learning model in a journal th
 And I'd bet 100 bucks that the paper would be rejected.
 
 The people within a shared mindset also accept the assumptions of that mindset.
-And these assumptions are usually not challenged, but mutually agreed upon, at least implicitly.
+And these assumptions are usually not challenged, but mutually agreed upon
+At least implicitly.
 If you work in a team that has been using Bayesian statistics for some time, you won't be questioning each model anew about whether using priors is good or whether the Bayesian interpretation of probability is legit.
 In machine learning competitions, the model with the lowest prediction error on new data wins.
 You will have a hard time arguing that your model should have won because it's the only causal model.
 If you believe that causality is important, you would simply not participate.
-You can only thrive on those machine learning competition platform if you have accepted the supervised machine learning mindset.
+You can only thrive in machine learning competitions if you have accepted the supervised machine learning mindset.
 
 The modeling mindsets as I present them in this book are archetypes: pure forms of these mindsets.
 In reality, the boundaries between mindsets are much more fluid.
 These archetypes of mindsets intermingle within individuals, communities and approaches:
 A data scientist who primarily builds machine learning models might also use some simple regression models with hypothesis tests -- without cross-validating the models' generalization error.
 A research community could accept analyses that use both frequentist and Bayesian statistics.
-A machine learning competition could include a human jury who wards additional points if the model is interpretable and incorporates causal reasoning.
+A machine learning competition could include a human jury who would award additional points if the model is interpretable and includes causal reasoning.
 
 Have you ever met anyone who is really into supervised machine learning?
 The first question they ask is ``Where is the labeled data?''.
@@ -499,6 +531,8 @@ Some people really are walking archetypes. 100\% of one archetype.
 But I would say that most people learned one or two mindsets when they start out.
 And later they got glimpses of other mindsets here and there.
 Most people's mindset is already a mixture of multiple modeling mindsets.
+And that's a good thing.
+Having an open mind about modeling ultimately makes you a better modeler.
 
 \hypertarget{statistical-modeling}{%
 \chapter{Statistical Modeling}\label{statistical-modeling}}
@@ -510,9 +544,7 @@ Most people's mindset is already a mixture of multiple modeling mindsets.
 \item
   Assumes the world is best described by probability distributions.
 \item
-  Statistical modeling fits probability distributions to data.
-\item
-  Requires further assumptions for drawing conclusions. See \protect\hyperlink{frequentism}{frequentism}, \protect\hyperlink{bayesian}{Bayesianism} and \protect\hyperlink{likelihoodism}{likelihoodism}.
+  Requires additional assumptions for drawing conclusions. See \protect\hyperlink{frequentism}{frequentism}, \protect\hyperlink{bayesian}{Bayesianism} and \protect\hyperlink{likelihoodism}{likelihoodism}.
 \end{itemize}
 
 Do you become more productive when you drink a lot of water?
@@ -523,23 +555,18 @@ Because of all these factors and other contingencies, we won't get a perfect equ
 Uncertainty remains.
 Even the water intake varies from day to day and from person to person.
 
-Statistics is changing your mind under uncertainty.
+Statistics is all about changing your mind under uncertainty.
 One way to deal with the uncertainty of the world is to abstract aspects of the world as random variables and ascribe a probability distribution to them.
 Daily water intake could be a random variable.
 For productivity we would need some clever idea on how to best measure this abstract concept.
 A not so clever example: Daily time spent in front of the computer.
 To further relate these variables to each other, we can make assumptions on how the data were generated and connect the random variables in a statistical model.
-Welcome to the statistical modeling mindset.
 
-Statistical modeling is a parent to these other mindsets: \protect\hyperlink{frequentism}{frequentism}, \protect\hyperlink{bayesianism}{Bayesianism}, \protect\hyperlink{likelihoodism}{likelihoodism} and \protect\hyperlink{causality}{causal inference}.
-These mindsets provide different ideas for how to do inference -- drawing conclusions about the world from data.
-The mindsets differ in their interpretation of probability, their stance on causality and their faithfulness to the likelihood principle.
-Their use of statistical models unites these mindsets.
+Welcome to the \textbf{statistical modeling} mindset.
 
-A statistical model consists of a set of probability distributions.
+A statistical model consists of a set of probability distributions that are fitted to data.
 A probability distribution describes the frequency with which we expect to see certain values of random variables.
 The second ingredient to a statistical model is the data, from which we estimate those probability distributions.
-Random variables are capture some aspect of the world.
 But let's start with the most elementary unit: the random variable.
 
 \hypertarget{random-variables}{%
@@ -547,7 +574,7 @@ But let's start with the most elementary unit: the random variable.
 
 A random variable is a mathematical object that carries uncertainty.
 Daily water intake can be a random variable.
-Observed data are seen as \textbf{observations} or realizations of random variables.
+Data are seen as \textbf{observations} or realizations of random variables.
 If someone drank 2.5 liters of water, that is a realization of the random variable ``daily water intake''.
 
 Other random variables:
@@ -587,7 +614,7 @@ Statisticians came up with probability distributions: a mathematical construct t
 \section{Probability Distributions}\label{probability-distributions}}
 
 A probability distribution is a function which gives each possible outcome of a random variable a probability.
-Value in, probability out. \footnote{For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.}
+Value in, probability out.
 Not all functions can be used as probability functions.
 A probability function must be larger or equal to zero for the entire range of the random variable.
 For discrete variables such as the number of fish caught, the probability distribution must sum up to 1 over all possible outcomes.
@@ -608,9 +635,8 @@ The Normal distribution is for continuous variables and defined from minus to pl
 \[f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\]
 
 In this equation, \(\pi\) and \(e\) are the famous constants \(pi \approx 3.14\) and \(e \approx 2.7\).
-The distribution has two parameters: mean \(mu\) and standard deviation \(\sigma\).
-
-These parameters called location (\(\mu\)) and scale (\(\sigma\)) parameters, since they determine where on the x-axis the center of the Normal distribution is and how flat or sharp the distribution is.
+The distribution has two parameters: mean \(\mu\) and standard deviation \(\sigma\).
+These parameters are sometimes called location (\(\mu\)) and scale (\(\sigma\)) parameters, since they determine where on the x-axis the center of the Normal distribution is and how flat or sharp the distribution is.
 The larger the standard deviation \(\sigma\), the flatter the distribution.
 
 Let's try it out and set \(\mu = 0\) and \(\sigma = 1\), as visualized in Figure \ref{fig:distributions}, leftmost curve.
@@ -643,29 +669,29 @@ A common approach is to choose a distribution that matches the ``nature'' of you
 \item
   A numerical outcome such as IQ? That's Normal distribution.
 \item
-  A count outcome, like number of fish caught per hour? The Poisson distribution is a solid choice.
+  A count outcome such as number of fish caught in an hour? The Poisson distribution is a solid choice.
 \item
   A binary repeated outcome, like the number of successful free throws in basketball? It follows a Binomial distribution.
 \end{itemize}
 
-These were all examples of the distributions of single random variables.
+These were examples 1-dimensional distributions that only consider a single variable.
 The world is more complex than that:
-Distributions of random variables can be intertwined.
-The distribution of one variable can depend on the value that another random value takes on.
+Random variables can be correlated.
+The distribution of one variable can depend on the value that another random variable takes.
 Fortunately, it's possible to define so-called multivariate distributions.
-A multivariate distribution is a function that takes more than one value and returns a density (still a single number).
+A multivariate distribution is a function that takes as input two ore more values and returns a density (still a single number).
 We might assume that the joint distribution of water intake and productivity (measured in minutes) follows a 2-dimensional Normal distribution.
-Or we could assume that the productivity, conditional on water intake, follows a Normal distribution.
-We can be very creative in defining distributions and so on.
 
-With these probability distributions, we are still in the realm of abstraction and assumptions.
+Another option is conditional distributions.
+For example, we could assume that productivity, conditional on water intake, follows a Normal distribution.
+
+With all these probability distributions, we are still in the realm of abstraction and assumptions.
 On one side we have the data: messy and untamed.
 On the other side, we have the probability distributions: clean and idealized.
-Statistician ideologically connect the two via random variables:
-The data are the realizations of the random variables.
-And the distributions summarize the stochastic behaviour of random variables.
-But we still need to mathematically connect data and theoretical distributions.
-How do we bring data and distributions together?
+Via random variables we have at least a theory how the two are connected:
+The data are the realizations of variables, and distributions summarize the stochastic behaviour of variables.
+But we still need to mathematically connect observed data and theoretical distributions.
+How can we connect them?
 
 The answer is \textbf{statistical models}.
 
@@ -673,7 +699,8 @@ The answer is \textbf{statistical models}.
 \section{Statistical Model}\label{statistical-model}}
 
 A statistical model connects theoretical distributions with observed data.
-Statistical models are mathematical models that make assumptions about how the data are generated, and are estimated using data.
+Statistical models are mathematical models that make assumptions about how the data are generated.
+With these assumptions in the background, statistical models are then estimated using data.
 More formally, a statistical model is the combination of the sample space from which the data comes from, and a set of probability distributions on this sample space.
 
 The distributions are ``fitted'' to the data by changing the parameters.
@@ -681,31 +708,46 @@ Imagine the distribution as a cat.
 And your data is a box.
 Your cat fits it's shape and position to match the box.
 
-How do we know which parameters to set in our distribution?
-Here we can work with the probability distribution.
-As I said, the probability distribution is a function that gives the probability or density, given the value of a data point.
-And it's parameterized, for example by the mean and variance for the Normal distribution.
-We can use the same function to also find our parameters -- by switching the point of view.
-The likelihood function \(L(\theta | X)\) is the probability function, but seeing the parameters as changeable, and the data as fixed.
-For each data point, we can compute the likelihood function.
-And we can multiply these likelihoods, which gives us the likelihood for all of our data.
-This is a function where we now can fill in some parameters, for example \(\mu = 1\) and \(\sigma = 2\) and get a value in return.
-The larger the value, the better the distribution fits the data.
+How does the cat know which form to take on?
+Ah pardon, our question now is:
+How do we find parameter values so that the distribution fits the data well?
+The density function of the Normal distribution, for example, has mean and variance as parameters.
+Given the parameters, the density or probability function can tell us how likely certain values of our random variables are.
 
-We have ourselves an optimization problem at hand: Maximize the likelihood function \(L\) with respect to the parameters, and given the data.
-We want to maximize the likelihood for all of our data, so first we form the likelihood for our entire dataset \(L(\mathbf{x}_1, \ldots, \mathbf{x}_n) = \prod_{i=1}^n f(\mathbf{x}_i)\).
-Emphasizing that \(\mathbf{x}_1\) can be a vector multiple variables, in this case for data point 1.
+We can also use the probability or density function to find our parameters -- by reversing the point of view and calling it the likelihood function.
+The value of the random variable is the input of the probability function, and the parameters are seen as given.
+The likelihood function \(L(\theta, X)\) is equal to the probability function.
+Except that the parameters are now the input, and the values of the random variable are seen as given.
+They are given, in the sense that we have data that are realizations of the random variable.
+
+We can take an observed value for \(X\) from our data and plug it into the likelihood function.
+Now we have a likelihood function that can tell us, for this one data point, which parameters would give the highest probability for observed this particular value.
+But our data consist of multiple realizations of random variables.
+To get the likelihood for the entire dataset, we multiply the likelihoods of the individual data points.
+This data likelihood can tell us, for a given parameter value, how likely our data is.
+For example we could try \(\mu = 1\) and \(\sigma = 2\) and the likelihood function returns a value.
+The larger the value, the better the distribution (with these parameters) fits the data.
+That's very useful, because it helps us in finding the best parameters.
+
+Finding the best parameters is a classical optimization problem:
+Maximize the data likelihood \(L\) with respect to the parameters.
+We want to maximize the likelihood for all of our data: \(L(\theta, \mathbf{x}_1, \ldots, \mathbf{x}_n) = \prod_{i=1}^n L_i(\theta, \mathbf{x}_i)\).
+Note that \(\mathbf{x}_i\) can be a vector with values for multiple variables.
 And we maximize the data likelihood:
 
 \[\arg \max_{\theta} L(\theta | \mathbf{x}_1, \ldots, \mathbf{x}_n)\]
 
-Maximum likelihood estimation is a classic optimization problem.
-For simpler cases this can even be solved analytically, for example for the Normal distribution, we know that the ideal \(mu\) is the mean of the data: \(\frac{1}{n} \sum_{i=1}^n x_i\).
-For likelihood maximization where the analytical solution is not possible, other optimization methods exists.
+\hypertarget{maximum-likelihood-estimation}{%
+\subsection*{Maximum Likelihood Estimation}\label{maximum-likelihood-estimation}}
 
-If you have understood the idea of maximum likelihood, you understand a key element the statistical modeling mindset.
+
+Maximum likelihood estimation is a classic optimization problem.
+For simpler cases this can even be solved analytically.
+For the Normal distribution, we know that the optimal \(mu\) is the mean of the data: \(\frac{1}{n} \sum_{i=1}^n x_i\).
+When an analytical solution is not possible, other optimization methods like gradient descent, the Newton-Raphson method and Fisher's scoring can be used.
+
+Maximum likelihood estimation is a key element to understanding the statistical modeling midnset.
 Maximizing the likelihood means bringing together the theoretical probability distributions and the observed data.
-We fit the distributions, aka our statistical model, to the data.
 
 \begin{figure}
 
@@ -716,28 +758,39 @@ We fit the distributions, aka our statistical model, to the data.
 \caption{Fitting distributions to data}\label{fig:fit}
 \end{figure}
 
-The role of the distribution parameters goes well beyond a technical one.
+\hypertarget{intepreting-parameters}{%
+\subsection*{Intepreting Parameters}\label{intepreting-parameters}}
+
+
+The parameters are not only things to be optimized.
+Their role goes beyond that of a mere technical controller.
 The parameters are central to the statistical modeling mindset.
-We can interpret the parameters as summarization of our data!
+
+\textbf{Statisticians interpret the parameters as summary of the data.}
+
 Statistical modeling is about understanding our data better.
-The nice consequence of modeling our data with probability distributions is that we summarize our data with a few numbers, the parameters.
-In the case of the Gaussian distribution, we can describe the distribution of a single variable with only two numbers, the mean and the standard deviation.
+The nice consequence of modeling the data with probability distributions is that we summarize our data with just a few numbers, the parameters.
+In the case of the Normal distribution, we can describe the distribution of a single variable with only two numbers, the mean and the standard deviation.
 Also for other types of statistical models, parameters are central to interpretation.
 
 \hypertarget{types-of-statistical-models}{%
 \section{Types of Statistical Models}\label{types-of-statistical-models}}
 
 All statistical models target an aspect of a probability distribution.
-For most of the chapter, we talked about simpler cases, like having the distribution of a single variable and fitting a distribution.
-So the case was of learning \(P(X)\).
-But we could have the case of multiple random variables \(X_1, \ldots, X_p\).
+For most of the chapter, we talked about simpler cases, like the distribution of a single variable: \(P(X)\).
 
-We have two options (bit oversimplifying here) for the probability distribution:
-Fit the joint distribution, or a conditional distribution.
-Depending on the problem that we want to solve, there are different properties of the distribution that we might want to find out.
-Very often, it's a conditional mean: ``What do we expect for a random variable \(Y\) given \(X= \mathbf{x}\)?
+But we could have the case of multiple random variables \(X_1, \ldots, X_p\).
+To describe the full distribution of more than one variable, we have to work with the joint distribution.
+The joint distribution can be difficult to estimate.
+It's often much simpler to work with \emph{conditional distributions}.
+The conditional distribution tells us how probable the outcome of one or more random variable is, given we already know the values of some other random variables.
+
+CONTINUE HERE
+
+Depending on the analytical task, the statistician can target different ``areas'' of the distribution.
+In many cases, the quantity of interest is a conditional mean: ``What do we expect for a random variable \(Y\) given \(X= \mathbf{x}\)?
 But it can also be other parts of the distribution:''What's the 90\% quantile for \(Y\) given \(X = \mathbf{x}\)?
-Consequently, 10\% of the values for \(Y\), given \(X=\mathbf{x}\), would be greater than the 90\% quantile.
+At the 90\% quantile 10\% of the values for \(Y\), given \(X=\mathbf{x}\), would be greater than the 90\% quantile.
 Think of insurance: An insurance company is noy only interested in the expected damages they have to cover, but also how much they would have to cover in the extreme case.
 
 A Gaussian mixture model, for example, requires learning the entire distribution.
@@ -1669,8 +1722,6 @@ The most common reasons not to use Bayesian statistics:
 
 
 Blei, David M., Alp Kucukelbir, and Jon D. McAuliffe. ``Variational inference: A review for statisticians.'' Journal of the American statistical Association 112, no. 518 (2017): 859-877.
-
-For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.
 
 Gandenberger, Greg. Why I am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library, 2016.
 

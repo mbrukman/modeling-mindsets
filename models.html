@@ -171,7 +171,11 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="4.1" data-path="statistical-modeling.html"><a href="statistical-modeling.html#random-variables"><i class="fa fa-check"></i><b>4.1</b> Random Variables</a></li>
 <li class="chapter" data-level="4.2" data-path="statistical-modeling.html"><a href="statistical-modeling.html#probability-distributions"><i class="fa fa-check"></i><b>4.2</b> Probability Distributions</a></li>
 <li class="chapter" data-level="4.3" data-path="statistical-modeling.html"><a href="statistical-modeling.html#assuming-a-distribution"><i class="fa fa-check"></i><b>4.3</b> Assuming a Distribution</a></li>
-<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a></li>
+<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#maximum-likelihood-estimation"><i class="fa fa-check"></i>Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#intepreting-parameters"><i class="fa fa-check"></i>Intepreting Parameters</a></li>
+</ul></li>
 <li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
 <li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
 <li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
@@ -229,33 +233,41 @@ window.cookieconsent.initialise({
 <div id="models" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Models<a href="models.html#models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <!-- motivation -->
-<p>Imagine you sit in front of some data and some questions that you are supposed to answer with help of the data.
-You are asked to predict which patients might get side effects from this a drug.
-How do bee colonies react to changing climate conditions?
-Which supermarket products are always out-of-stock?
-Data alone can tell you what happened: patients 124 and 22 got acne; 2/3 of bee colonies had troubles during drought in year 2018; on this one Tuesday the flour was sold out;
-But usually you want to find general rules and relationships in the data.
-Is flour low on stock at the beginning of the week in general?
-Even better, these rules and relationships would extend not only to your sample, but to all patients / bee colonies / supermarkets.
-To get from data to generalizable relationships, we have to simplify the real world and make assumptions.
-The thing that helps us answer all the questions about our data is called a model.</p>
+<p>You gaze at the screen.
+The screen shows a table with some data.
+Based on this data, you are to answer some questions.
+These questions could be:</p>
+<ul>
+<li>Which patients might get side effects from a certain drug?</li>
+<li>How do bee hives react to a change in climate?</li>
+<li>Which supermarket products are often out-of-stock?</li>
+</ul>
+<p>In the data you can see in detail what happened: patients with ID 124 and 22 got acne; 2/3 of bee colonies had trouble during drought in 2018; on that one Tuesday the flour was sold out;
+But with data, you can’t immediately see general rules and relationships.
+Is flour generally in low supply at the beginning of the week?
+It would be even better if these rules and relationships applied not only to your specific data sample, but to a more general population of patients/hives/supermarkets.
+To move from data to generalizable relationships, we have to simplify the world and make assumptions.
+The end result is a model of the world based on data.</p>
 <!-- summary: what is a model -->
-<p>A model is a simplified representation of something.
-In the context of learning from data about the world, a model represents simplified aspects of the world.
-The motivation to build or learn a model is that it allows us to answer questions and make predictions.</p>
+<p>A model is a simplified representation of some aspect of the world.
+For example, how bee colonies depend on climate.
+With a model we can answer questions and make predictions that we couldn’t with the raw data.</p>
 <!-- Exclusion criteria -->
-<p>In this book we study specific types of models:
-The models have to be computational or mathematical models.
+<p>In this book, we talk about certain types of models:
+Models must be computational or mathematical models.
 This excludes, for example, physical models, like the tiny houses that architects build.
 The second restriction: The models are learned from data.
-This excludes “designed” models such as pure simulations like cellular automata.</p>
+This excludes “designed” models such cellular automata.</p>
 <!-- What constitutes a model -->
-<p>There are three ingredients to a mathematical model:
+<p>There is no philosophical consensus on what makes a model.
+For our purpose, let’s say that <strong>a mathematical model consists of three ingredients: variables, relations and parameters</strong>.
 <!-- in original text it's objects instead of variables -->
-A mathematical model contains <em>mathematical structures</em> that represent <em>variables</em> and put them in <em>relation</em> (Figure <a href="models.html#fig:model">2.1</a>). <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
-When a mathematical model is learned from data, it also contains <em>parameters</em> that make the mathematical formula adaptable to data.
-Furthermore, if you want to interpret models instead of the world, you have to make assumptions about the relationship between the model and aspects of the world.
-But more on that in the <a href="mindsets.html#mindsets">mindsets chapter</a>.</p>
+A mathematical model contains mathematical structures that represent <em>variables</em> and put them in <em>relation</em> (Figure <a href="models.html#fig:model">2.1</a>). <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+The relations are often expressed as parameterized functions of the variables.
+The model <strong>parameters</strong> make the mathematical structure adaptable.
+When the model is learned from data, in the learning process the parameters and sometimes relations (functions) are adapted to the data.
+If you want to interpret models instead of the world, you have to make assumptions about the relationship between the model and aspects of the world.
+But more about this in the chapter <a href="mindsets.html#mindsets">Mindsets</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:model"></span>
 <img src="figures/model-1.png" alt="A mathematical model sets variables (dots) into relation (lines) using parameters." width="\textwidth" />
 <p class="caption">
@@ -264,31 +276,40 @@ FIGURE 2.1: A mathematical model sets variables (dots) into relation (lines) usi
 </div>
 <!-- variables -->
 <p>The aspects of the world are represented within the model as <em>variables</em>.
+The blood pressure of a patient is represented with a numerical value.
 Images, for example, are represented as tensors of pixels.
-The blood pressure of a patient is represented with a number for the model to use.
 Variables can also represent a latent, hidden or abstract aspect.
 Like happiness or introversion.
-There are different names for these variables:
+There are different names for variables:
 Random variables, covariates, predictors, latent variables, features, target, outcome, …
-These names sometimes reveal the role a variable takes on in our model, and are dependent on the modeling mindset we are in.
-For example, in machine learning the word feature and target are used.
-In statistics for similar variable roles, we would use independent and dependent variable, or covariates and outcome, …</p>
+These names sometimes reveal the role of a variable in the model.
+For example, the “target” is the variable that we want to predict.
+In different mindsets, variables have different names and roles:
+In machine learning, for example, the terms feature and target are used.
+In statistics, people might say dependent and independent variable or covariates and outcome instead.</p>
 <!-- relation -->
 <p>Within the model, the components are mathematically or computationally set in <em>relation</em> to each other.
-For example, causal models represent relations between variables as directed acyclic graph that can be translated into conditional (in-)dependencies.
-The joint distribution of variables describes the occurrence of certain variable values in a probabilist sense.
-A predictive model represents the output variable as a function of the input variables, in the case of a linear regression model as the sum of the input variables.</p>
+These relations are usually expressed as parameterized functions.
+For example:</p>
+<ul>
+<li>Causal models represent relations between variables in a directed acyclic graph that can be translated into conditional (in-)dependencies.</li>
+<li>The joint distribution of variables describes the occurrence of certain variable values in a probabilist sense.</li>
+<li>A predictive model represents the output variable as a parameterized function of the input variables.</li>
+<li>In the case of a linear regression model, the output variable is a weighted sum of the input variables.</li>
+</ul>
 <!-- TODO: visualize different functions? -->
 <!-- expressiveness of relations -->
 <p>The expressive power of such relationships really depends on the class of the model.
-A relationship can be a simple linear equation like <span class="math inline">\(Y = 5 \cdot X\)</span> involving two or more variables.
+A relation can be a simple linear equation like <span class="math inline">\(Y = 5 \cdot X\)</span> involving two or more variables.
 For example we might model the probability of a stroke as a function of blood pressure and age.
-A relationship can also be a long chain of mathematical operations, involving thousands of variables, for example deep neural networks for image classification.</p>
+A relation can also be a long chain of mathematical operations involving thousands of variables.
+Deep neural networks are an example of such a complicated relation.</p>
 <!-- parameters and structures -->
-<p>We don’t know the relationships in advance, so we use data to learn them.
+<p>We don’t know the relations between variables in advance, so we use data to learn them.
 For some models, learning these relationships is a matter of finding the right <em>parameters</em>.
 This is true for neural networks and generalized additive models, for example.
-For other models, the model structure is “grown”, as in decision trees or support vector machines.</p>
+For other models, the model structure is “grown”, as in decision trees or support vector machines.
+Growing the structure means not only learning parameters, but also learning the structure of the mathematical function.</p>
 <!-- instantiation -->
 <p>You can think of a model as having an uninstantiated state and an instantiated state.
 An uninstantiated model is not yet fitted to the data.
@@ -303,9 +324,9 @@ Let’s call this unknown parameter in our equation <span class="math inline">\(
 I could figure out the <span class="math inline">\(\beta\)</span> by going to the supermarket and checking the price.
 Maybe <span class="math inline">\(\beta = 500\)</span>, so I get half a kilogram of carrots for 1 euro.
 But that’s only for one supermarket!
-Maybe I have to add more relationships to the model.
-Maybe I need to consider the supermarket chain, whether there are special offers for carrots , whether I buy organic carrots, …
-All these choices add parameters to the model.</p>
+Maybe I have to add more variables and relations to the model.
+Maybe I need to consider the supermarket chain, special deals, organic / non-organic, …
+All these choices add variables, relations and parameters to the model.</p>
 <!-- 
 There are many different types and names for parameters.
 Sometimes they just describe a distribution, like the mean of distribution.
@@ -316,10 +337,11 @@ What's different is hyperparameters.
 In a sense, they exist outside of what the model describes.
 Hyperparameters set how the learning from data takes place.
 -->
-<!-- making use of the relationship -->
-<p>What we do with the relationships depends on the mindset.
-In supervised machine learning, we take advantage of the relationship to make predictions.
-In causal inference, we use the modeled relationship to derive statistical estimators and estimate causal effects.</p>
+<!-- making use of the model -->
+<p>What we can do with the model depends on the modeling mindset.
+In supervised machine learning, we take advantage of the modeled relations to make predictions.
+In causal inference, we use our model to estimate causal effects.
+In likelihoodism, we can compare the likelihoods between models.</p>
 <!--
 
 ## Tasks

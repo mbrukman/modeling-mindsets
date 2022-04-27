@@ -171,7 +171,11 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="4.1" data-path="statistical-modeling.html"><a href="statistical-modeling.html#random-variables"><i class="fa fa-check"></i><b>4.1</b> Random Variables</a></li>
 <li class="chapter" data-level="4.2" data-path="statistical-modeling.html"><a href="statistical-modeling.html#probability-distributions"><i class="fa fa-check"></i><b>4.2</b> Probability Distributions</a></li>
 <li class="chapter" data-level="4.3" data-path="statistical-modeling.html"><a href="statistical-modeling.html#assuming-a-distribution"><i class="fa fa-check"></i><b>4.3</b> Assuming a Distribution</a></li>
-<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a></li>
+<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#maximum-likelihood-estimation"><i class="fa fa-check"></i>Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#intepreting-parameters"><i class="fa fa-check"></i>Intepreting Parameters</a></li>
+</ul></li>
 <li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
 <li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
 <li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
@@ -231,8 +235,7 @@ window.cookieconsent.initialise({
 <ul>
 <li>Goal: Changing your mind under uncertainty.</li>
 <li>Assumes the world is best described by probability distributions.</li>
-<li>Statistical modeling fits probability distributions to data.</li>
-<li>Requires further assumptions for drawing conclusions. See <a href="#frequentism">frequentism</a>, <a href="bayesian.html#bayesian">Bayesianism</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a>.</li>
+<li>Requires additional assumptions for drawing conclusions. See <a href="#frequentism">frequentism</a>, <a href="bayesian.html#bayesian">Bayesianism</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a>.</li>
 </ul>
 <!-- statistician modeling mindset ingredients
 
@@ -270,23 +273,17 @@ Because of all these factors and other contingencies, we won’t get a perfect e
 Uncertainty remains.
 Even the water intake varies from day to day and from person to person.</p>
 <!-- summary of likelihood mindset -->
-<p>Statistics is changing your mind under uncertainty.
+<p>Statistics is all about changing your mind under uncertainty.
 One way to deal with the uncertainty of the world is to abstract aspects of the world as random variables and ascribe a probability distribution to them.
 Daily water intake could be a random variable.
 For productivity we would need some clever idea on how to best measure this abstract concept.
 A not so clever example: Daily time spent in front of the computer.
-To further relate these variables to each other, we can make assumptions on how the data were generated and connect the random variables in a statistical model.
-Welcome to the statistical modeling mindset.</p>
-<!-- parent mindset -->
-<p>Statistical modeling is a parent to these other mindsets: <a href="#frequentism">frequentism</a>, <a href="#bayesianism">Bayesianism</a>, <a href="likelihoodism.html#likelihoodism">likelihoodism</a> and <a href="#causality">causal inference</a>.
-These mindsets provide different ideas for how to do inference – drawing conclusions about the world from data.
-The mindsets differ in their interpretation of probability, their stance on causality and their faithfulness to the likelihood principle.
-Their use of statistical models unites these mindsets.</p>
+To further relate these variables to each other, we can make assumptions on how the data were generated and connect the random variables in a statistical model.</p>
+<p>Welcome to the <strong>statistical modeling</strong> mindset.</p>
 <!-- What is statistical model -->
-<p>A statistical model consists of a set of probability distributions.
+<p>A statistical model consists of a set of probability distributions that are fitted to data.
 A probability distribution describes the frequency with which we expect to see certain values of random variables.
 The second ingredient to a statistical model is the data, from which we estimate those probability distributions.
-Random variables are capture some aspect of the world.
 But let’s start with the most elementary unit: the random variable.</p>
 <!-- 
 [Semiparametric models](#semiparametric) and especially [distribution-free statistical modeling](#distribution-free) approach modelling with a different mindset, but are considered statistical modeling.
@@ -306,7 +303,7 @@ Assumptions:
 <!-- Random Variables -->
 <p>A random variable is a mathematical object that carries uncertainty.
 Daily water intake can be a random variable.
-Observed data are seen as <strong>observations</strong> or realizations of random variables.
+Data are seen as <strong>observations</strong> or realizations of random variables.
 If someone drank 2.5 liters of water, that is a realization of the random variable “daily water intake”.</p>
 <p>Other random variables:</p>
 <ul>
@@ -344,7 +341,7 @@ FIGURE 4.1: Each dot represents a data point, a realizations of a random variabl
 <h2><span class="header-section-number">4.2</span> Probability Distributions<a href="statistical-modeling.html#probability-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- Definition of a distribution -->
 <p>A probability distribution is a function which gives each possible outcome of a random variable a probability.
-Value in, probability out. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+Value in, probability out.
 Not all functions can be used as probability functions.
 A probability function must be larger or equal to zero for the entire range of the random variable.
 For discrete variables such as the number of fish caught, the probability distribution must sum up to 1 over all possible outcomes.
@@ -362,9 +359,9 @@ P(x) =
 <p><span class="math display">\[f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\]</span></p>
 <!-- what each part means -->
 <p>In this equation, <span class="math inline">\(\pi\)</span> and <span class="math inline">\(e\)</span> are the famous constants <span class="math inline">\(pi \approx 3.14\)</span> and <span class="math inline">\(e \approx 2.7\)</span>.
-The distribution has two parameters: mean <span class="math inline">\(mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+The distribution has two parameters: mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>.
 <!-- the parameters -->
-<p>These parameters called location (<span class="math inline">\(\mu\)</span>) and scale (<span class="math inline">\(\sigma\)</span>) parameters, since they determine where on the x-axis the center of the Normal distribution is and how flat or sharp the distribution is.
+These parameters are sometimes called location (<span class="math inline">\(\mu\)</span>) and scale (<span class="math inline">\(\sigma\)</span>) parameters, since they determine where on the x-axis the center of the Normal distribution is and how flat or sharp the distribution is.
 The larger the standard deviation <span class="math inline">\(\sigma\)</span>, the flatter the distribution.</p>
 <!-- how it works -->
 <p>Let’s try it out and set <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>, as visualized in Figure <a href="statistical-modeling.html#fig:distributions">4.2</a>, leftmost curve.
@@ -390,87 +387,105 @@ FIGURE 4.2: Distributions
 A common approach is to choose a distribution that matches the “nature” of your data:</p>
 <ul>
 <li>A numerical outcome such as IQ? That’s Normal distribution.</li>
-<li>A count outcome, like number of fish caught per hour? The Poisson distribution is a solid choice.</li>
+<li>A count outcome such as number of fish caught in an hour? The Poisson distribution is a solid choice.</li>
 <li>A binary repeated outcome, like the number of successful free throws in basketball? It follows a Binomial distribution.</li>
 </ul>
 <!-- assumption vs. estimation -->
 <!-- multidimensional distributions -->
-<p>These were all examples of the distributions of single random variables.
+<p>These were examples 1-dimensional distributions that only consider a single variable.
 The world is more complex than that:
-Distributions of random variables can be intertwined.
-The distribution of one variable can depend on the value that another random value takes on.
+Random variables can be correlated.
+The distribution of one variable can depend on the value that another random variable takes.
 Fortunately, it’s possible to define so-called multivariate distributions.
-A multivariate distribution is a function that takes more than one value and returns a density (still a single number).
-We might assume that the joint distribution of water intake and productivity (measured in minutes) follows a 2-dimensional Normal distribution.
+A multivariate distribution is a function that takes as input two ore more values and returns a density (still a single number).
+We might assume that the joint distribution of water intake and productivity (measured in minutes) follows a 2-dimensional Normal distribution.</p>
 <!-- conditional distribution -->
-Or we could assume that the productivity, conditional on water intake, follows a Normal distribution.
-We can be very creative in defining distributions and so on.</p>
+<p>Another option is conditional distributions.
+For example, we could assume that productivity, conditional on water intake, follows a Normal distribution.</p>
 <!-- dream land -->
-<p>With these probability distributions, we are still in the realm of abstraction and assumptions.
+<p>With all these probability distributions, we are still in the realm of abstraction and assumptions.
 On one side we have the data: messy and untamed.
 On the other side, we have the probability distributions: clean and idealized.
-Statistician ideologically connect the two via random variables:
-The data are the realizations of the random variables.
-And the distributions summarize the stochastic behaviour of random variables.
-But we still need to mathematically connect data and theoretical distributions.
-How do we bring data and distributions together?</p>
+Via random variables we have at least a theory how the two are connected:
+The data are the realizations of variables, and distributions summarize the stochastic behaviour of variables.
+But we still need to mathematically connect observed data and theoretical distributions.
+How can we connect them?</p>
 <p>The answer is <strong>statistical models</strong>.</p>
 </div>
 <div id="statistical-model" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Statistical Model<a href="statistical-modeling.html#statistical-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- definition of a statistical model -->
 <p>A statistical model connects theoretical distributions with observed data.
-Statistical models are mathematical models that make assumptions about how the data are generated, and are estimated using data.
+Statistical models are mathematical models that make assumptions about how the data are generated.
+With these assumptions in the background, statistical models are then estimated using data.
 More formally, a statistical model is the combination of the sample space from which the data comes from, and a set of probability distributions on this sample space.</p>
 <!-- TODO: Visualize statistical model as connection between data and distributions -->
 <!-- Parameters -->
 <!-- 
 Other distributions have other parameters. [^semiparametric]
 -->
-<!-- TODO: regressino models, non- and semi-parametric -->
+<!-- TODO: regression models, non- and semi-parametric -->
 <!-- Estimation intuition -->
 <p>The distributions are “fitted” to the data by changing the parameters.
 Imagine the distribution as a cat.
 And your data is a box.
 Your cat fits it’s shape and position to match the box.</p>
-<!-- Likelihood function -->
-<p>How do we know which parameters to set in our distribution?
-Here we can work with the probability distribution.
-As I said, the probability distribution is a function that gives the probability or density, given the value of a data point.
-And it’s parameterized, for example by the mean and variance for the Normal distribution.
-We can use the same function to also find our parameters – by switching the point of view.
-The likelihood function <span class="math inline">\(L(\theta | X)\)</span> is the probability function, but seeing the parameters as changeable, and the data as fixed.
-For each data point, we can compute the likelihood function.
-And we can multiply these likelihoods, which gives us the likelihood for all of our data.
-This is a function where we now can fill in some parameters, for example <span class="math inline">\(\mu = 1\)</span> and <span class="math inline">\(\sigma = 2\)</span> and get a value in return.
-The larger the value, the better the distribution fits the data.</p>
+<!-- TODO: visualize cat in box -->
+<!-- where params come from -->
+<p>How does the cat know which form to take on?
+Ah pardon, our question now is:
+How do we find parameter values so that the distribution fits the data well?
+The density function of the Normal distribution, for example, has mean and variance as parameters.
+Given the parameters, the density or probability function can tell us how likely certain values of our random variables are.</p>
+<!-- from density to likelihood -->
+<p>We can also use the probability or density function to find our parameters – by reversing the point of view and calling it the likelihood function.
+The value of the random variable is the input of the probability function, and the parameters are seen as given.
+The likelihood function <span class="math inline">\(L(\theta, X)\)</span> is equal to the probability function.
+Except that the parameters are now the input, and the values of the random variable are seen as given.
+They are given, in the sense that we have data that are realizations of the random variable.</p>
+<!-- how to compute -->
+<p>We can take an observed value for <span class="math inline">\(X\)</span> from our data and plug it into the likelihood function.
+Now we have a likelihood function that can tell us, for this one data point, which parameters would give the highest probability for observed this particular value.
+But our data consist of multiple realizations of random variables.
+To get the likelihood for the entire dataset, we multiply the likelihoods of the individual data points.
+This data likelihood can tell us, for a given parameter value, how likely our data is.
+For example we could try <span class="math inline">\(\mu = 1\)</span> and <span class="math inline">\(\sigma = 2\)</span> and the likelihood function returns a value.
+The larger the value, the better the distribution (with these parameters) fits the data.
+That’s very useful, because it helps us in finding the best parameters.</p>
 <!-- maximum likelihood -->
-<p>We have ourselves an optimization problem at hand: Maximize the likelihood function <span class="math inline">\(L\)</span> with respect to the parameters, and given the data.
-We want to maximize the likelihood for all of our data, so first we form the likelihood for our entire dataset <span class="math inline">\(L(\mathbf{x}_1, \ldots, \mathbf{x}_n) = \prod_{i=1}^n f(\mathbf{x}_i)\)</span>. <!-- vim_ -->
-Emphasizing that <span class="math inline">\(\mathbf{x}_1\)</span> <!-- x_ --> can be a vector multiple variables, in this case for data point 1.
+<p>Finding the best parameters is a classical optimization problem:
+Maximize the data likelihood <span class="math inline">\(L\)</span> with respect to the parameters.
+We want to maximize the likelihood for all of our data: <span class="math inline">\(L(\theta, \mathbf{x}_1, \ldots, \mathbf{x}_n) = \prod_{i=1}^n L_i(\theta, \mathbf{x}_i)\)</span>. <!-- vim_ -->
+Note that <span class="math inline">\(\mathbf{x}_i\)</span> <!-- x_ --> can be a vector with values for multiple variables.
 And we maximize the data likelihood:</p>
 <p><span class="math display">\[\arg \max_{\theta} L(\theta | \mathbf{x}_1, \ldots, \mathbf{x}_n)\]</span> <!-- vim_ --></p>
+<div id="maximum-likelihood-estimation" class="section level3 unnumbered hasAnchor">
+<h3>Maximum Likelihood Estimation<a href="statistical-modeling.html#maximum-likelihood-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <!-- Estimation technically -->
 <p>Maximum likelihood estimation is a classic optimization problem.
-For simpler cases this can even be solved analytically, for example for the Normal distribution, we know that the ideal <span class="math inline">\(mu\)</span> is the mean of the data: <span class="math inline">\(\frac{1}{n} \sum_{i=1}^n x_i\)</span>.
-For likelihood maximization where the analytical solution is not possible, other optimization methods exists.</p>
+For simpler cases this can even be solved analytically.
+For the Normal distribution, we know that the optimal <span class="math inline">\(mu\)</span> is the mean of the data: <span class="math inline">\(\frac{1}{n} \sum_{i=1}^n x_i\)</span>.
+When an analytical solution is not possible, other optimization methods like gradient descent, the Newton-Raphson method and Fisher’s scoring can be used.</p>
 <!-- maximum likelihood mental model -->
-<p>If you have understood the idea of maximum likelihood, you understand a key element the statistical modeling mindset.
-Maximizing the likelihood means bringing together the theoretical probability distributions and the observed data.
-We fit the distributions, aka our statistical model, to the data.</p>
+<p>Maximum likelihood estimation is a key element to understanding the statistical modeling midnset.
+Maximizing the likelihood means bringing together the theoretical probability distributions and the observed data.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fit"></span>
 <img src="figures/fit-1.png" alt="Fitting distributions to data" width="\textwidth" />
 <p class="caption">
 FIGURE 4.3: Fitting distributions to data
 </p>
 </div>
+</div>
+<div id="intepreting-parameters" class="section level3 unnumbered hasAnchor">
+<h3>Intepreting Parameters<a href="statistical-modeling.html#intepreting-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <!-- role of the parameters -->
-<p>The role of the distribution parameters goes well beyond a technical one.
-The parameters are central to the statistical modeling mindset.
-We can interpret the parameters as summarization of our data!
-Statistical modeling is about understanding our data better.
-The nice consequence of modeling our data with probability distributions is that we summarize our data with a few numbers, the parameters.
-In the case of the Gaussian distribution, we can describe the distribution of a single variable with only two numbers, the mean and the standard deviation.
+<p>The parameters are not only things to be optimized.
+Their role goes beyond that of a mere technical controller.
+The parameters are central to the statistical modeling mindset.</p>
+<p><strong>Statisticians interpret the parameters as summary of the data.</strong></p>
+<p>Statistical modeling is about understanding our data better.
+The nice consequence of modeling the data with probability distributions is that we summarize our data with just a few numbers, the parameters.
+In the case of the Normal distribution, we can describe the distribution of a single variable with only two numbers, the mean and the standard deviation.
 Also for other types of statistical models, parameters are central to interpretation.</p>
 <!-- example for likelihood mindset -->
 <!--
@@ -496,6 +511,7 @@ This now parameterized distribution is the statistical model of our little offic
 <!-- end of example -->
 <!-- what types of models are possible -->
 </div>
+</div>
 <div id="types-of-statistical-models" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Types of Statistical Models<a href="statistical-modeling.html#types-of-statistical-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- 
@@ -509,16 +525,19 @@ This now parameterized distribution is the statistical model of our little offic
 - ANOVA, regression models, survival model / cox model, Justification
 -->
 <p>All statistical models target an aspect of a probability distribution.
-For most of the chapter, we talked about simpler cases, like having the distribution of a single variable and fitting a distribution.
-So the case was of learning <span class="math inline">\(P(X)\)</span>.
-But we could have the case of multiple random variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.</p>
-<!-- targets of the statistical models -->
-<p>We have two options (bit oversimplifying here) for the probability distribution:
-Fit the joint distribution, or a conditional distribution.
-Depending on the problem that we want to solve, there are different properties of the distribution that we might want to find out.
-Very often, it’s a conditional mean: “What do we expect for a random variable <span class="math inline">\(Y\)</span> given <span class="math inline">\(X= \mathbf{x}\)</span>?
+For most of the chapter, we talked about simpler cases, like the distribution of a single variable: <span class="math inline">\(P(X)\)</span>.</p>
+<!-- joint versus conditional  -->
+<p>But we could have the case of multiple random variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.
+To describe the full distribution of more than one variable, we have to work with the joint distribution.
+The joint distribution can be difficult to estimate.
+It’s often much simpler to work with <em>conditional distributions</em>.
+The conditional distribution tells us how probable the outcome of one or more random variable is, given we already know the values of some other random variables.</p>
+<p>CONTINUE HERE</p>
+<!-- aspect of the distribuion -->
+<p>Depending on the analytical task, the statistician can target different “areas” of the distribution.
+In many cases, the quantity of interest is a conditional mean: “What do we expect for a random variable <span class="math inline">\(Y\)</span> given <span class="math inline">\(X= \mathbf{x}\)</span>?
 But it can also be other parts of the distribution:”What’s the 90% quantile for <span class="math inline">\(Y\)</span> given <span class="math inline">\(X = \mathbf{x}\)</span>?
-Consequently, 10% of the values for <span class="math inline">\(Y\)</span>, given <span class="math inline">\(X=\mathbf{x}\)</span>, would be greater than the 90% quantile.
+At the 90% quantile 10% of the values for <span class="math inline">\(Y\)</span>, given <span class="math inline">\(X=\mathbf{x}\)</span>, would be greater than the 90% quantile.
 Think of insurance: An insurance company is noy only interested in the expected damages they have to cover, but also how much they would have to cover in the extreme case.</p>
 <!-- Gaussian mixture, joint example -->
 <p>A Gaussian mixture model, for example, requires learning the entire distribution.
@@ -641,7 +660,7 @@ The stats detective then tries to uncover the data-generating process by making 
 <ul>
 <li>Dice roll: the throw of the dice is the data-generating process. The dice is symmetric, which makes each side equally likely. We could factor in throwing angle, surface roughness and so on, but the chaotic behaviour of the dice jumping and spinning over the table makes us dismiss all these factors.</li>
 <li>We study the income of computer scientists via a survey. Instead of only reporting on the income distribution, we think about the entire data-generating process: For example, some income values are missing. Are they missing at random? Or are maybe people with higher incomes omitting the question? Are some companies overrepresentated in the survey? Is the sample truly random?</li>
-<li>A research team has collected chest x-ray images of patients with and without COVID-19 for building a COVID-19 prediction model. A closer look at the data-generating proces shows: the images not only differ in COVID-19 status, but they come from different data-generating processes. COVID-19 images are more likely from a horizontal position where the patient lies down because they are so exhausted. One of the non-COVID-19 datasets are even just children x-ray images. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> I picked this example, because it is a paper from a <a href="#machine-learning">machine learning mindset</a>. Statisticians would think much more about the data-generating process, and are, IMHO, more likely to spot such mistakes.</li>
+<li>A research team has collected chest x-ray images of patients with and without COVID-19 for building a COVID-19 prediction model. A closer look at the data-generating proces shows: the images not only differ in COVID-19 status, but they come from different data-generating processes. COVID-19 images are more likely from a horizontal position where the patient lies down because they are so exhausted. One of the non-COVID-19 datasets are even just children x-ray images. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> I picked this example, because it is a paper from a <a href="#machine-learning">machine learning mindset</a>. Statisticians would think much more about the data-generating process, and are, IMHO, more likely to spot such mistakes.</li>
 </ul>
 <p>If these examples of data-generating process sound like common sense to you, it’s because they are.
 But it’s surprisingly uncommon among non-statistician mindsets.
@@ -681,7 +700,7 @@ And, more general, how probability is to be interpreted.</p>
 <blockquote>
 <p>“It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel.”</p>
 </blockquote>
-<p>– Leonard Savage, 1972 <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>– Leonard Savage, 1972 <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>Statistical modeling is the foundation for learning from data.
 But we need another mindset on top of that to make the models useful.</p>
 <p><a href="#frequentism">Frequentist inference</a> is the most prominent mindset for inferring properties about the world from statistical models.
@@ -745,9 +764,8 @@ Insights from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
 <div class="footnotes">
 <hr />
 <ol start="2">
-<li id="fn2"><p>For continuous variables like water intake, technically we may not interpret probability density functions at a certain value, like P(intake = 2.5 liter) as probability. Instead we have to take the integral, for example over the range of 2.4 to 2.6 liters and then may interpret as the probability.<a href="statistical-modeling.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. “Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal.” bmj 369 (2020).<a href="statistical-modeling.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.<a href="statistical-modeling.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. “Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal.” bmj 369 (2020).<a href="statistical-modeling.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.<a href="statistical-modeling.html#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

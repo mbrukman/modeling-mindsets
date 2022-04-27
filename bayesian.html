@@ -171,7 +171,11 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="4.1" data-path="statistical-modeling.html"><a href="statistical-modeling.html#random-variables"><i class="fa fa-check"></i><b>4.1</b> Random Variables</a></li>
 <li class="chapter" data-level="4.2" data-path="statistical-modeling.html"><a href="statistical-modeling.html#probability-distributions"><i class="fa fa-check"></i><b>4.2</b> Probability Distributions</a></li>
 <li class="chapter" data-level="4.3" data-path="statistical-modeling.html"><a href="statistical-modeling.html#assuming-a-distribution"><i class="fa fa-check"></i><b>4.3</b> Assuming a Distribution</a></li>
-<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a></li>
+<li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#maximum-likelihood-estimation"><i class="fa fa-check"></i>Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#intepreting-parameters"><i class="fa fa-check"></i>Intepreting Parameters</a></li>
+</ul></li>
 <li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
 <li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
 <li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
@@ -315,7 +319,7 @@ Or maybe the parameter is more drawn to 0.25?
 Another Beta prior might put emphasis on <span class="math inline">\(\pi\)</span> being one.
 <!-- intuition for alpha = beta = 0.5: https://stats.stackexchange.com/questions/362728/whats-the-intuition-for-a-beta-distribution-with-alpha-and-or-beta-less-than -->
 But it’s also possible to have a prior that puts most probability on 0 and 1 symmetrically.
-When there are no specific prior beliefs about the parameter the Bayesian can use an “uninformative” or “objective” priors, meaning <a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>
+When there are no specific prior beliefs about the parameter the Bayesian can use an “uninformative” or “objective” priors, meaning <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>
 <!-- convenience reasons -->
 Another factor is mathematical convenience.
 It’s convenient to pick conjugate priors.
@@ -426,7 +430,7 @@ Gibbs sampler, Metropolis-Hastings, …
 All have in common that they are computationally expensive.
 So a big part of the daily job as a Bayesian is to wait for those MCMC chains to converge.
 At least compared to a frequentist.</p>
-<p>A shorter alternative is variational inference <a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.
+<p>A shorter alternative is variational inference <a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.
 But while MCMC deliver approximately exact estimates of the posterior probability, variational inference is more of a heuristic.</p>
 <p>TODO: Visualize the process that is implied by saying that parameters are random variables</p>
 </div>
@@ -561,9 +565,9 @@ https://efron.ckirby.su.domains//papers/2005BayesFreqSci.pdf
 </div>
 <div class="footnotes">
 <hr />
-<ol start="7">
-<li id="fn7"><p>Yang, Ruoyong, and James O. Berger. A catalog of noninformative priors. Durham, NC, USA: Institute of Statistics and Decision Sciences, Duke University, 1996.<a href="bayesian.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>Blei, David M., Alp Kucukelbir, and Jon D. McAuliffe. “Variational inference: A review for statisticians.” Journal of the American statistical Association 112, no. 518 (2017): 859-877.<a href="bayesian.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<ol start="6">
+<li id="fn6"><p>Yang, Ruoyong, and James O. Berger. A catalog of noninformative priors. Durham, NC, USA: Institute of Statistics and Decision Sciences, Duke University, 1996.<a href="bayesian.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Blei, David M., Alp Kucukelbir, and Jon D. McAuliffe. “Variational inference: A review for statisticians.” Journal of the American statistical Association 112, no. 518 (2017): 859-877.<a href="bayesian.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
