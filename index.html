@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-04-27" />
+<meta name="date" content="2022-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -59,7 +59,7 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+ga('create', 'G-KCMDGRVL1L', 'https://book.modeling-mindsets.com', {
   'anonymizeIp': true
   , 'storage': 'none'
   , 'clientId': window.localStorage.getItem('ga_clientId')
@@ -174,9 +174,9 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a>
 <ul>
 <li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#maximum-likelihood-estimation"><i class="fa fa-check"></i>Maximum Likelihood Estimation</a></li>
-<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#intepreting-parameters"><i class="fa fa-check"></i>Intepreting Parameters</a></li>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#interpreting-parameters"><i class="fa fa-check"></i>Interpreting Parameters</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
+<li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#joint-or-conditional-distribution"><i class="fa fa-check"></i><b>4.5</b> Joint or Conditional Distribution</a></li>
 <li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
 <li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
 <li class="chapter" data-level="4.8" data-path="statistical-modeling.html"><a href="statistical-modeling.html#data-generating-process-dgp"><i class="fa fa-check"></i><b>4.8</b> Data-Generating Process (DGP)</a></li>
@@ -207,7 +207,10 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
 <li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#design-based-inference"><i class="fa fa-check"></i><b>10.1</b> Design-based Inference</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> 
@@ -234,7 +237,7 @@ window.cookieconsent.initialise({
 <h1 class="title">Modeling Mindsets</h1>
 <h2 class="subtitle"><em>The Many Cultures of Learning From Data</em></h2>
 <p class="author"><em>Christoph Molnar</em></p>
-<p class="date"><em>2022-04-27</em></p>
+<p class="date"><em>2022-04-28</em></p>
 </div>
 <div id="summary" class="section level1 unnumbered hasAnchor">
 <h1>Summary<a href="index.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -251,14 +254,14 @@ Write about how this book is unique:
 -->
 <!-- Background -->
 <p>We use data to advance science, make businesses more profitable, automate annoying tasks, and develop smart products.
-But there is a middleman between data and it’s usefulness: the <strong>model</strong>.
-The model that was learned from data and represents a simplified aspect of the world; it’s the glue that connects data and world.</p>
+But there is a middleman between data and its usefulness: the <strong>model</strong>.
+The model that was learned from data represents a simplified aspect of the world; it’s the glue that connects data and world.</p>
 <!-- Many mindsets available -->
 <p>Statistics versus machine learning, frequentist versus Bayesian inference, causation or association, …
 There are many mindsets to consider for building models from data.
-Each of these modeling mindset has its own assumptions, strengths and limitations.</p>
+Each of these modeling mindsets has its own assumptions, strengths, and limitations.</p>
 <!-- best mindset -->
-<p>The best modelers, researchers and data scientists don’t stubbornly stick to just one mindset.
+<p>The best modelers, researchers, and data scientists don’t stubbornly stick to just one mindset.
 The best modelers mix and match the mindsets.</p>
 <!-- difficulty with learning many mindsets -->
 <p>It can take years to truly grasp a new mindset.
@@ -279,7 +282,7 @@ Each of them enhances your own mind and makes you a better modeler:</p>
 <!-- this book -->
 <p>Modeling Mindsets opens the door to all these different ways of thinking.
 The book is packed with intuitive explanations and striking illustrations.
-Quickly get an overview of strengths and limitations for each modeling mindset.
+Quickly get an overview of the strengths and the limitations of each modeling mindset.
 Expand your mind when it comes to modeling the world using data.</p>
 
 </div>

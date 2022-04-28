@@ -18,7 +18,7 @@ random-variables
 probability-distributions
 assuming-a-distribution
 statistical-model
-types-of-statistical-models
+joint-or-conditional-distribution
 regression-models
 model-evaluation
 data-generating-process-dgp
@@ -45,3 +45,4 @@ likelihoodism
 causal
 supervised-ml
 deep-learning
+design-based-inference

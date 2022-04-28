@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-04-27" />
+<meta name="date" content="2022-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -59,7 +59,7 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-110543840-1', 'https://christophm.github.io/interpretable-ml-book/', {
+ga('create', 'G-KCMDGRVL1L', 'https://book.modeling-mindsets.com', {
   'anonymizeIp': true
   , 'storage': 'none'
   , 'clientId': window.localStorage.getItem('ga_clientId')
@@ -174,9 +174,9 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a>
 <ul>
 <li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#maximum-likelihood-estimation"><i class="fa fa-check"></i>Maximum Likelihood Estimation</a></li>
-<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#intepreting-parameters"><i class="fa fa-check"></i>Intepreting Parameters</a></li>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#interpreting-parameters"><i class="fa fa-check"></i>Interpreting Parameters</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#types-of-statistical-models"><i class="fa fa-check"></i><b>4.5</b> Types of Statistical Models</a></li>
+<li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#joint-or-conditional-distribution"><i class="fa fa-check"></i><b>4.5</b> Joint or Conditional Distribution</a></li>
 <li class="chapter" data-level="4.6" data-path="statistical-modeling.html"><a href="statistical-modeling.html#regression-models"><i class="fa fa-check"></i><b>4.6</b> Regression Models</a></li>
 <li class="chapter" data-level="4.7" data-path="statistical-modeling.html"><a href="statistical-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>4.7</b> Model Evaluation</a></li>
 <li class="chapter" data-level="4.8" data-path="statistical-modeling.html"><a href="statistical-modeling.html#data-generating-process-dgp"><i class="fa fa-check"></i><b>4.8</b> Data-Generating Process (DGP)</a></li>
@@ -207,7 +207,10 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
 <li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#design-based-inference"><i class="fa fa-check"></i><b>10.1</b> Design-based Inference</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> 
@@ -467,7 +470,7 @@ For simpler cases this can even be solved analytically.
 For the Normal distribution, we know that the optimal <span class="math inline">\(mu\)</span> is the mean of the data: <span class="math inline">\(\frac{1}{n} \sum_{i=1}^n x_i\)</span>.
 When an analytical solution is not possible, other optimization methods like gradient descent, the Newton-Raphson method and Fisher’s scoring can be used.</p>
 <!-- maximum likelihood mental model -->
-<p>Maximum likelihood estimation is a key element to understanding the statistical modeling midnset.
+<p>Maximum likelihood estimation is a key element to understanding the statistical modeling mindset.
 Maximizing the likelihood means bringing together the theoretical probability distributions and the observed data.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fit"></span>
 <img src="figures/fit-1.png" alt="Fitting distributions to data" width="\textwidth" />
@@ -476,8 +479,8 @@ FIGURE 4.3: Fitting distributions to data
 </p>
 </div>
 </div>
-<div id="intepreting-parameters" class="section level3 unnumbered hasAnchor">
-<h3>Intepreting Parameters<a href="statistical-modeling.html#intepreting-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="interpreting-parameters" class="section level3 unnumbered hasAnchor">
+<h3>Interpreting Parameters<a href="statistical-modeling.html#interpreting-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <!-- role of the parameters -->
 <p>The parameters are not only things to be optimized.
 Their role goes beyond that of a mere technical controller.
@@ -512,8 +515,8 @@ This now parameterized distribution is the statistical model of our little offic
 <!-- what types of models are possible -->
 </div>
 </div>
-<div id="types-of-statistical-models" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Types of Statistical Models<a href="statistical-modeling.html#types-of-statistical-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="joint-or-conditional-distribution" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Joint or Conditional Distribution<a href="statistical-modeling.html#joint-or-conditional-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- 
 - 1D distributions
 - but also mulitvariate
@@ -524,59 +527,50 @@ This now parameterized distribution is the statistical model of our little offic
 - also clustering is possible
 - ANOVA, regression models, survival model / cox model, Justification
 -->
+<!-- joint distribution -->
 <p>All statistical models target an aspect of a probability distribution.
-For most of the chapter, we talked about simpler cases, like the distribution of a single variable: <span class="math inline">\(P(X)\)</span>.</p>
-<!-- joint versus conditional  -->
-<p>But we could have the case of multiple random variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.
-To describe the full distribution of more than one variable, we have to work with the joint distribution.
-The joint distribution can be difficult to estimate.
-It’s often much simpler to work with <em>conditional distributions</em>.
-The conditional distribution tells us how probable the outcome of one or more random variable is, given we already know the values of some other random variables.</p>
-<p>CONTINUE HERE</p>
-<!-- aspect of the distribuion -->
-<p>Depending on the analytical task, the statistician can target different “areas” of the distribution.
-In many cases, the quantity of interest is a conditional mean: “What do we expect for a random variable <span class="math inline">\(Y\)</span> given <span class="math inline">\(X= \mathbf{x}\)</span>?
-But it can also be other parts of the distribution:”What’s the 90% quantile for <span class="math inline">\(Y\)</span> given <span class="math inline">\(X = \mathbf{x}\)</span>?
-At the 90% quantile 10% of the values for <span class="math inline">\(Y\)</span>, given <span class="math inline">\(X=\mathbf{x}\)</span>, would be greater than the 90% quantile.
-Think of insurance: An insurance company is noy only interested in the expected damages they have to cover, but also how much they would have to cover in the extreme case.</p>
+For most of the chapter, we talked about simpler cases, like the distribution of a single variable: <span class="math inline">\(P(X)\)</span>.
+But we could have the case of multiple random variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.
+To describe the full distribution of more than one variable, we have to work with the joint distribution.</p>
 <!-- Gaussian mixture, joint example -->
-<p>A Gaussian mixture model, for example, requires learning the entire distribution.
+<p>A Gaussian mixture model, for example, requires learning the entire distribution of multiple variables.
 Gaussian mixture models can be used for identifying clusters in the data, which are assumed to stem from a mixture of Normal distributions.
-With Gaussian mixture models we also seen an example where maximum likelihood is not the sole optimization approach.
-Instead, the expectation-maximization algorithm is used, which iteratively jumps between optimizing the model parameters and predicting the “mixture” of cluster centers for each data point.</p>
+Gaussian mixture models are also an example of using a different optimization algorithm than the maximum likelihood algorithm: the expectation-maximization algorithm, which iteratively jumps between optimizing the model parameters and predicting the “mixture” of cluster centers for each data point.</p>
+<!-- joint versus conditional  -->
 <!-- motivation: regression models -->
-<p>The joint distribution is not always of interest.
-So often, the modeler is only interested in the conditional distribution:
-How does the probability distribution of a variable depend on other variables?
+<p>The joint distribution is not always of interest and can be difficult to estimate.
+It’s often much simpler to work with <em>conditional distributions</em>.
+The conditional distribution tells us how likely the outcome of one or more random variables is given that we already know the values of some other random variables.
 For example:</p>
 <!-- example of conditional outcomes -->
 <ul>
-<li>What are risk factors that influence the probability of getting lung cancer?</li>
-<li>How do climatic conditions like temperature and humidity affect the occurence of bonobos?</li>
-<li>On which days is a hospital likely to be understaffed?</li>
+<li>Which risk factors influence the probability of getting lung cancer?</li>
+<li>How do climatic conditions like temperature and humidity affect the occurrence of bonobos?</li>
+<li>On what days is a hospital likely to be understaffed?</li>
 </ul>
 <!-- advantages of conditional -->
-<p>The conditional distribution is the natural form for prediction tasks and usually simpler to estimate than the joint distribution.
+<p>The conditional distribution is the natural form for prediction tasks.
+And it’s usually simpler to estimate than the joint distribution.
 Models of the conditional distribution are central to statistical modeling.
 They are also known as regression models.</p>
 </div>
 <div id="regression-models" class="section level2 hasAnchor" number="4.6">
 <h2><span class="header-section-number">4.6</span> Regression Models<a href="statistical-modeling.html#regression-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- regression models -->
-<p>Regression models are statistical models that don’t learn the joint distribution, but a conditional distribution.
+<p>Regression models are statistical models of the conditional and not the joint distribution.
 Let’s say we have two variables: <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>.
-With the join distribution <span class="math inline">\(P(Y,X)\)</span> we could answer “How likely is a certain combination of <span class="math inline">\(X=x\)</span>, and <span class="math inline">\(Y=y\)</span>.
-But with the joint distribution, we can ask:”Given <span class="math inline">\(X=x\)</span>, what is the probability distribution of <span class="math inline">\(Y\)</span>“?</p>
+With the joint distribution <span class="math inline">\(P(Y,X)\)</span> we could answer “How likely is it that <span class="math inline">\(X=x\)</span> and <span class="math inline">\(Y=y\)</span> occur together?
+But with the conditional distribution we can ask:”Given <span class="math inline">\(X=x\)</span>, how likely are certain values for <span class="math inline">\(Y\)</span>“?</p>
 <!-- an example -->
 <p>For example, we want to know not only how often a disease is successfully treated.
 We might want to know if a certain drug played a part in the disease outcome.
-And other factors such as age of the patient, progression of the disease and so on might play a role as well.
-And we would have to consider such factors to answer the question on whether the drug helps.</p>
+Other factors such as the patient’s age, disease progression, etc. may play a role.</p>
 <!-- how it works -->
-<p>Our target is the distribution of outcome variable <span class="math inline">\(Y\)</span> conditionanl on variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.
-That means that within the regression model the parameters of the distribution of <span class="math inline">\(Y\)</span> are linked to the other variables.
-How exactly this link looks like depends on the distribution that the modeler assumed for <span class="math inline">\(Y\)</span> and the link they chose to connect the two.
-The simplest case is a linear model.
+<p>Our target is the distribution of outcome variable <span class="math inline">\(Y\)</span> conditional on variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.
+Within the regression model, the distribution of <span class="math inline">\(Y\)</span> is linked to the variables <span class="math inline">\(X_1, \ldots, X_p\)</span>.
+Often this means that we express the parameters <span class="math inline">\(\theta\)</span> of <span class="math inline">\(Y\)</span>’s distribution (such as the mean <span class="math inline">\(\mu\)</span> in a Normal distribution) as a function of the other variables.
+How exactly this link looks like depends on the distribution that the modeler assumed for <span class="math inline">\(Y\)</span> and the link they chose to connect <span class="math inline">\(\theta\)</span> and <span class="math inline">\(X\)</span>.
+The simplest case is a linear regression model.
 We assume that <span class="math inline">\(Y\)</span> follows a Normal distribution and link the mean of <span class="math inline">\(Y\)</span>’s distribution to a weighted sum of the other variables:</p>
 <p><span class="math display">\[Y \sim N(\mu, \sigma)\]</span></p>
 <p><span class="math display">\[\mu = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p\]</span></p>
@@ -584,131 +578,147 @@ We assume that <span class="math inline">\(Y\)</span> follows a Normal distribut
 <p>The linear regression model expresses the mean of the target <span class="math inline">\(Y\)</span> as the weighted sum of the other variables.
 <span class="math inline">\(Y\)</span> given <span class="math inline">\(\mathbf{X}\)</span> follows a Normal distribution.
 We only link the mean <span class="math inline">\(\mu\)</span> to the variables.
-A typical assumption is that the <span class="math inline">\(\sigma\)</span> is independent of the value of the other variables.</p>
+A typical assumption is that the standard deviation <span class="math inline">\(\sigma\)</span> is independent of the value of the other variables.</p>
 <!-- what can we do with model -->
 <p>What can we do now with a regression model?
 <!-- goal: prediction -->
 We can make predictions.
-We just have to fill in values for <span class="math inline">\(X\)</span> and get the expected value of the probability distribution of <span class="math inline">\(X\)</span>.
+We just have to fill in values for <span class="math inline">\(X\)</span> and get the expected value of the probability distribution of <span class="math inline">\(Y\)</span>.
+<!-- target other parts of the conditional distribution -->
+While the conditional mean of <span class="math inline">\(Y\)</span> is often the goal of the regression model, the statistician can also target other parts of the conditional distribution.
+For example the median or other quantiles.
+These types of regression models are quantile regression models.
+For survival models the target is often the hazard rate, which is a function of the probability of an event happening in a time interval.
+See for example the Cox proportional odds model.</p>
 <!-- goal: interpretation -->
-Another typical goal is interpreting the relationship between the target with the other variables.
-The coefficients in the regression model are subject to interpretation.
-For the linear regression model, a positive coefficient <span class="math inline">\(\beta_j\)</span> means that increasing the value of variable <span class="math inline">\(X_j\)</span> increases the expected value of <span class="math inline">\(Y\)</span>.</p>
-<!-- glm and gam -->
-<!--
-So [frequentists](#frequentism) can derive confidence intervals, p-values and hypothesis tests for them ("Is coefficient $\beta_j$ significantly different from $0$?").
-[Bayesians](#bayesian) would additionally assume a prior distribution for $\mathbf{\beta}$ and we would get as a result the posterior distributions of the coefficients to analyze. 
--->
+<p><strong>Interpretation of parameters</strong> is usually even more important than prediction.
+The parameters contain information about the relationship between the target and the other variables.
+For regression models, we usually speak of the coefficients.
+In the linear regression model, a positive coefficient <span class="math inline">\(\beta_j\)</span> means that increasing the value of variable <span class="math inline">\(X_j\)</span> increases the expected value of <span class="math inline">\(Y\)</span>.</p>
+<p>A large part of statistical modeling consists of regression models in different flavors.</p>
+<ul>
+<li>Generalized linear models (GLMs)</li>
+<li>Generalized additive models (GAMs)</li>
+<li>Quantile regression</li>
+<li>Mixed effect models</li>
+<li>…</li>
+</ul>
+<p>Most of these models were “invented” to address a shortcoming of another regression model.
+GLMs can model targets that don’t follow a Normal distribution but some other distribution.
+GAMs can model non-linear relationships.</p>
 <!-- bridge to ML -->
-<p>Thinking in regression models brings you closer to the <a href="#mindset">supervised machine learning</a>.
-However, in supervised machine learning, the focus is usually on getting a good predictive model.
-Not on finding a finding a probabilistic representation of your data with random variables and distributions.</p>
-<!-- on classification models -->
-<p>But what if the outcome is a category, and our task is classification?
-When you come from the <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> mindset, always the distinction between classification and regression models is made.
-In statistical modeling, we don’t model the categories, but their probability distribution.
+<p>Regression models also have a place in <a href="#mindset">supervised machine learning</a>.
+But in supervised machine learning, the goal is to achieve good predictive performance on unseen data.
+And if a random forest performs better than a GAM, then the GAM gets thrown out, even if it has nicer statistical properties.</p>
+<!-- on classification models 
+But what if the outcome is a category, and our task is classification?
+When you come from the [supervised machine learning](#supervised-ml) mindset, always the distinction between classification and regression models is made.
+In statistical modeling, we don't model the categories, but their probability distribution.
 From the statistical modeling mindset, a categorical variable is nothing special.
 Like for all other variables, we model the conditional distribution of the variable.
-And if we make predictions with our model, we get the probabilities for the categories.</p>
+And if we make predictions with our model, we get the probabilities for the categories.
+-->
 </div>
 <div id="model-evaluation" class="section level2 hasAnchor" number="4.7">
 <h2><span class="header-section-number">4.7</span> Model Evaluation<a href="statistical-modeling.html#model-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- importance of evaluation for understanding mindset -->
-<p>Statistical models can be evaluated.
-The evaluation is very revealing to understand the mindset.
-And especially how the statistical modeling mindset differs from the <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> mindset.
-Evaluation consists of model diagnostics and goodness-of-fit measures.</p>
+<p>Good statisticians evaluate their models.
+Understanding how this evaluation works will help you better understand the statistical modeling mindset.
+It’s particularly interesting to see how much the evaluation in the statistical modeling mindset differs from that of <a href="supervised-ml.html#supervised-ml">supervised machine learning</a>.
+The evaluation of statistical models consists of two parts: <strong>model diagnostics and goodness-of-fit</strong>.</p>
 <!--  diagnostics -->
-<p>The role of model diagnostics is to check whether the modeling assumptions were meaningful.
-If we assumed that a random variable follows a Normal distribution, we can visually check whether that’s really the case using, for example, the Q-Q plot.
-An assumption for linear regression model that I mentioned : The variance of the outcome does not depend on the values of the other variables.
-This can be checked visually by plotting the residuals (value of <span class="math inline">\(Y\)</span> minus predicted value of <span class="math inline">\(Y\)</span>) against each of the other variables.</p>
+<p>The role of model diagnostics is to check whether the modeling assumptions were reasonable.
+If we have assumed that a random variable follows a Normal distribution, we can check this assumption visually.
+For example, with a Q-Q plot.
+<!-- TODO: visualize a few qq-plots -->
+Another typical assumption is homoscedasticity: The variance of the target is independent of other variables.
+Homoscedasticity can be checked visually by plotting the residuals (<span class="math inline">\(y_i\)</span> minus its predicted value) against each of the other variables.</p>
 <!-- goodness-of-fit -->
-<p>The role of goodness-of-fit measures is model comparison and evaluating modeling choices.
-Typical measures here are the (adjusted) R-squared, Akaikes Information Criterion (AIC), the Bayes factor, and likelihood ratios.
-Goodness-of-fit are, quite literally, measures that tell us how well our model fits the data.
-Goodness-of-fit metrics can guide the model building process and decide which model to choose in the end.</p>
+<p>A model that passes these diagnostics is not automatically a good model.
+Statisticians use goodness-of-fit measures to compare models and evaluate modeling choices, such as which variables to have in the model.<br />
+Typical goodness-of-fit measures are the (adjusted) R-squared, Akaikes Information Criterion (AIC), the Bayes factor, and likelihood ratios.
+Goodness-of-fit is literally a measure of how well the model fits the data.
+The goodness-of-fit can guide the model building process and decide which model is chosen in the end.</p>
 <!-- compare evaluation to ML -->
-<p>Goodness-of-fit metrics are typically computed with the same data that were used for fitting the statistical models.
+<p>Goodness-of-fit is typically computed with the same data that were used for fitting the statistical models.
 This choice may look like a minor detail, but it says a lot about the statistical modeling mindset.
 The critical factor here is overfitting: The more flexible a model is, the better it adapts to ALL the randomness in the data instead of learning patterns that generalize.
 Many goodness-of-fit metrics therefore account for model complexity, like the AIC or adjusted R-squared.
-For the <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> mindset, you would always use new, unseen data for the evaluation.</p>
+Compare this to <a href="supervised-ml.html#supervised-ml">supervised machine learning</a>: in this mindset, there is a strict requirement to always use “fresh” data for evaluation.</p>
 </div>
 <div id="data-generating-process-dgp" class="section level2 hasAnchor" number="4.8">
 <h2><span class="header-section-number">4.8</span> Data-Generating Process (DGP)<a href="statistical-modeling.html#data-generating-process-dgp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- what is the DGP -->
-<p>A quite central, but fuzzy topic of the statistical modeling mindset is the data-generating process.
+<p>A quite central, but fuzzy also topic of the statistical modeling mindset is the data-generating process.
 The statistical modeler thinks about the data-generating process all the time.
-The data-generating process is a construct, an unknowable ideal of how the data was generated.
-The data-generating process produces the unknown distributions that than produce the data.
-We can only observe the data-generating indirectly by oberving data.
-And we can come closer to the DGP by reasoning about it.
-You won’t find this in any statistics book explicitly.
-But it’s the mindset of statistical modeling to have this idea of the DGP.
-It’s a natural consequence when you think about the world as random variables and distributions.</p>
+The data-generating process is a construct, an unknowable ideal of how the data were generated.
+The data-generating process produces the unknown distributions that then produce the data.
+We observe the data-generating process indirectly through the data.
+With data and reflections on the DGP, sometimes together with experts, the statistician tries to decipher the DGP.
+Statisticians talk about the DGP all the time, but it remains more of a mental model than a clearly defined concept.
+When I was studying statistics, the DGP was mentioned in most lectures.
+But I never had a formal lecture on what the DGP is.
+It’s also difficult to find textbooks, lectures, or blog posts that define what the DGP really is.
+It seems to me that the mental model of a DGP is a natural consequence of viewing the world in terms of probability distributions.</p>
 <!-- DGP detective -->
-<p>I think the DGP is a very powerful idea, even when it’s not well defined.
+<p>The DGP is a powerful idea, even if it’s not well defined.
 Assuming a DGP encourages you to intellectually dive deep into your data.
 Having this image of a DGP in your mind let’s you take on the mindset of a detective:
 Statisticians are like detectives reconstructing a crime.
 You can’t observe the crime directly.
 But the crime has generated a lot of “data” at the scene.
-The stats detective then tries to uncover the data-generating process by making assumptions and learning from data.</p>
+The stats detective then tries to uncover the data-generating process by making assumptions and learning from the observed data.</p>
 <!-- examples of data-generating processes -->
-<p>“Defining” the data-generating process is neither simple nor well-defined, but I’ll give it a try:</p>
+<p>There is no definition of the data-generating process, so I’ll give you a some examples:</p>
 <ul>
-<li>Dice roll: the throw of the dice is the data-generating process. The dice is symmetric, which makes each side equally likely. We could factor in throwing angle, surface roughness and so on, but the chaotic behaviour of the dice jumping and spinning over the table makes us dismiss all these factors.</li>
-<li>We study the income of computer scientists via a survey. Instead of only reporting on the income distribution, we think about the entire data-generating process: For example, some income values are missing. Are they missing at random? Or are maybe people with higher incomes omitting the question? Are some companies overrepresentated in the survey? Is the sample truly random?</li>
-<li>A research team has collected chest x-ray images of patients with and without COVID-19 for building a COVID-19 prediction model. A closer look at the data-generating proces shows: the images not only differ in COVID-19 status, but they come from different data-generating processes. COVID-19 images are more likely from a horizontal position where the patient lies down because they are so exhausted. One of the non-COVID-19 datasets are even just children x-ray images. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> I picked this example, because it is a paper from a <a href="#machine-learning">machine learning mindset</a>. Statisticians would think much more about the data-generating process, and are, IMHO, more likely to spot such mistakes.</li>
+<li>Rolling dice is a data-generating process. A die is symmetric, making each side equally likely. We could factor in the angle of the throw, surface roughness and so on. But the chaotic behaviour of the dice bouncing and spinning across the table makes us disregard all these factors.</li>
+<li>We study the income of computer scientists via a survey. Instead of mindlessly reporting the income distribution, we think about the entire data-generating process: For example, some income values are missing. Are they missing at random? Are higher-income individuals more likely to leave the income answer empty? Are some businesses overrepresented in the survey? Is the sample truly random?</li>
+<li>A research team has collected chest x-ray images of patients with and without COVID-19 for building a COVID-19 prediction model. A closer look at the data-generating process shows: the images not only differ in COVID-19 status, but they come from different data-generating processes. COVID-19 images are often taken with patients lying down because of exhaustion. One of the non-COVID-19 datasets are even children x-ray images.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Considering the DGP casts doubt on whether such data can be used to build a COVID-19 classifier or whether, in reality, it classifies data into child/adult, standing/lying down, … I chose this example because it’s a paper from the <a href="supervised-ml.html#supervised-ml">supervised machine learning mindset</a>. A good statisticians would check the DGP much more carefully, making it more likely to detect such problems.</li>
 </ul>
-<p>If these examples of data-generating process sound like common sense to you, it’s because they are.
+<p>If these examples of data-generating processes sound like common sense to you, it’s because they are.
 But it’s surprisingly uncommon among non-statistician mindsets.
-For example, for <a href="#machine-learning">machine learning</a> considerations of the data-generating process play a subordinate .
-For machine learning competitions, for example, the winner is, most of the times, solely determined by the lowest loss function.
-It’s not considered when some approach has a more meaningful consideration of the data-generating process, and an understandable model.</p>
-<p>Sometimes we want to control at least parts of the data-generating process.
-In randomized clinical trials, for example, we control who gets the drug and who get the placebo.
-In other controlled experiments we even control more factors.</p>
+For example, for <a href="supervised-ml.html#supervised-ml">supervised machine learning</a>, considerations of the data-generating process play a subordinate .
+For most machine learning competitions the winner is determined solely by the lowest prediction error on new data.
+It doesn’t matter whether the model meaningfully reflects the data-generating process.</p>
 </div>
 <div id="drawing-conclusions-about-the-world" class="section level2 hasAnchor" number="4.9">
 <h2><span class="header-section-number">4.9</span> Drawing Conclusions About the World<a href="statistical-modeling.html#drawing-conclusions-about-the-world" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- from world to model -->
-<p>Statisticians collect data about the world and use that data to fit a statistical model.
+<!--
+Statisticians collect data about the world and use that data to fit a statistical model.
 The statistical model links the world and the data through random variables:
 The world can be simplified by probability distributions;
-the data are viewed as realizations of the random variables.</p>
+the data are viewed as realizations of the random variables.
+-->
 <!-- from model to world -->
-<p>Statistical modeling is a practical endeavour.
-In most cases, statistical models are built for practical reasons:
+<p>In most cases, statistical models are built for practical reasons:
 To make a decision, to better understand some property of the world, or to make a prediction.
-These goals requires us to interpret the model instead of the world.
-But this interpretation does not come for free.
-After all the model building and evaluation, the statistical modeler must consider the representativeness of the data, the interpretation of probability and causality.</p>
+These goals require the interpretation of the model instead of the world.
+But using the model as a representation of the world isn’t for free.
+The statistician must consider the representativeness of the data and choose a mindset that allows the findings of the model to be applied to the world.</p>
 <!-- Part 1: Representativeness -->
 <p>Considering the data-generating process also means thinking about the representativeness of the data, and thus the model.
-Are the data a good sample and representative of the quantity of the world you are interested in?
+Are the data a good sample and representative of the quantity of the world the statistician is interested in?
 Let’s say a statistical modeler analyzes data on whether a sepsis screening tool successfully reduced the incidence of sepsis in a hospital.
 They conclude that the sepsis screening tool has helped reduce sepsis-related deaths at that hospital.
 Are the data representative of all hospitals in the region, the country, or even the world?
 Are the data even representative of all patients at the hospital, or are data only available from patients in intensive care unit?
-In the statistical modeling mindset, defining the “population” from which the data are a sample and discussing how representative the data are of that population is critical to any conclusions drawn from the model.
+A good statistical modeler define and discuss the “population” from which the data are a sample of.
 <a href="#design-based">Design-based inference</a> fully embraces this mindset that the data are sampled from a larger population.</p>
 <!-- Part 2: Interpretation of probability -->
-<p>More philosophical is the modeler’s attitude to causality, prior probabilities and the likelihood principle.
-And, more general, how probability is to be interpreted.</p>
+<p>More philosophical is the modeler’s attitude toward causality, the nature of probability, and the likelihood principle.</p>
 <blockquote>
 <p>“It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel.”</p>
 </blockquote>
-<p>– Leonard Savage, 1972 <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>– Leonard Savage, 1972<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>Statistical modeling is the foundation for learning from data.
 But we need another mindset on top of that to make the models useful.</p>
 <p><a href="#frequentism">Frequentist inference</a> is the most prominent mindset for inferring properties about the world from statistical models.
-Frequentist statistics sees probability as the relative frequencies of events in long-run experiments.</p>
+Frequentist statistics sees probability as relative frequencies of events in long-run experiments.</p>
 <p><a href="bayesian.html#bayesian">Bayesian inference</a> is based on an interpretation of probability as a degree belief about the world.
 Bayesianism states that the model parameters also have a (prior) distribution.
 And the goal of the statistician is to update the prior distribution by learning from data.
-The resulting posteriori distribution of the parameter expresses our belief about the the parameter.</p>
+The resulting posteriori distributions of the parameters express our belief about the world.</p>
 <p><a href="likelihoodism.html#likelihoodism">Likelihoodism</a> is a lesser known modeling mindset. Like Bayesianism, it adheres to the likelihood principle, which states that the likelihood function captures all evidence from the data (which frequentist inference violates).
 However, it does not require prior probabilities.</p>
 <p><a href="#causality">Causal inference</a> adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.</p>
@@ -722,15 +732,16 @@ However, it does not require prior probabilities.</p>
 <li>The data-generating process is an underestimated mental model. But it’s a powerful mental model that encourages mindful modeling and asking the right questions.</li>
 <li>Conditional probability models can be used not only to learn about the parameters of interest, but also to make predictions</li>
 <li>Probability distributions give us a language to express uncertainty. <a href="#bayesianism">Bayesianism</a> arguably has the most principled focus on formalizing and modeling uncertainty.</li>
+<li>Can naturally handle different types of variables: Categorical, ordinal, numerical, …</li>
 </ul>
 </div>
 <div id="limitations" class="section level2 hasAnchor" number="4.11">
 <h2><span class="header-section-number">4.11</span> Limitations<a href="statistical-modeling.html#limitations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Statistical modeling quickly reaches its limits when defining probability distributions becomes difficult. Images and text don’t easily fit into this mindset, and this where <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> and especially <a href="deep-learning.html#deep-learning">deep learning</a> shine.</li>
-<li>Working with the statistical modeling mindset can be quite “manual” and tedious. It’s not easy to always think about the DGP, and sometimes more automatable mindsets such as supervised machine learning are more convenient.</li>
-<li>Statistical models require a lot of assumptions. Sometimes more, sometimes less. Just to name a few common assumptions: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, … For most violations, there is a special version of a statistical model without the critical assumption whose estimation and interpretation is often more complicated.</li>
-<li>Statistical modeling, when used for prediction, is often outperformed by <a href="supervised-ml.html#supervised-ml">supervised machine learning</a>. To be fair, outperforming here requires an evaluation based on the supervised learning mindset. However, this means that a goodness-of-fit and diagnostics are no guarantee that a model will performs well on all metrics. <!-- requires citation. kaggle? -->
+<li>Statistical modeling reaches its limits whenever defining probability distributions becomes difficult. Images and text don’t easily fit into this mindset, and this where <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> and especially <a href="deep-learning.html#deep-learning">deep learning</a> shine.</li>
+<li>Working within the statistical modeling mindset can be quite “manual” and tedious. It’s not easy to always think about the DGP, and sometimes more automatable mindsets such as supervised machine learning are more convenient.</li>
+<li>Statistical models require a lot of assumptions. Sometimes more, sometimes less. Just to name a few common assumptions: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, … For most violations, there is a special version of a statistical model that doesn’t require the critical assumption. The price is more complex and less interpretable models.</li>
+<li>Statistical modeling, when used for prediction, is often outperformed by <a href="supervised-ml.html#supervised-ml">supervised machine learning</a>. To be fair, outperforming here requires an evaluation based on the supervised learning mindset. However, this means that goodness-of-fit and diagnosis are no guarantee that a model will performs well on all metrics. <!-- requires citation. kaggle? -->
 <!--
 ## Justification of Likelihood Mindset: Probability Theory
 
