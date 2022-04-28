@@ -17,6 +17,7 @@
 - TODO: Mention that most models make simplifying assumptions, such as typical for the linear model
 - TODO: Write a paragraph about evaluation
 -->
+
 <!-- TODO: Mention all the types of statistical models one can build with this mindset: clustering, classification, regression, outlier detection, ... -->
 
 <!-- 
@@ -674,7 +675,6 @@ A different but complimentary approach is [design-based inference](#design-based
 * Working within the statistical modeling mindset can be quite "manual" and tedious. It's not easy to always think about the DGP, and sometimes more automatable mindsets such as supervised machine learning are more convenient.
 * Statistical models require a lot of assumptions. Sometimes more, sometimes less. Just to name a few common assumptions: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, ... For most violations, there is a special version of a statistical model that doesn't require the critical assumption. The price is more complex and less interpretable models.
 * Statistical modeling, when used for prediction, is often outperformed by [supervised machine learning](#supervised-ml). To be fair, outperforming here requires an evaluation based on the supervised learning mindset. However, this means that goodness-of-fit and diagnosis are no guarantee that a model will performs well on all metrics. <!-- requires citation. kaggle? -->
-<!--
 <!-- representativeness -->
 <!--
 So to make claims about the world, we also have to make claims about what our sample represents.
