@@ -5,6 +5,7 @@ bookdown::gitbook:
   fontfamily: arial
   includes:
     in_header: html/header.html
+    before_body: html/cta-button.html
   config:
     edit: https://github.com/christophM/modeling-mindsets/edit/master/manuscript/%s
     download: false
