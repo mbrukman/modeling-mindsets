@@ -1,10 +1,8 @@
 # Design-based Inference
 
-TODO
-
-* 
-* 
-* 
+* Focused on sampling data representatively rather than complex modeling.
+* Data population is finite; uncertainty about results is only due to sampling.
+* Often combined with [Statistical Modeling](#statistical-modeling), especially [Frequentist Inference](#frequentism).
 
 ```{r, results = "asis"}
 cat(under_construction)

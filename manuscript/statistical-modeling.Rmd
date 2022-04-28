@@ -675,24 +675,6 @@ A different but complimentary approach is [design-based inference](#design), whi
 * Statistical models require a lot of assumptions. Sometimes more, sometimes less. Just to name a few common assumptions: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, ... For most violations, there is a special version of a statistical model that doesn't require the critical assumption. The price is more complex and less interpretable models.
 * Statistical modeling, when used for prediction, is often outperformed by [supervised machine learning](#supervised-ml). To be fair, outperforming here requires an evaluation based on the supervised learning mindset. However, this means that goodness-of-fit and diagnosis are no guarantee that a model will performs well on all metrics. <!-- requires citation. kaggle? -->
 <!--
-## Justification of Likelihood Mindset: Probability Theory
-
-Let's start VERY basic.
-What is a probability?
-It's axiomatic, meaning we have to make some assumptions to build a framework of interpretability.
-Introduced by Andrey Kolmogorov in 1933.
-There's an entire field called measurement theory, which lays the theoretical groundwork that we can even speak of "probabilities" and events.
-The idea is that we can describe a so-called probability space with $\Omega$, the set of all possible events that can happen, we call $B$ sub-spaces of $\Omega$ and $p$ is a measure on the event space.
-The clue is how we define $p$.
-And this is where axioms kick in: We have to build on axioms because we can't say what's right or wrong.
-Kolmogorov's axioms:
-For any event $b \in B$ we want $p(b) \in [0,1]$, and also $p(\Omega) = 1$.
-This looks a lot like a probability: The probability that any of the events happens is 1 ($\Omega$ is an exhaustive set) and the probability is always between 0 and 1.
-Also for disjunct events, the probability that any of them happens is the sum of their probability.
-The probality that a person a person rolls a dice with "1" or a "2" is the sum of probabilities for both numbers. 
--->
-
-
 <!-- representativeness -->
 <!--
 So to make claims about the world, we also have to make claims about what our sample represents.
@@ -707,7 +689,6 @@ Insights from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
 
 [^Wynants2020]: Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. "Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal." bmj 369 (2020).
 
-
-[^semiparametric]: Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric.
+<!-- [^semiparametric]: Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric. -->
 
 
