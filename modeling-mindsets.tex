@@ -242,20 +242,19 @@ This book is licensed under the Creative Commons Attribution-NonCommercial-Share
 
 We use data to advance science, make businesses more profitable, automate annoying tasks, and develop smart products.
 But there is a middleman between data and its usefulness: the \textbf{model}.
-The model that was learned from data represents a simplified aspect of the world; it's the glue that connects data and world.
+The model represents a simplified aspect of the world; it's the glue that connects data and world.
 
 Statistics versus machine learning, frequentist versus Bayesian inference, causation or association, \ldots{}
 There are many mindsets to consider for building models from data.
 Each of these modeling mindsets has its own assumptions, strengths, and limitations.
 
-The best modelers, researchers, and data scientists don't stubbornly stick to just one mindset.
+\textbf{The best modelers, researchers, and data scientists don't stubbornly stick to just one mindset}.
 The best modelers mix and match the mindsets.
 
 It can take years to truly grasp a new mindset.
 Most books and courses jump right into math and methods instead of discussing the fundamental mindset.
 But learning a new mindset doesn't have to be this difficult.
-
-The Modeling Mindset book introduces all the cultures of learning models from data.
+\textbf{The Modeling Mindset book introduces many cultures of learning models from data}.
 Each of them enhances your own mind and makes you a better modeler:
 
 \begin{itemize}
@@ -275,7 +274,7 @@ Each of them enhances your own mind and makes you a better modeler:
 \end{itemize}
 
 Modeling Mindsets opens the door to all these different ways of thinking.
-The book is packed with intuitive explanations and striking illustrations.
+The book is packed with \textbf{intuitive explanations and illustrations}.
 Quickly get an overview of the strengths and the limitations of each modeling mindset.
 Expand your mind when it comes to modeling the world using data.
 
@@ -544,7 +543,7 @@ Having an open mind about modeling ultimately makes you a better modeler.
 \item
   Assumes the world is best described by probability distributions.
 \item
-  Requires additional assumptions for drawing conclusions. See \protect\hyperlink{frequentism}{frequentism}, \protect\hyperlink{bayesian}{Bayesianism} and \protect\hyperlink{likelihoodism}{likelihoodism}.
+  Requires additional assumptions for drawing conclusions. See \protect\hyperlink{frequentist-inference}{Frequentism Inference}, \protect\hyperlink{bayesian-inference}{Bayesian Inference} and \protect\hyperlink{likelihoodism}{Likelihoodism}.
 \end{itemize}
 
 Do you become more productive when you drink a lot of water?
@@ -867,7 +866,7 @@ Most of these models were ``invented'' to address a shortcoming of another regre
 GLMs can model targets that don't follow a Normal distribution but some other distribution.
 GAMs can model non-linear relationships.
 
-Regression models also have a place in \protect\hyperlink{mindset}{supervised machine learning}.
+Regression models also have a place in \protect\hyperlink{supervised-ml}{supervised machine learning}.
 But in supervised machine learning, the goal is to achieve good predictive performance on unseen data.
 And if a random forest performs better than a GAM, then the GAM gets thrown out, even if it has nicer statistical properties.
 
@@ -954,7 +953,7 @@ They conclude that the sepsis screening tool has helped reduce sepsis-related de
 Are the data representative of all hospitals in the region, the country, or even the world?
 Are the data even representative of all patients at the hospital, or are data only available from patients in intensive care unit?
 A good statistical modeler define and discuss the ``population'' from which the data are a sample of.
-\protect\hyperlink{design-based}{Design-based inference} fully embraces this mindset that the data are sampled from a larger population.
+\protect\hyperlink{design-based-inference}{Design-based inference} fully embraces this mindset that the data are sampled from a larger population.
 
 More philosophical is the modeler's attitude toward causality, the nature of probability, and the likelihood principle.
 
@@ -967,10 +966,10 @@ More philosophical is the modeler's attitude toward causality, the nature of pro
 Statistical modeling is the foundation for learning from data.
 But we need another mindset on top of that to make the models useful.
 
-\protect\hyperlink{frequentism}{Frequentist inference} is the most prominent mindset for inferring properties about the world from statistical models.
+\protect\hyperlink{frequentism-frequentism}{Frequentist inference} is the most prominent mindset for inferring properties about the world from statistical models.
 Frequentist statistics sees probability as relative frequencies of events in long-run experiments.
 
-\protect\hyperlink{bayesian}{Bayesian inference} is based on an interpretation of probability as a degree belief about the world.
+\protect\hyperlink{bayesian-inference}{Bayesian inference} is based on an interpretation of probability as a degree belief about the world.
 Bayesianism states that the model parameters also have a (prior) distribution.
 And the goal of the statistician is to update the prior distribution by learning from data.
 The resulting posteriori distributions of the parameters express our belief about the world.
@@ -978,9 +977,9 @@ The resulting posteriori distributions of the parameters express our belief abou
 \protect\hyperlink{likelihoodism}{Likelihoodism} is a lesser known modeling mindset. Like Bayesianism, it adheres to the likelihood principle, which states that the likelihood function captures all evidence from the data (which frequentist inference violates).
 However, it does not require prior probabilities.
 
-\protect\hyperlink{causality}{Causal inference} adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.
+\protect\hyperlink{causal-inference}{Causal inference} adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.
 
-A different but complimentary approach is \protect\hyperlink{design}{design-based inference}, which focuses on data sampling and experiments instead of models.
+A different but complimentary approach is \protect\hyperlink{design-based-infernce}{design-based inference}, which focuses on data sampling and experiments instead of models.
 
 \hypertarget{strengths}{%
 \section{Strengths}\label{strengths}}
@@ -996,7 +995,7 @@ A different but complimentary approach is \protect\hyperlink{design}{design-base
 \item
   Conditional probability models can be used not only to learn about the parameters of interest, but also to make predictions
 \item
-  Probability distributions give us a language to express uncertainty. \protect\hyperlink{bayesianism}{Bayesianism} arguably has the most principled focus on formalizing and modeling uncertainty.
+  Probability distributions give us a language to express uncertainty. \protect\hyperlink{bayesian-inference}{Bayesianism} arguably has the most principled focus on formalizing and modeling uncertainty.
 \item
   Can naturally handle different types of variables: Categorical, ordinal, numerical, \ldots{}
 \end{itemize}
@@ -1016,8 +1015,8 @@ A different but complimentary approach is \protect\hyperlink{design}{design-base
   Statistical modeling, when used for prediction, is often outperformed by \protect\hyperlink{supervised-ml}{supervised machine learning}. To be fair, outperforming here requires an evaluation based on the supervised learning mindset. However, this means that goodness-of-fit and diagnosis are no guarantee that a model will performs well on all metrics.
 \end{itemize}
 
-\hypertarget{statistical-inference}{%
-\chapter{Frequentist Inference}\label{statistical-inference}}
+\hypertarget{frequentist-inference}{%
+\chapter{Frequentist Inference}\label{frequentist-inference}}
 
 \begin{itemize}
 \tightlist
@@ -1028,7 +1027,7 @@ A different but complimentary approach is \protect\hyperlink{design}{design-base
 \item
   Interprets probability as long-run relative frequencies from which hypothesis tests, confidence intervals and p-values are derived.
 \item
-  A statistical mindset, with \protect\hyperlink{bayesian}{Bayesian inference} and \protect\hyperlink{likelihoodism}{likelihoodism} as alternatives.
+  A statistical mindset, with \protect\hyperlink{bayesian-inference}{Bayesian inference} and \protect\hyperlink{likelihoodism}{likelihoodism} as alternatives.
 \end{itemize}
 
 Drinking alcohol is associated with a higher risk of diabetes in middle-aged men.
@@ -1105,7 +1104,7 @@ The interpretation of the confidence interval reveals the \textbf{core philosoph
   Repeated measurements/experiments reveal the true parameter values in the long-run.
 \end{itemize}
 
-In contrast, \protect\hyperlink{bayesian}{Bayesianism} assumes that the parameters of the distributions are themselves random variables.
+In contrast, \protect\hyperlink{bayesian-inference}{Bayesianism} assumes that the parameters of the distributions are themselves random variables.
 As the frequentists collect more and more data (\(n \to \infty\)), their parameter estimation gets closer and closer to the true parameter (if the estimator is unbiased).
 With each additional data point, the uncertainty of the estimated parameter shrinks and the confidence interval becomes narrower.
 
@@ -1139,7 +1138,7 @@ These imagined experiments have a curious implication for frequentism.
 Frequentism violates the likelihood principle, which says that all evidence about the data is contained in the likelihood function.
 But with frequentism, it's important to know what experiments we are further imagining.
 You can find a simple example involving coin tosses in the chapter on \protect\hyperlink{likelihoodism}{Likelihoodism}.
-\protect\hyperlink{likelihoodism}{Likelihoodism} and \protect\hyperlink{bayesianism}{Bayesianism} adhere to the likelihood principle.
+\protect\hyperlink{likelihoodism}{Likelihoodism} and \protect\hyperlink{bayesianism-inference}{Bayesianism} adhere to the likelihood principle.
 
 \hypertarget{estimators-are-random-variables}{%
 \section{Estimators are Random Variables}\label{estimators-are-random-variables}}
@@ -1304,9 +1303,9 @@ As you can see, this is a very frequentist point of view: the confidence interva
 \item
   Once you understand frequentist inference, you have the key to understanding most modern research findings. I studied statistics and can now quickly grasp many research papers. For example, to figure out whether I should have knee surgery for my torn meniscus, I read papers comparing knee surgery and physiotherapy alone. All of those papers used frequentist methods, and although I didn't understand everything, I was able to quickly get an idea of their analyses and results.
 \item
-  Frequentist methods are generally faster to compute than methods from \protect\hyperlink{bayesian}{Bayesian inference} or \protect\hyperlink{supervised-ml}{machine learning}.
+  Frequentist methods are generally faster to compute than methods from \protect\hyperlink{bayesian-inference}{Bayesian inference} or \protect\hyperlink{supervised-ml}{machine learning}.
 \item
-  Compared to \protect\hyperlink{bayesian}{Bayesianism}, no prior information about the parameters is required. This makes frequentism more objective.
+  Compared to \protect\hyperlink{bayesian-inference}{Bayesianism}, no prior information about the parameters is required. This makes frequentism more objective.
 \item
   Frequentism allows binary decisions (accept/reject hypothesis). This simplicity is one of the reasons why frequentism is popular for both scientific publications and business decisions.
 \item
@@ -1327,19 +1326,19 @@ As you can see, this is a very frequentist point of view: the confidence interva
 \item
   Similarly, if the analysis is exploratory rather than hypothesis-driven, a naive frequentist approach may produce many false positive findings. Look again at figure \ref{fig:ci}: Imagine these were confidence intervals for different variables. Again, for \(\alpha = 0.05\), we would expect 1 in 20 hypothesis tests to yield false positives. Now imagine a data scientist testing hundreds of hypothesis tests. This problem is called the multiple testing problem. There are solutions, but they are not always used and multiple testing can be very subtle.
 \item
-  The frequentist interpretation of probability is very awkward when it comes to confidence intervals and p-values. They are commonly misinterpreted. Arguably, frequentist confidence intervals are not what practitioners want. \protect\hyperlink{bayesian}{Bayesian} credibility intervals are more aligned with the natural interpretation of uncertainty.
+  The frequentist interpretation of probability is very awkward when it comes to confidence intervals and p-values. They are commonly misinterpreted. Arguably, frequentist confidence intervals are not what practitioners want. \protect\hyperlink{bayesian-inference}{Bayesian} credibility intervals are more aligned with the natural interpretation of uncertainty.
 \item
   Frequentist analysis depends not only on the data, but also on the experimental design. This is a violation of the likelihood principle that says that all information about the data must be contained in the likelihood, see also the example in the \protect\hyperlink{likelihoodism}{Likelihoodism} chapter.
 \item
-  Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. \protect\hyperlink{bayesian}{Bayesianism} offers a solution to involve prior information for such estimates.
+  Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. \protect\hyperlink{bayesian-inference}{Bayesianism} offers a solution to involve prior information for such estimates.
 \item
   There is an ``off-the-shelf''-mentality among users of frequentist inference. Instead of carefully adapting a probability model to the data, an off-the-shelf statistical test or statistical model is chosen. The choice is based on just a few properties of the data. For example, there are popular flow charts of choosing an appropriate statistical test.
 \item
   Frequentist statistics says nothing about causality except that ``correlation does not imply causation''.
 \end{itemize}
 
-\hypertarget{bayesian}{%
-\chapter{Bayesian Inference}\label{bayesian}}
+\hypertarget{bayesian-inference}{%
+\chapter{Bayesian Inference}\label{bayesian-inference}}
 
 \begin{itemize}
 \tightlist
@@ -1348,7 +1347,7 @@ As you can see, this is a very frequentist point of view: the confidence interva
 \item
   Model parameters are random variables with a prior distribution. Goal: posterior distribution.
 \item
-  A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} with \protect\hyperlink{frequentism}{frequentism} and \protect\hyperlink{likelihoodism}{likelihoodism} as alternatives.
+  A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} with \protect\hyperlink{frequentist-inference}{frequentism} and \protect\hyperlink{likelihoodism}{likelihoodism} as alternatives.
 \end{itemize}
 
 \textbf{This chapter is under construction! Stay tuned.}
@@ -1363,13 +1362,13 @@ As you can see, this is a very frequentist point of view: the confidence interva
 \item
   Does not assume that parameters are random variables.\\
 \item
-  A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} with \protect\hyperlink{frequentism}{frequentism} and \protect\hyperlink{bayesianism}{Bayesianism} as alternatives.
+  A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} with \protect\hyperlink{frequent-inference}{frequentism} and \protect\hyperlink{bayesian-inference}{Bayesianism} as alternatives.
 \end{itemize}
 
 \textbf{This chapter is under construction! Stay tuned.}
 
-\hypertarget{causal}{%
-\chapter{Causal inference}\label{causal}}
+\hypertarget{causal-inference}{%
+\chapter{Causal inference}\label{causal-inference}}
 
 \begin{itemize}
 \tightlist
@@ -1378,7 +1377,7 @@ As you can see, this is a very frequentist point of view: the confidence interva
 \item
   Builds a causal model from which statistical estimators are derived.
 \item
-  A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} that adds causality to \protect\hyperlink{frequentism}{frequentist} and \protect\hyperlink{bayesian}{Bayesian} inference.
+  A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} that adds causality to \protect\hyperlink{frequentist-inference}{frequentist} and \protect\hyperlink{bayesian-inference}{Bayesian} inference.
 \end{itemize}
 
 \textbf{This chapter is under construction! Stay tuned.}
@@ -1423,7 +1422,7 @@ As you can see, this is a very frequentist point of view: the confidence interva
 \item
   Data population is finite; uncertainty about results is only due to sampling.
 \item
-  Often combined with \protect\hyperlink{statistical-modeling}{Statistical Modeling}, especially \protect\hyperlink{frequentism}{Frequentist Inference}.
+  Often combined with \protect\hyperlink{statistical-modeling}{Statistical Modeling}, especially \protect\hyperlink{frequentist-inference}{Frequentist Inference}.
 \end{itemize}
 
 \textbf{This chapter is under construction! Stay tuned.}

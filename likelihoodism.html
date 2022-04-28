@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="bayesian.html"/>
-<link rel="next" href="causal.html"/>
+<link rel="prev" href="bayesian-inference.html"/>
+<link rel="next" href="causal-inference.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -163,18 +163,18 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="4.10" data-path="statistical-modeling.html"><a href="statistical-modeling.html#strengths"><i class="fa fa-check"></i><b>4.10</b> Strengths</a></li>
 <li class="chapter" data-level="4.11" data-path="statistical-modeling.html"><a href="statistical-modeling.html#limitations"><i class="fa fa-check"></i><b>4.11</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
+<li class="chapter" data-level="5" data-path="frequentist-inference.html"><a href="frequentist-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="statistical-inference.html"><a href="statistical-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
-<li class="chapter" data-level="5.2" data-path="statistical-inference.html"><a href="statistical-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
-<li class="chapter" data-level="5.3" data-path="statistical-inference.html"><a href="statistical-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
-<li class="chapter" data-level="5.4" data-path="statistical-inference.html"><a href="statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="5.5" data-path="statistical-inference.html"><a href="statistical-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
-<li class="chapter" data-level="5.6" data-path="statistical-inference.html"><a href="statistical-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
+<li class="chapter" data-level="5.1" data-path="frequentist-inference.html"><a href="frequentist-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
+<li class="chapter" data-level="5.2" data-path="frequentist-inference.html"><a href="frequentist-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
+<li class="chapter" data-level="5.3" data-path="frequentist-inference.html"><a href="frequentist-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
+<li class="chapter" data-level="5.4" data-path="frequentist-inference.html"><a href="frequentist-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.5" data-path="frequentist-inference.html"><a href="frequentist-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
+<li class="chapter" data-level="5.6" data-path="frequentist-inference.html"><a href="frequentist-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
+<li class="chapter" data-level="6" data-path="bayesian-inference.html"><a href="bayesian-inference.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
-<li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
 <li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
 <li class="chapter" data-level="11" data-path="design-based-inference.html"><a href="design-based-inference.html"><i class="fa fa-check"></i><b>11</b> Design-based Inference</a></li>
@@ -212,7 +212,7 @@ window.cookieconsent.initialise({
 <li>Focused on the likelihood, follows the likelihood principle.</li>
 <li>Does not assume that parameters are random variables.<br />
 </li>
-<li>A <a href="statistical-modeling.html#statistical-modeling">statistical modeling mindset</a> with <a href="#frequentism">frequentism</a> and <a href="#bayesianism">Bayesianism</a> as alternatives.</li>
+<li>A <a href="statistical-modeling.html#statistical-modeling">statistical modeling mindset</a> with <a href="#frequent-inference">frequentism</a> and <a href="bayesian-inference.html#bayesian-inference">Bayesianism</a> as alternatives.</li>
 </ul>
 <p><strong>This chapter is under construction! Stay tuned.</strong></p>
 
@@ -222,8 +222,8 @@ window.cookieconsent.initialise({
           </div>
         </div>
       </div>
-<a href="bayesian.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="causal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesian-inference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="causal-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

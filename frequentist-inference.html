@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="statistical-modeling.html"/>
-<link rel="next" href="bayesian.html"/>
+<link rel="next" href="bayesian-inference.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -163,18 +163,18 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="4.10" data-path="statistical-modeling.html"><a href="statistical-modeling.html#strengths"><i class="fa fa-check"></i><b>4.10</b> Strengths</a></li>
 <li class="chapter" data-level="4.11" data-path="statistical-modeling.html"><a href="statistical-modeling.html#limitations"><i class="fa fa-check"></i><b>4.11</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
+<li class="chapter" data-level="5" data-path="frequentist-inference.html"><a href="frequentist-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="statistical-inference.html"><a href="statistical-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
-<li class="chapter" data-level="5.2" data-path="statistical-inference.html"><a href="statistical-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
-<li class="chapter" data-level="5.3" data-path="statistical-inference.html"><a href="statistical-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
-<li class="chapter" data-level="5.4" data-path="statistical-inference.html"><a href="statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="5.5" data-path="statistical-inference.html"><a href="statistical-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
-<li class="chapter" data-level="5.6" data-path="statistical-inference.html"><a href="statistical-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
+<li class="chapter" data-level="5.1" data-path="frequentist-inference.html"><a href="frequentist-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
+<li class="chapter" data-level="5.2" data-path="frequentist-inference.html"><a href="frequentist-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
+<li class="chapter" data-level="5.3" data-path="frequentist-inference.html"><a href="frequentist-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
+<li class="chapter" data-level="5.4" data-path="frequentist-inference.html"><a href="frequentist-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.5" data-path="frequentist-inference.html"><a href="frequentist-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
+<li class="chapter" data-level="5.6" data-path="frequentist-inference.html"><a href="frequentist-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
+<li class="chapter" data-level="6" data-path="bayesian-inference.html"><a href="bayesian-inference.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
-<li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
 <li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
 <li class="chapter" data-level="11" data-path="design-based-inference.html"><a href="design-based-inference.html"><i class="fa fa-check"></i><b>11</b> Design-based Inference</a></li>
@@ -206,13 +206,13 @@ window.cookieconsent.initialise({
 <a id="cta-button-device" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank">Buy</a>
   
 
-<div id="statistical-inference" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Frequentist Inference<a href="statistical-inference.html#statistical-inference" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="frequentist-inference" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Frequentist Inference<a href="frequentist-inference.html#frequentist-inference" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
 <li>Popular modeling mindset in science.</li>
 <li>The world consists of probability distributions with fixed parameters that have to be uncovered.</li>
 <li>Interprets probability as long-run relative frequencies from which hypothesis tests, confidence intervals and p-values are derived.</li>
-<li>A statistical mindset, with <a href="bayesian.html#bayesian">Bayesian inference</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a> as alternatives.</li>
+<li>A statistical mindset, with <a href="bayesian-inference.html#bayesian-inference">Bayesian inference</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a> as alternatives.</li>
 </ul>
 <!-- TODOs:
 
@@ -285,7 +285,7 @@ This confidence interval describes uncertainty regarding the alcohol coefficient
 If we were to repeat the analysis many times with new samples, the respective 95% confidence interval would cover the “true” parameter 95% of the time.
 Always under the condition that the model assumptions were correct.</p>
 <div id="frequentist-probability" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Frequentist probability<a href="statistical-inference.html#frequentist-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">5.1</span> Frequentist probability<a href="frequentist-inference.html#frequentist-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- frequentist interpretation of example -->
 <p>The interpretation of the confidence interval reveals the <strong>core philosophy of frequentism</strong>:</p>
 <ul>
@@ -293,7 +293,7 @@ Always under the condition that the model assumptions were correct.</p>
 <li>The parameters of the probability distributions are constant and unknown;</li>
 <li>Repeated measurements/experiments reveal the true parameter values in the long-run.</li>
 </ul>
-<p>In contrast, <a href="bayesian.html#bayesian">Bayesianism</a> assumes that the parameters of the distributions are themselves random variables.
+<p>In contrast, <a href="bayesian-inference.html#bayesian-inference">Bayesianism</a> assumes that the parameters of the distributions are themselves random variables.
 As the frequentists collect more and more data (<span class="math inline">\(n \to \infty\)</span>), their parameter estimation gets closer and closer to the true parameter (if the estimator is unbiased).
 With each additional data point, the uncertainty of the estimated parameter shrinks and the confidence interval becomes narrower.</p>
 <!-- other examples -->
@@ -324,10 +324,10 @@ These “imagined” experiments are central to the interpretation of confidence
 Frequentism violates the likelihood principle, which says that all evidence about the data is contained in the likelihood function.
 But with frequentism, it’s important to know what experiments we are further imagining.
 You can find a simple example involving coin tosses in the chapter on <a href="likelihoodism.html#likelihoodism">Likelihoodism</a>.
-<a href="likelihoodism.html#likelihoodism">Likelihoodism</a> and <a href="#bayesianism">Bayesianism</a> adhere to the likelihood principle.</p>
+<a href="likelihoodism.html#likelihoodism">Likelihoodism</a> and <a href="#bayesianism-inference">Bayesianism</a> adhere to the likelihood principle.</p>
 </div>
 <div id="estimators-are-random-variables" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Estimators are Random Variables<a href="statistical-inference.html#estimators-are-random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">5.2</span> Estimators are Random Variables<a href="frequentist-inference.html#estimators-are-random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- estimands are fixed -->
 <p>We can learn a lot about frequentist inference, especially in contrast to Bayesian inference, by understanding which “things” are random variables and which are not.
 In the frequentist mindset, the estimand, the “true” but unknown parameter is assumed to be fixed.
@@ -345,7 +345,7 @@ Bayesians assume that the parameters are random variables.
 Bayesian inference updates the (prior) probability distributions of the parameters, which results in the posterior distributions of the parameters.</p>
 <!-- other parameters -->
 <p>Typical frequentist constructs like confidence intervals, test statistics and p-values are also random variables.
-Mix this with the long-run frequencies and you get a special interpretation, for example, for <a href="statistical-inference.html#confidence-intervals">confidence intervals</a>.</p>
+Mix this with the long-run frequencies and you get a special interpretation, for example, for <a href="frequentist-inference.html#confidence-intervals">confidence intervals</a>.</p>
 <!-- example -->
 <p>Let’s say you want to know how many teas you drink on average per day.
 If you are a frequentist, you would assume that there is a true but unknown daily number of teas.
@@ -364,7 +364,7 @@ Combined with the idea of fixed true parameters, it becomes possible to connect 
 A commonly used tool to derive insights about the world is null hypothesis significance testing.</p>
 </div>
 <div id="null-hypothesis-significance-testing" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Null Hypothesis Significance Testing<a href="statistical-inference.html#null-hypothesis-significance-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">5.3</span> Null Hypothesis Significance Testing<a href="frequentist-inference.html#null-hypothesis-significance-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- example of decision under frequentism -->
 <p>Let’s say, your estimator <span class="math inline">\(\hat{\lambda}\)</span> says that you drink 2.5 teas per day on average.
 Initially you had the hypothesis that you drink at least 3.0 teas per day.
@@ -395,7 +395,7 @@ It can be as simple as assuming that the data follow a Normal distribution and c
 <li>Decide which statistical test to use. This step includes modeling the data.</li>
 <li>Calculate the distribution of the parameter estimates under the null hypothesis (or rather, the test statistic <span class="math inline">\(T\)</span>).</li>
 <li>Choose the significance level <span class="math inline">\(\alpha\)</span>: the probability threshold at which to reject the null hypothesis assuming it would be true. Often <span class="math inline">\(\alpha = 0.05\)</span>.</li>
-<li>Calculate the p-value: Assume that the null hypothesis is correct. Then p is the probability of getting a more extreme test statistic <span class="math inline">\(T\)</span> than was actually observed. See figure <a href="statistical-inference.html#fig:hypothesis">5.2</a>.</li>
+<li>Calculate the p-value: Assume that the null hypothesis is correct. Then p is the probability of getting a more extreme test statistic <span class="math inline">\(T\)</span> than was actually observed. See figure <a href="frequentist-inference.html#fig:hypothesis">5.2</a>.</li>
 <li>If <span class="math inline">\(\text{p-value} &lt;\alpha\)</span>, then the null hypothesis is rejected.</li>
 </ul>
 <p>Some examples of tests and test statistics:</p>
@@ -430,7 +430,7 @@ With frequentist inference, however, we can tell how likely a model result is un
 That’s why hypothesis tests work by rejection.</p>
 </div>
 <div id="confidence-intervals" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> Confidence Intervals<a href="statistical-inference.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">5.4</span> Confidence Intervals<a href="frequentist-inference.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- Alternative, but equivalent: Confidence interval -->
 <p>Frequentists use confidence intervals as an alternative to statistical tests.
 Hypothesis tests and confidence intervals ultimately lead to the same decisions, but confidence intervals are more informative. <!-- citation needed -->
@@ -474,25 +474,25 @@ FIGURE 5.3: 100 95% confidence intervals and the true value.
 </div>
 </div>
 <div id="strengths-1" class="section level2 hasAnchor" number="5.5">
-<h2><span class="header-section-number">5.5</span> Strengths<a href="statistical-inference.html#strengths-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">5.5</span> Strengths<a href="frequentist-inference.html#strengths-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Once you understand frequentist inference, you have the key to understanding most modern research findings. I studied statistics and can now quickly grasp many research papers. For example, to figure out whether I should have knee surgery for my torn meniscus, I read papers comparing knee surgery and physiotherapy alone. All of those papers used frequentist methods, and although I didn’t understand everything, I was able to quickly get an idea of their analyses and results.</li>
-<li>Frequentist methods are generally faster to compute than methods from <a href="bayesian.html#bayesian">Bayesian inference</a> or <a href="supervised-ml.html#supervised-ml">machine learning</a>.</li>
-<li>Compared to <a href="bayesian.html#bayesian">Bayesianism</a>, no prior information about the parameters is required. This makes frequentism more objective.</li>
+<li>Frequentist methods are generally faster to compute than methods from <a href="bayesian-inference.html#bayesian-inference">Bayesian inference</a> or <a href="supervised-ml.html#supervised-ml">machine learning</a>.</li>
+<li>Compared to <a href="bayesian-inference.html#bayesian-inference">Bayesianism</a>, no prior information about the parameters is required. This makes frequentism more objective.</li>
 <li>Frequentism allows binary decisions (accept/reject hypothesis). This simplicity is one of the reasons why frequentism is popular for both scientific publications and business decisions.</li>
 <li>Frequentism has all advantages of <a href="statistical-modeling.html#statistical-modeling">statistical models</a> in general: a solid theoretical foundation and an appreciation of the data-generating process.</li>
 <li>When the underlying process is a long-run, repeated experiment, frequentist inference shines. Casino games, model benchmarks, …</li>
 </ul>
 </div>
 <div id="limitations-1" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> Limitations<a href="statistical-inference.html#limitations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">5.6</span> Limitations<a href="frequentist-inference.html#limitations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Frequentism makes it easy to <strong>over-simplify questions</strong> into yes/no-questions. Reducing models to binary decisions obscures critical model assumptions and the difficult trade-offs that had to be made for the analysis.</li>
 <li>Focusing on p-values encourages <strong>p-hacking</strong>: the either conscious or unconscious search for “positive” results. Guided by the lure of a significant result, researchers and data scientists may play around with their analysis until the p-value in question is small enough. With <span class="math inline">\(\alpha\)</span>-level of 0.05, 1 in 20 null hypotheses are falsely rejected. P-hacking increases this percentage of false positive findings.</li>
-<li>Similarly, if the analysis is exploratory rather than hypothesis-driven, a naive frequentist approach may produce many false positive findings. Look again at figure <a href="statistical-inference.html#fig:ci">5.3</a>: Imagine these were confidence intervals for different variables. Again, for <span class="math inline">\(\alpha = 0.05\)</span>, we would expect 1 in 20 hypothesis tests to yield false positives. Now imagine a data scientist testing hundreds of hypothesis tests. This problem is called the multiple testing problem. There are solutions, but they are not always used and multiple testing can be very subtle.</li>
-<li>The frequentist interpretation of probability is very awkward when it comes to confidence intervals and p-values. They are commonly misinterpreted. Arguably, frequentist confidence intervals are not what practitioners want. <a href="bayesian.html#bayesian">Bayesian</a> credibility intervals are more aligned with the natural interpretation of uncertainty.</li>
+<li>Similarly, if the analysis is exploratory rather than hypothesis-driven, a naive frequentist approach may produce many false positive findings. Look again at figure <a href="frequentist-inference.html#fig:ci">5.3</a>: Imagine these were confidence intervals for different variables. Again, for <span class="math inline">\(\alpha = 0.05\)</span>, we would expect 1 in 20 hypothesis tests to yield false positives. Now imagine a data scientist testing hundreds of hypothesis tests. This problem is called the multiple testing problem. There are solutions, but they are not always used and multiple testing can be very subtle.</li>
+<li>The frequentist interpretation of probability is very awkward when it comes to confidence intervals and p-values. They are commonly misinterpreted. Arguably, frequentist confidence intervals are not what practitioners want. <a href="bayesian-inference.html#bayesian-inference">Bayesian</a> credibility intervals are more aligned with the natural interpretation of uncertainty.</li>
 <li>Frequentist analysis depends not only on the data, but also on the experimental design. This is a violation of the likelihood principle that says that all information about the data must be contained in the likelihood, see also the example in the <a href="likelihoodism.html#likelihoodism">Likelihoodism</a> chapter.</li>
-<li>Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. <a href="bayesian.html#bayesian">Bayesianism</a> offers a solution to involve prior information for such estimates.</li>
+<li>Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. <a href="bayesian-inference.html#bayesian-inference">Bayesianism</a> offers a solution to involve prior information for such estimates.</li>
 <li>There is an “off-the-shelf”-mentality among users of frequentist inference. Instead of carefully adapting a probability model to the data, an off-the-shelf statistical test or statistical model is chosen. The choice is based on just a few properties of the data. For example, there are popular flow charts of choosing an appropriate statistical test. <!-- https://bookdown.org/content/4857/generalized-linear-madness.html --> <!-- citation needed --></li>
 <li>Frequentist statistics says nothing about causality except that “correlation does not imply causation”.</li>
 </ul>
@@ -502,8 +502,8 @@ FIGURE 5.3: 100 95% confidence intervals and the true value.
 <div class="footnotes">
 <hr />
 <ol start="4">
-<li id="fn4"><p>Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. “Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study.” American journal of epidemiology 154, no. 8 (2001): 748-757.<a href="statistical-inference.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Ioannidis, John PA. “Why most published research findings are false.” PLoS medicine 2, no. 8 (2005): e124.<a href="statistical-inference.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. “Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study.” American journal of epidemiology 154, no. 8 (2001): 748-757.<a href="frequentist-inference.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Ioannidis, John PA. “Why most published research findings are false.” PLoS medicine 2, no. 8 (2005): e124.<a href="frequentist-inference.html#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -512,7 +512,7 @@ FIGURE 5.3: 100 95% confidence intervals and the true value.
         </div>
       </div>
 <a href="statistical-modeling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bayesian.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesian-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="mindsets.html"/>
-<link rel="next" href="statistical-inference.html"/>
+<link rel="next" href="frequentist-inference.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -163,18 +163,18 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="4.10" data-path="statistical-modeling.html"><a href="statistical-modeling.html#strengths"><i class="fa fa-check"></i><b>4.10</b> Strengths</a></li>
 <li class="chapter" data-level="4.11" data-path="statistical-modeling.html"><a href="statistical-modeling.html#limitations"><i class="fa fa-check"></i><b>4.11</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="statistical-inference.html"><a href="statistical-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
+<li class="chapter" data-level="5" data-path="frequentist-inference.html"><a href="frequentist-inference.html"><i class="fa fa-check"></i><b>5</b> Frequentist Inference</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="statistical-inference.html"><a href="statistical-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
-<li class="chapter" data-level="5.2" data-path="statistical-inference.html"><a href="statistical-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
-<li class="chapter" data-level="5.3" data-path="statistical-inference.html"><a href="statistical-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
-<li class="chapter" data-level="5.4" data-path="statistical-inference.html"><a href="statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="5.5" data-path="statistical-inference.html"><a href="statistical-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
-<li class="chapter" data-level="5.6" data-path="statistical-inference.html"><a href="statistical-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
+<li class="chapter" data-level="5.1" data-path="frequentist-inference.html"><a href="frequentist-inference.html#frequentist-probability"><i class="fa fa-check"></i><b>5.1</b> Frequentist probability</a></li>
+<li class="chapter" data-level="5.2" data-path="frequentist-inference.html"><a href="frequentist-inference.html#estimators-are-random-variables"><i class="fa fa-check"></i><b>5.2</b> Estimators are Random Variables</a></li>
+<li class="chapter" data-level="5.3" data-path="frequentist-inference.html"><a href="frequentist-inference.html#null-hypothesis-significance-testing"><i class="fa fa-check"></i><b>5.3</b> Null Hypothesis Significance Testing</a></li>
+<li class="chapter" data-level="5.4" data-path="frequentist-inference.html"><a href="frequentist-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>5.4</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.5" data-path="frequentist-inference.html"><a href="frequentist-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
+<li class="chapter" data-level="5.6" data-path="frequentist-inference.html"><a href="frequentist-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
+<li class="chapter" data-level="6" data-path="bayesian-inference.html"><a href="bayesian-inference.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
-<li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
 <li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
 <li class="chapter" data-level="11" data-path="design-based-inference.html"><a href="design-based-inference.html"><i class="fa fa-check"></i><b>11</b> Design-based Inference</a></li>
@@ -211,7 +211,7 @@ window.cookieconsent.initialise({
 <ul>
 <li>Goal: Changing your mind under uncertainty.</li>
 <li>Assumes the world is best described by probability distributions.</li>
-<li>Requires additional assumptions for drawing conclusions. See <a href="#frequentism">frequentism</a>, <a href="bayesian.html#bayesian">Bayesianism</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a>.</li>
+<li>Requires additional assumptions for drawing conclusions. See <a href="frequentist-inference.html#frequentist-inference">Frequentism Inference</a>, <a href="bayesian-inference.html#bayesian-inference">Bayesian Inference</a> and <a href="likelihoodism.html#likelihoodism">Likelihoodism</a>.</li>
 </ul>
 <!-- statistician modeling mindset ingredients
 
@@ -581,7 +581,7 @@ In the linear regression model, a positive coefficient <span class="math inline"
 GLMs can model targets that don’t follow a Normal distribution but some other distribution.
 GAMs can model non-linear relationships.</p>
 <!-- bridge to ML -->
-<p>Regression models also have a place in <a href="#mindset">supervised machine learning</a>.
+<p>Regression models also have a place in <a href="supervised-ml.html#supervised-ml">supervised machine learning</a>.
 But in supervised machine learning, the goal is to achieve good predictive performance on unseen data.
 And if a random forest performs better than a GAM, then the GAM gets thrown out, even if it has nicer statistical properties.</p>
 <!-- on classification models 
@@ -678,7 +678,7 @@ They conclude that the sepsis screening tool has helped reduce sepsis-related de
 Are the data representative of all hospitals in the region, the country, or even the world?
 Are the data even representative of all patients at the hospital, or are data only available from patients in intensive care unit?
 A good statistical modeler define and discuss the “population” from which the data are a sample of.
-<a href="#design-based">Design-based inference</a> fully embraces this mindset that the data are sampled from a larger population.</p>
+<a href="design-based-inference.html#design-based-inference">Design-based inference</a> fully embraces this mindset that the data are sampled from a larger population.</p>
 <!-- Part 2: Interpretation of probability -->
 <p>More philosophical is the modeler’s attitude toward causality, the nature of probability, and the likelihood principle.</p>
 <blockquote>
@@ -687,16 +687,16 @@ A good statistical modeler define and discuss the “population” from which th
 <p>– Leonard Savage, 1972<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>Statistical modeling is the foundation for learning from data.
 But we need another mindset on top of that to make the models useful.</p>
-<p><a href="#frequentism">Frequentist inference</a> is the most prominent mindset for inferring properties about the world from statistical models.
+<p><a href="#frequentism-frequentism">Frequentist inference</a> is the most prominent mindset for inferring properties about the world from statistical models.
 Frequentist statistics sees probability as relative frequencies of events in long-run experiments.</p>
-<p><a href="bayesian.html#bayesian">Bayesian inference</a> is based on an interpretation of probability as a degree belief about the world.
+<p><a href="bayesian-inference.html#bayesian-inference">Bayesian inference</a> is based on an interpretation of probability as a degree belief about the world.
 Bayesianism states that the model parameters also have a (prior) distribution.
 And the goal of the statistician is to update the prior distribution by learning from data.
 The resulting posteriori distributions of the parameters express our belief about the world.</p>
 <p><a href="likelihoodism.html#likelihoodism">Likelihoodism</a> is a lesser known modeling mindset. Like Bayesianism, it adheres to the likelihood principle, which states that the likelihood function captures all evidence from the data (which frequentist inference violates).
 However, it does not require prior probabilities.</p>
-<p><a href="#causality">Causal inference</a> adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.</p>
-<p>A different but complimentary approach is <a href="#design">design-based inference</a>, which focuses on data sampling and experiments instead of models.</p>
+<p><a href="causal-inference.html#causal-inference">Causal inference</a> adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.</p>
+<p>A different but complimentary approach is <a href="#design-based-infernce">design-based inference</a>, which focuses on data sampling and experiments instead of models.</p>
 </div>
 <div id="strengths" class="section level2 hasAnchor" number="4.10">
 <h2><span class="header-section-number">4.10</span> Strengths<a href="statistical-modeling.html#strengths" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -705,7 +705,7 @@ However, it does not require prior probabilities.</p>
 <li>Statistical modeling has a long tradition and extensive theoretical foundation, from measurement theory as the basis of probability theory to convergence properties of statistical estimators.</li>
 <li>The data-generating process is an underestimated mental model. But it’s a powerful mental model that encourages mindful modeling and asking the right questions.</li>
 <li>Conditional probability models can be used not only to learn about the parameters of interest, but also to make predictions</li>
-<li>Probability distributions give us a language to express uncertainty. <a href="#bayesianism">Bayesianism</a> arguably has the most principled focus on formalizing and modeling uncertainty.</li>
+<li>Probability distributions give us a language to express uncertainty. <a href="bayesian-inference.html#bayesian-inference">Bayesianism</a> arguably has the most principled focus on formalizing and modeling uncertainty.</li>
 <li>Can naturally handle different types of variables: Categorical, ordinal, numerical, …</li>
 </ul>
 </div>
@@ -744,7 +744,7 @@ Insights from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
         </div>
       </div>
 <a href="mindsets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistical-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="frequentist-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
