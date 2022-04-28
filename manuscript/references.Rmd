@@ -19,8 +19,6 @@ Pearl, Judea. "The do-calculus revisited." arXiv preprint arXiv:1210.4852 (2012)
 
 Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972. 
 
-Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric.
-
 Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.
 
 Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. "Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal." bmj 369 (2020).

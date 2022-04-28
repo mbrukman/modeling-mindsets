@@ -1,4 +1,4 @@
-# Bayesian Inference {#bayesian}
+# Bayesian Inference {#bayesian-inference}
 
 <!-- summary of Bayesian inference -->
 Bayesian inference sees the world as parameterized distributions.
@@ -8,12 +8,12 @@ So to learn about the parameters, we have to assume some prior distribution, and
 This is then the posteriori distribution.
 
 <!-- relation to others -->
-Bayesian inference is a likelihood-based apprach that builds on the Bayes theorem:
+Bayesian inference is a likelihood-based approach that builds on the Bayes theorem:
 The distribution parameters do not only depend on the data, but we assume some prior distribution.
 In Bayesian statistics, probability can be interpreted as the plausibility of an event.
 Bayesian statistics is about the degree of beliefs we have about our parameters.
 Bayesianism is therefore found on the idea of subjective probabilities.
-If you haven't read the [chapter on statistical inference](#statistical-inference), I recommend you do it first, since Bayesian inference is easier understood when you have a good grasp on statistical inference.
+If you haven't read the chapter on [Statistical Modeling](#statistical-modeling), I recommend you do it first, since Bayesian inference is easier understood when you have a good grasp on statistical inference.
 The core difference to frequentism are: Heavy use of Bayes' theorem; assumption of prior distribution of parameters; interpretation of probability as degrees of beliefs and not as long-run frequencies.
 
 <!-- Bayesian updating -->
@@ -22,7 +22,7 @@ We update our knowledge about the world when new information comes in.
 You already know some stuff to the world.
 Prior to getting some new information.
 Then you update your knowledge, based on data / evidence.
-Then you go about your life with this udpated knowledge.
+Then you go about your life with this updated knowledge.
 
 <!-- Example of knowledge update in real life -->
 Imagine you are at a snack machine.

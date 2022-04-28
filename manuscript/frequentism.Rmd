@@ -1,10 +1,10 @@
-# Frequentist Inference {#statistical-inference}
+# Frequentist Inference {#frequentist-inference}
 
 
 * Popular modeling mindset in science.
 * The world consists of probability distributions with fixed parameters that have to be uncovered.
 * Interprets probability as long-run relative frequencies from which hypothesis tests, confidence intervals and p-values are derived.
-* A statistical mindset, with [Bayesian inference](#bayesian) and [likelihoodism](#likelihoodism) as alternatives.
+* A statistical mindset, with [Bayesian inference](#bayesian-inference) and [likelihoodism](#likelihoodism) as alternatives.
 
 
 <!-- TODOs:
@@ -97,7 +97,7 @@ The interpretation of the confidence interval reveals the **core philosophy of f
 * The parameters of the probability distributions are constant and unknown;
 * Repeated measurements/experiments reveal the true parameter values in the long-run.
 
-In contrast, [Bayesianism](#bayesian) assumes that the parameters of the distributions are themselves random variables.
+In contrast, [Bayesianism](#bayesian-inference) assumes that the parameters of the distributions are themselves random variables.
 As the frequentists collect more and more data ($n \to \infty$), their parameter estimation gets closer and closer to the true parameter (if the estimator is unbiased).
 With each additional data point, the uncertainty of the estimated parameter shrinks and the confidence interval becomes narrower.
 
@@ -144,7 +144,7 @@ These imagined experiments have a curious implication for frequentism.
 Frequentism violates the likelihood principle, which says that all evidence about the data is contained in the likelihood function.
 But with frequentism, it's important to know what experiments we are further imagining.
 You can find a simple example involving coin tosses in the chapter on [Likelihoodism](#likelihoodism).
-[Likelihoodism](#likelihoodism) and [Bayesianism](#bayesianism) adhere to the likelihood principle.
+[Likelihoodism](#likelihoodism) and [Bayesianism](#bayesianism-inference) adhere to the likelihood principle.
 
 
 ## Estimators are Random Variables
@@ -418,8 +418,8 @@ ggplot(dat) +
 ## Strengths
 
 * Once you understand frequentist inference, you have the key to understanding most modern research findings. I studied statistics and can now quickly grasp many research papers. For example, to figure out whether I should have knee surgery for my torn meniscus, I read papers comparing knee surgery and physiotherapy alone. All of those papers used frequentist methods, and although I didn't understand everything, I was able to quickly get an idea of their analyses and results.
-* Frequentist methods are generally faster to compute than methods from [Bayesian inference](#bayesian) or [machine learning](#supervised-ml).
-* Compared to [Bayesianism](#bayesian), no prior information about the parameters is required. This makes frequentism more objective.
+* Frequentist methods are generally faster to compute than methods from [Bayesian inference](#bayesian-inference) or [machine learning](#supervised-ml).
+* Compared to [Bayesianism](#bayesian-inference), no prior information about the parameters is required. This makes frequentism more objective.
 * Frequentism allows binary decisions (accept/reject hypothesis). This simplicity is one of the reasons why frequentism is popular for both scientific publications and business decisions.
 * Frequentism has all advantages of [statistical models](#statistical-modeling) in general: a solid theoretical foundation and an appreciation of the data-generating process.
 * When the underlying process is a long-run, repeated experiment, frequentist inference shines. Casino games, model benchmarks, ...
@@ -430,9 +430,9 @@ ggplot(dat) +
 * Frequentism makes it easy to **over-simplify questions** into yes/no-questions. Reducing models to binary decisions obscures critical model assumptions and the difficult trade-offs that had to be made for the analysis.
 * Focusing on p-values encourages **p-hacking**: the either conscious or unconscious search for "positive" results. Guided by the lure of a significant result, researchers and data scientists may play around with their analysis until the p-value in question is small enough. With $\alpha$-level of 0.05, 1 in 20 null hypotheses are falsely rejected. P-hacking increases this percentage of false positive findings. 
 * Similarly, if the analysis is exploratory rather than hypothesis-driven, a naive frequentist approach may produce many false positive findings. Look again at figure \@ref(fig:ci): Imagine these were confidence intervals for different variables. Again, for $\alpha = 0.05$, we would expect 1 in 20 hypothesis tests to yield false positives. Now imagine a data scientist testing hundreds of hypothesis tests. This problem is called the multiple testing problem. There are solutions, but they are not always used and multiple testing can be very subtle.
-* The frequentist interpretation of probability is very awkward when it comes to confidence intervals and p-values. They are commonly misinterpreted. Arguably, frequentist confidence intervals are not what practitioners want. [Bayesian](#bayesian) credibility intervals are more aligned with the natural interpretation of uncertainty.
+* The frequentist interpretation of probability is very awkward when it comes to confidence intervals and p-values. They are commonly misinterpreted. Arguably, frequentist confidence intervals are not what practitioners want. [Bayesian](#bayesian-inference) credibility intervals are more aligned with the natural interpretation of uncertainty.
 * Frequentist analysis depends not only on the data, but also on the experimental design. This is a violation of the likelihood principle that says that all information about the data must be contained in the likelihood, see also the example in the [Likelihoodism](#likelihoodism) chapter.
-* Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. [Bayesianism](#bayesian) offers a solution to involve prior information for such estimates.
+* Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. [Bayesianism](#bayesian-inference) offers a solution to involve prior information for such estimates.
 * There is an "off-the-shelf"-mentality among users of frequentist inference. Instead of carefully adapting a probability model to the data, an off-the-shelf statistical test or statistical model is chosen. The choice is based on just a few properties of the data. For example, there are popular flow charts of choosing an appropriate statistical test. <!-- https://bookdown.org/content/4857/generalized-linear-madness.html --> <!-- citation needed -->
 * Frequentist statistics says nothing about causality except that "correlation does not imply causation".
 

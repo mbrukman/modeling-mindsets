@@ -1,4 +1,4 @@
-# Design-based inference
+# Design-based inference {#design-based-inference}
 
 <!-- TODO: Malte zum reviewn schicken -->
 

@@ -62,7 +62,7 @@ Write about how this book is unique:
 <!-- Background -->
 We use data to advance science, make businesses more profitable, automate annoying tasks, and develop smart products.
 But there is a middleman between data and its usefulness: the **model**.
-The model that was learned from data represents a simplified aspect of the world; it's the glue that connects data and world.
+The model represents a simplified aspect of the world; it's the glue that connects data and world.
 
 <!-- Many mindsets available -->
 Statistics versus machine learning, frequentist versus Bayesian inference, causation or association, ...
@@ -70,16 +70,15 @@ There are many mindsets to consider for building models from data.
 Each of these modeling mindsets has its own assumptions, strengths, and limitations.
 
 <!-- best mindset -->
-The best modelers, researchers, and data scientists don't stubbornly stick to just one mindset.
+**The best modelers, researchers, and data scientists don't stubbornly stick to just one mindset**.
 The best modelers mix and match the mindsets.
 
 <!-- difficulty with learning many mindsets -->
 It can take years to truly grasp a new mindset.
 Most books and courses jump right into math and methods instead of discussing the fundamental mindset.
 But learning a new mindset doesn't have to be this difficult.
-
 <!-- content -->
-The Modeling Mindset book introduces all the cultures of learning models from data.
+**The Modeling Mindset book introduces many cultures of learning models from data**.
 Each of them enhances your own mind and makes you a better modeler: 
 
 <!-- only list mindsets? without sentence?-->
@@ -92,7 +91,7 @@ Each of them enhances your own mind and makes you a better modeler:
 
 <!-- this book -->
 Modeling Mindsets opens the door to all these different ways of thinking.
-The book is packed with intuitive explanations and striking illustrations.
+The book is packed with **intuitive explanations and illustrations**.
 Quickly get an overview of the strengths and the limitations of each modeling mindset.
 Expand your mind when it comes to modeling the world using data.
 

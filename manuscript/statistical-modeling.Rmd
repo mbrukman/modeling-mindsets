@@ -3,7 +3,7 @@
 
 * Goal: Changing your mind under uncertainty.
 * Assumes the world is best described by probability distributions.
-* Requires additional assumptions for drawing conclusions. See [frequentism](#frequentism), [Bayesianism](#bayesian) and [likelihoodism](#likelihoodism).
+* Requires additional assumptions for drawing conclusions. See [Frequentism Inference](#frequentist-inference), [Bayesian Inference](#bayesian-inference) and [Likelihoodism](#likelihoodism).
 
 
 
@@ -525,7 +525,7 @@ GLMs can model targets that don't follow a Normal distribution but some other di
 GAMs can model non-linear relationships.
 
 <!-- bridge to ML -->
-Regression models also have a place in [supervised machine learning](#mindset).
+Regression models also have a place in [supervised machine learning](#supervised-ml).
 But in supervised  machine learning, the goal is to achieve good predictive performance on unseen data.
 And if a random forest performs better than a GAM, then the GAM gets thrown out, even if it has nicer statistical properties.
 
@@ -631,7 +631,7 @@ They conclude that the sepsis screening tool has helped reduce sepsis-related de
 Are the data representative of all hospitals in the region, the country, or even the world?
 Are the data even representative of all patients at the hospital, or are data only available from patients in intensive care unit?
 A good statistical modeler define and discuss the "population" from which the data are a sample of.
-[Design-based inference](#design-based) fully embraces this mindset that the data are sampled from a larger population.
+[Design-based inference](#design-based-inference) fully embraces this mindset that the data are sampled from a larger population.
 
 
 <!-- Part 2: Interpretation of probability -->
@@ -644,10 +644,10 @@ More philosophical is the modeler's attitude toward causality, the nature of pro
 Statistical modeling is the foundation for learning from data.
 But we need another mindset on top of that to make the models useful.
 
-[Frequentist inference](#frequentism) is the most prominent mindset for inferring properties about the world from statistical models.
+[Frequentist inference](#frequentism-frequentism) is the most prominent mindset for inferring properties about the world from statistical models.
 Frequentist statistics sees probability as relative frequencies of events in long-run experiments.
 
-[Bayesian inference](#bayesian) is based on an interpretation of probability as a degree belief about the world.
+[Bayesian inference](#bayesian-inference) is based on an interpretation of probability as a degree belief about the world.
 Bayesianism states that the model parameters also have a (prior) distribution.
 And the goal of the statistician is to update the prior distribution by learning from data.
 The resulting posteriori distributions of the parameters express our belief about the world.
@@ -655,9 +655,9 @@ The resulting posteriori distributions of the parameters express our belief abou
 [Likelihoodism](#likelihoodism) is a lesser known modeling mindset. Like Bayesianism, it adheres to the likelihood principle, which states that the likelihood function captures all evidence from the data (which frequentist inference violates).
 However, it does not require prior probabilities.
 
-[Causal inference](#causality) adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.
+[Causal inference](#causal-inference) adds causality to statistical modeling. It can be superimposed onto any of the other three mindsets.
 
-A different but complimentary approach is [design-based inference](#design), which focuses on data sampling and experiments instead of models.
+A different but complimentary approach is [design-based inference](#design-based-infernce), which focuses on data sampling and experiments instead of models.
 
 ## Strengths
 
@@ -665,7 +665,7 @@ A different but complimentary approach is [design-based inference](#design), whi
 * Statistical modeling has a long tradition and extensive theoretical foundation, from measurement theory as the basis of probability theory to convergence properties of statistical estimators.
 * The data-generating process is an underestimated mental model. But it's a powerful mental model that encourages mindful modeling and asking the right questions.
 * Conditional probability models can be used not only to learn about the parameters of interest, but also to make predictions 
-* Probability distributions give us a language to express uncertainty. [Bayesianism](#bayesianism) arguably has the most principled focus on formalizing and modeling uncertainty.
+* Probability distributions give us a language to express uncertainty. [Bayesianism](#bayesian-inference) arguably has the most principled focus on formalizing and modeling uncertainty.
 * Can naturally handle different types of variables: Categorical, ordinal, numerical, ...
 
 ## Limitations
