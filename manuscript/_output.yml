@@ -7,10 +7,12 @@ bookdown::gitbook:
     in_header: html/header.html
     before_body: html/cta-button.html
   config:
-    edit: https://github.com/christophM/interpretable-ml-book/edit/master/manuscript/%s
+    edit: https://github.com/christophM/modeling-mindsets/edit/master/manuscript/%s
+    download: false
     sharing:
-      github: yes
-      facebook: yes
+      linkedin: true
+      twitter: true
+      facebook: false
     toc:
       collapse: section
       before: |

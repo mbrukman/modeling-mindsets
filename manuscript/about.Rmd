@@ -1,19 +1,30 @@
 # What This Book is About
 
-The book introduces many modeling mindsets: each presents a different perspective on how to see the world through data.
-It's an introduction to each mindset: its *assumptions, central ideas, its relationship to other mindsets, and its strengths and limitations*.
-The book is not about history and (formal) philosophy.
-It's also not a full introduction to the mindsets.
-After reading this book, you will not be a Bayesian, or any other type of modeler.
-Modeling Mindsets can open the doors to new ways of thinking about modeling for you.
-But there are other resources to explore what's behind each door -- an online course on machine learning, blog posts about about causal inference, a book about Bayesian inference, ...
+The book is about all the different mindsets that allow you to model the world with data.
+Each mindset represents a different perspective on how to see the world through data.
+In this book, you will find for each mindset the **assumptions, central ideas, their relationship to other mindsets, and their strengths and limitations**.
+Modeling mindsets is not about history.
+Modeling mindsets is a mixture of lightweight methodological introduction and philosophy.
+That said, this book is not and **cannot be a full introduction to each mindset**.
+There are entire books about, for example, Bayesian inference, or supervised machine learning.
+After reading this book, you will not automatically become a frequentist statistician, or a causal inference expert.
+Sorry to disappoint this early in the book.
+However, reading Modeling Mindsets can open doors to new ways of thinking about modeling.
+But there are other resources to explore what's behind each door -- an online course on machine learning, blog posts about about causal inference, a book about design-based inference, ...
+In each chapter, I refer to **useful resources to deepen the particular mindset**.
 
 ## Who This Book is For
 
 The book is for data scientists, statisticians, machine learner, quantitative researchers, ...
 In short, for anyone who already has experience with modeling data.
-This means you probably already know one of the mindsets.
+This means you should probably **know at least one of the mindsets**.
 Perhaps, like me, you studied frequentist statistics.
 Or you may be a researcher who has learned to use Bayesian inference to analyze your data.
 Or maybe you are a self-taught machine learner.
-A little bit of math should not scare you off.
+
+That said, it's crucial that you don't cling to the mindset you already know.
+Let go of the rigid assumptions you've learned.
+Open your mind to fundamentally new ways of modeling data.
+
+A little math shouldn't scare you either.
+But I can promise you that the book is not too heavy on the math side.
