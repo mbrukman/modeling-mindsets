@@ -432,6 +432,7 @@ This now parameterized distribution is the statistical model of our little offic
 - ANOVA, regression models, survival model / cox model, Justification
 -->
 
+<!-- TODO: Visualize both joint and conditional distribution. Gaussian, 2 variables, one plot with margins. Also marginal distribution? -->
 <!-- joint distribution -->
 All statistical models target an aspect of a probability distribution.
 For most of the chapter, we talked about simpler cases, like the distribution of a single variable: $P(X)$.
