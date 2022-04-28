@@ -52,23 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'G-KCMDGRVL1L', 'https://book.modeling-mindsets.com', {
-  'anonymizeIp': true
-  , 'storage': 'none'
-  , 'clientId': window.localStorage.getItem('ga_clientId')
-});
-ga(function(tracker) {
-  window.localStorage.setItem('ga_clientId', tracker.get('clientId'));
-});
-ga('send', 'pageview');
-</script>
 
 <link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css" />
 <script src="javascript/cookieconsent.min.js"></script>
@@ -135,10 +118,6 @@ window.cookieconsent.initialise({
 </style>
 
 
-<a id="cta-button-desktop" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank"> Buy Book </a>
-
-<a id="cta-button-device" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank">Buy</a>
-  
 
 
 
@@ -193,17 +172,7 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="5.5" data-path="statistical-inference.html"><a href="statistical-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
 <li class="chapter" data-level="5.6" data-path="statistical-inference.html"><a href="statistical-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="bayesian.html"><a href="bayesian.html#bayes-theorem"><i class="fa fa-check"></i><b>6.1</b> Bayes Theorem</a></li>
-<li class="chapter" data-level="6.2" data-path="bayesian.html"><a href="bayesian.html#prior-probability"><i class="fa fa-check"></i><b>6.2</b> Prior Probability</a></li>
-<li class="chapter" data-level="6.3" data-path="bayesian.html"><a href="bayesian.html#likelihood"><i class="fa fa-check"></i><b>6.3</b> Likelihood</a></li>
-<li class="chapter" data-level="6.4" data-path="bayesian.html"><a href="bayesian.html#evidence"><i class="fa fa-check"></i><b>6.4</b> Evidence</a></li>
-<li class="chapter" data-level="6.5" data-path="bayesian.html"><a href="bayesian.html#posterior-probability-estimation"><i class="fa fa-check"></i><b>6.5</b> Posterior Probability Estimation</a></li>
-<li class="chapter" data-level="6.6" data-path="bayesian.html"><a href="bayesian.html#bayesian-inference"><i class="fa fa-check"></i><b>6.6</b> Bayesian Inference</a></li>
-<li class="chapter" data-level="6.7" data-path="bayesian.html"><a href="bayesian.html#strengths-2"><i class="fa fa-check"></i><b>6.7</b> Strengths</a></li>
-<li class="chapter" data-level="6.8" data-path="bayesian.html"><a href="bayesian.html#limitations-2"><i class="fa fa-check"></i><b>6.8</b> Limitations</a></li>
-</ul></li>
+<li class="chapter" data-level="6" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
 <li class="chapter" data-level="8" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
@@ -231,6 +200,12 @@ window.cookieconsent.initialise({
           <div class="page-inner">
 
             <section class="normal" id="section-">
+
+<a id="cta-button-desktop" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank"> Buy Book </a>
+
+<a id="cta-button-device" href="https://leanpub.com/interpretable-machine-learning" rel="noopener noreferrer" target="blank">Buy</a>
+  
+
 <div id="statistical-modeling" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Statistical Modeling<a href="statistical-modeling.html#statistical-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
@@ -742,23 +717,6 @@ However, it does not require prior probabilities.</p>
 <li>Statistical models require a lot of assumptions. Sometimes more, sometimes less. Just to name a few common assumptions: homoscedasticity, independent and identically distributed data (IID), linearity, independence of errors, lack of (perfect) multicollinearity, … For most violations, there is a special version of a statistical model that doesn’t require the critical assumption. The price is more complex and less interpretable models.</li>
 <li>Statistical modeling, when used for prediction, is often outperformed by <a href="supervised-ml.html#supervised-ml">supervised machine learning</a>. To be fair, outperforming here requires an evaluation based on the supervised learning mindset. However, this means that goodness-of-fit and diagnosis are no guarantee that a model will performs well on all metrics. <!-- requires citation. kaggle? -->
 <!--
-## Justification of Likelihood Mindset: Probability Theory
-
-Let's start VERY basic.
-What is a probability?
-It's axiomatic, meaning we have to make some assumptions to build a framework of interpretability.
-Introduced by Andrey Kolmogorov in 1933.
-There's an entire field called measurement theory, which lays the theoretical groundwork that we can even speak of "probabilities" and events.
-The idea is that we can describe a so-called probability space with $\Omega$, the set of all possible events that can happen, we call $B$ sub-spaces of $\Omega$ and $p$ is a measure on the event space.
-The clue is how we define $p$.
-And this is where axioms kick in: We have to build on axioms because we can't say what's right or wrong.
-Kolmogorov's axioms:
-For any event $b \in B$ we want $p(b) \in [0,1]$, and also $p(\Omega) = 1$.
-This looks a lot like a probability: The probability that any of the events happens is 1 ($\Omega$ is an exhaustive set) and the probability is always between 0 and 1.
-Also for disjunct events, the probability that any of them happens is the sum of their probability.
-The probality that a person a person rolls a dice with "1" or a "2" is the sum of probabilities for both numbers. 
---></li>
-</ul>
 <!-- representativeness -->
 <!--
 So to make claims about the world, we also have to make claims about what our sample represents.
@@ -767,7 +725,9 @@ Insights from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
 * Targets are the coefficients: They characterize this infinite population 
 * Fisher is about model-based inference
 * TODO: Think about moving model-based inference to statistical learning?
--->
+--></li>
+</ul>
+<!-- [^semiparametric]: Some approaches don't assume a closed form distribution. For example the Cox proportional hazards model. For the Cox model, we optimize the partial likelihood. These approaches are called semiparametric. -->
 
 </div>
 </div>

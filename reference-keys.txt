@@ -6,9 +6,6 @@ fig:fit
 fig:dice
 fig:hypothesis
 fig:ci
-fig:bayesian
-fig:priors
-fig:posteriori
 what-this-book-is-about
 who-this-book-is-for
 models
@@ -33,14 +30,6 @@ confidence-intervals
 strengths-1
 limitations-1
 bayesian
-bayes-theorem
-prior-probability
-likelihood
-evidence
-posterior-probability-estimation
-bayesian-inference
-strengths-2
-limitations-2
 likelihoodism
 causal
 supervised-ml
