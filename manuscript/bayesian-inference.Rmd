@@ -1,5 +1,9 @@
 # Bayesian Inference {#bayesian-inference}
 
+* Interprets probability as degree of belief and learning from data as updating that belief.
+* Model parameters are random variables with a prior distribution. Goal: posterior distribution.
+* A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentist-inference) and [likelihoodism](#likelihoodism) as alternatives.
+
 <!-- summary of Bayesian inference -->
 Bayesian inference sees the world as parameterized distributions.
 To learn about the world, we have to learn about the best fitting parameters.
