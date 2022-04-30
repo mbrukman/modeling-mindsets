@@ -1,12 +1,17 @@
 # Bayesian Inference {#bayesian-inference}
 
-* Interprets probability as degree of belief and learning from data as updating that belief.
-* Model parameters are random variables with a prior distribution. Goal: posterior distribution.
+<!-- CONTENT TO ADD
+
+-
+
+-->
+
+* Probability is a degree of belief; learning from data means updating the belief.
+* Model parameters are random variables with a prior distribution.
 * A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentist-inference) and [likelihoodism](#likelihoodism) as alternatives.
 
 <!-- summary of Bayesian inference -->
-Bayesian inference sees the world as parameterized distributions.
-To learn about the world, we have to learn about the best fitting parameters.
+Bayesian inference models the world with parameterized distributions, like all the other statistical modeling mindsets.
 But for Bayesians, the parameters themselves are random variables with a probability distribution.
 So to learn about the parameters, we have to assume some prior distribution, and update our belief about the our parameters with data.
 This is then the posteriori distribution.
@@ -63,33 +68,34 @@ The probability distribution gets updated by multiplying the prior with the like
 This product is scaled by the probability of the data $P(D)$, also called evidence.
 The result is the posteriori probability distribution, an updated belief about our parameters $\theta$.
 
-```{r bayesian, fig.cap = "Illustration of priori density that gets an update from the likelihood of the data to result in posteriori probability distribution."}
+```{r bayesian, fig.cap = "Illustration of priori density that gets an update from the likelihood of the data to result in posteriori probability distribution: priori $\\times$ likelihood $\\propto$ posteriori", fig.width = 10, fig.height = 3}
 library(ggplot2)
 library(tidyr)
 
-x = seq(from = -10, to = 35, length.out = 100)
-prior_theta = dnorm(x, mean = 20, sd = 3)
-likelihood = dnorm(x, mean = 5, sd = 3)
-posteriori = dnorm(x, mean = 10, sd = 3)
+x = seq(from = -1, to = 8, length.out = 500)
+prior_d = approxfun(x, dgamma(x, shape = 1.4, rate = 0.8))
+likelihood_d = approxfun(x, dnorm(x, mean = 3.5, sd = 1.5))
 
-df = data.frame(priori = prior_theta, likelihood = likelihood, posteriori = posteriori, x = x)
+posterior_d = function(x) {
+  prior_d(x) * likelihood_d(x) 
+}
+
+auc = sum(diff(x)[1] * posterior_d(x))
+posterior = function(x) {posterior_d(x) / auc}
+
+dat = data.frame(priori = prior_d(x), likelihood = likelihood_d(x), posteriori = posterior(x), x = x)
 densities = c("priori", "likelihood", "posteriori")
-df2 = pivot_longer(df, cols = all_of(densities))
-df2$name = factor(df2$name, levels = densities)
+dat = pivot_longer(dat, cols = all_of(densities))
+dat$name = factor(dat$name, levels = densities)
 
-lbdt = data.frame(x = c(20, 5, 10),
-                  name = factor(densities, levels = densities),
-                  y = 0.05)
-
-ggplot(df2) +
-geom_polygon(aes(x = x, y = value), fill = "grey", alpha = 0.3) +
-geom_line(aes(x = x, y = value)) +
-coord_cartesian(xlim=c(-2, 28)) +
-scale_fill_discrete("") +
-theme_void() + 
-facet_grid(name ~ ., switch = "y") +
-geom_label(data = lbdt, aes(x = x, y = y, label = name))  +
-theme(strip.text.y = element_blank())
+ggplot(dat, aes(x = x, y = value)) +
+  geom_area(size = 1.1, fill = "lightgrey") +
+  geom_line() +
+  #coord_fixed(ratio = 20) +
+  facet_grid(. ~ name) +
+  theme_void() + 
+ theme(axis.text.x = element_text(),
+      strip.text.x = element_text(size = 18))
 ```
 
 Next, let's dive deeper into the individual components of the Bayes' theorem, so that we can update our own beliefs about Bayesianism.
@@ -148,7 +154,7 @@ You can run Bayesian inference twice, and compare the results.
 
 To get to the posterior likelihood of our parameters, our ultimate goal in Bayesian inferene, we have to update our prior belief with data, or rather: the likelihood function.
 
-```{r priors, fig.cap = "Various prior distributions for the success probability p in a Binomial ditribution. Priors here are Beta distributions with shape parameters $\\alpha$ and $\\beta$."}
+```{r priors, fig.cap = "Various prior distributions for the success probability p in a Binomial ditribution. Priors here are Beta distributions with shape parameters $\\alpha$ and $\\beta$.", fig.width = 10, fig.height = 2.5}
 library("ggplot2")
 n = 100000
 x = seq(from = 0, to = 1, length.out = 100)
@@ -162,9 +168,10 @@ datbeta4 = data.frame(x = x, y = dbeta(x, shape1 = 2, shape2 = 2), dist = "list(
 datbeta = rbind(datbeta1, datbeta2, datbeta3, datbeta4)
 
 ggplot(datbeta, aes(x = x, y = y)) +
-geom_area(fill = "grey") +
+geom_area(fill = "lightgrey") +
 geom_line(size = 1) +
-facet_wrap(. ~ dist, ncol = 2, labeller = label_parsed) + 
+facet_wrap(. ~ dist, ncol = 4, labeller = label_parsed) + 
+scale_x_continuous(breaks = c(0, 0.5, 1), labels = c("0", "0.5", "1")) +
 theme_void() +
 theme(axis.text.x = element_text(),
       strip.text.x = element_text(size = 18))
@@ -390,6 +397,24 @@ Combination of frequentism and Bayesianism
 https://efron.ckirby.su.domains//papers/2005BayesFreqSci.pdf
 
 -->
+
+## How Different is Frequentism Really?
+
+[Frequentist Inference](#frequentist-inference) is the mindset to which Bayesian inference is compared the most often. The debate of which mindset is better has been going on for a long time and is still going on.
+Throughout this chapter, we have seen that both mindsets have different ideas of what a probability is and whether to use prior probabilities.
+These decisions have far reaching consequences on how to do modeling and how to interpret the models.
+But with all the adversary, it's easy to overlook how close mindsets are, especially compared with many other mindset that you will encounter in this book.
+Both mindsets are statistical modeling mindsets: They both rely on probability distributions.
+And they both assume that interpreting those distributions is a valid way to see the world.
+Also, everyone puts so much emphasis on the prior probability.
+But, what ways much heavier, is the likelihood that is used by both frequentism and Bayesianism.
+In cases where we have very few data points, the prior has a high impact on the result.
+And for those data-poor cases frequentist and Bayesian inference will differ the most.
+But in all other cases, where there is enough data, a modeler will often get similar results with frequentist and Bayesian inference.
+And ultimately, they will come to similar conclusions.
+
+Frequentist confidence interval can be interpreted as a special case of credibility interval <!-- citation needed --> with an uninformative prior.
+Really, all frequentist method can be expressed as special cases of Bayesian models.
 
 ## Strengths
 
