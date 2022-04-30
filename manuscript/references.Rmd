@@ -1,8 +1,6 @@
 # References {-}
 <!-- Generated automatically, please don't edit manually! -->
 
-Blei, David M., Alp Kucukelbir, and Jon D. McAuliffe. "Variational inference: A review for statisticians." Journal of the American statistical Association 112, no. 518 (2017): 859-877.
-
 Gandenberger, Greg. Why I am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library, 2016.
 
 Hernán, Miguel A., and James M. Robins. "Causal inference." (2010): 2.
@@ -22,5 +20,3 @@ Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.
 Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.
 
 Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. "Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal." bmj 369 (2020).
-
-Yang, Ruoyong, and James O. Berger. A catalog of noninformative priors. Durham, NC, USA: Institute of Statistics and Decision Sciences, Duke University, 1996.

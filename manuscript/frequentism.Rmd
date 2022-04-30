@@ -220,7 +220,7 @@ How does a hypothesis test work?
 
 * Start with a hypothesis.
 * Formulate the **alternative or null hypothesis**.
-* Decide which statistical test to use. This step includes modeling the data.
+* Decide which statistical test to use. This step includes modeling the data. In fact, all statistical tests are statistical models [@mcelreath2020statistical]
 * Calculate the distribution of the parameter estimates under the null hypothesis (or rather, the test statistic $T$).
 * Choose the significance level $\alpha$: the probability threshold at which to reject the null hypothesis assuming it would be true. Often $\alpha = 0.05$.
 * Calculate the p-value: Assume that the null hypothesis is correct. Then p is the probability of getting a more extreme test statistic $T$ than was actually observed. See figure \@ref(fig:hypothesis).

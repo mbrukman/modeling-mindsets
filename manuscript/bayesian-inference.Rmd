@@ -124,8 +124,7 @@ Or maybe the parameter is more drawn to 0.25?
 Another Beta prior might put emphasis on $\pi$ being one.
 <!-- intuition for alpha = beta = 0.5: https://stats.stackexchange.com/questions/362728/whats-the-intuition-for-a-beta-distribution-with-alpha-and-or-beta-less-than -->
 But it's also possible to have a prior that puts most probability on 0 and 1 symmetrically.
-When there are no specific prior beliefs about the parameter the Bayesian can use an "uninformative" or "objective" priors, meaning  [^yang1996] 
-<!-- convenience reasons -->
+When there are no specific prior beliefs about the parameter the Bayesian can use an "uninformative" or "objective" priors [@yang1996catalog].
 Another factor is mathematical convenience.
 It's convenient to pick conjugate priors.
 A convenient case is using conjugate priors.
@@ -265,7 +264,7 @@ All have in common that they are computationally expensive.
 So a big part of the daily job as a Bayesian is to wait for those MCMC chains to converge.
 At least compared to a frequentist.
 
-A shorter alternative is variational inference [^blei2017].
+A shorter alternative is variational inference [@blei2017variational].
 But while MCMC deliver approximately exact estimates of the posterior probability, variational inference is more of a heuristic.
 
 TODO: Visualize the process that is implied by saying that parameters are random variables
@@ -416,13 +415,4 @@ The most common reasons not to use Bayesian statistics:
 * Hard to implement.
 * No causal interpretations, just associations.
 
-<!-- Software
 
-- STAN
-- PyMC3
-
--->
-
-[^yang1996]: Yang, Ruoyong, and James O. Berger. A catalog of noninformative priors. Durham, NC, USA: Institute of Statistics and Decision Sciences, Duke University, 1996.
-
-[^blei2017]: Blei, David M., Alp Kucukelbir, and Jon D. McAuliffe. "Variational inference: A review for statisticians." Journal of the American statistical Association 112, no. 518 (2017): 859-877.

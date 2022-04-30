@@ -7,6 +7,9 @@ knit: "bookdown::render_book"
 documentclass: scrbook
 link-citations: yes
 colorlinks: yes
+bibliography: ["references.bib"]
+csl: "vancouver-superscript.csl"
+link-citation: true
 fontsize: 10pt
 site: bookdown::bookdown_site
 description: "Statistics, machine learning, causality, ... The best data scientists don't mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal -- and use the right tool for the right job."
