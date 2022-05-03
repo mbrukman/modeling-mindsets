@@ -1,0 +1,7 @@
+# Notation {-}
+
+| Symbol | Space | Meaning |
+|-----|----|--------|
+| $X$  | $X \in \mathcal{X}^p$ | Random variables  |
+| $X_j$ | $X_j \in \{X_1, \ldots X_p\}$ | Specific random variables |
+| $Y$ | $Y \in \mathbb{R}^k | 

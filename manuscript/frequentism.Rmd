@@ -138,6 +138,7 @@ theme_void()
 Imagining experiments that will never take place is essential to the frequentist mindset.
 By defining probability in terms of long-run frequencies, frequentism requires imagining that the sampling and experiment will be done many times.
 These "imagined" experiments are central to the interpretation of confidence intervals, p-values, and hypothesis tests.
+And *every* interpretation of probability in the frequentist mindset has to be connected to frequencies of events in long-run samples / experiments.
 
 <!-- likelihood principle violated -->
 These imagined experiments have a curious implication for frequentism.
@@ -435,6 +436,7 @@ ggplot(dat) +
 * Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. [Bayesianism](#bayesian-inference) offers a solution to involve prior information for such estimates.
 * There is an "off-the-shelf"-mentality among users of frequentist inference. Instead of carefully adapting a probability model to the data, an off-the-shelf statistical test or statistical model is chosen. The choice is based on just a few properties of the data. For example, there are popular flow charts of choosing an appropriate statistical test. <!-- https://bookdown.org/content/4857/generalized-linear-madness.html --> <!-- citation needed -->
 * Frequentist statistics says nothing about causality except that "correlation does not imply causation".
+* Weird interpretation of probability: Often it does not make any sense to interpret every probability with imagined experiments. For example, the probability for a party to get the majority vote in an election requires to imagine multiple elections, yet under the same circumstances, like same year, same candidates, and so on.  
 
 
 [^Kao2001]: Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. "Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study." American journal of epidemiology 154, no. 8 (2001): 748-757.
