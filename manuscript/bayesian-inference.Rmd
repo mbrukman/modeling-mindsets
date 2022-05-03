@@ -315,7 +315,7 @@ Example of an interval with pre-defined boundaries: Interval from 10 to infinity
 Example of an interval with pre-defined probability mass: The shortest interval that contains 50% of posterior probability mass? Or the interval that goes from the 2.5% to the 97.5% quantile (95% credible interval). 
 
 
-```{r posteriori, fig.cap = "Describing the posterior distribution with either intervals, for example the 95\% credibility interval, or point estimates, for example the maximum a posteriori estimation."}
+```{r posteriori, fig.cap = "Describing the posterior distribution with either intervals, for example the 95 credibility interval, or point estimates, for example the maximum a posteriori estimation."}
 library("ggplot2")
 set.seed(2)
 n = 10000
