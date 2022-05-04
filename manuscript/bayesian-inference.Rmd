@@ -14,15 +14,17 @@
 
 -->
 
-* Probability is a degree of belief; learning from data means updating the belief.
+* Probability is a degree of belief and learning from data means updating the belief.
 * Model parameters are random variables with prior and posterior distributions.
 * A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentist-inference) and [likelihoodism](#likelihoodism) as alternatives.
 
 <!-- relation to others -->
-If you haven't read the chapter on [Statistical Modeling](#statistical-modeling), I recommend you do it first, since Bayesian inference is easier understood when you have a good grasp on statistical inference.
+If you haven't read the chapter on [Statistical Modeling](#statistical-modeling), I recommend that you do so first, since Bayesian inference is easier to understand if you have a good understanding of statistical inference.
 Bayesian inference is based on probability distributions, interpretation of parameters, and learning from data through the likelihood.
 The big twist: Distribution parameters are random variables as well!
-Random variables that have a prior distribution: Prior meaning before encountering the first data.
+Random variables that have a prior distribution.
+As such they have a prior distribution.
+Prior means before encountering the data.
 Learning about the parameters means updating the prior probabilities to the posterior probabilities.
 
 <!-- summary learning with Bayesian inference -->
@@ -31,7 +33,7 @@ That's different from the more objective framing of probability in [frequentist 
 Bayesian inference doesn't require to imagine repeated experiments.
 You could even apply Bayesian inference to just one data point.
 Which you couldn't do with frequentist inference.
-We can work with a Bayesian model even without data, by just using the prior distributions of the parameters. [^prior-predictive]
+We can work with a Bayesian model even without data, by just using the prior distributions of the parameters.[^prior-predictive]
 Your model would even work without data, by just using the prior distributions.
 
 
@@ -53,30 +55,36 @@ Because of these betrayals you had to update your rating to 5/10.
 ## Bayes Theorem
 
 Bayesians wanna know the distribution of their model parameters given the data: $P(\theta | X)$.
-It's a weird inverse probability, because the data-generating process would do it the other way around:
+It's a weird inverse probability, because the data-generating process produces the data the other way around:
 The data are produced given the parameters and follow a probability distribution $P(X | \theta)$.
 
 <!-- Bayes' theorem has many applications -->
-So Bayesians use a trick that earned them their name: They applied the Bayes theorem.
+So Bayesians use a trick that earned them their name: They applied the Bayes' theorem.
 With the Bayes' theorem, the conditional probability statement can be inverted:
 
 $$\underbrace{P(\theta|X)}_{\text{posteriori}} = \frac{\overbrace{P(X | \theta)}^{\text{likelihood}} \cdot  \overbrace{P(\theta)}^{\text{priori}}}{\underbrace{P(X)}_{\text{evidence}}}$$
 
-$P(\theta)$, also called the prior,  is the probability distribution of $\theta$ before we have collected any data.
-The probability distribution gets updated by multiplying the prior with the likelihood $P(X | \theta)$ of the data.
+$P(\theta)$, also called the prior, is the probability distribution of $\theta$ before we have collected any data.
+The probability distribution gets updated by multiplying the prior with the likelihood of the data $P(X | \theta)$.
 This product is scaled by the probability of the data $P(X)$, also called evidence.
-The result is the posteriori probability distribution, an updated belief about our parameters $\theta$.
+The result is the posterior probability distribution, an updated belief about our parameters $\theta$.
 
-The Bayes' theorem is a generally useful equation of probabilities, but we focus on its use for Bayesian inference.
-It's not only a simple rearrangement of equations, but a powerful mental model: Bayesian updating.
+The Bayes' theorem is a generally useful equation for working with probabilities, but we focus on its use for Bayesian inference.
+It's not just a simple rearrangement of probabilities, but a powerful mental model: Bayesian updating.
 Remember that the data likelihood is the product of the likelihoods for each data point:
-$L(\theta, X) = \prod_{i=1}^n L_i(X^{(i)})$.
+$$P(\theta, X) = \prod_{i=1}^n P(\theta, X^{(i)})$.
 
+Here, $X^{(i)}$ is the vector of random variables of the i-th outcome, for example in a drug trial the variables $X^{(i)} could belong to the i-th (not yet observed) patient and contain pain level, blood pressure and iron levels.
 Putting that into the Bayes' theorem, we can see how it's related to updating ones belief when new data comes in.
 For simplicity, I removed the evidence $P(X)$ which only serves as a normalization so that we may interpret the results as probability:
 
-$$P(\theta|X) \propto P(X | \theta) \cdot  P(\theta) = P(\theta) \cdot \prod_{i=1}^n L_i(\theta, X^{i}) = P(\theta) \cdot L_1 \cdot \ldots \cdot L_p$$
+\begin{eqnarray}
+P(\theta|X) & \propto  & P(X | \theta) \cdot  P(\theta) \\ 
+            & =        & P(\theta) \cdot \prod_{i=1}^n P(\theta, X^{i}) \\
+            & =        & P(\theta) \cdot P_1 \cdot \ldots \cdot P_p,
+\end{eqnarray}
 
+where $P_j = P(\theta, X_j)$.
 Even after seeing just one data point, we get an updated belief in the form of an updated posterior distribution.
 Then we multiply this distribution with the likelihood of another data point, and so on.
 The Bayes' theorem in the context of Bayesian inference contains the idea of belief updates, as also visualized in Figure \@ref(fig:bayesian).

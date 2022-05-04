@@ -17,7 +17,7 @@ Pearl, Judea. "The do-calculus revisited." arXiv preprint arXiv:1210.4852 (2012)
 
 Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972. 
 
-This is called the prior predictive simulation and  serves as a check that the chosen prior probabilities produce data in a reasonable range. The modeler simulates by first samplign parameters from their priors and using those parameters sample data from the data probability function. Repeat many times to get a distribution of data.
+This is called the prior predictive simulation and serves to check whether the chosen priors produce reasonable data. The modeler simulates by first sampling parameters from the priors and using those parameters to generate data. Repeated many times, this produces a distribution of data.
 
 Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.
 
