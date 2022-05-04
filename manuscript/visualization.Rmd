@@ -1,6 +1,6 @@
-# Visualization
+# Graphical Inference
 
-
+Source:  
 Is visualization a modeling mindset?
 
 Let's revisit what's a model:
