@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-04-28" />
+<meta name="date" content="2022-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -121,6 +121,28 @@ window.cookieconsent.initialise({
 
 
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -172,7 +194,25 @@ window.cookieconsent.initialise({
 <li class="chapter" data-level="5.5" data-path="frequentist-inference.html"><a href="frequentist-inference.html#strengths-1"><i class="fa fa-check"></i><b>5.5</b> Strengths</a></li>
 <li class="chapter" data-level="5.6" data-path="frequentist-inference.html"><a href="frequentist-inference.html#limitations-1"><i class="fa fa-check"></i><b>5.6</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="bayesian-inference.html"><a href="bayesian-inference.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a></li>
+<li class="chapter" data-level="6" data-path="bayesian-inference.html"><a href="bayesian-inference.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bayesian-inference.html"><a href="bayesian-inference.html#bayes-theorem"><i class="fa fa-check"></i><b>6.1</b> Bayes Theorem</a></li>
+<li class="chapter" data-level="6.2" data-path="bayesian-inference.html"><a href="bayesian-inference.html#prior-probability"><i class="fa fa-check"></i><b>6.2</b> Prior Probability</a>
+<ul>
+<li class="chapter" data-level="" data-path="bayesian-inference.html"><a href="bayesian-inference.html#picking-a-prior"><i class="fa fa-check"></i>Picking a Prior</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="bayesian-inference.html"><a href="bayesian-inference.html#likelihood"><i class="fa fa-check"></i><b>6.3</b> Likelihood</a></li>
+<li class="chapter" data-level="6.4" data-path="bayesian-inference.html"><a href="bayesian-inference.html#evidence"><i class="fa fa-check"></i><b>6.4</b> Evidence</a></li>
+<li class="chapter" data-level="6.5" data-path="bayesian-inference.html"><a href="bayesian-inference.html#posterior-probability-estimation"><i class="fa fa-check"></i><b>6.5</b> Posterior Probability Estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="bayesian-inference.html"><a href="bayesian-inference.html#sample-from-the-posterior-with-mcmc"><i class="fa fa-check"></i>Sample From the Posterior with MCMC</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="bayesian-inference.html"><a href="bayesian-inference.html#summarizing-the-posterior-samples"><i class="fa fa-check"></i><b>6.6</b> Summarizing the Posterior Samples</a></li>
+<li class="chapter" data-level="6.7" data-path="bayesian-inference.html"><a href="bayesian-inference.html#from-model-to-world"><i class="fa fa-check"></i><b>6.7</b> From Model to World</a></li>
+<li class="chapter" data-level="6.8" data-path="bayesian-inference.html"><a href="bayesian-inference.html#simulate-to-predict"><i class="fa fa-check"></i><b>6.8</b> Simulate to Predict</a></li>
+<li class="chapter" data-level="6.9" data-path="bayesian-inference.html"><a href="bayesian-inference.html#strengths-2"><i class="fa fa-check"></i><b>6.9</b> Strengths</a></li>
+<li class="chapter" data-level="6.10" data-path="bayesian-inference.html"><a href="bayesian-inference.html#limitations-2"><i class="fa fa-check"></i><b>6.10</b> Limitations</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
 <li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
@@ -647,7 +687,7 @@ The stats detective then tries to uncover the data-generating process by making 
 <ul>
 <li>Rolling dice is a data-generating process. A die is symmetric, making each side equally likely. We could factor in the angle of the throw, surface roughness and so on. But the chaotic behaviour of the dice bouncing and spinning across the table makes us disregard all these factors.</li>
 <li>We study the income of computer scientists via a survey. Instead of mindlessly reporting the income distribution, we think about the entire data-generating process: For example, some income values are missing. Are they missing at random? Are higher-income individuals more likely to leave the income answer empty? Are some businesses overrepresented in the survey? Is the sample truly random?</li>
-<li>A research team has collected chest x-ray images of patients with and without COVID-19 for building a COVID-19 prediction model. A closer look at the data-generating process shows: the images not only differ in COVID-19 status, but they come from different data-generating processes. COVID-19 images are often taken with patients lying down because of exhaustion. One of the non-COVID-19 datasets are even children x-ray images.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Considering the DGP casts doubt on whether such data can be used to build a COVID-19 classifier or whether, in reality, it classifies data into child/adult, standing/lying down, … I chose this example because it’s a paper from the <a href="supervised-ml.html#supervised-ml">supervised machine learning mindset</a>. A good statisticians would check the DGP much more carefully, making it more likely to detect such problems.</li>
+<li>A research team has collected chest x-ray images of patients with and without COVID-19 for building a COVID-19 prediction model. A closer look at the data-generating process shows: the images not only differ in COVID-19 status, but they come from different data-generating processes. COVID-19 images are often taken with patients lying down because of exhaustion. One of the non-COVID-19 datasets are even children x-ray images.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Considering the DGP casts doubt on whether such data can be used to build a COVID-19 classifier or whether, in reality, it classifies data into child/adult, standing/lying down, … I chose this example because it’s a paper from the <a href="supervised-ml.html#supervised-ml">supervised machine learning mindset</a>. A good statisticians would check the DGP much more carefully, making it more likely to detect such problems.</li>
 </ul>
 <p>If these examples of data-generating processes sound like common sense to you, it’s because they are.
 But it’s surprisingly uncommon among non-statistician mindsets.
@@ -684,7 +724,7 @@ A good statistical modeler define and discuss the “population” from which th
 <blockquote>
 <p>“It is unanimously agreed that statistics depends somehow on probability. But, as to what probability is and how it is connected with statistics, there has seldom been such complete disagreement and breakdown of communication since the Tower of Babel.”</p>
 </blockquote>
-<p>– Leonard Savage, 1972<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>– Leonard Savage, 1972<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>Statistical modeling is the foundation for learning from data.
 But we need another mindset on top of that to make the models useful.</p>
 <p><a href="#frequentism-frequentism">Frequentist inference</a> is the most prominent mindset for inferring properties about the world from statistical models.
@@ -732,9 +772,9 @@ Insights from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
 </div>
 <div class="footnotes">
 <hr />
-<ol start="2">
-<li id="fn2"><p>Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. “Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal.” bmj 369 (2020).<a href="statistical-modeling.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.<a href="statistical-modeling.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<ol start="1">
+<li id="fn1"><p>Wynants, Laure, Ben Van Calster, Gary S. Collins, Richard D. Riley, Georg Heinze, Ewoud Schuit, Marc MJ Bonten et al. “Prediction models for diagnosis and prognosis of covid-19: systematic review and critical appraisal.” bmj 369 (2020).<a href="statistical-modeling.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Savage, Leonard J. The foundations of statistics. Courier Corporation, 1972.<a href="statistical-modeling.html#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
