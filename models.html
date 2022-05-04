@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-05-03" />
+<meta name="date" content="2022-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -197,16 +197,21 @@ div.csl-indent {
 <li class="chapter" data-level="6" data-path="bayesian-inference.html"><a href="bayesian-inference.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="bayesian-inference.html"><a href="bayesian-inference.html#bayes-theorem"><i class="fa fa-check"></i><b>6.1</b> Bayes Theorem</a></li>
-<li class="chapter" data-level="6.2" data-path="bayesian-inference.html"><a href="bayesian-inference.html#prior-probability"><i class="fa fa-check"></i><b>6.2</b> Prior Probability</a></li>
+<li class="chapter" data-level="6.2" data-path="bayesian-inference.html"><a href="bayesian-inference.html#prior-probability"><i class="fa fa-check"></i><b>6.2</b> Prior Probability</a>
+<ul>
+<li class="chapter" data-level="" data-path="bayesian-inference.html"><a href="bayesian-inference.html#picking-a-prior"><i class="fa fa-check"></i>Picking a Prior</a></li>
+</ul></li>
 <li class="chapter" data-level="6.3" data-path="bayesian-inference.html"><a href="bayesian-inference.html#likelihood"><i class="fa fa-check"></i><b>6.3</b> Likelihood</a></li>
 <li class="chapter" data-level="6.4" data-path="bayesian-inference.html"><a href="bayesian-inference.html#evidence"><i class="fa fa-check"></i><b>6.4</b> Evidence</a></li>
-<li class="chapter" data-level="6.5" data-path="bayesian-inference.html"><a href="bayesian-inference.html#posterior-probability-estimation"><i class="fa fa-check"></i><b>6.5</b> Posterior Probability Estimation</a></li>
-<li class="chapter" data-level="6.6" data-path="bayesian-inference.html"><a href="bayesian-inference.html#just-sample-from-the-posterior"><i class="fa fa-check"></i><b>6.6</b> Just Sample From the Posterior</a></li>
-<li class="chapter" data-level="6.7" data-path="bayesian-inference.html"><a href="bayesian-inference.html#analysis-summarizing-the-posterior"><i class="fa fa-check"></i><b>6.7</b> Analysis = Summarizing the Posterior</a></li>
-<li class="chapter" data-level="6.8" data-path="bayesian-inference.html"><a href="bayesian-inference.html#from-model-to-real-world"><i class="fa fa-check"></i><b>6.8</b> From Model to Real World</a></li>
-<li class="chapter" data-level="6.9" data-path="bayesian-inference.html"><a href="bayesian-inference.html#simulate-to-predict"><i class="fa fa-check"></i><b>6.9</b> Simulate to Predict</a></li>
-<li class="chapter" data-level="6.10" data-path="bayesian-inference.html"><a href="bayesian-inference.html#strengths-2"><i class="fa fa-check"></i><b>6.10</b> Strengths</a></li>
-<li class="chapter" data-level="6.11" data-path="bayesian-inference.html"><a href="bayesian-inference.html#limitations-2"><i class="fa fa-check"></i><b>6.11</b> Limitations</a></li>
+<li class="chapter" data-level="6.5" data-path="bayesian-inference.html"><a href="bayesian-inference.html#posterior-probability-estimation"><i class="fa fa-check"></i><b>6.5</b> Posterior Probability Estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="bayesian-inference.html"><a href="bayesian-inference.html#sample-from-the-posterior-with-mcmc"><i class="fa fa-check"></i>Sample From the Posterior with MCMC</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="bayesian-inference.html"><a href="bayesian-inference.html#summarizing-the-posterior-samples"><i class="fa fa-check"></i><b>6.6</b> Summarizing the Posterior Samples</a></li>
+<li class="chapter" data-level="6.7" data-path="bayesian-inference.html"><a href="bayesian-inference.html#from-model-to-world"><i class="fa fa-check"></i><b>6.7</b> From Model to World</a></li>
+<li class="chapter" data-level="6.8" data-path="bayesian-inference.html"><a href="bayesian-inference.html#simulate-to-predict"><i class="fa fa-check"></i><b>6.8</b> Simulate to Predict</a></li>
+<li class="chapter" data-level="6.9" data-path="bayesian-inference.html"><a href="bayesian-inference.html#strengths-2"><i class="fa fa-check"></i><b>6.9</b> Strengths</a></li>
+<li class="chapter" data-level="6.10" data-path="bayesian-inference.html"><a href="bayesian-inference.html#limitations-2"><i class="fa fa-check"></i><b>6.10</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
 <li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
@@ -273,7 +278,7 @@ This excludes “designed” models such cellular automata.</p>
 <p>There is no philosophical consensus on what makes a model.
 For our purpose, let’s say that <strong>a mathematical model consists of three ingredients: variables, relations and parameters</strong>.
 <!-- in original text it's objects instead of variables -->
-A mathematical model contains mathematical structures that represent <em>variables</em> and put them in <em>relation</em> (Figure <a href="models.html#fig:model">2.1</a>). <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+A mathematical model contains mathematical structures that represent <em>variables</em> and put them in <em>relation</em> (Figure <a href="models.html#fig:model">2.1</a>).<span class="citation"><sup><a href="#ref-weisberg2012simulation" role="doc-biblioref">1</a></sup></span>
 The relations are often expressed as parameterized functions of the variables.
 The model <strong>parameters</strong> make the mathematical structure adaptable.
 When the model is learned from data, in the learning process the parameters and sometimes relations (functions) are adapted to the data.
@@ -373,11 +378,11 @@ Because some mindsets are more concentrated on some of the tasks.
 -->
 
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.<a href="models.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-weisberg2012simulation" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Weisberg M. Simulation and similarity: Using models to understand the world. Oxford University Press; 2012. </div>
+</div>
 </div>
             </section>
 

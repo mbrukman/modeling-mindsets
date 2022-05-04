@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-05-03" />
+<meta name="date" content="2022-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -197,16 +197,21 @@ div.csl-indent {
 <li class="chapter" data-level="6" data-path="bayesian-inference.html"><a href="bayesian-inference.html"><i class="fa fa-check"></i><b>6</b> Bayesian Inference</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="bayesian-inference.html"><a href="bayesian-inference.html#bayes-theorem"><i class="fa fa-check"></i><b>6.1</b> Bayes Theorem</a></li>
-<li class="chapter" data-level="6.2" data-path="bayesian-inference.html"><a href="bayesian-inference.html#prior-probability"><i class="fa fa-check"></i><b>6.2</b> Prior Probability</a></li>
+<li class="chapter" data-level="6.2" data-path="bayesian-inference.html"><a href="bayesian-inference.html#prior-probability"><i class="fa fa-check"></i><b>6.2</b> Prior Probability</a>
+<ul>
+<li class="chapter" data-level="" data-path="bayesian-inference.html"><a href="bayesian-inference.html#picking-a-prior"><i class="fa fa-check"></i>Picking a Prior</a></li>
+</ul></li>
 <li class="chapter" data-level="6.3" data-path="bayesian-inference.html"><a href="bayesian-inference.html#likelihood"><i class="fa fa-check"></i><b>6.3</b> Likelihood</a></li>
 <li class="chapter" data-level="6.4" data-path="bayesian-inference.html"><a href="bayesian-inference.html#evidence"><i class="fa fa-check"></i><b>6.4</b> Evidence</a></li>
-<li class="chapter" data-level="6.5" data-path="bayesian-inference.html"><a href="bayesian-inference.html#posterior-probability-estimation"><i class="fa fa-check"></i><b>6.5</b> Posterior Probability Estimation</a></li>
-<li class="chapter" data-level="6.6" data-path="bayesian-inference.html"><a href="bayesian-inference.html#just-sample-from-the-posterior"><i class="fa fa-check"></i><b>6.6</b> Just Sample From the Posterior</a></li>
-<li class="chapter" data-level="6.7" data-path="bayesian-inference.html"><a href="bayesian-inference.html#analysis-summarizing-the-posterior"><i class="fa fa-check"></i><b>6.7</b> Analysis = Summarizing the Posterior</a></li>
-<li class="chapter" data-level="6.8" data-path="bayesian-inference.html"><a href="bayesian-inference.html#from-model-to-real-world"><i class="fa fa-check"></i><b>6.8</b> From Model to Real World</a></li>
-<li class="chapter" data-level="6.9" data-path="bayesian-inference.html"><a href="bayesian-inference.html#simulate-to-predict"><i class="fa fa-check"></i><b>6.9</b> Simulate to Predict</a></li>
-<li class="chapter" data-level="6.10" data-path="bayesian-inference.html"><a href="bayesian-inference.html#strengths-2"><i class="fa fa-check"></i><b>6.10</b> Strengths</a></li>
-<li class="chapter" data-level="6.11" data-path="bayesian-inference.html"><a href="bayesian-inference.html#limitations-2"><i class="fa fa-check"></i><b>6.11</b> Limitations</a></li>
+<li class="chapter" data-level="6.5" data-path="bayesian-inference.html"><a href="bayesian-inference.html#posterior-probability-estimation"><i class="fa fa-check"></i><b>6.5</b> Posterior Probability Estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="bayesian-inference.html"><a href="bayesian-inference.html#sample-from-the-posterior-with-mcmc"><i class="fa fa-check"></i>Sample From the Posterior with MCMC</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="bayesian-inference.html"><a href="bayesian-inference.html#summarizing-the-posterior-samples"><i class="fa fa-check"></i><b>6.6</b> Summarizing the Posterior Samples</a></li>
+<li class="chapter" data-level="6.7" data-path="bayesian-inference.html"><a href="bayesian-inference.html#from-model-to-world"><i class="fa fa-check"></i><b>6.7</b> From Model to World</a></li>
+<li class="chapter" data-level="6.8" data-path="bayesian-inference.html"><a href="bayesian-inference.html#simulate-to-predict"><i class="fa fa-check"></i><b>6.8</b> Simulate to Predict</a></li>
+<li class="chapter" data-level="6.9" data-path="bayesian-inference.html"><a href="bayesian-inference.html#strengths-2"><i class="fa fa-check"></i><b>6.9</b> Strengths</a></li>
+<li class="chapter" data-level="6.10" data-path="bayesian-inference.html"><a href="bayesian-inference.html#limitations-2"><i class="fa fa-check"></i><b>6.10</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
 <li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
@@ -261,8 +266,8 @@ div.csl-indent {
 <!-- example of frequentist study -->
 <!-- source of study:  https://academic.oup.com/aje/article/154/8/748/131397 -->
 <p>Drinking alcohol is associated with a higher risk of diabetes in middle-aged men.
-At least this is what a study claims. <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>
-The study modeled type II diabetes as a function of various risk factors.
+At least this is what a study claims.<span class="citation"><sup><a href="#ref-kao2001alcohol" role="doc-biblioref">3</a></sup></span></p>
+<p>The study modeled type II diabetes as a function of various risk factors.
 The researchers found out that alcohol significantly increases the diabetes risk for middle-aged men by a factor of <span class="math inline">\(1.81\)</span>.</p>
 <!-- familiar frequentist terms -->
 <p>“Significant” and “associated with” are familiar terms when reading about scientific results.
@@ -280,7 +285,7 @@ From analyzing A/B tests for a website to calculating portfolio risk to monitori
 <!-- frequentist criticized -->
 <p>As much as frequentism dominates the world of data, it’s also criticized.
 Frequentist inference has been the analysis method for scientific “findings” that turned out to be a waste of research time.
-You may have heard about the replication crisis.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
+You may have heard about the replication crisis.<span class="citation"><sup><a href="#ref-ioannidis2005most" role="doc-biblioref">4</a></sup></span>
 Many scientific findings in psychology, medicine, social sciences and other fields could not be replicated.
 The problem with that is that replication is at the center of the scientific method.
 Many causes have contributed to the replication crisis
@@ -428,7 +433,7 @@ It can be as simple as assuming that the data follow a Normal distribution and c
 <ul>
 <li>Start with a hypothesis.</li>
 <li>Formulate the <strong>alternative or null hypothesis</strong>.</li>
-<li>Decide which statistical test to use. This step includes modeling the data. In fact, all statistical tests are statistical models<span class="citation"><sup><a href="#ref-mcelreath2020statistical" role="doc-biblioref">1</a></sup></span></li>
+<li>Decide which statistical test to use. This step includes modeling the data. In fact, all statistical tests are statistical models<span class="citation"><sup><a href="#ref-mcelreath2020statistical" role="doc-biblioref">2</a></sup></span></li>
 <li>Calculate the distribution of the parameter estimates under the null hypothesis (or rather, the test statistic <span class="math inline">\(T\)</span>).</li>
 <li>Choose the significance level <span class="math inline">\(\alpha\)</span>: the probability threshold at which to reject the null hypothesis assuming it would be true. Often <span class="math inline">\(\alpha = 0.05\)</span>.</li>
 <li>Calculate the p-value: Assume that the null hypothesis is correct. Then p is the probability of getting a more extreme test statistic <span class="math inline">\(T\)</span> than was actually observed. See figure <a href="frequentist-inference.html#fig:hypothesis">5.2</a>.</li>
@@ -536,18 +541,17 @@ FIGURE 5.3: 100 95% confidence intervals and the true value.
 
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-mcelreath2020statistical" class="csl-entry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">McElreath R. Statistical rethinking: A bayesian course with examples in r and stan. Chapman; Hall/CRC; 2020. </div>
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">McElreath R. Statistical rethinking: A bayesian course with examples in r and stan. Chapman; Hall/CRC; 2020. </div>
 </div>
+<div id="ref-kao2001alcohol" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Kao WL, Puddey IB, Boland LL, Watson RL, Brancati FL. Alcohol consumption and the risk of type 2 diabetes mellitus: Atherosclerosis risk in communities study. American journal of epidemiology. 2001;154(8):748–57. </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="4">
-<li id="fn4"><p>Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. “Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study.” American journal of epidemiology 154, no. 8 (2001): 748-757.<a href="frequentist-inference.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Ioannidis, John PA. “Why most published research findings are false.” PLoS medicine 2, no. 8 (2005): e124.<a href="frequentist-inference.html#fnref5" class="footnote-back">↩︎</a></p></li>
-</ol>
+<div id="ref-ioannidis2005most" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Ioannidis JP. Why most published research findings are false. PLoS medicine. 2005;2(8):e124. </div>
+</div>
 </div>
             </section>
 

@@ -8,7 +8,7 @@ fig:hypothesis
 fig:ci
 fig:bayesian
 fig:priors
-fig:posteriori
+fig:posterior
 what-this-book-is-about
 who-this-book-is-for
 models
@@ -38,9 +38,8 @@ prior-probability
 likelihood
 evidence
 posterior-probability-estimation
-just-sample-from-the-posterior
-analysis-summarizing-the-posterior
-from-model-to-real-world
+summarizing-the-posterior-samples
+from-model-to-world
 simulate-to-predict
 strengths-2
 limitations-2
