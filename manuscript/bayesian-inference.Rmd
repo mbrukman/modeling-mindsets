@@ -85,7 +85,8 @@ P(\theta|X) & \propto  & P(X | \theta) \cdot  P(\theta) \\
 \end{eqnarray}
 
 where $P_j = P(\theta, X_j)$.
-Even after seeing just one data point, we get an updated belief in the form of an updated posterior distribution.
+Even with just one data point, we can update our belief about the parameters!
+And each time this posterior then becomes -- kind of -- the prior for the next update.
 Then we multiply this distribution with the likelihood of another data point, and so on.
 The Bayes' theorem in the context of Bayesian inference contains the idea of belief updates, as also visualized in Figure \@ref(fig:bayesian).
 
