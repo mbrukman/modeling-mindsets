@@ -2,7 +2,7 @@
 
 This is the repository of the book Modeling Mindsets.
 
-You can [read the book for free](https://book.modeling-mindset.com) online.
+You can [read the book for free](https://book.modeling-mindsets.com) online.
 Get the [eBook and pdf from Leanpub](https://leanpub.com/modeling-mindsets).
 
 ![Build Status](https://github.com/christophM/modeling-mindsets.com/actions/workflows/Book.yaml/badge.svg)
