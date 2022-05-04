@@ -22,7 +22,8 @@
 <!-- example of frequentist study -->
 <!-- source of study:  https://academic.oup.com/aje/article/154/8/748/131397 -->
 Drinking alcohol is associated with a higher risk of diabetes in middle-aged men.
-At least this is what a study claims. [^Kao2001]
+At least this is what a study claims. [@kao2001alcohol]
+
 The study modeled type II diabetes as a function of various risk factors.
 The researchers found out that alcohol significantly increases the diabetes risk for middle-aged men by a factor of $1.81$.
 
@@ -44,7 +45,7 @@ From analyzing A/B tests for a website to calculating portfolio risk to monitori
 <!-- frequentist criticized -->
 As much as frequentism dominates the world of data, it's also criticized.
 Frequentist inference has been the analysis method for scientific "findings" that turned out to be a waste of research time.
-You may have heard about the replication crisis.[^Ioannidis2005]
+You may have heard about the replication crisis.[@ioannidis2005most]
 Many scientific findings in psychology, medicine, social sciences and other fields could not be replicated.
 The problem with that is that replication is at the center of the scientific method.
 Many causes have contributed to the replication crisis
@@ -439,6 +440,3 @@ ggplot(dat) +
 * Weird interpretation of probability: Often it does not make any sense to interpret every probability with imagined experiments. For example, the probability for a party to get the majority vote in an election requires to imagine multiple elections, yet under the same circumstances, like same year, same candidates, and so on.  
 
 
-[^Kao2001]: Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. "Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study." American journal of epidemiology 154, no. 8 (2001): 748-757.
-
-[^Ioannidis2005]: Ioannidis, John PA. "Why most published research findings are false." PLoS medicine 2, no. 8 (2005): e124.
