@@ -22,7 +22,8 @@
 <!-- example of frequentist study -->
 <!-- source of study:  https://academic.oup.com/aje/article/154/8/748/131397 -->
 Drinking alcohol is associated with a higher risk of diabetes in middle-aged men.
-At least this is what a study claims. [^Kao2001]
+At least this is what a study claims. [@kao2001alcohol]
+
 The study modeled type II diabetes as a function of various risk factors.
 The researchers found out that alcohol significantly increases the diabetes risk for middle-aged men by a factor of $1.81$.
 
@@ -44,7 +45,7 @@ From analyzing A/B tests for a website to calculating portfolio risk to monitori
 <!-- frequentist criticized -->
 As much as frequentism dominates the world of data, it's also criticized.
 Frequentist inference has been the analysis method for scientific "findings" that turned out to be a waste of research time.
-You may have heard about the replication crisis.[^Ioannidis2005]
+You may have heard about the replication crisis.[@ioannidis2005most]
 Many scientific findings in psychology, medicine, social sciences and other fields could not be replicated.
 The problem with that is that replication is at the center of the scientific method.
 Many causes have contributed to the replication crisis
@@ -138,6 +139,7 @@ theme_void()
 Imagining experiments that will never take place is essential to the frequentist mindset.
 By defining probability in terms of long-run frequencies, frequentism requires imagining that the sampling and experiment will be done many times.
 These "imagined" experiments are central to the interpretation of confidence intervals, p-values, and hypothesis tests.
+And *every* interpretation of probability in the frequentist mindset has to be connected to frequencies of events in long-run samples / experiments.
 
 <!-- likelihood principle violated -->
 These imagined experiments have a curious implication for frequentism.
@@ -220,7 +222,7 @@ How does a hypothesis test work?
 
 * Start with a hypothesis.
 * Formulate the **alternative or null hypothesis**.
-* Decide which statistical test to use. This step includes modeling the data.
+* Decide which statistical test to use. This step includes modeling the data. In fact, all statistical tests are statistical models [@mcelreath2020statistical]
 * Calculate the distribution of the parameter estimates under the null hypothesis (or rather, the test statistic $T$).
 * Choose the significance level $\alpha$: the probability threshold at which to reject the null hypothesis assuming it would be true. Often $\alpha = 0.05$.
 * Calculate the p-value: Assume that the null hypothesis is correct. Then p is the probability of getting a more extreme test statistic $T$ than was actually observed. See figure \@ref(fig:hypothesis).
@@ -435,8 +437,6 @@ ggplot(dat) +
 * Frequentist probability can fail in the simplest scenarios: Imagine you are modeling the probability of rain in August. The data only has 20 August days, all of which are without rain. The frequentist answer is that there is absolutely no chance that it will ever rain in August. The frequentist recommendation is that to collect more data if we want a better answer. [Bayesianism](#bayesian-inference) offers a solution to involve prior information for such estimates.
 * There is an "off-the-shelf"-mentality among users of frequentist inference. Instead of carefully adapting a probability model to the data, an off-the-shelf statistical test or statistical model is chosen. The choice is based on just a few properties of the data. For example, there are popular flow charts of choosing an appropriate statistical test. <!-- https://bookdown.org/content/4857/generalized-linear-madness.html --> <!-- citation needed -->
 * Frequentist statistics says nothing about causality except that "correlation does not imply causation".
+* Weird interpretation of probability: Often it does not make any sense to interpret every probability with imagined experiments. For example, the probability for a party to get the majority vote in an election requires to imagine multiple elections, yet under the same circumstances, like same year, same candidates, and so on.  
 
 
-[^Kao2001]: Kao, WH Linda, Ian B. Puddey, Lori L. Boland, Robert L. Watson, and Frederick L. Brancati. "Alcohol consumption and the risk of type 2 diabetes mellitus: atherosclerosis risk in communities study." American journal of epidemiology 154, no. 8 (2001): 748-757.
-
-[^Ioannidis2005]: Ioannidis, John PA. "Why most published research findings are false." PLoS medicine 2, no. 8 (2005): e124.

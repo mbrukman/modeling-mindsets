@@ -35,8 +35,6 @@ _book/$(bookname).epub : bookfiles
 	rm -f $(bookname).Rmd
 	Rscript  -e "bookdown::render_book('./', 'bookdown::epub_book')"
 
-references.Rmd : *.Rmd
-	Rscript ../scripts/references.R
 
 sbrl:
 	sudo apt install -y libgsl10-dev open-cobol

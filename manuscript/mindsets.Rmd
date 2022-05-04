@@ -37,7 +37,14 @@ While mindsets cover many different modeling tasks, they have some tasks where t
 Each mindset invites you to ask different questions, and so shapes the way you view the world through your model.
 In supervised machine learning, for example, everything becomes a prediction or classification problem, while in Bayesian inference, the goal is to update our beliefs about the world using probability theory.
 
-```{r mindset, fig.cap = "Only when a model is embedded in a mindset can we put it into context with the world."}
+
+<!-- small and large world -->
+Within a  mindset there are two worlds: the model world and the real world (Figure \@ref(fig:mindsets).
+Or, as McElreath called them in his book "Statistical Rethinking": the "small" and the "large" world. [@mcelreath2020statistical]
+All modeling results are first and foremost statements about the model world, and to be interpreted within the simplified model world..
+How and if model results may be transferred from the model world to the real world, depends on the mindset. 
+
+```{r mindsets, fig.cap = "Only when a model is embedded in a mindset can we put it into context with the world."}
 library(ggplot2)
 library(patchwork)
 

@@ -35,7 +35,7 @@ This excludes "designed" models such cellular automata.
 There is no philosophical consensus on what makes a model.
 For our purpose, let's say that **a mathematical model consists of three ingredients: variables, relations and parameters**.
 <!-- in original text it's objects instead of variables -->
-A mathematical model contains mathematical structures that represent *variables* and put them in *relation* (Figure \@ref(fig:model)). [^Weisberg2012]
+A mathematical model contains mathematical structures that represent *variables* and put them in *relation* (Figure \@ref(fig:model)). [@weisberg2012simulation]
 The relations are often expressed as parameterized functions of the variables. 
 The model **parameters** make the mathematical structure adaptable.
 When the model is learned from data, in the learning process the parameters and sometimes relations (functions) are adapted to the data.
@@ -149,6 +149,7 @@ In supervised machine learning, we take advantage of the modeled relations to ma
 In causal inference, we use our model to estimate causal effects.
 In likelihoodism, we can compare the likelihoods between models.
 
+
 <!--
 
 ## Tasks
@@ -167,6 +168,4 @@ Because some mindsets are more concentrated on some of the tasks.
 
 
 -->
-
-[^Weisberg2012]: Weisberg, Michael. Simulation and similarity: Using models to understand the world. Oxford University Press, 2012.
 

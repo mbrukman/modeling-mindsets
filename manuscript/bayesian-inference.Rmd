@@ -1,151 +1,171 @@
 # Bayesian Inference {#bayesian-inference}
 
-<!-- summary of Bayesian inference -->
-Bayesian inference sees the world as parameterized distributions.
-To learn about the world, we have to learn about the best fitting parameters.
-But for Bayesians, the parameters themselves are random variables with a probability distribution.
-So to learn about the parameters, we have to assume some prior distribution, and update our belief about the our parameters with data.
-This is then the posteriori distribution.
+<!-- CONTENT TO ADD
+
+- Just one level: The parameter random variables themselves don't have a further distribution
+- Bayes Factor: A way to compare models/hypotheses. Also a way to do testing in the Bayesian mindset
+- checkout book: https://press-files.anu.edu.au/downloads/press/n1652/pdf/book.pdf
+- minimizing some risk function on the posterior delivers point estimates
+- whether mean, median or mode or whatever are wanted, implicitly depends on the risk function
+- the decision theory + loss function is also a bridge to machine learning: what if we only look at best possible decision instead of relying on random variables and DGP thoughts?
+
+-->
+
+* Probability is a degree of belief, and learning from data means updating belief.
+* Model parameters are random variables with prior and posterior distributions.
+* A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentist-inference) and [likelihoodism](#likelihoodism) as alternatives.
 
 <!-- relation to others -->
-Bayesian inference is a likelihood-based approach that builds on the Bayes theorem:
-The distribution parameters do not only depend on the data, but we assume some prior distribution.
-In Bayesian statistics, probability can be interpreted as the plausibility of an event.
-Bayesian statistics is about the degree of beliefs we have about our parameters.
-Bayesianism is therefore found on the idea of subjective probabilities.
-If you haven't read the chapter on [Statistical Modeling](#statistical-modeling), I recommend you do it first, since Bayesian inference is easier understood when you have a good grasp on statistical inference.
-The core difference to frequentism are: Heavy use of Bayes' theorem; assumption of prior distribution of parameters; interpretation of probability as degrees of beliefs and not as long-run frequencies.
+If you haven't read the chapter on [Statistical Modeling](#statistical-modeling), I recommend that you do so first, since Bayesian inference is easier to understand if you have a good understanding of statistical inference.
+Bayesian inference is based on probability distributions, interpreting parameters, and learning from data through the likelihood.
+The twist: distribution parameters are also random variables.
+Random variables that have a prior distribution.
+Prior means before encountering the data.
+Learning about the parameters means updating the prior probabilities to the posterior probabilities.
 
-<!-- Bayesian updating -->
-Bayesian inference is about changing your mind.
-We update our knowledge about the world when new information comes in.
-You already know some stuff to the world.
-Prior to getting some new information.
-Then you update your knowledge, based on data / evidence.
-Then you go about your life with this updated knowledge.
-
-<!-- Example of knowledge update in real life -->
-Imagine you are at a snack machine.
-You have a general idea how much you like snack machines.
-You rate most snack vending machines 6/10 - 9/10.
-Without further knowledge, you would expect the new machine that you just encountered to be somewhere in that range too.
-But this newly installed machine is directly at the train station, and it has your favorite chips.
-So you give it a rating of 9/10.
-But then two big betrayals.
-First, the chips got stuck one day, between the tray and the window pane.
-This happens, but it's always very annoying.
-But directly the day after, the machine refused to give you change.
-These betrayals made you change your rating to 5/10.
-
+<!-- summary learning with Bayesian inference -->
+In Bayesian statistics, probability can be interpreted as the plausibility of an event or our belief about it.
+That's different from the more objective interpretation of probability in [frequentist inference](#frequentist-inference).
+In Bayesian inference, it's not necessary to imagine repeated experiments.
+One can even apply Bayesian inference to a single data point.
+This is not possible with frequentist inference.
+A Bayesian model even works without data, by just using the prior distributions. [^prior-predictive]
 
 ## Bayes Theorem
 
+Bayesians want to learn the distribution of the model parameters from the data: $P(\theta | X)$.
+P(\theta | X) is a strange way of looking at the probabilities involved.
+The data-generating process generates data as a function of the parameters: $P(X | \theta)$.
+So Bayesians look for the inverse of what the DGP would naturally do.
+
 <!-- Bayes' theorem has many applications -->
-At the very center of Bayesian inference is the Bayes' theorem.
-The Bayes' theorem expresses a conditional probability in terms of other probabilities.
-As such, the theorem has many applications.
+To make $P(\theta|X)$ computable, Bayesians use a trick that earned them their name: the Bayes' theorem.
+Bayes' theorem can be used to invert the conditional probability:
 
-<!-- The Bayes' theorem -->
-In the case of Bayesian modelling, we are interested in the distribution of the parameters $\theta$ conditional on the data $D$, which is $P(\theta | D)$.
-So far, equivalent to [frequentism](#frequentism) and [likelihoodism](#likelihoodism), with the difference that Bayesians explicitly say that the model parameters $\theta$ are random variables and therefore have probability distributions.
-To 
-Applying the Bayes' theorem:
+$$\underbrace{P(\theta|X)}_{\text{posterior}} = \frac{\overbrace{P(X | \theta)}^{\text{likelihood}} \cdot  \overbrace{P(\theta)}^{\text{prior}}}{\underbrace{P(X)}_{\text{evidence}}}$$
 
-$$\underbrace{P(\theta|D)}_{\text{posteriori}} = \frac{\overbrace{P(D | \theta)}^{\text{likelihood}} \cdot  \overbrace{P(\theta)}^{\text{priori}}}{\underbrace{P(D)}_{\text{evidence}}}$$
+$P(\theta)$, also called prior, is the probability distribution of $\theta$ before we have collected any data.
+The probability distribution is updated by multiplying the prior by the data likelihood $P(X | \theta)$. [^confusing-likelihood]
+This product is scaled by the probability of the data $P(X)$, also called evidence.
+The result is the posterior probability distribution, an updated belief about the parameters $\theta$.
 
-The Bayes' theorem in the context of Bayesian inference contains the idea of belief updates, as also visualized in Figure \@ref(fig:bayesian).
-$P(\theta)$, also called the prior,  is the probability distribution of $\theta$ before we have collected any data.
-The probability distribution gets updated by multiplying the prior with the likelihood $P(D | \theta)$ of the data.
-This product is scaled by the probability of the data $P(D)$, also called evidence.
-The result is the posteriori probability distribution, an updated belief about our parameters $\theta$.
+Bayes' theorem is a generally useful equation for working with probabilities, but we focus on its use for Bayesian inference.
+The theorem is not just a simple rearrangement of probabilities, but a powerful mental model: Bayesian updating.
+Remember that the data likelihood is the product of the likelihoods for each data point:
+$$P(X | \theta) = \prod_{i=1}^n P(X^{(i)} | \theta)$.
+Here, $X^{(i)}$ is the vector of random variables of the i-th outcome.
+For example, in a drug trial, the variables $X^{(i)} could belong to the i-th (not yet observed) patient and include pain level, blood pressure and iron level.
+Plugging this version of the likelihood into Bayes' theorem, we can see how it relates to updating ones belief with new data.
+For simplicity, I have removed the evidence $P(X)$ which only serves as a normalization so we can interpret the results as probability:
 
-```{r bayesian, fig.cap = "Illustration of priori density that gets an update from the likelihood of the data to result in posteriori probability distribution."}
+\begin{eqnarray}
+P(\theta|X) & \propto  & P(X | \theta) \cdot  P(\theta) \\ 
+            & =        & P(\theta) \cdot \prod_{i=1}^n P(\theta, X^{i}) \\
+            & =        & P(\theta) \cdot P_1 \cdot \ldots \cdot P_p,
+\end{eqnarray}
+
+where $P_i = P(X^{(i)} | \theta)$.
+Even with just one data point, we can update our belief about the parameters!
+And each time, this posterior then becomes -- in a sense -- the prior for the next update.
+The posterior distribution is the product of prior and likelihood (Figure \@ref(fig:bayesian)).
+
+```{r bayesian, fig.cap = "The posterior distribution (right) is the scaled product of prior and likelihood: prior $\\times$ likelihood $\\propto$ posterior.", fig.width = 10, fig.height = 3}
 library(ggplot2)
 library(tidyr)
 
-x = seq(from = -10, to = 35, length.out = 100)
-prior_theta = dnorm(x, mean = 20, sd = 3)
-likelihood = dnorm(x, mean = 5, sd = 3)
-posteriori = dnorm(x, mean = 10, sd = 3)
+x = seq(from = -1, to = 8, length.out = 500)
+prior_d = approxfun(x, dgamma(x, shape = 1.4, rate = 0.8))
+likelihood_d = approxfun(x, dnorm(x, mean = 3.5, sd = 1.5))
 
-df = data.frame(priori = prior_theta, likelihood = likelihood, posteriori = posteriori, x = x)
-densities = c("priori", "likelihood", "posteriori")
-df2 = pivot_longer(df, cols = all_of(densities))
-df2$name = factor(df2$name, levels = densities)
+posterior_d = function(x) {
+  prior_d(x) * likelihood_d(x) 
+}
 
-lbdt = data.frame(x = c(20, 5, 10),
-                  name = factor(densities, levels = densities),
-                  y = 0.05)
+auc = sum(diff(x)[1] * posterior_d(x))
+posterior = function(x) {posterior_d(x) / auc}
 
-ggplot(df2) +
-geom_polygon(aes(x = x, y = value), fill = "grey", alpha = 0.3) +
-geom_line(aes(x = x, y = value)) +
-coord_cartesian(xlim=c(-2, 28)) +
-scale_fill_discrete("") +
-theme_void() + 
-facet_grid(name ~ ., switch = "y") +
-geom_label(data = lbdt, aes(x = x, y = y, label = name))  +
-theme(strip.text.y = element_blank())
+dat = data.frame(prior = prior_d(x), likelihood = likelihood_d(x), posterior = posterior(x), x = x)
+densities = c("prior", "likelihood", "posterior")
+dat = pivot_longer(dat, cols = all_of(densities))
+dat$name = factor(dat$name, levels = densities)
+
+ggplot(dat, aes(x = x, y = value)) +
+  geom_area(size = 1.1, fill = "lightgrey") +
+  geom_line() +
+  #coord_fixed(ratio = 20) +
+  facet_grid(. ~ name) +
+  theme_void() + 
+ theme(axis.text.x = element_text(),
+      strip.text.x = element_text(size = 18))
 ```
 
-Next, let's dive deeper into the individual components of the Bayes' theorem, so that we can update our own beliefs about Bayesianism.
+Next, let's explore the individual terms of Bayes' theorem, so that we can update our own beliefs about Bayesian inference.
 
 ## Prior Probability 
 
 <!-- prerequisites -->
-The Bayes' theorem tells us that we have to know $P(\theta)$ to calculate the posterior probability distribution.
-This implies that the model parameters themselves are random variables, or otherwise $P(\theta)$ is a meaningless statement.
-For example, the mean of a distribution has a distribution itself.
-Let's sat we randomly choose a person and want to know how long they worked today.
-The number of daily working hours, the random variable of interest, follow some probability distribution that have parameters.
-For example, it might follow a Gaussian distribution, which is described with mean and variance parameters.
-Bayesians would assume that the mean parameter is itself a random variable.
+Bayesians assume that model or distribution parameters a prior probability distribution $P(\theta)$. [^just-one-level]
+Let's say we randomly pick a person and want to know how many hours per day they usually work.
+The number of hours worked per day, the random variable of interest, follows a probability distribution.
+For example, the number of hours worked might follow a Gaussian distribution.
+Bayesians assume that mean and variance of this Gaussian distribution are random variables.
 
-<!-- how to pick a prior --> 
-How would we know how the model parameter is distributed, when we haven't even observed any data yet?
-Bayesians assume some prior distribution.
-The factors going into the choice of prior distribution are manifold.
+<!-- role of the prior -->
+How do priors make sense?
+How can Bayesians know the distribution of parameters *before* observing any data?
+Priors are a consequence of saying that parameters are random variables, and a technical requirement for working with the Bayes' theorem.
+But how can we know anything about the parameters before we see the data?
+
+### Picking a Prior {-}
+
 <!-- parameter space reasons -->
-The clearest factor are constraints on the space the parameter lives in:
-Is the parameter the mean of distribution? Then we need a continuous distribution, for example Gaussian.
-Maybe you know that the mean is positive, so you pick a prior distribution that only contains positive values, for example the Gamma distribution.
+The first consideration in choosing a prior is the *space* the parameter is in.
+Is the parameter the mean of a continuous distribution?
+If so, it makes sense for the parameter to follow a continuous distribution as well, such as a Gaussian distribution.
+Maybe the mean of the data distribution has to be positive.
+Then the prior distribution should contain only positive values (meaning the probability for negative values should be zero), for example, the Gamma distribution.
 <!-- expert knowledge reasons -->
-Furthermore, expert knowledge can be used to inform the choice.
-Maybe we know from other experiments that the mean of the data distribution should be near 1.
-So we could assume a Normal distribution for $\theta$: $\theta \sim N(1, 1)$.
-In the case of Binomial distribution of your data, for binary outcomes, the Beta distribution is a good prior (see Figure \@ref(fig:priors)).
-Depending on your belief about the parameter $\pi$ you might choose a very different parameteriziation of the Beta distribution.
-Maybe you belief the parameter to be symmetrically distributed around 0.5.
-Or maybe the parameter is more drawn to 0.25?
-Another Beta prior might put emphasis on $\pi$ being one.
+Furthermore, expert knowledge can be used to choose the prior.
+Maybe we know from other experiments that the mean parameter should be around 1.
+So we could assume a Gaussian distribution for $\theta$: $\theta \sim N(1, 1)$.
+In the case where the data follow a Binomial distribution, the Beta distribution is a good prior (see Figure \@ref(fig:priors)).
+Depending on what the modelers believes about the success probability parameter $p$ of the Binomial distribution, they might choose different parameterizations of the Beta distribution.
+Maybe the modeler believes that the parameter must be symmetrically distributed around 0.5.
+Or maybe the parameter is lower, around 0.25?
+Another Beta prior might put emphasis on $p$ being 1.
 <!-- intuition for alpha = beta = 0.5: https://stats.stackexchange.com/questions/362728/whats-the-intuition-for-a-beta-distribution-with-alpha-and-or-beta-less-than -->
-But it's also possible to have a prior that puts most probability on 0 and 1 symmetrically.
-When there are no specific prior beliefs about the parameter the Bayesian can use an "uninformative" or "objective" priors, meaning  [^yang1996] 
-<!-- convenience reasons -->
-Another factor is mathematical convenience.
-It's convenient to pick conjugate priors.
-A convenient case is using conjugate priors.
-Conjugate priors are probability distributions that remain of the same family when combined with certain likelihood functions. 
-Suppose you model your data as Bernoulli distribution, which describes the  distribution as probabilities of being 1 with probability of $p$ and 0 otherwise.Then we measure a realization $X$ of this Bernoulli random variable.
-Further, if we assume to have a Beta distribution as prior distribution, then we also have a beta posteriori function.
+It's even possible to have a prior that that places the greatest probability symmetrically on 0 and 1.
 
-<!-- priors are criticized -->
-The reliance on choosing prior probability functions is the Achilles' heel of Bayesianism, or at least the biggest target of critique.
-The subjective choice of a prior probability influences all results coming from Bayesian inference.
-It clashes especially with the frequentist mindset that there is some true and constant parameters out there.
-And frequentist aim to be very objective, by only operating on long-run frequencies.
-Also likelihoodism says that all information is in the likelihood, which clashes with the idea of a prior distribution influencing the outcome.
+<!-- uninformative and conjugate priors -->
+Without expert knowledge about the parameter, the modeler can use "uninformative" or "objective" priors [@yang1996catalog].
+Uninformative priors often produce results similar to those of frequentist inference (for example for confidence/credible intervals). <!-- citation needed -->
+Another factor influencing the choice of prior is mathematical convenience.
+Conjugate priors are convenient choices.
+Conjugate priors remain in the same family of distributions when multiplied by the right likelihood functions. 
+A Beta prior distribution multiplied by a Bernoulli likelihood, in turn, produces a Beta posterior distribution. 
 
-<!-- don't exagerate -->
-However, there are two major objections to this criticism.
-First, the more data we have, the less influential the prior distribution becomes.
-And second, the prior is not hidden or anything, influencing the analysis from the shadows.
-Let's say two experts disagree on which prior to use.
-You can run Bayesian inference twice, and compare the results.
+<!-- criticizing the prior-->
+Although there are all these different strategies for choosing a prior, even "objective" ones, the choice remains subjective.
+And this subjective choice of prior is why many frequentists reject Bayesian inference. <!-- citation needed -->
+<!-- advantages of priors -->
+While the prior can be seen as a bug, it can also be seen as a feature.
+Thanks to the prior, Bayesian modeling is very flexible.
+The prior can be used to constrain and regularize model parameters, especially when data are scarce;
+the prior can encode results from other experiments and expert knowledge;
+the prior allows a natural handling of measurement errors and missing data.
 
-To get to the posterior likelihood of our parameters, our ultimate goal in Bayesian inferene, we have to update our prior belief with data, or rather: the likelihood function.
+<!-- joint prior? -->
+<!-- 
+But that sounds overly complex, do we really have to specify all the priors?
+There can be many parameters involved in a statistical model.
+And in the Bayesian world, every parameter gets a prior.
+These priors could even have a complex joint distribution with correlations between the parameters.
+But usually, Bayesians specify the prior probabilities independent of each other.
+-->
 
-```{r priors, fig.cap = "Various prior distributions for the success probability p in a Binomial ditribution. Priors here are Beta distributions with shape parameters $\\alpha$ and $\\beta$."}
+To obtain the posterior distribution of the parameters -- the ultimate goal of Bayesian inference -- we need to update the prior using data, or rather, the likelihood function.
+
+```{r priors, fig.cap = "Various Beta prior distributions for the success probability p in a Binomial distribution. The parameters $\\alpha$ and $\\beta$ influence the shape of the Beta prior.", fig.width = 10, fig.height = 2.5}
 library("ggplot2")
 n = 100000
 x = seq(from = 0, to = 1, length.out = 100)
@@ -159,9 +179,10 @@ datbeta4 = data.frame(x = x, y = dbeta(x, shape1 = 2, shape2 = 2), dist = "list(
 datbeta = rbind(datbeta1, datbeta2, datbeta3, datbeta4)
 
 ggplot(datbeta, aes(x = x, y = y)) +
-geom_area(fill = "grey") +
+geom_area(fill = "lightgrey") +
 geom_line(size = 1) +
-facet_wrap(. ~ dist, ncol = 2, labeller = label_parsed) + 
+facet_wrap(. ~ dist, ncol = 4, labeller = label_parsed) + 
+scale_x_continuous(breaks = c(0, 0.5, 1), labels = c("0", "0.5", "1")) +
 theme_void() +
 theme(axis.text.x = element_text(),
       strip.text.x = element_text(size = 18))
@@ -171,127 +192,122 @@ theme(axis.text.x = element_text(),
 ## Likelihood
 
 <!-- likelihood recap -->
-If you have read the [chapter about statistical modeling](#statistical-modeling), you should be familiar with the likelihood function $P(\theta | D)$.
-The likelihood is the probability function of the data, but with a twist:
-We switch the role of data and parameters.
-The probability function is a function of the data: We put in a data point and the probability function tells us how probable this data point is. Parameters are assumed to be fixed.
-The likelihood function is a function of the parameters: We put in the model parameters, and it tells us how likely the observed data is. Data are assumed to be fixed.
+If you have read the chapter [Statistical Modeling](#statistical-modeling), you should be familiar with the likelihood function $P(\theta, X)$.
+The likelihood is equivalent to the probability function of the data.
+Only that the focus is switched: the likelihood is a function of the parameters, while the probability is a function of the data.
 
 <!-- where does the likelihood come from -->
-To get to the likelihood, we have to make assumptions about how our data is distributed.
-Like any [statistical model](#statistical-modeling)!
-So we assume parameterized distributions for our data and turn it into a maximization problem: Finding the right parameter that maximize the likelihood.
-That's true at least for [frequentism](#frequentism) and [likelihoodism](#likelihoodism).
-But for Bayesians, it's just part of the equation.
-But if you are already familiar with likelihoods and so on, then this part of the Bayesian mindset should be very familiar to you.
-Another part of the equation is the evidence $P(D)$, but as we will see, it does not matter that much:
+The Bayesian makes an assumption about how the data are distributed and forms the likelihood function.
+This is no different than [frequentism](#frequentism) and [likelihoodism](#likelihoodism).
+But for Bayesians, the likelihood is just one part of the equation.
+
+With all the comparisons between frequentist inference and Bayesian inference, it's easy to forget that both approaches are quite similar.
+Comparisons between the two mindsets often focus on the (lack of) prior distribution.
+This overlooks the fact that both frequentist and Bayesian inference use the likelihood at the core of their models.
+Especially in cases with a lot of data, both approaches produce similar results.
+That's because the more data are available for the model, the less impact the prior has on the Bayesian results.
+
+Let's now turn to the last part of the equation: the evidence $P(X)$.
 
 ## Evidence
 
-The evidence is the marginalized probability of our data.
-It's sometimes called model evidence.
-Marginalized means that we integrate over all possible parameter values.
-It's a bit difficult to interpret, but that's not a problem at all.
-Due to the marginalization, $P(D)$ does not depend on the parameters $\theta$ at all.
-Which means that in terms of maximizing the posterior probability, it's just a constant factor.
-As we will see later on, we can work around $P(D)$.
-We don't have to compute it to get to the posterior probability.
-But it means that we have to employ sampling techniques instead of computing the posterior directly.
-That's why the posterior probability is often written as being proportional to the numerator: 
+The evidence is the marginalized probability of the data.
+Marginalized means that the probability of the data is integrated over all possible parameter values: $P(X) = \int_{\Theta} P(X|\theta) P(\theta) d\theta$, where $\Theta$ are all possible parameter values.
+Because of this marginalization, $P(X)$ is no longer a function of the parameters $\theta$.
+$P(X)$ is just a constant factor in terms of maximizing the posterior probability
+Constant factors don't change *where* the maximum is, just how large it is.
+In search of the maximum, the evidence $P(X)$ can be ignored.
+For this reason, the posterior probability is often expressed as proportional to the numerator:
 
-$$\underbrace{P(\theta|D)}_{\text{posteriori}} \propto \overbrace{P(D | \theta)}^{\text{likelihood}} \cdot  \underbrace{P(\theta)}_{\text{priori}}$$
+$$\underbrace{P(\theta|D)}_{\text{posterior}} \propto \overbrace{P(D | \theta)}^{\text{likelihood}} \cdot  \underbrace{P(\theta)}_{\text{prior}}$$
 
-So, how do we finally estimate the posterior probability?
+Just one problem: When throwing away $P(X)$, the posterior probability is not a probability at all, because it doesn't integrate to 1, but to $P(X)$.
+How can this problem be solved?
 
 ## Posterior Probability Estimation
 
 <!-- Goal of Bayesian -->
-The goal of the Bayesian is to estimate the posterior distributions of the parameters.
-Once they have that, they can interpret those distributions, make predictions with the model, draw conclusions.
+The goal of the Bayesian modelers is to estimate the posterior distributions of the parameters.
+Once the modelers have the posteriors, they can interpret them, make predictions, and draw conclusions about the world.
 
 <!-- Problem: Posterior estimation -->
-But how do we estimate the posterior?
-Ideally you'd want to have a closed form expression to calculate the posterior.
-That's possible in simple cases, for example when you used conjugate priors.
-But in many modelling cases, it's not possible to get a closed form expression to calculate the posterior probability distribution.
-The problem here is the $P(D)$.
-The evidence is too difficult to compute.
-Not only is $P(D)$ a problem:
-Also there can be many parameters, and we have a high-dimensional optimization problem.
-So we need to be clever about optimizing it.
+But how is the posterior estimated?
+In the ideal case, the posterior can be written down as a simple formula.
+But that's only possible for certain combinations of prior and likelihood, for example when conjugate priors are used.
+For many Bayesian models it's impossible to obtain a closed form for the posterior.
+The main problem is that $P(X)$ may not be computable.
+
+### Sample From the Posterior with MCMC {-}
 
 <!-- Don't solve exactly, but sample -->
-We don't HAVE to compute it.
-Another option is to just sample from it.
-Special sampling techniques from the posterior distribution is the go-to solution to fit the posterior distribution.
-A method called Markov Chain Monte Carlo (MCMC) is typically employed for this sampling task
+The good news: We don't have to compute the posterior probability.
+We can sample from it.
+Approaches such as Markov Chain Monte Carlo (MCMC) and derivations thereof are used to generate samples from the posterior distribution.
 
 <!-- shortest MCMC explanation -->
-We start with some initial values for our parameters.
-Then new parameter values are proposed.
-This requires some prooposal function.
-These new values are either accepted or rejected, based on prior and likelihood.
-If jump is accepted, adapt parameters.
-In any case, go back to step 2 of new parameter proposals.
-The process is repeated many times, and produces a "chain" of samples for each of the parameters.
+The rough idea of MCMC and similar approaches is as follows:
 
-<!-- MCMC interpretation -->
-<!-- https://twiecki.io/blog/2015/11/10/mcmc-sampling/ -->
-How does MCMC make any sense?
-During the "jumping" between parameters, we are actually comparing models.
-This if the acceptance function.
-The comparison happens by dividing the posteriors of the model with  "old" parameter values and the one with the newly proposed parameter values.
-The evidence $P(D)$ cancels out.
+* Start with some initial values for the parameters $\theta$.
+* Repeat the following steps until a stopping criterion is reached (like pre-determined number of samples):
+  1. Propose new parameter values. Proposals are based on a proposal function receives as input the previous parameters.
+  1. Accept or reject the new values, based on an acceptance function. The acceptance function depends on the prior and the likelihood, but not on the evidence.
+  1. If the new parameter are accepted, continue with these new values.
 
-<!-- from sample to distributions -->
-We cannot use the entire chain as samples from the posteriori distribution.
-First, the first view samples are likely far away from the true posteriori and should therfore be "burned", meaning you ignore them.
-So, maybe the first 1000 of samples are thrown away.
-Then, you want independent samples.
-But the samples in the chain are dependent on the ones that come before them.
-So we have to sample from the chain, and make sure that there are enough values between the samples.
-There are diagnosis tools to do this, but we won't go into the details here. 
-Then you have samples from your posterior distribution.
-Those you can visualize with histogram or density plots.
+A run of MCMC produces a "chain" of samples from the posterior distribution.
+MCMC can be repeated to produce multiple chains.
 
-<!-- more to know about MCMC -->
-There are many other more sophisticated sampling methods, but for this introduction it is good enough to show MCMC.
-Gibbs sampler, Metropolis-Hastings, ...
-All have in common that they are computationally expensive.
-So a big part of the daily job as a Bayesian is to wait for those MCMC chains to converge.
-At least compared to a frequentist.
+MCMC has many variants such as Gibbs sampling and the Metropolis-Hastings algorithm.
+Each variant differs in proposal and acceptance functions or other algorithmic steps.
 
-A shorter alternative is variational inference [^blei2017].
-But while MCMC deliver approximately exact estimates of the posterior probability, variational inference is more of a heuristic.
+MCMC produces a random walk through the posterior distribution of the parameters.
+Regions where the parameters have a high probability are also "visited" with a higher probability.
+The samples can be seen as samples from the posterior.
+But first, some cleaning up needs to happen:
+Since MCMC has to start somewhere, it's possible that the first samples will be from parameter regions with low probability.
+So the first 1000 or so samples are "burned", meaning they are not used for estimating the posterior.
+Another problem is autocorrelation within the chain:
+Samples that occur one after the other are correlated since the proposal function usually proposes new parameters that are close to the previous values.
+So the chain is sampled at different points to ensure that there are enough MCMC steps between two samples to make them independent.
 
-TODO: Visualize the process that is implied by saying that parameters are random variables
+<!-- time and other resources -->
+MCMC sampling can be complex and can take some time to compute.
+Fortunately, most probabilistic software runs MCMC automatically.
+But this can take time.
+More time than fitting a frequentist model would take.
+A shorter alternative is variational inference.[@blei2017variational]
+But while MCMC delivers approximately exact estimates of the posterior probability, variational inference is more of a heuristic.
 
-## Bayesian Inference
+<!-- TODO: visualize MCMC -->
+Frequentists have their parameter estimates.
+Bayesians have ... samples from the posterior distribution?
+That's not the end of the story.
+There are two more steps required to get from posterior samples to insights: turning the samples to a distribution and (optionally) summarizing the distribution.
 
-<!-- raising questions about inference -->
-As said before, getting the posterior distribution is the core of Bayesian mindset.
-What can we then do with the posterior probability?
-What insights can be drawn from the posterior, and how do we link it with the world?
+## Summarizing the Posterior Samples
 
-<!-- statistical model -->
-Remember that Bayesians build [statistical models](#statistical-modeling):
-So they try to approximate the data-generating process with a construct of  probability distributions of random variables.
-These distributions are parameterized, and Bayesians say that these parameters are random variable themselves.
-Also, Bayesians think of probability as degrees of belief.
-The posterior represents an updated belief about the parameters that represent the real world. 
+<!-- from samples to distribution -->
+The posterior samples can be visualized with a histogram or a density estimator for a smoother looking curve.
+Visualizing the entire posterior is the most informative way of reporting the Bayesian results.
 
-<!-- learning about the world -->
-A parameter might reveal to us the distribution of the treatment effect of a cancer drug.
-Or a parameter represents the probability distribution of the mean size of a person.
-Visualizing the posterior distributions fully reveals the information that we have.
-But there are plenty of options as well to summarize the posterior distributions:
+<!-- tables and numbers -->
+People love numbers and tables.
+The fewer and simpler, the better.
+You won't get your manager to understand posterior distributions.
+They demand simple answers!
+So, let's simplify the posterior.
+Summaries of the posterior can be  points or intervals.
+Intervals can be defined via fixed boundaries or fixed probability mass.
+Some examples:
 
-TODO: finish up figure with credible interval, mean
+* Point estimate: The parameter value with the highest posterior probability.
+* Interval with fixed boundaries: The interval from 10 to infinity indicates the probability that the parameter is greater than 10. 
+* Interval with fixed probability mass: The shortest interval containing 50% of the posterior probability mass. Or the interval that ranges from the 2.5% quantile to the 97.5% quantile ( called the 95% credible interval). 
 
-```{r posteriori, fig.cap = "Describing the posterior distribution."}
+
+```{r posterior, fig.cap = "Describing the posterior distribution with an interval, for example the 95\\% credibility interval, or a point estimate, for example the maximum a posteriori estimation (MAP).", fig.width = 9, fig.height = 3}
 library("ggplot2")
 set.seed(2)
-n = 1000000
+n = 10000
 datbeta = data.frame(x = c(rbeta(n/2, shape1 = 2, shape2 = 5), rbeta(n, shape1 = 5, shape2 = 2)))
 
 qs = cumsum(datbeta$x) / sum(datbeta$x)
@@ -303,28 +319,25 @@ dd = density(datbeta$x)
 dd = data.frame(x = dd$x, dens = dd$y)
 dd = dd[(dd$x > lower) & (dd$x < upper), ]
 
+f = approxfun(density(datbeta$x))
+datbeta$f = f(datbeta$x)
+map = datbeta$x[datbeta$f == max(datbeta$f)]
 
 ggplot(datbeta, aes(x = x)) +
-geom_density(fill = "grey", size = 2) +
-geom_area(aes(x = x, y = dens), data = dd) +
-annotate(x = 0.79, y = 2.3, geom = "text", label = "Maximum \n a posteriori \n probability estimate", size = 6, vjust = 1) +
-annotate(x = 0.79, y = 1.8, xend = 0.79, yend = 1.68, geom = "segment", arrow = arrow(), size = 2) + 
-geom_density(fill = "grey", size = 2, trim = TRUE, alpha = 0.5)  +
-annotate(x = lower + 0.01, y = 0.1, xend = upper - 0.01, yend = 0.1, geom = "segment", arrow = arrow(ends = "both"), size = 2) + 
-annotate(x = mean(c(lower, upper)), y = 0.1, geom = "label", label = "95% Credible Interval", size = 6) + 
+#geom_density(fill = "grey", size = 2) + geom_area(aes(x = x, y = dens), data = dd, fill = NA) +
+annotate("text", x = map, y = 1.9, label = "MAP", size = 6, vjust = 1) +
+annotate("segment", x = map,  y = 1.8, xend = map, yend = 1.68, arrow = arrow(), size = 2) + 
+annotate("segment", x = map, y = 0, xend = map, yend = f(map), size = 1, lty = 3) + 
+geom_density(size = 1.5, trim = FALSE, fill = "grey", alpha = 0.5)  +
+annotate("segment", x = lower + 0.01, y = 0.1, xend = upper - 0.01, yend = 0.1, arrow = arrow(ends = "both"), size = 1.5) + 
+annotate("label", x = mean(c(lower, upper)), y = 0.1, label = "95% Credible Interval", size = 6) + 
+annotate("segment", x = lower, y = 0, xend = lower, yend = f(lower), size = 1, lty = 2) + 
+annotate("segment", x = upper, y = 0, xend = upper, yend = f(upper), size = 1, lty = 2) + 
 theme_void()
 ```
 
 
-<!-- options to describe the distribution -->
-Maximum a posteriori estimation: This is the mode (the highest point) of the posteriori distribution. It represents the most likely value.
-But there are other summaries:
-You could just compute the mean or the median of the posterior probability distribution.
-Or any other quantile of the distribution.
-Another option are credible intervals.
-
-<!-- Credible interval -->
-In frequentist statistics, we get confidence intervals for our estimators.
+<!-- Credible interval In frequentist statistics, results of estimators are often described with confidence intervals.
 That's some uncertainty quantifycation telling us how sure we are about our estimation.
 But it's different with Bayesian inference.
 Since we get posterior probabilities for our parameters, and from the we can derive credibility or credible intervals.
@@ -334,14 +347,46 @@ Not in the sense that there is some fixed value for the parameter.
 But it's a random variable that can take on different values.
 Technically, they work the same as confidence intervals in frequentist statistics.
 But they have a different philosophical interpretation. 
+-->
 
 
-<!-- Bayesian prediction -->
-* Since the parameters have a distribution, also the prediction is not just a point-wise prediction.
-* posterior predictive distribution: The distribution for a newly predicted data point. To get there, we have to marginalize over the posterior
-* IN frequentist statistis, the uncertainty of the model parameters is not regarded in the prediction f a new data point. So it underestimates the variability of the prediction.
-* There is also a prior predictive distribution: It's the distribution for a newly predicted data point. But instead of marginalized 
-*
+
+## From Model to World
+
+<!-- statistical model -->
+Bayesians build [statistical models](#statistical-modeling) to approximate the data-generating process with probability distributions.
+These distributions are parameterized, and Bayesians say that these parameters are themselves random variables.
+Learning means updating the model parameters.
+But after the "update" there is no definite answer on what the true parameters are.
+Instead, the modeler was able to reduce the uncertainty about the parameters whereabouts.
+The posterior distribution doesn't encode the uncertainty inherent in nature, as in quantum mechanics.
+Instead, the posterior distribution expresses the uncertainty about **information about the world**. 
+<!-- compare with frequentist -->
+That's different from how frequentists connect their statistical models to the world.
+Frequentists assume that there are some unknown but fixed parameters that can be approximated with statistical models.
+Uncertainty is a function of the estimators, and conclusions about the world are derived from how these estimators are expected to behave when samples and experiments are repeated.
+
+## Simulate to Predict
+
+<!-- Natural inclusion of uncertainty in prediction -->
+Parameters are random variables.
+At first glance, that's a problem if we want to make predictions with the model.
+But it's actually a gift and not a problem.
+In the Bayesian mindset, predictions are also random variables, not just point estimates.
+The distribution of a prediction reflects the uncertainty of the parameters.
+Not getting a definite answer or prediction seems inconvenient at first.
+But it's much more honest and informative than a point estimate.
+The modeler in the Bayesian mindset is encouraged to consider the prediction along with its uncertainty.
+
+<!-- How to predict -->
+To predict, the Bayesian must simulate.
+Prediction means marginalizing the distribution of the prediction for a new data point $X_{new}$ with respect to the distribution of parameters: 
+
+$$P(X_{new} | X)_{\Theta} = \int P(X_{new} | X, \theta) \cdot P(\theta | X) d\theta$$
+
+Simulation means that values for the parameters are drawn from the posterior distribution.
+For each draw of parameters, the modeler can insert these parameters into the probability distribution of the data and then draw the prediction.
+Repeating this process  many times yields the posterior predictive density.
 
 <!-- 
 ## Some Examples of Bayesian inference
@@ -388,37 +433,46 @@ https://efron.ckirby.su.domains//papers/2005BayesFreqSci.pdf
 
 -->
 
-## Strengths
+<!--  
+## How Different is Frequentism Really?
 
-* Bayesianism allows to make use of prior knowledge.
-* Priors are especially useful when expert knowledge has to be included in the approach.
-* Bayesian inference inherits all advantages of [statistical models](#statistical-modeling).
-* Bayesianism offers an expressive language to build up models
-* A natural propagation of variance if, for example, there are uncertainties in the measurement
-* A natural appraoch for hierarchical or multilevel modeling.
-* Allows a holistic probabilistic approach: Through Bayes' theorem, parameters and data can be chained into a probabilistic model. General solver programs can then automatically derive the posterior estimates using MCMC. Everything is random variable: data and parameters. Everything is tied together by probabilistic operations.
-* Thinking like a Bayesian makes you aware of DGP, uncertainties in your parameters, full probability models. Even more than in the frequentist mindset.
-* As a more general benefit: Bayesianism is a great mental mdoel for how we update our own hypotheses about the world.
-* Arguable a more intuitive interpretation of probability: When practitioners make a wrong interpretation of frequentist confidence interval, what they actually do is interpret them as credible intervals. The interpretation of Bayesian probbility is easier: I believe / it's likely that the parameter is in this area.
-* Decoupling of inference and decision. You can first learn those posteriors, and then apply logic to make decision with this inference. Like MAP and credible intervals.
+[Frequentist Inference](#frequentist-inference) is the mindset to which Bayesian inference is compared the most often. The debate of which mindset is better has been going on for a long time and is still going on.
+Throughout this chapter, we have seen that both mindsets have different ideas of what a probability is and whether to use prior probabilities.
+These decisions have far reaching consequences on how to do modeling and how to interpret the models.
+But with all the adversary, it's easy to overlook how close mindsets are, especially compared with many other mindset that you will encounter in this book.
+Both mindsets are statistical modeling mindsets: They both rely on probability distributions.
+And they both assume that interpreting those distributions is a valid way to see the world.
+Also, everyone puts so much emphasis on the prior probability.
+But, what ways much heavier, is the likelihood that is used by both frequentism and Bayesianism.
+In cases where we have very few data points, the prior has a high impact on the result.
+And for those data-poor cases frequentist and Bayesian inference will differ the most.
+But in all other cases, where there is enough data, a modeler will often get similar results with frequentist and Bayesian inference.
+And ultimately, they will come to similar conclusions.
 
-## Limitations
-
-The most common reasons not to use Bayesian statistics:
-
-* The prior distributions are subjective.
-* Bayesian methods are mathematically demanding and computationally expensive (Always waiting for MCMC chains to finish up).
-* Not as decisive as frequentism, but can be turned into such with MAP and so on.
-* Hard to implement.
-* No causal interpretations, just associations.
-
-<!-- Software
-
-- STAN
-- PyMC3
+Frequentist confidence interval can be interpreted as a special case of credibility interval (citation needed) with an uninformative prior.
+Really, all frequentist method can be expressed as special cases of Bayesian models.
 
 -->
 
-[^yang1996]: Yang, Ruoyong, and James O. Berger. A catalog of noninformative priors. Durham, NC, USA: Institute of Statistics and Decision Sciences, Duke University, 1996.
+## Strengths
 
-[^blei2017]: Blei, David M., Alp Kucukelbir, and Jon D. McAuliffe. "Variational inference: A review for statisticians." Journal of the American statistical Association 112, no. 518 (2017): 859-877.
+* Bayesianism allows the use of prior information such as expert knowledge.
+* Bayesian inference inherits all advantages of [statistical models](#statistical-modeling).
+* Bayesian inference  provides an expressive language to build models that naturally propagate uncertainty. This makes it easy to work with hierarchical data, measurement errors and missing data. 
+* A general benefit: Bayesian updating is an interesting mental model for how we update our own beliefs about the world.
+* Bayesian interpretation of probability is arguably more intuitive than frequentist interpretation: When practitioners misinterpret frequentist confidence intervals, it's often because they interpret them as credible intervals.
+* Since Bayesian inference always estimates the full posterior, decision based on the posterior always require another step. As a consequence, inference and decision making are decoupled. In frequentist inference, it's common to design the entire inference process around the decision (hypothesis tests).
+
+## Limitations
+
+* The choice of prior distributions is subjective. 
+* The modeler always has to define a prior which can be tedious when many priors are involved.
+* Bayesian methods are mathematically demanding and computationally expensive.
+* When used exclusively for decisions, all the additional information about the entire posterior may appear as unnecessary overhead.
+* No causal interpretations are allowed, just associations are modeled.
+
+[^prior-predictive]: This is called the prior predictive simulation and is used to check that the chosen priors produce reasonable data. The modeler simulates by first sampling parameters from the priors and using those parameters to generate data. Repeating this several times results in a distribution of data.
+
+[^confusing-likelihood]: In the Bayesian mindset $\theta$ is a random variable, so the notation can be confusing: $P(X | \theta)$ refers to the likelihood function. The same function that we used in frequentist inference. But in the frequentist inference, we might write $P(\theta | X)$ to emphasize that $\theta$ is the input that varies. But this notation refers to the posterior in Bayesian statistics, so we write $P(X | \theta)$.
+
+[^just-one-level]: When I was learning about Bayesian inference, one of my first question was: do the parameters of the priori distributions have priori distributions themselves? Where does it end? The answer: Bayesian stop after one level of priori distributions and don't go full inception.

@@ -145,6 +145,8 @@ Variables $X_2$ and $X_3 are direct causes for target $Y$.
 We can also see that $X_5$ does not directly influence $Y$.
 So the DAG already shows us a lot about the dependencies and independencies.
 
+<!-- TODO: Visualize Fork, Pipe, Collider, Descendant, see p. 185 in statistical rethinking -->
+
 <!-- DAG in Bayesian -->
 DAGs are simple visual tools, not specific to causal inference: These graphs are basically a bunch of circles that are connected with arrows, and you are not allowed to go in circles.
 DAGs also make an appearance in [Bayesianism](#bayesian), or more specifically in Bayesian networks aka probabilistic graphical models.
@@ -192,6 +194,8 @@ They have a tools to visualize causal structures.
 But how do we learn something about the world?
 How do we estimate the causal effect of a variable on some outcome we are interested in?
 And is it even always possible to calculate causal effects?
+
+
 
 ## From Causal to Conditional
 
@@ -274,6 +278,16 @@ ggplot(nodes, aes(x = x, y = y)) +
 ```
 Result after this step: A statistical estimand that we can estimate with plain old statistical models: $E_X[P(Y,T,X)]$
 
+
+
+<!-- TODO: Explain backdoor criterion.
+
+No matter how complicated a causal DAG appears, it is always built out of these four  types of relations. And since you know how to open and close each, you (or your computer)  can figure out which variables you need to include or not include. Here’s the recipe:  (1) List all of the paths connecting X (the potential cause of interest) and Y (the outcome).  (2) Classify each path by whether it is open or closed. A path is open unless it contains  a collider.  (3) Classify each path by whether it is a backdoor path. A backdoor path has an arrow  entering X.  (4) If there are any open backdoor paths, decide which variable(s) to condition on to  close it (if possible).  Let’s consider some examples. 
+
+Tatis. Statistical Rethinking-E-Book: A Bayesian Course with Examples in R and STAN (Chapman & Hall/CRC Texts in Statistical Science) 2nd Edition, Kindle Edition (p. 185). Kindle Edition. 
+
+-->
+
 <!-- Step 3: Estimation -->
 For the estimation, we need to make assumptions about how the random variable are (conditionally) distributed.
 But really, we are in the frequentist/Bayesian mindset again.
@@ -295,7 +309,9 @@ After this first step, we have a causal estimand $P(Y|do(T),X)$.
  
 ## Limitations
 
-* Building the causal model is an inherently subjective task. The causalist can never be sure whether the causal model is correct.
+* There is no commonly accepted way to do causal inference yet <!-- citation needed -->. Do calculus by Pearl and co is a strong contender though.
+* Some people that causality does not exist <!-- citation needed -->
+* Building the causal model is an inherently subjective task. The causalist can never be sure whether the causal model is correct. Some assumptions about causal directions and arrows can never be verified.
 * Confounders, causes of both variable of interest and target,  are especially tricky. For a causal interpretation, you have to assume that you found all the confounders. But you can't proove that you have.
 * Inherits limitations from the statistical modeling approach it builds upon (except for lack of causality).
 * Using non-causal variables can enhance predictive performance, but make your model non-causal. So causal inference is not with predictive power first.
