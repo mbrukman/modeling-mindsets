@@ -1,6 +1,6 @@
 # Graphical Inference
 
-Source:  
+Source: [@hullman2021designing]
 Is visualization a modeling mindset?
 
 Let's revisit what's a model:
@@ -20,6 +20,14 @@ The mindset behind data visualization:
 * We can understand the data best by visualizing it
 * We don't put assumptions on how the data is distributed
 
+From [@hullman2021designing]:
+
+* There are exploratory and confirmatory data analysis / visualization
+* Exploratory meaning having no specific hypothesis in mind that needs confirmation
+* Exploratory meaning looking for something unexpected
+* Difficult to draw a line between EDA and CDA
+* EDA requires a model, because only then can you find something unexpected
+* 
 
 
 ## Relation to other mindsets
