@@ -1,4 +1,9 @@
-# Likelihoodism
+# Likelihoodism {#likelihoodism}
+
+* Focused on the likelihood, follows the likelihood principle.
+* Does not assume that parameters are random variables.  
+* A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequent-inference) and [Bayesianism](#bayesian-inference) as alternatives.
+
 
 <!-- summary of likelihoodism -->
 Apart from [frequentist inference](#frequentism) and [Bayesian inference](#bayesian), there is -- at least -- a third interpretation of statistical models: likelihoodism.
