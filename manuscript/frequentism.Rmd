@@ -322,6 +322,13 @@ The problem with statistical models is: We can't prove that they are true becaus
 With frequentist inference, however, we can tell how likely a model result is under a given hypothesis and given the data.
 That's why hypothesis tests work by rejection.
 
+Null hypothesis tests are even more troublesome.
+
+* The choice of the null hypothesis is arbitrary.
+* If the null hypothesis is accepted, it's not evidence that it's true. It just means that the data that were observed are not in conflict with the null hypothesis. But there is still an infinite number of models that could have produced the same results.
+* If the null hypothesis is rejected, it doesn't mean that the hypothesis of interest is true.
+* A significant result doesn't mean that the deviation from the null hypothesis is relevant. The drug has a significant effect on the disease progression? The difference might be too small to be relevant.
+* Especially the larger the data sample, the more likely the null hypothesis is rejected, because the tiniest differences to the null hypothesis are enough to produce significant results when $n$ becomes large.
 
 ## Confidence Intervals {#confidence-intervals}
 
@@ -425,7 +432,7 @@ ggplot(dat) +
 * Frequentism allows binary decisions (accept/reject hypothesis). This simplicity is one of the reasons why frequentism is popular for both scientific publications and business decisions.
 * Frequentism has all advantages of [statistical models](#statistical-modeling) in general: a solid theoretical foundation and an appreciation of the data-generating process.
 * When the underlying process is a long-run, repeated experiment, frequentist inference shines. Casino games, model benchmarks, ...
-
+* The scientific method requires that scientific experiments be repeatable. The frequentist idea that truth lies in long-run frequencies of experiments is  therefore well compatible with a core idea of science.  
 
 ## Limitations
 
