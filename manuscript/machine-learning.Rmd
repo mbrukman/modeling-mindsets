@@ -1,103 +1,104 @@
-# Machine Learning / Risk Minimization {#machine-learning}
+# Machine Learning {#machine-learning}
 
-TODO: Write when you have finished some other chapters (supervised ML, generative models and deep learning).
-<!-- TODO
+Machine learners are a pragmatic people.
+Task-oriented, and much less principled than the pure statisticians.
+Statistics originated from pen and paper, evolving probability distributions from there.
+The take-up of computer was because it was practical, and a natural step.
 
-- inductive bias
-- inductive learning
-
--->
-
-<!-- Clarification -->
-Machine learning is a broad term and usually means something like algorithms that learn by themselves from data.
-But I want to focus on the mindset of learning by doing risk minimization.
-Not risk as in investing in Bitcoin and hoping for the best.
-But risk as minimization of a loss function, but based on data.
-This chapter is also a meta mindset chapter.
-We will get into different flavoured mindset of machine learning in other chapters.
+People with a machine learning mindset think of the computer from the start on.
+I'm equating machine learning folks with artificial intelligence folks here.
+They have the same goal -- make the computer more intelligent.
+But machine learners say that taking this path requires learning from data.
+The other paths that don't involve data, like expert systems, are not part of this book.
 
 
-<!-- summary of ml -->
-The goal of machine learning is to learn some kind of function $f$ that minimized some loss function $L$ over data.
-In the ML mindset, the best model is the one that has the lowest generalization error.
-As a machine learner you think in loss, features, optimization, benchmarking.
-Your goal is to optimize some loss function $L$.
-You are allowed to produce any function $f$ that produces the outcome $Y$ from the features $X$.
 
-$$\arg \min_{f} L(X, f(X))$$
+* task-driven and pragmantic mindset
+* Make the computer do smart things
+* less principled than statistical
 
 
-<!-- optimization without data -->
-Keep in mind that data is involved.
-So this loss-based mindset is not about optimizing the Traveling Salesmen problem.
-Because Traveling Salesmen is solved by finding one solution for one problem.
-But with loss-based mindset your goal is to find some form of model that can also be applied to new data and it's also learned from data.
 
-<!-- comparison  with other mindsets -->
-Since loss-based optimization is stub mindset, we should compare it to the other one: statistical modeling.
-In the extreme case the modeled relationships between the variables (also called features in machine learning) does not matter at all for machine learning.
-If machine learning were a boss, it would say "I don't care how you get the job done, just get it done".
-Maximum likelihood estimators are also optimization problems.
-Maximizing the likelihood for the conditional mean of a Gausian distribution is the same as minimizing the mean squared error, for example. <!-- TODO: find citation -->
-Is statistical modeling a special case of loss-based modeling?
-No, because optimization is not that central.
-It's a technique required for e.g. maximum likelihood estimation.
-But there are other estimation means, such as Markov Chain Monte Carlo sampling.
-And if a statistician does not have to use optimization, they don't care.
-In purely [statistical mindsets](#statistical-modeling), it's important that we work with probability distributions.
-And our focus is to understand how the random variables are connected to each other.
-But in the purely risk minimization setup, we only care about optimization and generalization, or a specific form thereof.
+Machine learning -- an umbrella term under which we find many things.
+Deep learning, clustering, supervised machine learning, generative models and so on.
 
-<!-- one method, many mindsets -->
-Sometimes you can see the same methods through two mindset.
-The linear regressino model assumes that $Y$ given the variables $X$ follow a Normal distribution.
-That's the statistical modeling mindset.
-But you could also see it as an optimization problem with constraints.
-Given $X$, find a linear function that minimizes the mean squared error.
+Machine learning is often defined as a branch of artificial intelligence.
+Machine learning is about algorithms that improve themselves through the use of data.
+Any algorithm that makes a machine seem intelligent, and which involves learning from data.
+Which excludes things like expert systems.
+
+What machine learning approaches have in common
+
+* learn models from data. But then again, that's true for all mindsets in this book
+* Improvement of some kind of algorithm.
+* Som Task-driven rather than insight-driven.
+* For example, the goal might be to cluster the data. If we were in the statistical modeling mindset, it would be important to think in probability distributions. But for machine learning mindset whatever get's the task done is fine. 
+* "generalize from experience"
+* computers make decisions
+* type of artificial intelligence
+* recognize patterns
+* not being explcitly programmed
+* trial and error
+* "practice" and experience
+* lots of data
+* a good machine learning model is
+  * one that helps you with some task
+  * goal-driven
+  * not important how you get there, but that you reach the goal
+  * makes the computer look smart
+  * algorithmic driven, not dgp driven. e.g. statisticians wouldn't use computers if they didn't had to. machine learning is more from the mindset that we have computers and now how can we make them smarter. see Breiman two cultures        
+* statistics is much more principaled
+* most theory about machine learning comes from intersection of stats and ml: statistical learning theory. mostly worked out for supervised ml. 
+* starts with computer, and not with theory.
+* how can we make computer intelligent.
 
 
-## Examples of Loss functions
+## Diverse Mindsets Within ML
 
-* Mean squared error between some label and a prediction model
-*
+Within machine learning, the mindsets are quite diverse
+
+There are supervised machine learner.
+They wouldn't dare get their hands dirty with problems where no label is defined.
+
+Interpretable machine learning folks share a lot of the mindset with supervised learners, as they usually work on supervised.
+But they have the goal to find something out about the data.
+They are willing to sacfrifice model performance for interpretability of the model.
+
+Deep learner want to build everything with neural networks.
+They work more with text and images.
 
 
-## Loss Optimization
 
-The output of the training process is a machine learning model $f$.
-Thereby it does not really matter what form $f$ takes on, as long as the generalization error is low.
-We have to types of metrics involved here:
-The loss function, that's the one that is directly optimized during the training phase.
-Then there is the evaluation metric.
-Can be the same as the loss that is optimized, but sometimes different.
-Especially when the evaluation loss is not derivatible.
+## Model in Machine Learning
 
-How is the loss function chosen?
-The choice is quite central to the problem that should be solved with machine learning.
-Working with a classification problem with two possible classes, like healthy or unhealthy?
-Use the logistic loss:
 
-$$L(x_i, y_i) = y_i log(f(x_i)) + (1 - y_i) log(1 - f(x_i))$$
+* What constitutes a model in machine learning varies wildly
+* DBSCAN, statistical models, neural networks, support vector machines, ...
+* Not so principled how to get there
+* All models of course learned with data
+* Tasks also vary wildly: Classification, Clustering, Regression, Image segmentation, language translations,  
+* Often things are benchmarked in machine learning
+  * For supervised ml it's the clearest bc there you have  clear metrics of success bc the true lables are known
+  * For language models there is the BLEU score. stands for bi-lingual evaluation understudy, BLEU compares translation to human tranlsation.
+  * in stats there is goodness-of-fit
+  * task-related scores might also be used in stats, but the role is not as central
+  * compared to stats the benchmarks 
+* A good model solves a task with a computer algorithm and data
+  * Want to caption images automatically? Goal is to find the best algorithm to do it.
+* A good model of the world is one that emulates intelligence 
+* A good model of the world is one that helps in solving a task
+* How good the task is solved is determined by a score or so
+* Scores naturally turn it into a competition between models
+* Machine Learning is very "competitive" in the sense that the model with the best score wins.
+ 
+## Generalizability
 
-Here $f(x_i)$ would be the probability for one class (e.g. healthy).
-This loss function potentially gives the same weight to every data point.
-It would be possible to give a higher loss to certain data points:
+* ml has goal to do some task
+* that includes that the models are generalizable to other data
+* in supervised ml we can directly work with generalization error and that's the optimization goal there.
 
-$$L(x_i, y_i, w_i) = w_i[log(f(x_i)) + (1 - y_i) log(1 - f(x_i))]$$
 
-The weight $w_i$ could for example increase the weight of patients that have an expensive premium health insurance (\*evil corporate laughing in the background\*).
-A higher loss means that a wrong prediction for these data points are more costly and the model is pushed more in the direction of getting these predictions rights.
-In theory, you could build custom loss function for any application.
-Not all models can directly optimize a loss function though.
-Many models already have built-in loss functions.
-But you can always do hyperparameter optimization with regards to the evaluation loss.
 
-* loss-based example example from supervised learning
-* clustering
-* find some loss function
-* e.g. hierarchical clustering
-* are based on distances between points
-* maximize distance between 
 
 
 
