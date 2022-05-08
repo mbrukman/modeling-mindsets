@@ -1,5 +1,12 @@
 # Likelihoodism {#likelihoodism}
 
+<!-- TODO
+
+- read: https://www.stat.fi/isi99/proceedings/arkisto/varasto/roya0578.pdf
+- read "Statistical evidence"
+-->
+
+
 * The likelihood is all you need. No priors, no frequentist inference.
 * Follows the likelihood principle and works with likelihood ratios.
 * A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequent-inference) and [Bayesianism](#bayesian-inference) as alternatives.
