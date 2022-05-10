@@ -470,6 +470,7 @@ Or have we just updated prior information about the effect of fertilizer with ne
 Welcome to \textbf{Modeling Mindsets}.
 
 A modeling mindset is a specification of how to model the world using data.
+Modeling means investigating a real world phenomenon indirectly using a model.\textsuperscript{\protect\hyperlink{ref-weisberg2007modeler}{2}}
 Modeling mindsets are like different lenses.
 All lenses show us the world, but with a different focus.
 Some lenses magnify things that are close, some that are far away.
@@ -483,7 +484,7 @@ Each mindset invites you to ask different questions, and so shapes the way you v
 In supervised machine learning, for example, everything becomes a prediction or classification problem, while in Bayesian inference, the goal is to update our beliefs about the world using probability theory.
 
 Within a mindset there are two worlds: the model world and the real world (Figure \ref{fig:mindsets}.
-Or, as McElreath called them in his book ``Statistical Rethinking'': the ``small'' and the ``large'' world.\textsuperscript{\protect\hyperlink{ref-mcelreath2020statistical}{2}}
+Or, as McElreath called them in his book ``Statistical Rethinking'': the ``small'' and the ``large'' world.\textsuperscript{\protect\hyperlink{ref-mcelreath2020statistical}{3}}
 All modeling results are first and foremost statements about the model world, and to be interpreted within the simplified model world..
 How and if model results may be transferred from the model world to the real world, depends on the mindset.
 
@@ -1059,7 +1060,7 @@ A different but complimentary approach is \protect\hyperlink{design-based-infern
 \end{itemize}
 
 Drinking alcohol is associated with a higher risk of diabetes in middle-aged men.
-At least this is what a study claims.\textsuperscript{\protect\hyperlink{ref-kao2001alcohol}{3}}
+At least this is what a study claims.\textsuperscript{\protect\hyperlink{ref-kao2001alcohol}{4}}
 
 The study modeled type II diabetes as a function of various risk factors.
 The researchers found out that alcohol significantly increases the diabetes risk for middle-aged men by a factor of \(1.81\).
@@ -1079,7 +1080,7 @@ From analyzing A/B tests for a website to calculating portfolio risk to monitori
 
 As much as frequentism dominates the world of data, it's also criticized.
 Frequentist inference has been the analysis method for scientific ``findings'' that turned out to be a waste of research time.
-You may have heard about the replication crisis.\textsuperscript{\protect\hyperlink{ref-ioannidis2005most}{4}}
+You may have heard about the replication crisis.\textsuperscript{\protect\hyperlink{ref-ioannidis2005most}{5}}
 Many scientific findings in psychology, medicine, social sciences and other fields could not be replicated.
 The problem with that is that replication is at the center of the scientific method.
 Many causes have contributed to the replication crisis
@@ -1241,7 +1242,7 @@ How does a hypothesis test work?
 \item
   Formulate the \textbf{alternative or null hypothesis}.
 \item
-  Decide which statistical test to use. This step includes modeling the data. In fact, all statistical tests are statistical models\textsuperscript{\protect\hyperlink{ref-mcelreath2020statistical}{2}}
+  Decide which statistical test to use. This step includes modeling the data. In fact, all statistical tests are statistical models\textsuperscript{\protect\hyperlink{ref-mcelreath2020statistical}{3}}
 \item
   Calculate the distribution of the parameter estimates under the null hypothesis (or rather, the test statistic \(T\)).
 \item
@@ -1478,7 +1479,7 @@ Or maybe the parameter is lower, around 0.25?
 Another Beta prior might put emphasis on \(p\) being 1.
 It's even possible to have a prior that that places the greatest probability symmetrically on 0 and 1.
 
-Without expert knowledge about the parameter, the modeler can use ``uninformative'' or ``objective'' priors\textsuperscript{\protect\hyperlink{ref-yang1996catalog}{5}}.
+Without expert knowledge about the parameter, the modeler can use ``uninformative'' or ``objective'' priors\textsuperscript{\protect\hyperlink{ref-yang1996catalog}{6}}.
 Uninformative priors often produce results similar to those of frequentist inference (for example for confidence/credible intervals).
 Another factor influencing the choice of prior is mathematical convenience.
 Conjugate priors are convenient choices.
@@ -1600,7 +1601,7 @@ MCMC sampling can be complex and can take some time to compute.
 Fortunately, most probabilistic software runs MCMC automatically.
 But this can take time.
 More time than fitting a frequentist model would take.
-A shorter alternative is variational inference.\textsuperscript{\protect\hyperlink{ref-blei2017variational}{6}}
+A shorter alternative is variational inference.\textsuperscript{\protect\hyperlink{ref-blei2017variational}{7}}
 But while MCMC delivers approximately exact estimates of the posterior probability, variational inference is more of a heuristic.
 
 Frequentists have their parameter estimates.
@@ -1798,24 +1799,28 @@ Repeating this process many times yields the posterior predictive density.
 \CSLLeftMargin{1. }
 \CSLRightInline{Weisberg M. Simulation and similarity: Using models to understand the world. Oxford University Press; 2012. }
 
-\leavevmode\vadjust pre{\hypertarget{ref-mcelreath2020statistical}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-weisberg2007modeler}{}}%
 \CSLLeftMargin{2. }
+\CSLRightInline{Weisberg M. Who is a modeler? The British journal for the philosophy of science. 2007;58(2):207--33. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-mcelreath2020statistical}{}}%
+\CSLLeftMargin{3. }
 \CSLRightInline{McElreath R. Statistical rethinking: A bayesian course with examples in r and stan. Chapman; Hall/CRC; 2020. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-kao2001alcohol}{}}%
-\CSLLeftMargin{3. }
+\CSLLeftMargin{4. }
 \CSLRightInline{Kao WL, Puddey IB, Boland LL, Watson RL, Brancati FL. Alcohol consumption and the risk of type 2 diabetes mellitus: Atherosclerosis risk in communities study. American journal of epidemiology. 2001;154(8):748--57. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-ioannidis2005most}{}}%
-\CSLLeftMargin{4. }
+\CSLLeftMargin{5. }
 \CSLRightInline{Ioannidis JP. Why most published research findings are false. PLoS medicine. 2005;2(8):e124. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-yang1996catalog}{}}%
-\CSLLeftMargin{5. }
+\CSLLeftMargin{6. }
 \CSLRightInline{Yang R, Berger JO. A catalog of noninformative priors. Institute of Statistics; Decision Sciences, Duke University Durham, NC, USA; 1996. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-blei2017variational}{}}%
-\CSLLeftMargin{6. }
+\CSLLeftMargin{7. }
 \CSLRightInline{Blei DM, Kucukelbir A, McAuliffe JD. Variational inference: A review for statisticians. Journal of the American statistical Association. 2017;112(518):859--77. }
 
 \end{CSLReferences}
