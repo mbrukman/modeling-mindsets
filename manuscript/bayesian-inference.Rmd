@@ -15,6 +15,9 @@
 * Model parameters are random variables with prior and posterior distributions.
 * A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentist-inference) and [likelihoodism](#likelihoodism) as alternatives.
 
+<!-- The Bayesian -->
+While frequentists analyze data to answer the question "What should I do?", Bayesians analyze data to answer "What should I believe?".
+
 <!-- relation to others -->
 If you haven't read the chapter on [Statistical Modeling](#statistical-modeling), I recommend that you do so first, since Bayesian inference is easier to understand if you have a good understanding of statistical inference.
 Bayesian inference is based on probability distributions, interpreting parameters, and learning from data through the likelihood.

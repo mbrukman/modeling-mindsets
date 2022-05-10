@@ -210,7 +210,7 @@ We can make (frequentist) probabilistic statements about this estimator.
 And while the true value for $\lambda$ is unknown, we can study the hypothesis of $\lambda = 3.0$ by examining the random variable $\hat{\lambda}$.
 
 <!-- central idea of frequentism -->
-This idea of proposing a hypothesis, and then accepting or rejecting it based on a statistical model or test is called null hypothesis significance testing.
+This idea of proposing a hypothesis, and then accepting or rejecting it based on a statistical model or test is called null hypothesis significance testing. [^other-testing-procedures]
 Hypothesis testing is a central method in the frequentist modeling mindset.
 Hypothesis tests simplify decisions:
 The frequentist accepts or rejects the so-called null hypothesis based on the results of the statistical model.
@@ -321,6 +321,9 @@ Suddenly the goal of the researcher becomes to show that the null hypothesis is 
 The problem with statistical models is: We can't prove that they are true because our assumptions are not testable.
 With frequentist inference, however, we can tell how likely a model result is under a given hypothesis and given the data.
 That's why hypothesis tests work by rejection.
+The [likelihoodist mindset](#likelihoodism) navigates this issue:
+two statistical models are compared in terms of the evidence through the likelihood.
+
 
 Null hypothesis tests are even more troublesome.
 
@@ -446,4 +449,4 @@ ggplot(dat) +
 * Frequentist statistics says nothing about causality except that "correlation does not imply causation".
 * Weird interpretation of probability: Often it does not make any sense to interpret every probability with imagined experiments. For example, the probability for a party to get the majority vote in an election requires to imagine multiple elections, yet under the same circumstances, like same year, same candidates, and so on.  
 
-
+[^other-testing-procedures]: There are two other "main" approaches for hypothesis testing: The Fisher approach, and the Neyman-Pearson approach. Null hypothesis significance testing is a combination of the two.  [@perezgonzalez2015fisher]
