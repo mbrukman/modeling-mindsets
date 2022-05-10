@@ -1,7 +1,16 @@
 # Machine Learning and Artificial Intelligence {#machine-learning}
 
+<!-- TODO
+
+* Reread: End of Theory. https://www.wired.com/2008/06/pb-theory/ [@anderson2008end]
+*
+
+-->
+
 * Modeling is task-oriented and algorithmic.
-* Aims at making the computer do smart things.
+* Lives from having lots of data
+* A good model allows the computer to solve a task, make it look "intelligent".
+* A model is connected to the real world by helping in solving a real task.
 * Also a meta mindset and alternative to [statistical modeling](#statistical-ml). 
 * [Supervised machine learning](#supervised-ml), [deep learning](#deep-learning) are specializations of this mindset.
 
