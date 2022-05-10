@@ -4,6 +4,7 @@
 * Goal: Changing your mind under uncertainty.
 * Assumes the world is best described by probability distributions.
 * Requires additional assumptions for drawing conclusions. See [Frequentism Inference](#frequentist-inference), [Bayesian Inference](#bayesian-inference) and [Likelihoodism](#likelihoodism).
+* [Machine learning](#machine-learning) is an alternative mindset.
 
 
 

@@ -1,4 +1,18 @@
-# Machine Learning {#machine-learning}
+# Machine Learning and Artificial Intelligence {#machine-learning}
+
+* Modeling is task-oriented and algorithmic.
+* Aims at making the computer do smart things.
+* Also a meta mindset and alternative to [statistical modeling](#statistical-ml). 
+* [Supervised machine learning](#supervised-ml), [deep learning](#deep-learning) are specializations of this mindset.
+
+<!-- metaphor -->
+* machine learner
+* statistician
+* walk into amusement park
+* they play game where you have to throw balls to win game
+* 
+
+
 
 Machine learners are a pragmatic people.
 Task-oriented, and much less principled than the pure statisticians.
