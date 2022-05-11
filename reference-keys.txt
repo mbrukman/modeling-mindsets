@@ -46,6 +46,9 @@ simulate-to-predict
 strengths-2
 limitations-2
 likelihoodism
+likelihood-principle
+law-of-likelihood
+likelihood-intervals
 why-frequentism-violates-the-likelihood-principle
 stopping-criteria
 strengths-3

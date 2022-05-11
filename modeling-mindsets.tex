@@ -1445,7 +1445,7 @@ A Bayesian model even works without data, by just using the prior distributions.
 \section{Bayes Theorem}\label{bayes-theorem}}
 
 Bayesians want to learn the distribution of the model parameters from the data: \(P(\theta | X)\).
-P(\theta \textbar{} X) is a strange way of looking at the probabilities involved.
+\(P(\theta | X)\) is a strange way of looking at the probabilities involved.
 The data-generating process generates data as a function of the parameters: \(P(X | \theta)\).
 So Bayesians look for the inverse of what the DGP would naturally do.
 
@@ -1766,17 +1766,19 @@ Repeating this process many times yields the posterior predictive density.
 \begin{itemize}
 \tightlist
 \item
-  The likelihood function is all you need (law of likelihood).
+  The likelihood function is all you need.
 \item
-  Statistical models or hypotheses are compared by the ratio of their likelihoods.
+  Statistical models are compared by the ratio of their likelihoods.
+\item
+  Data is evidence.
 \item
   A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} with \protect\hyperlink{frequent-inference}{frequentism} and \protect\hyperlink{bayesian-inference}{Bayesianism} as alternatives.
 \end{itemize}
 
-A frequentist, a Bayesian, and a likelihoodist walk into a wine bar to taste wines.
-The sommelier brings the first wines.
-The Bayesian wants to hear the sommelier's opinion first before ``analyzing'' the data -- drinking the wine.
-The frequentist asks the sommelier about the tasting procedure: Is the numbers of wines pre-determined? Does the tasting conclude when the customer found a suitable wine? How are subsequent wines selected? Etc.
+A frequentist, a Bayesian, and a likelihoodist walk into a bar, a wine bar.
+The sommelier quickly joins the three.
+The Bayesian wants to hear the sommelier's opinion first before ``analyzing'' the data.
+The frequentist asks the sommelier about the tasting procedure: Is the number of wines to taste pre-determined? Does the tasting conclude when the customer found a suitable wine? How are subsequent wines selected?
 The likelihoodist politely tells the sommelier to fuck off.
 
 \protect\hyperlink{frequentist-inference}{Frequentist inference} has a long list of limitations.
@@ -1790,14 +1792,27 @@ Welcome to the \textbf{likelihoodist} mindset.
 
 I studied statistics for 5 years, worked as statistician and data scientist for 3 years, then did my PhD studies for 4.5 years.
 In those 12 years of statistics I never learned about likelihoodism.
-It's fair to say that likelihoodism is an underdog.
-Likelihoodism lurks in the shadows while Bayesianism and Frequentism are having an epic fight.
+It's fair to say that likelihoodism is the underdog.
+Likelihoodism lurks in the shadows while Bayesianism and frequentism are having an epic fight.
 
 Likelihoodism is the purist among the statistical modeling mindsets.
-A mindset that completely focuses on the likelihood function of statistical model.
+A mindset that completely focuses on the likelihood functions of statistical models.
 Likelihoodism is an attempt to make statistics as objective as possible.
-It doesn't rely on subjective prior probabilities, like in Bayesian inference.
-Frequentist inference also has a subjective component: As we will see later in this chapter, it depends on the intention of analyst, such as stopping criteria for collecting data and how the experiment is set up.
+It doesn't rely on subjective prior probabilities, like Bayesian inference does.
+Frequentist inference also has a subjective component.
+The intention of the analyst, like stopping criteria for collecting data, influences the frequentist's results.
+But more on that later.
+
+\textbf{All three mindsets use likelihood functions in different ways.}
+A short recap: The likelihood function is the same as the data density function, but thes roles of data and parameters within the function are switched.
+Data \(X\) are ``fixed'', and the likelihood is a function of the parameters \(\theta\) \(P(\theta; X) = P(X = x | \theta)\).
+The likelihood bridges observed data and theoretic distributions.
+Bayesians use the likelihood function to update the prior of the parameters to the posterior distribution.
+Frequentists use the likelihood to estimate parameters and construct ``imagined'' experiments that teach us about long-run frequencies, such as hypothesis tests and confidence intervals.
+Likelihoodists see the likelihood as evidence derived from data for a statistical hypothesis.
+Likelihoodists put all the focus on the likelihood and reject the non-likelihood elements from freauentism and Bayesianism:
+Likelihoodists reject priors, because they are subjective;
+Likelihoodists also reject the frequentists dependence on ``imagined'' experiments, because they violate the likelihood principle and are, arguably, subjective as well.
 
 \begin{figure}
 
@@ -1808,124 +1823,110 @@ Frequentist inference also has a subjective component: As we will see later in t
 \caption{How Bayesianism, frequentism and likelihoodism overlap and differ. Figure inspired by [Greg Gandenberger](https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/)}\label{fig:three-stat-mindsets}
 \end{figure}
 
-\textbf{All three mindsets use likelihood functions in different ways.}
-A short recap: The likelihood function is the same as the data density function, but with switched role of data and parameters.
-Data \(X\) are ``fixed'', and the likelihood is a function of the parameters \(\theta\) \(P(\theta | X) = P(X = x | \theta)\).\footnote{Not interpreted in the Bayesian way. Just that \(X\) are seen as given.}
-The likelihood bridges observed data and theoretic distributions.
-Bayesians use the likelihood function to update the prior of the parameters to the posterior distribution.
-Frequentists use the likelihood to construct ``imagined'' experiments that teach us about long-run frequencies, such as hypothesis tests and confidence intervals.
-Likelihoodists use the likelihood as evidence from the data for a given hypothesis.
-Likelihoodists puts all the focus on the likelihood and thereby reject the non-likelihood elements in the other mindsets:
-Likelihoodists reject priors, because they are subjective;
-Likelihoodists also reject the frequentists dependence on ``imagined'' experiments, because they violate the likelihood principle and are, arguably, subjective as well.
-
 But what is this likelihood principle?
 
 \hypertarget{likelihood-principle}{%
-\subsection*{Likelihood Principle}\label{likelihood-principle}}
-
+\section{Likelihood Principle}\label{likelihood-principle}}
 
 ``The likelihood principle asserts that two observations that generate identical likelihood functions are equivalent as evidence''\textsuperscript{\protect\hyperlink{ref-richard2017statistical}{8}}
 As a consequence, all the evidence that comes from the data about a quantity of interest \(\theta\) has to come from the likelihood function \(P(\theta;X)\).
-If we reverse the statement: If any information about the data influences the parameters but is not part of the likelihood, then the likelihood principle is violated.
+If we reverse the statement: If information from the data influences the analysis but is not part of the likelihood, then the likelihood principle is violated.
 
-Let's say we want to estimate the average waiting time for the bus.
-The exponential distribution is a typical contender as distribution assumption, so we would say that the waiting times \(X \sim Exp(\lambda)\), where \(\lambda\) can be interpreted as the inverse wait time, so the expected waiting time would be \(\frac{1}{\lambda}\).
-We collected \(n\) waiting times \$x\_1, \ldots, \(x_n\).
-The likelihood function is \(P(\lambda; x_1, \ldots, x_n) = \lambda^n exp(-\lambda \sum_{i=n}^n x^{(i)}\).
+Let's say we want to estimate the average waiting time for a public bus.
+The exponential distribution is typically used to model waiting times.
+So we might assume that \(X \sim Exp(\lambda)\), where \(\lambda\) can be interpreted as the inverse waiting time.
+The expected waiting time is \(\frac{1}{\lambda}\).
+We collected \(n\) waiting times \(x_1, \ldots, x_n\).
+The likelihood function is:
+
+\[P(\lambda; x_1, \ldots, x_n) = \lambda^n exp\left(-\lambda \sum_{i=n}^n x^{(i)}\right).\]
 
 In all three mindsets, it would make sense to work with this likelihood.
 Bayesians would, in addition, assume a prior distribution for \(\lambda\).
-The relevant question of whether the likelihood principle is violated or not is what we do with the results after.
-The Bayesians get a posterior distribution for \(\lambda\) which is interpreted as belief about the parameter.
+Whether the likelihood principle is violated depends on what we do after calculating the likelihood.
+Bayesians get a posterior distribution for \(\lambda\) which is interpreted as belief about the parameter.
 The likelihoodist might report the likelihood region for the parameter \(\lambda\) which can be interpreted as relative evidence of a range of parameter values compared to the maximum likelihood estimate for \(\lambda\).
-Both the Bayesian and the likelihoodist adhere to the principle: All evidence from the parameter about \(\lambda\) comes through the likelihood.
+Both the Bayesian and the likelihoodist adhere to the likelihood principle:
+All evidence from the data about \(\lambda\) is contained in the likelihood.
 Bayesians use priors, but as long as they don't contain information from the data, it's fine. \footnote{The likelihood principle is of course violated if the data is used to inform the pior. For example empirical priors.}
 
 The frequentist might test whether the parameter is larger than a certain value.
-By advising such a test, the frequentist has to ``imagine'' experiments, or at least assume a distribution under the null hypothesis.
-Frequentist inference violates the likelihood principle, due to it's interpretation of long-run frequencies.
-We will later see a few examples of how frequentism violates the likelihood principle.
+By advising such a test, the frequentist has to ``imagine'' experiments under an assumed distribution under the null hypothesis.
+But the null hypothesis is not part of the likelihood.
+Frequentists choose the distribution under the null hypothesis based on how they ``imagine'' repetitions of the sampling or the experiment.
+That in turn depends on how the experiment was conducted or how the data was collected in the first place.
+You will later see a simple coin toss example where the same data from different experiments produce different frequentist conclusions.
 
-The likelihood principle is a consequence of 1) the sufficiency principle and 2) the conditionality principle.\textsuperscript{\protect\hyperlink{ref-birnbaum1962foundations}{9}}
-The sufficiency principle says that a sufficient statistic \(S(X)\) of a quantity of interest summarizes all relevant evidence from the data.
-The conditionality principles says that experiments or samples that were not performed should be ignored.
-Many frequentist approaches directly violate the conditionality principle.
-Statistical hypothesis tests are designed around experiments that never happen.
-
-Apart from priors, the law of likelihood is what distinguishes likelihoodism from Bayesian inference.
+So the big difference between frequentism and likelihoodism is the likelihood principle.
+The likelihood principle gives the likelihood function the monopoly over data evidence.
+But the likelihood principle alone, is not enough to build a coherent modeling mindset with.
 
 \hypertarget{law-of-likelihood}{%
-\subsection*{Law of Likelihood}\label{law-of-likelihood}}
+\section{Law of Likelihood}\label{law-of-likelihood}}
 
-
-The law of likelihood says\textsuperscript{\protect\hyperlink{ref-hacking1965logic}{10}}:
+The law of likelihood is the foundation for using the likelihood function alone for modeling decisions.
+The law of likelihood says\textsuperscript{\protect\hyperlink{ref-hacking1965logic}{9}}:
 
 \begin{itemize}
 \tightlist
 \item
-  Given
+  Given:
 
   \begin{itemize}
   \tightlist
   \item
-    Hypotheses A and B, and data \(X=x\)
+    Hypotheses \(H_1\) and \(H_2\); data \(X=x\).
   \item
-    Likelihood of A is larger than B: \(P_A(X=x) > P_B(X=x)\)
+    Likelihood of A is larger than B: \(P_{H_1}(X=x) > P_{H_2}(X=x)\).
   \end{itemize}
 \item
-  Then
+  Then:
 
   \begin{itemize}
   \tightlist
   \item
-    Observation \(X=x\) is evidence supporting A over B.
+    Observation \(X=x\) is evidence supporting \(H_1\) over \(H_2\).
   \item
-    The likelihood ratio \(P_A(x)/P_B(x)\) measures the strenght of that evidence.
+    The likelihood ratio \(P_{H_1}(x)/P_{H_2}(x)\) measures the strength of that evidence.
   \end{itemize}
 \end{itemize}
 
-The hypotheses can be, for example, just different parameter values of a distribution.
-Going back to the bus waiting time example, A could be that \(\lambda = 1\) and B could be that \(\lambda = 0.5\).
-If, for example \(P(1;x)/P(0.5;x) = 4\) then that's the strenght of evidence for the statistical hypothesis that \(\lambda = 1\).
-The differences in statistical hypotheses might also be more complex, such as regression models with different covariates or assumptions.
+The hypotheses can be different parameter values for a distribution.
+Going back to the bus waiting time example, \(H_1\) could be that \(\lambda = 1\) and \(H_2\) could be that \(\lambda = 0.5\).
+The result might be:
+\[P(\lambda = 1;x_1, \ldots, x_n)/P(\lambda = 0.5;x_1, \ldots, x_n) = 4\].
 
-The law of likelihood is stronger than the likelihood principle.
-While the likelihood principle just says that the all evidence from the data must be in the likelihood, the law of describes how evidence looks like.
-And that's also where Bayesian and likelihoodist inference differ.
-Bayesians are not guided by the law of inference, but by Bayesian updating.
-But comparing likelihoods does have a place in Bayesian inference.
-
-The law of likelihood gives clear guidance on how to do inference:
-Not through hypothesis testing, but through comparing different hypothesis using likelihood ratios.
-The larger the ratio, the larger the evidence for one hypothesis over another.
-
-Unfortunately, the likelihoodism mindset doesn't entail guidance for belief or action.
-The likelihood ratio can say which hypothesis is favored, when we follow the law of likelihood.
-But it can't tell us whether the evidence is enough to decide for a hypothesis or not.
-The likelihood ratio also doesn't reflect a degree of belief about the parameters.
-
-\hypertarget{likelihood-ratio}{%
-\subsection*{Likelihood Ratio}\label{likelihood-ratio}}
-
-
-The likelihood ratio is simply the likelihood of one model divided by the likelihood of another.
-Remember, a statistical model can embody a statistcal hypothesis.
+The likelihood ratio is the likelihood of one statistical hypothesis divided by the likelihood of another.
+As a reminder, statistical hypotheses are like statistical models, where some or all of the parameters may be assigned by hand rather than learned from the data.
 If we want to compare hypotheses \(H_1\) and \(H_2\), we can use the likelihood ratio:
 
 \[\frac{P(H_1;X)}{P(H_2;X)}\]
 
-Likelihood ratios are also used in Bayesianism and frequentism.
-In Bayesianism as Bayes factor, also for model selection.
-In frequentism likelihood rations are often used as test statistics for hypothesis tests.
-
+In frequentism likelihood ratios are often used as test statistics for hypothesis tests.
 In likelihoodism, the likelihood ratio is interpreted as evidence.
-As a shortcut, likelihoodists can use rule of thumbs for deciding whether likelihood ratios is already big enough.
-For example a likelihood ratio of 8 is seen as fairly strong, and 32 or more as strong favoring.\textsuperscript{\protect\hyperlink{ref-richard2017statistical}{8}}
+As a shortcut, likelihoodists can use a rule of thumb for judging the strength of evidence.
+For example, a likelihood ratio of 8 is seen as fairly strong, and 32 or more as strong favoring.\textsuperscript{\protect\hyperlink{ref-richard2017statistical}{8}}
+
+In our example, a likelihood ratio of 4 in favor of \(H_1: \lambda = 1\) over \(H_2: \lambda = 0.5\) is not enough to be ``fairly strong''.
+\(H_1\) and \(H_2\) can also be more complex hypotheses, such as regression models with different covariates or assumptions.
+
+\textbf{The law of likelihood is stronger than the likelihood principle:}
+The likelihood principle says that the all evidence from the data must be in the likelihood;
+\textbf{the law of describes how evidence can be measured.}
+And that's where Bayesian inference and likelihoodism differ.
+Bayesians are not guided by the law of likelihood, but by Bayesian updating.
+
+The law of likelihood makes it clear how we may compare statistical hypotheses:
+Not with hypothesis testing, but by comparing different hypothesis using their likelihood ratios.
+The larger the ratio, the stronger the evidence for one hypothesis over another.
+
+Unfortunately, the likelihoodism mindset doesn't entail guidance for belief or action.
+The likelihood ratio can say which hypothesis is favored.
+But the likelihood ratio can't tell us whether the evidence is enough to make decision for a hypothesis over another.
+The likelihood ratio also doesn't reflect a degree of belief about the parameters.
 
 \hypertarget{likelihood-intervals}{%
-\subsection*{Likelihood Intervals}\label{likelihood-intervals}}
-
+\section{Likelihood Intervals}\label{likelihood-intervals}}
 
 Likelihood intervals or regions are the likelihoodist analogue to frequentist confidence interval and Bayesian credible intervals.
 The interpretation of likelihood regions is in terms of, you guessed it, relative likelihood.
@@ -1933,11 +1934,11 @@ The likelihood interval of a model parameter \(\theta\) (like a coefficient in a
 
 \[\left\{\theta: \frac{L(\theta| X)}{L(\hat{\theta}| X)} \geq \frac{p}{100}\right\}\]
 
-The \(\hat{\theta}\) is the ``optimal'' parameter that the modeler found using maximum likelihood (or a similar optimization methods).
+The \(\hat{\theta}\) is the ``optimal'' parameter that the modeler found using maximum likelihood (or a similar optimization method).
 Let's say for a logistic regression model coefficient \(\beta_j\): \(\hat{\beta}_j = 1.1\).
 Then an interval might be \([0.9; 1.3]\).
-The constant \(p\) serves a similar function like the alpha level for confidence intervals:
-It decides the size of the region.
+The constant \(p\) is similar to the \(\alpha\)-level for confidence and credible intervals:
+It sets the size of the region.
 See Figure \ref{fig:likelihood-interval}.
 Any point within that interval can be seen as a different hypothesis.
 And these hypotheses are compared to the hypothesis with the model that \(\theta = \hat{\theta}\).
@@ -1948,30 +1949,30 @@ And these hypotheses are compared to the hypothesis with the model that \(\theta
 
 }
 
-\caption{A 1/4 and a 1/16 likelihood ratio interval.}\label{fig:likelihood-interval}
+\caption{1/4 and 1/16 likelihood ratio intervals.}\label{fig:likelihood-interval}
 \end{figure}
 
 \hypertarget{why-frequentism-violates-the-likelihood-principle}{%
 \section{Why Frequentism Violates the Likelihood Principle}\label{why-frequentism-violates-the-likelihood-principle}}
 
-In short, many frequentist methods violates the likelihood principle because they require ``imagined'' experiments.
-Experiments that never happened, but we require their theoretic distribution to compute, for example, p-values.
-It's also dependent on stopping criteria for collecting data.
+Many frequentist methods violate the likelihood principle because they require ``imagined'' experiments.
+Experiments that never happened.
+But we need these theoretic distribution to compute, for example, p-values.
+Statistical null hypothesis testing is also dependent on stopping criteria for collecting data, which is in conflict with the likelihood principle.
 
-You can skip this example if it's too tedious.
-The following example shows how frequentism violates the likelihood principle, but also a great illustration of the core idea of likelihoodism.
-The criterion why experiments are stopped is a relevant factor for frequentist inference, because it does not adhere to the likelihood principle.
+The following example shows how frequentism violates the likelihood principle based on stopping criteria.
+It's also a great illustration of the core idea of likelihoodism.
 
 Suppose we have a coin.
 We want to figure out whether it's fair, or whether maybe head turns up too often.
 We'll call \(\theta\) the probability of head.
-We have two different hypothesis:
+We have two hypotheses:
 
-So: \(H_0: \theta = 0.5\) und \(H_1: \theta > 0.5\)
+\[H_0: \theta = 0.5 \text{ and } H_1: \theta > 0.5\]
 
-The \(H_0\) hypothesis means the coin is fair.
-And \(H_1\) claims that head comes up more often than tails.
-We need two random variables: the number of heads \(X\), and the number of coin tosses \(Y\) .
+\(H_0\) means the coin is fair.
+\(H_1\) claims that head comes up more often than tail.
+We define two random variables: the number of heads \(X\), and the number of coin tosses \(Y\) .
 
 We conduct two experiments with a different setup, but with the same results:
 
@@ -1981,30 +1982,33 @@ We conduct two experiments with a different setup, but with the same results:
 \item
   Toss the coin 12 times. We observe 9 heads out of the 12 tosses.
 \item
-  Toss coin until 3 times tail was observed. The third head comes up at the 12-th toss.
+  Toss the coin until tail is observed 3 times. The third tail appears on the 12-th toss.
 \end{enumerate}
 
-In experiment 1) we fixed \(Y\), the number of tosses.
-IN experiment 2), we fixed \(X\) the number of heads.
+Both experiments have the exact same outcome, but we defined the stopping criteria for the experiments differently:
+In experiment 1) we fixed the number of tosses \(Y\).
+In experiment 2) we fixed the number of heads \(X\).
+Should we both experiments come to different conclusions about the fairness of the coin?
+What do you think?
 
-Both experiments produce the same likelihood, up to a constant factor. Experiment 1)
+Both experiments produce the same likelihood, up to a constant factor. Experiment 1):
 
-\[L(\theta | X = 3) = \binom{12}{3} \theta^3 (1 - \theta)^9 (1 - \theta)^9 = 220 \theta^3 (1 - \theta)^9 \]
+\[L(\theta | X = 3) = \binom{12}{3} \theta^3 (1 - \theta)^9  = 220 \theta^3 (1 - \theta)^9 \]
 
 And experiment 2):
 
-\[L(\theta | Y = 12) = \binom{11}{2} \theta^3 (1 - \theta)^9 (1 - \theta)^9 = 55 \theta^3 (1 - \theta)^9\]
+\[L(\theta | Y = 12) = \binom{11}{2} \theta^3 (1 - \theta)^9  = 55 \theta^3 (1 - \theta)^9\]
 
 So the likelihoodists say that both experiments carry the same evidence.
 And they would get the same likelihood intervals for both experiments, for example.
 
-Frequentists would come to different conclusion for both experiments. {[}\^{}vidakovic9999{]}
+Frequentists would come to different conclusions depending on the experiment.
 Frequentists incorporate results that did not happen, but are dependent on how the experiments are conducted.
-For both hypothesis tests, \(H_1\) is framed as getting a more extreme event than the one observed, both in the direction of a higher probability for heads.
+For both hypotheses tests, \(H_1\) is framed as getting a more extreme event than the one observed, both in the direction of a higher probability for heads.
 But we never observed more extreme events.
 We just take what we observed (9 times head) and pretend that we observe the event more often.
 What ``more extreme'' means depends on whether we are in experiment 1) or 2).\\
-When the number of tosses is fixed, the \(H_1\) includes probabilities of fictional experiments where 9,11, or 12 heads were observed.
+When the number of tosses is fixed, \(H_1\) includes probabilities of fictional experiments where 9,11, or 12 heads were observed.
 In the other experiment, the number of tails is fixed.
 More extreme in experiment 2) means all possible experiments where we observe more than 12 tosses.
 Which includes, for example that we tossed it 10234 times.
@@ -2026,10 +2030,10 @@ The p-value is now smaller than 0.05, and with that the coin is significantly un
 \section{Stopping Criteria}\label{stopping-criteria}}
 
 This is becoming a bashing for frequentist inference.
-For frequentist inference, how data are sampled or how the experiments was designed has an influence on the results.
+For frequentist inference, how data are sampled and how the experiments were designed has an influence on the results.
 
 This has much more subtle consequences than I've illustrated so far.
-Imagine you are a statistician, and a domain experts ask you to do an analysis with 1000 data points.
+Imagine you are a statistician, and a domain expert asks you to do an analysis with 1000 data points.
 As a frequentist, you need to know how these 1000 data points were collected.
 What was the stopping criterion?
 If the domain expert just planned to collect 1000, that's fine.
@@ -2043,17 +2047,15 @@ But if the expert would say that, depending on the outcome of the analysis, she 
 \item
   Likelihoodism inherits all strengths of statistical models.
 \item
-  It's coherent modeling approach that all information is contained in the likelihood. Frequentism is rather fragmented with different approaches such as statistical tests and confidence intervals.
+  It's a coherent modeling approach: all information is contained in the likelihood. Frequentism, in contrast, is rather fragmented with different approaches such as statistical tests and confidence intervals.
 \item
-  Like Bayesian inference, likelihoodist inference conforms to the likelihood principle.
+  Like Bayesian inference, likelihoodist inference conforms to the likelihood principle. Therefore both are not affected by experimental design like frequentism is.
 \item
-  Therefore likelihoodism is also not dependent on the experimental design like frequentism is.
+  Arguably, likelihoodism is the most objective of the statistical modeling mindsets. No priors, no imagined experiments.
 \item
-  Arguably the most objective of the statistical modeling mindsets. Works with prior distributions and without imagined experiments.
+  Likelihoodist ideas can enhance the reporting of Bayesian results. For example, Bayesians can additionally report likelihood ratios as evidence.
 \item
-  Likelihoodist ideas can enhance reporting of Bayesian results. For example, by also reporting likelihood ratios of models without using the priors.
-\item
-  Compared to frequentism: A null hypothesis significance test might reject \(H_0\), even though the evidence for \(H_0\) is larger than for some point \(H_1\). Likelihoodism does not have this problem.
+  A significance test might reject \(H_0\), even though the evidence for \(H_0\) is larger than for \(H_1\). Likelihoodism doesn't have this problem.
 \end{itemize}
 
 \hypertarget{limitations-3}{%
@@ -2062,14 +2064,14 @@ But if the expert would say that, depending on the outcome of the analysis, she 
 \begin{itemize}
 \tightlist
 \item
-  Likelihoodism doesn't give guidance in the form of belief or decision. Evidence is less practical, and the statistician has no clear answer on what do or think which model is the correct one. This is the strongest argument against likelihoodism, and maybe the reason why we don't see it in practice.
+  Likelihoodism doesn't give guidance in the form of belief or decision. Evidence is less practical, and the statistician has no clear answer on which model to work with. This is the strongest argument against likelihoodism, and maybe the reason why we don't see it in practice.
 \item
-  The statistical hypotheses hypotheses to be compared with likelihood ratios have to be specific, simple hypothesis where all parameters are specified. Compound hypothesis for intervals of parameters are not possible. Likelihoodism can't compare \(\theta > 0\) versus \(\theta \leq 0\). Only, for example \(\theta = 1\) against \(\theta = 0\).
+  With a likelihoodist mindset, we can can only compare specific hypotheses where all parameters are specified. Compound hypotheses for ranges of parameters are impossible. Likelihoodism can't compare \(\theta > 0\) versus \(\theta \leq 0\). Only, for example \(\theta = 1\) against \(\theta = 0\).
 \item
   Likelihoodism allows only relative claims. It can't give the probability that some statistical hypothesis is true -- only how its evidence compares to another hypothesis.
 \end{itemize}
 
-I found\textsuperscript{\protect\hyperlink{ref-gandenberger2016not}{11}} a good source on criticism of likelihoodism.
+I found\textsuperscript{\protect\hyperlink{ref-gandenberger2016not}{10}} a good source on criticism of likelihoodism.
 
 \hypertarget{causal-inference}{%
 \chapter{Causal inference}\label{causal-inference}}
@@ -2169,16 +2171,12 @@ I found\textsuperscript{\protect\hyperlink{ref-gandenberger2016not}{11}} a good 
 \CSLLeftMargin{8. }
 \CSLRightInline{Richard R. Statistical evidence: A likelihood paradigm. Routledge; 2017. }
 
-\leavevmode\vadjust pre{\hypertarget{ref-birnbaum1962foundations}{}}%
-\CSLLeftMargin{9. }
-\CSLRightInline{Birnbaum A. On the foundations of statistical inference. Journal of the American Statistical Association. 1962;57(298):269--306. }
-
 \leavevmode\vadjust pre{\hypertarget{ref-hacking1965logic}{}}%
-\CSLLeftMargin{10. }
+\CSLLeftMargin{9. }
 \CSLRightInline{Hacking I. Logic of statistical inference. 1965; }
 
 \leavevmode\vadjust pre{\hypertarget{ref-gandenberger2016not}{}}%
-\CSLLeftMargin{11. }
+\CSLLeftMargin{10. }
 \CSLRightInline{Gandenberger G. Why i am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library; 2016. }
 
 \end{CSLReferences}
