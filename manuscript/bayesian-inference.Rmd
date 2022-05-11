@@ -37,7 +37,7 @@ A Bayesian model even works without data, by just using the prior distributions.
 ## Bayes Theorem
 
 Bayesians want to learn the distribution of the model parameters from the data: $P(\theta | X)$.
-P(\theta | X) is a strange way of looking at the probabilities involved.
+$P(\theta | X)$ is a strange way of looking at the probabilities involved.
 The data-generating process generates data as a function of the parameters: $P(X | \theta)$.
 So Bayesians look for the inverse of what the DGP would naturally do.
 
