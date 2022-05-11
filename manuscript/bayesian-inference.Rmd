@@ -295,6 +295,7 @@ The fewer and simpler, the better.
 You won't get your manager to understand posterior distributions.
 They demand simple answers!
 So, let's simplify the posterior.
+There's advice about not summarizing the posterior [@tiao1973some], but people do it anyways.
 Summaries of the posterior can be  points or intervals.
 Intervals can be defined via fixed boundaries or fixed probability mass.
 Some examples:
