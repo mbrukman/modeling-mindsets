@@ -2,12 +2,14 @@
 
 <!-- TODO
 
-* Reread: End of Theory. https://www.wired.com/2008/06/pb-theory/ [@anderson2008end]
-*
+* Reread: End of Theory. https://www.wired.com/2008/06/pb-theory/ [@anderson2008end] -> This one is more general and might fit into the model chapter
+* Read: https://hal.archives-ouvertes.fr/hal-03474791/
+* Recreate Leo Breiman figure from Two cultures
 
 -->
 
 * Modeling is task-oriented and algorithmic.
+* External validity more important than internal validity (aka stats).
 * Lives from having lots of data
 * A good model allows the computer to solve a task, make it look "intelligent".
 * A model is connected to the real world by helping in solving a real task.
@@ -21,6 +23,11 @@
 * they play game where you have to throw balls to win game
 * 
 
+Random notes
+
+* Statistical models are based on their components they are build of.
+* Machine learning models are based on how well they do their task, often involving prediction.
+* 
 
 
 Machine learners are a pragmatic people.
