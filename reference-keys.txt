@@ -9,6 +9,8 @@ fig:ci
 fig:bayesian
 fig:priors
 fig:posterior
+fig:three-stat-mindsets
+fig:likelihood-interval
 what-this-book-is-about
 who-this-book-is-for
 models
@@ -44,6 +46,10 @@ simulate-to-predict
 strengths-2
 limitations-2
 likelihoodism
+why-frequentism-violates-the-likelihood-principle
+stopping-criteria
+strengths-3
+limitations-3
 causal-inference
 supervised-ml
 deep-learning
