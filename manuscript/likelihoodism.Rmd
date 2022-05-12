@@ -45,7 +45,7 @@ Likelihoodists emphasize the likelihood and reject the non-likelihood elements f
 Likelihoodists reject priors because they are subjective;
 Likelihoodists reject the frequentists' reliance on "imagined" experiments because these never-observed experiments violate the likelihood principle.
 
-```{r three-stat-mindsets, fig.cap = "How Bayesianism, frequentism, and likelihoodism overlap and differ. Figure inspired by [Greg Gandenberger](https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/).", fig.height = 5, figh.width = 5}
+```{r three-stat-mindsets, fig.cap = "How Bayesianism, frequentism, and likelihoodism overlap and differ. Figure inspired by Greg Gandenberger: https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/.", fig.height = 5, figh.width = 5}
 library(ggplot2)
 circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
   r = diameter / 2
