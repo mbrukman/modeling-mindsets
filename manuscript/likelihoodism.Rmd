@@ -45,7 +45,7 @@ Likelihoodists emphasize the likelihood and reject the non-likelihood elements f
 Likelihoodists reject priors because they are subjective;
 Likelihoodists reject the frequentists' reliance on "imagined" experiments because these never-observed experiments violate the likelihood principle.
 
-```{r three-stat-mindsets, fig.cap = "How Bayesianism, frequentism, and likelihoodism overlap and differ. Figure inspired by [Greg Gandenberger](https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/)."}
+```{r three-stat-mindsets, fig.cap = "How Bayesianism, frequentism, and likelihoodism overlap and differ. Figure inspired by [Greg Gandenberger](https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/).", fig.height = 5, figh.width = 5}
 library(ggplot2)
 circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
   r = diameter / 2
@@ -59,17 +59,19 @@ circle1 = circleFun(c(0.7, -1), 2.3)
 circle2 = circleFun(c(2.3, -1), 2.3)
 circle3 = circleFun(c(1.5, 0.3), 2.3)
 csize = 1.5
+btextsize = 8
+stextsize = 4.5
 #geom <- path will do open circles, geom <- polygon will do filled circles
 ggplot(mapping = aes(x,y)) +
   geom_path(data = circle1, size = csize) +
   geom_path(data = circle2, size = csize) + 
   geom_path(data = circle3, size = csize) + 
-  annotate("text", label = "No priors", x = 0.5, y = -1, size = 10) +
-  annotate("text", label = "Provides \n belief/action", x = 2.6, y = -1, size = 10) +
-  annotate("text", label = "Likelihood \n Principle", x = 1.5, y = 0.5, size = 10) +
-  annotate("text", label = "Bayesianism", x = 2.1, y = -0.2, size = 6, angle = 40) +
-  annotate("text", label = "Likelihoodism", x = 0.85, y = -0.25, size = 6, angle = -40) +
-  annotate("text", label = "Frequentism", x = 1.5, y = -1.3, size = 6, angle = 90) +
+  annotate("text", label = "No priors", x = 0.5, y = -1, size = btextsize) +
+  annotate("text", label = "Provides \n belief/action", x = 2.6, y = -1, size = btextsize) +
+  annotate("text", label = "Likelihood \n Principle", x = 1.5, y = 0.5, size = btextsize) +
+  annotate("text", label = "Bayesianism", x = 2.1, y = -0.2, size = stextsize, angle = 40) +
+  annotate("text", label = "Likelihoodism", x = 0.85, y = -0.25, size = stextsize, angle = -40) +
+  annotate("text", label = "Frequentism", x = 1.5, y = -1.3, size = stextsize, angle = 90) +
   coord_fixed() +
   theme_void()
 
@@ -191,20 +193,20 @@ See figure \@ref(fig:likelihood-interval).
 Each $\theta$-value within that interval can be seen as constituting a different hypothesis.
 And these hypotheses are compared with the optimal model $\theta = \hat{\theta}$.  
 
-```{r likelihood-interval, fig.cap = "1/4 and 1/16 likelihood ratio intervals.", fig.height = 3, fig.width = 10}
-n = 1000
+```{r likelihood-interval, fig.cap = "1/2 and 1/16 likelihood ratio intervals.", fig.height = 2, fig.width = 6}
 library(ggplot2)
+n = 1000
 
 x = seq(from = -3, to = 3, length.out = n)
 dat = data.frame(x = x, dens = dnorm(x, sd = 0.8))
 dat$x = dat$x
 dat$lr = dnorm(0) / dat$dens
-lr4l = min(dat$x[dat$lr <= 4])
-lr4u = max(dat$x[dat$lr <= 4])
+lr2l = min(dat$x[dat$lr <= 2])
+lr2u = max(dat$x[dat$lr <= 2])
 
 # y coordinates for these segments
-lr4ly = dat$dens[dat$x == lr4l]
-lr4uy = dat$dens[dat$x == lr4u]
+lr2ly = dat$dens[dat$x == lr2l]
+lr2uy = dat$dens[dat$x == lr2u]
 
 lr16l = min(dat$x[dat$lr <= 16])
 lr16u = max(dat$x[dat$lr <= 16])
@@ -215,11 +217,11 @@ lr16uy = dat$dens[dat$x == lr16u]
 
 ggplot(dat) +
   geom_line(aes(x = x, y = dens)) +
-  annotate("segment", x = lr4l, xend = lr4u, y = lr4ly, yend = lr4uy, arrow = arrow(ends = "both", angle = 90)) +
+  annotate("segment", x = lr2l, xend = lr2u, y = lr2ly, yend = lr2uy, arrow = arrow(ends = "both", angle = 90)) +
   annotate("segment", x = lr16l, xend = lr16u, y = lr16ly, yend = lr16uy, arrow = arrow(ends = "both", angle = 90)) +
   annotate("point", x = 0, y = max(dat$dens), size = 3) +
-  annotate("label", label = "LR 4", x = lr4l -0.2, y = lr4ly) +
-  annotate("label", label = "LR 16", x = lr16l -0.2, y = lr16ly) +
+  annotate("label", label = "LR 2", x = (lr2u + lr2l)/2 , y = lr2ly) +
+  annotate("label", label = "LR 16", x = (lr16u + lr16l)/2, y = lr16ly) +
   theme_void()
 
 ```
