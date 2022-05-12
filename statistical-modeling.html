@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-05-11" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,6 +175,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a>
 <ul>
 <li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#maximum-likelihood-estimation"><i class="fa fa-check"></i>Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-hypothesis"><i class="fa fa-check"></i>Statistical Hypothesis</a></li>
 <li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#interpreting-parameters"><i class="fa fa-check"></i>Interpreting Parameters</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#joint-or-conditional-distribution"><i class="fa fa-check"></i><b>4.5</b> Joint or Conditional Distribution</a></li>
@@ -213,7 +214,16 @@ div.csl-indent {
 <li class="chapter" data-level="6.9" data-path="bayesian-inference.html"><a href="bayesian-inference.html#strengths-2"><i class="fa fa-check"></i><b>6.9</b> Strengths</a></li>
 <li class="chapter" data-level="6.10" data-path="bayesian-inference.html"><a href="bayesian-inference.html#limitations-2"><i class="fa fa-check"></i><b>6.10</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
+<li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="likelihoodism.html"><a href="likelihoodism.html#likelihood-principle"><i class="fa fa-check"></i><b>7.1</b> Likelihood Principle</a></li>
+<li class="chapter" data-level="7.2" data-path="likelihoodism.html"><a href="likelihoodism.html#law-of-likelihood"><i class="fa fa-check"></i><b>7.2</b> Law of Likelihood</a></li>
+<li class="chapter" data-level="7.3" data-path="likelihoodism.html"><a href="likelihoodism.html#likelihood-intervals"><i class="fa fa-check"></i><b>7.3</b> Likelihood Intervals</a></li>
+<li class="chapter" data-level="7.4" data-path="likelihoodism.html"><a href="likelihoodism.html#why-frequentism-violates-the-likelihood-principle"><i class="fa fa-check"></i><b>7.4</b> Why Frequentism Violates the Likelihood Principle</a></li>
+<li class="chapter" data-level="7.5" data-path="likelihoodism.html"><a href="likelihoodism.html#strengths-3"><i class="fa fa-check"></i><b>7.5</b> Strengths</a></li>
+<li class="chapter" data-level="7.6" data-path="likelihoodism.html"><a href="likelihoodism.html#limitations-3"><i class="fa fa-check"></i><b>7.6</b> Limitations</a></li>
+<li class="chapter" data-level="7.7" data-path="likelihoodism.html"><a href="likelihoodism.html#resources"><i class="fa fa-check"></i><b>7.7</b> Resources</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
 <li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
@@ -491,6 +501,25 @@ Maximizing the likelihood means bringing together the theoretical probability di
 FIGURE 4.3: Fitting distributions to data
 </p>
 </div>
+</div>
+<div id="statistical-hypothesis" class="section level3 unnumbered hasAnchor">
+<h3>Statistical Hypothesis<a href="statistical-modeling.html#statistical-hypothesis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A statistical hypothesis is a specification of a probability distribution for (observable) random variables.
+A statistical model can also embody a statistical hypthesis, because it specifies a probability distribution.
+For example, saying that the height of people follows a Gaussian distribution is a statistical hypothesis.
+The effect of a drug on disease progression could be modeled with a logistic regression model.
+After the model was fitted, the resulting statistical model also represents a statistical hypothesis.
+An alternative statistical hypothesis would be that the effect of the drug is zero, which also encodes a statistical model.</p>
+<p>As you can see there is a tight relationship between statistical models and statistical hypotheses.
+All statistical models can be your statistical hypotheses.
+But a statistical hypothesis is not necessarily fitted with data, or at least parts are manipulated.
+A statistical hypothesis can come purely from data plus the modeling assumptions.
+Or it can be purely come from assumptions.
+Or something inbetween, that some parameters from a statistical model are fitted, the other are assumed to take on a certain value.</p>
+<p>What we do with those hyptotheses depends on the mindset.
+Frequentist inference engages in null hypothesis significance testing: Define an alternative hypothesis to your statistical model (which is a hypothesis); then computed the probability to observe your model under the alternative hypothesis (= p-value).
+Likelihoodism compares the likelihoods of two statistical hypothesis.
+In Bayesian inference we can compare the Bayes factor to compare two hypothesis.</p>
 </div>
 <div id="interpreting-parameters" class="section level3 unnumbered hasAnchor">
 <h3>Interpreting Parameters<a href="statistical-modeling.html#interpreting-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>

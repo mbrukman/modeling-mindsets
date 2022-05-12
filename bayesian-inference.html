@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-05-11" />
+<meta name="date" content="2022-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,6 +175,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-model"><i class="fa fa-check"></i><b>4.4</b> Statistical Model</a>
 <ul>
 <li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#maximum-likelihood-estimation"><i class="fa fa-check"></i>Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#statistical-hypothesis"><i class="fa fa-check"></i>Statistical Hypothesis</a></li>
 <li class="chapter" data-level="" data-path="statistical-modeling.html"><a href="statistical-modeling.html#interpreting-parameters"><i class="fa fa-check"></i>Interpreting Parameters</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="statistical-modeling.html"><a href="statistical-modeling.html#joint-or-conditional-distribution"><i class="fa fa-check"></i><b>4.5</b> Joint or Conditional Distribution</a></li>
@@ -213,7 +214,16 @@ div.csl-indent {
 <li class="chapter" data-level="6.9" data-path="bayesian-inference.html"><a href="bayesian-inference.html#strengths-2"><i class="fa fa-check"></i><b>6.9</b> Strengths</a></li>
 <li class="chapter" data-level="6.10" data-path="bayesian-inference.html"><a href="bayesian-inference.html#limitations-2"><i class="fa fa-check"></i><b>6.10</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a></li>
+<li class="chapter" data-level="7" data-path="likelihoodism.html"><a href="likelihoodism.html"><i class="fa fa-check"></i><b>7</b> Likelihoodism</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="likelihoodism.html"><a href="likelihoodism.html#likelihood-principle"><i class="fa fa-check"></i><b>7.1</b> Likelihood Principle</a></li>
+<li class="chapter" data-level="7.2" data-path="likelihoodism.html"><a href="likelihoodism.html#law-of-likelihood"><i class="fa fa-check"></i><b>7.2</b> Law of Likelihood</a></li>
+<li class="chapter" data-level="7.3" data-path="likelihoodism.html"><a href="likelihoodism.html#likelihood-intervals"><i class="fa fa-check"></i><b>7.3</b> Likelihood Intervals</a></li>
+<li class="chapter" data-level="7.4" data-path="likelihoodism.html"><a href="likelihoodism.html#why-frequentism-violates-the-likelihood-principle"><i class="fa fa-check"></i><b>7.4</b> Why Frequentism Violates the Likelihood Principle</a></li>
+<li class="chapter" data-level="7.5" data-path="likelihoodism.html"><a href="likelihoodism.html#strengths-3"><i class="fa fa-check"></i><b>7.5</b> Strengths</a></li>
+<li class="chapter" data-level="7.6" data-path="likelihoodism.html"><a href="likelihoodism.html#limitations-3"><i class="fa fa-check"></i><b>7.6</b> Limitations</a></li>
+<li class="chapter" data-level="7.7" data-path="likelihoodism.html"><a href="likelihoodism.html#resources"><i class="fa fa-check"></i><b>7.7</b> Resources</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>9</b> Supervised Machine Learning</a></li>
 <li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
@@ -263,6 +273,8 @@ div.csl-indent {
 <li>Model parameters are random variables with prior and posterior distributions.</li>
 <li>A <a href="statistical-modeling.html#statistical-modeling">statistical modeling mindset</a> with <a href="frequentist-inference.html#frequentist-inference">frequentism</a> and <a href="likelihoodism.html#likelihoodism">likelihoodism</a> as alternatives.</li>
 </ul>
+<!-- The Bayesian -->
+<p>While frequentists analyze data to answer the question “What should I do?”, Bayesians analyze data to answer “What should I believe?”.</p>
 <!-- relation to others -->
 <p>If you haven’t read the chapter on <a href="statistical-modeling.html#statistical-modeling">Statistical Modeling</a>, I recommend that you do so first, since Bayesian inference is easier to understand if you have a good understanding of statistical inference.
 Bayesian inference is based on probability distributions, interpreting parameters, and learning from data through the likelihood.
@@ -276,11 +288,11 @@ That’s different from the more objective interpretation of probability in <a h
 In Bayesian inference, it’s not necessary to imagine repeated experiments.
 One can even apply Bayesian inference to a single data point.
 This is not possible with frequentist inference.
-A Bayesian model even works without data, by just using the prior distributions. <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+A Bayesian model even works without data, by just using the prior distributions. <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <div id="bayes-theorem" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Bayes Theorem<a href="bayesian-inference.html#bayes-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Bayesians want to learn the distribution of the model parameters from the data: <span class="math inline">\(P(\theta | X)\)</span>.
-P(| X) is a strange way of looking at the probabilities involved.
+<span class="math inline">\(P(\theta | X)\)</span> is a strange way of looking at the probabilities involved.
 The data-generating process generates data as a function of the parameters: <span class="math inline">\(P(X | \theta)\)</span>.
 So Bayesians look for the inverse of what the DGP would naturally do.</p>
 <!-- Bayes' theorem has many applications -->
@@ -288,7 +300,7 @@ So Bayesians look for the inverse of what the DGP would naturally do.</p>
 Bayes’ theorem can be used to invert the conditional probability:</p>
 <p><span class="math display">\[\underbrace{P(\theta|X)}_{\text{posterior}} = \frac{\overbrace{P(X | \theta)}^{\text{likelihood}} \cdot  \overbrace{P(\theta)}^{\text{prior}}}{\underbrace{P(X)}_{\text{evidence}}}\]</span></p>
 <p><span class="math inline">\(P(\theta)\)</span>, also called prior, is the probability distribution of <span class="math inline">\(\theta\)</span> before we have collected any data.
-The probability distribution is updated by multiplying the prior by the data likelihood <span class="math inline">\(P(X | \theta)\)</span>. <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>
+The probability distribution is updated by multiplying the prior by the data likelihood <span class="math inline">\(P(X | \theta)\)</span>. <a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
 This product is scaled by the probability of the data <span class="math inline">\(P(X)\)</span>, also called evidence.
 The result is the posterior probability distribution, an updated belief about the parameters <span class="math inline">\(\theta\)</span>.</p>
 <p>Bayes’ theorem is a generally useful equation for working with probabilities, but we focus on its use for Bayesian inference.
@@ -319,7 +331,7 @@ FIGURE 6.1: The posterior distribution (right) is the scaled product of prior an
 <div id="prior-probability" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Prior Probability<a href="bayesian-inference.html#prior-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- prerequisites -->
-<p>Bayesians assume that model or distribution parameters a prior probability distribution <span class="math inline">\(P(\theta)\)</span>. <a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
+<p>Bayesians assume that model or distribution parameters a prior probability distribution <span class="math inline">\(P(\theta)\)</span>. <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>
 Let’s say we randomly pick a person and want to know how many hours per day they usually work.
 The number of hours worked per day, the random variable of interest, follows a probability distribution.
 For example, the number of hours worked might follow a Gaussian distribution.
@@ -349,7 +361,7 @@ Another Beta prior might put emphasis on <span class="math inline">\(p\)</span> 
 <!-- intuition for alpha = beta = 0.5: https://stats.stackexchange.com/questions/362728/whats-the-intuition-for-a-beta-distribution-with-alpha-and-or-beta-less-than -->
 It’s even possible to have a prior that that places the greatest probability symmetrically on 0 and 1.</p>
 <!-- uninformative and conjugate priors -->
-<p>Without expert knowledge about the parameter, the modeler can use “uninformative” or “objective” priors<span class="citation"><sup><a href="#ref-yang1996catalog" role="doc-biblioref">6</a></sup></span>.
+<p>Without expert knowledge about the parameter, the modeler can use “uninformative” or “objective” priors<span class="citation"><sup><a href="#ref-yang1996catalog" role="doc-biblioref">7</a></sup></span>.
 Uninformative priors often produce results similar to those of frequentist inference (for example for confidence/credible intervals). <!-- citation needed -->
 Another factor influencing the choice of prior is mathematical convenience.
 Conjugate priors are convenient choices.
@@ -457,7 +469,7 @@ So the chain is sampled at different points to ensure that there are enough MCMC
 Fortunately, most probabilistic software runs MCMC automatically.
 But this can take time.
 More time than fitting a frequentist model would take.
-A shorter alternative is variational inference.<span class="citation"><sup><a href="#ref-blei2017variational" role="doc-biblioref">7</a></sup></span>
+A shorter alternative is variational inference.<span class="citation"><sup><a href="#ref-blei2017variational" role="doc-biblioref">8</a></sup></span>
 But while MCMC delivers approximately exact estimates of the posterior probability, variational inference is more of a heuristic.</p>
 <!-- TODO: visualize MCMC -->
 <p>Frequentists have their parameter estimates.
@@ -477,7 +489,7 @@ The fewer and simpler, the better.
 You won’t get your manager to understand posterior distributions.
 They demand simple answers!
 So, let’s simplify the posterior.
-There’s advice about not summarizing the posterior<span class="citation"><sup><a href="#ref-tiao1973some" role="doc-biblioref">8</a></sup></span>, but people do it anyways.
+There’s advice about not summarizing the posterior<span class="citation"><sup><a href="#ref-tiao1973some" role="doc-biblioref">9</a></sup></span>, but people do it anyways.
 Summaries of the posterior can be points or intervals.
 Intervals can be defined via fixed boundaries or fixed probability mass.
 Some examples:</p>
@@ -611,6 +623,7 @@ Really, all frequentist method can be expressed as special cases of Bayesian mod
 <li>A general benefit: Bayesian updating is an interesting mental model for how we update our own beliefs about the world.</li>
 <li>Bayesian interpretation of probability is arguably more intuitive than frequentist interpretation: When practitioners misinterpret frequentist confidence intervals, it’s often because they interpret them as credible intervals.</li>
 <li>Since Bayesian inference always estimates the full posterior, decision based on the posterior always require another step. As a consequence, inference and decision making are decoupled. In frequentist inference, it’s common to design the entire inference process around the decision (hypothesis tests).</li>
+<li>Bayesian statistics adheres to the likelihood principle which states that all the evidence from the data relevant to a quantity of interest must be contained in the likelihood function.</li>
 </ul>
 </div>
 <div id="limitations-2" class="section level2 hasAnchor" number="6.10">
@@ -628,21 +641,21 @@ Really, all frequentist method can be expressed as special cases of Bayesian mod
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-yang1996catalog" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Yang R, Berger JO. A catalog of noninformative priors. Institute of Statistics; Decision Sciences, Duke University Durham, NC, USA; 1996. </div>
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Yang R, Berger JO. A catalog of noninformative priors. Institute of Statistics; Decision Sciences, Duke University Durham, NC, USA; 1996. </div>
 </div>
 <div id="ref-blei2017variational" class="csl-entry">
-<div class="csl-left-margin">7. </div><div class="csl-right-inline">Blei DM, Kucukelbir A, McAuliffe JD. Variational inference: A review for statisticians. Journal of the American statistical Association. 2017;112(518):859–77. </div>
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Blei DM, Kucukelbir A, McAuliffe JD. Variational inference: A review for statisticians. Journal of the American statistical Association. 2017;112(518):859–77. </div>
 </div>
 <div id="ref-tiao1973some" class="csl-entry">
-<div class="csl-left-margin">8. </div><div class="csl-right-inline">Tiao GC, Box GE. Some comments on <span>“bayes”</span> estimators. The American Statistician. 1973;27(1):12–4. </div>
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Tiao GC, Box GE. Some comments on <span>“bayes”</span> estimators. The American Statistician. 1973;27(1):12–4. </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="3">
-<li id="fn3"><p>This is called the prior predictive simulation and is used to check that the chosen priors produce reasonable data. The modeler simulates by first sampling parameters from the priors and using those parameters to generate data. Repeating this several times results in a distribution of data.<a href="bayesian-inference.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>In the Bayesian mindset <span class="math inline">\(\theta\)</span> is a random variable, so the notation can be confusing: <span class="math inline">\(P(X | \theta)\)</span> refers to the likelihood function. The same function that we used in frequentist inference. But in the frequentist inference, we might write <span class="math inline">\(P(\theta | X)\)</span> to emphasize that <span class="math inline">\(\theta\)</span> is the input that varies. But this notation refers to the posterior in Bayesian statistics, so we write <span class="math inline">\(P(X | \theta)\)</span>.<a href="bayesian-inference.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>When I was learning about Bayesian inference, one of my first question was: do the parameters of the priori distributions have priori distributions themselves? Where does it end? The answer: Bayesian stop after one level of priori distributions and don’t go full inception.<a href="bayesian-inference.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<ol start="4">
+<li id="fn4"><p>This is called the prior predictive simulation and is used to check that the chosen priors produce reasonable data. The modeler simulates by first sampling parameters from the priors and using those parameters to generate data. Repeating this several times results in a distribution of data.<a href="bayesian-inference.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>In the Bayesian mindset <span class="math inline">\(\theta\)</span> is a random variable, so the notation can be confusing: <span class="math inline">\(P(X | \theta)\)</span> refers to the likelihood function. The same function that we used in frequentist inference. But in the frequentist inference, we might write <span class="math inline">\(P(\theta | X)\)</span> to emphasize that <span class="math inline">\(\theta\)</span> is the input that varies. But this notation refers to the posterior in Bayesian statistics, so we write <span class="math inline">\(P(X | \theta)\)</span>.<a href="bayesian-inference.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>When I was learning about Bayesian inference, one of my first question was: do the parameters of the priori distributions have priori distributions themselves? Where does it end? The answer: Bayesian stop after one level of priori distributions and don’t go full inception.<a href="bayesian-inference.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
