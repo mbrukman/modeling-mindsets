@@ -22,6 +22,7 @@ Or have we just updated prior information about the effect of fertilizer with ne
 Welcome to **Modeling Mindsets**.
 
 A modeling mindset is a specification of how to model the world using data.
+Modeling means investigating a real world phenomenon indirectly using a model. [@weisberg2007modeler]
 <!-- lenses analogy-->
 Modeling mindsets are like different lenses.
 All lenses show us the world, but with a different focus.
