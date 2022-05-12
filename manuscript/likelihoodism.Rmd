@@ -407,6 +407,10 @@ But if the expert would say that, depending on the outcome of the analysis, she 
 * With a likelihoodist mindset, we can can only compare specific hypotheses where all parameters are specified. Compound hypotheses for ranges of parameters are impossible. Likelihoodism can't compare  $\theta > 0$ versus $\theta \leq 0$. Only, for example $\theta = 1$ against $\theta = 0$.
 * Likelihoodism allows only relative claims. It can't give the probability that some statistical hypothesis is true -- only how its evidence compares to another hypothesis.
 
-I found [@gandenberger2016not] a good source on criticism of likelihoodism.
+## Resources
+
+* The book "Statistical Evidence: A Likelihood Paradigm" is good introduction into the topic of likelihoodism, if you have some background as a statistician.
+* I've found the [blog by Greg Gandenberger](http://gandenberger.org/) super helpful in learning about likelihoodism. He takes on a rather philosophical standpoint and argues against likelihoodism, and in favor of Bayesianism. This criticism is most elaborated in his essay "Why I am not a likelihoodist".[@gandenberger2016not] 
+
 
 [^empirical-priors]: The likelihood principle is of course violated if the data is used to inform the pior. For example empirical priors.
