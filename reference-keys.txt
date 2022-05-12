@@ -50,9 +50,9 @@ likelihood-principle
 law-of-likelihood
 likelihood-intervals
 why-frequentism-violates-the-likelihood-principle
-stopping-criteria
 strengths-3
 limitations-3
+resources
 causal-inference
 supervised-ml
 deep-learning
