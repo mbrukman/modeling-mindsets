@@ -122,154 +122,74 @@ The likelihood principle gives the likelihood function the monopoly over data ev
 But the likelihood principle alone is not sufficient to create a coherent modeling mindset.
 We need the law of likelihood.
 
-CONTINUE HERE DEEPL
-
 ## Law of Likelihood
 
-The law of likelihood is the foundation for using the likelihood function alone for modeling decisions.
+The law of likelihood is the foundation for using the likelihood function alone formaking modeling decisions.
 The law of likelihood says [@hacking1965logic]:
 
 * Given:
-  * Hypotheses $H_1$ and $H_2$; data $X=x$.
-  * Likelihood of A is larger than B: $P_{H_1}(X=x) > P_{H_2}(X=x)$.
+  * Hypotheses $H_1$ and $H_2$; data $\mathbf{x} = \{x^{(1)}, \dots, x^{(n)}\}$.
+  * Likelihood for $H_1$ is larger than for $H_2$: $P_{H_1}(X = \mathbf{x}) > P_{H_2}(X = \mathbf{x})$.
 * Then:
-  * Observation $X=x$ is evidence supporting $H_1$ over $H_2$.
-  * The likelihood ratio $P_{H_1}(x)/P_{H_2}(x)$ measures the strength of that evidence.
+  * Observation $X=\mathbf{x}$ is evidence supporting $H_1$ over $H_2$.
+  * The likelihood ratio $P_{H_1}(x)/P_{H_2}(x)$ measures the strength of this evidence.
 
-The hypotheses can be different parameter values for a distribution.
-Going back to the bus waiting time example, $H_1$ could be that $\lambda = 1$ and $H_2$ could be that $\lambda = 0.5$.
-The result might be:
+The hypotheses can be the same statistical model, but with different parameter values $\theta$.
+Returning to the bus waiting time example, $H_1$ could be that $\lambda = 1$, and $H_2$ could be that $\lambda = 0.5$.
+The resulting likelihood ratio might be:
+
 $$P(\lambda = 1;x_1, \ldots, x_n)/P(\lambda = 0.5;x_1, \ldots, x_n) = 4$$.
 
-
 The likelihood ratio is the likelihood of one statistical hypothesis divided by the likelihood of another.
-As a reminder, statistical hypotheses are like statistical models, where some or all of the parameters may be assigned by hand rather than learned from the data.
-If we want to compare hypotheses $H_1$ and $H_2$, we can use the likelihood ratio: 
+As a reminder, statistical hypotheses are statistical models where, optionally, some or all of the parameters are assigned by hand rather than learned from the data.
+The law of likelihood tells us, that to compare hypotheses $H_1$ and $H_2$ with their likelihood ratio:
 
-$$\frac{P(H_1;X)}{P(H_2;X)}$$
+$$\frac{P(H_1;X = \mathbf{x})}{P(H_2;X = \mathbf{x})}$$
 
-In frequentism likelihood ratios are often used as test statistics for hypothesis tests.
+In frequentism, likelihood ratios are often used as test statistics for hypothesis tests.
 In likelihoodism, the likelihood ratio is interpreted as evidence.
-As a shortcut, likelihoodists can use a rule of thumb for judging the strength of evidence.
-For example, a likelihood ratio of 8 is seen as fairly strong, and 32 or more as strong favoring.[@richard2017statistical]
 
+Likelihoodists may use a rule of thumb for judging the strength of evidence.
+For example, a likelihood ratio of 8 is considered fairly strong and 32 or more is considered "strong favoring".[@richard2017statistical]
 In our example, a likelihood ratio of 4 in favor of $H_1: \lambda = 1$ over $H_2: \lambda = 0.5$ is not enough to be "fairly strong".
 $H_1$ and $H_2$ can also be more complex hypotheses, such as regression models with different covariates or assumptions.
 
 <!-- stronger law -->
 **The law of likelihood is stronger than the likelihood principle:**
-The likelihood principle says that the all evidence from the data must be in the likelihood;
-**the law of describes how evidence can be measured.**
-And that's where Bayesian inference and likelihoodism differ.
-Bayesians are not guided by the law of likelihood, but by Bayesian updating.
+The likelihood principle states that the all evidence from the data must be in the likelihood;
+**The law of likelihood describes how evidence can be quantified and compared.**
+And this is where Bayesian inference and likelihoodism differ.
+Bayesians are not guided by the law of likelihood, but by Bayesian updating and a subjective interpretation of interpretability.
 
 <!-- clear vision -->
-The law of likelihood makes it clear how we may compare statistical hypotheses:
-Not with hypothesis testing, but by comparing different hypothesis using their likelihood ratios.
+The law of likelihood makes it clear how we can compare statistical hypotheses:
+Not by hypothesis testing, but by their likelihood ratios.
 The larger the ratio, the stronger the evidence for one hypothesis over another.
 
 <!-- shortcomings -->
-Unfortunately, the likelihoodism mindset doesn't entail guidance for belief or action.
-The likelihood ratio can say which hypothesis is favored.
-But the likelihood ratio can't tell us whether the evidence is enough to  make decision for a hypothesis over another.
-The likelihood ratio also doesn't reflect a degree of belief about the parameters.
+This is also where likelihoodism reaches a dead end.
+The ratio may only be interpreted as evidential favoring.
+The likelihoodist mindset doesn't come with guidance on what we should believe about the parameters or what decision/action to take based on the results.
+The likelihood ratio only tell us which hypothesis is favored.
 
-<!--
-
-### Voltmeter Story {-}
-
-CONTINUE HERE
-
-There is a famous story by TODO.
-It's about a frequentist statistician, and about changing the inference based on imagined experiments.
-
-* An engineer measures voltages of electron tubes. The results range from 30V to 99V.
-* The statistician computes mean and 95% confidence interval of the measurements.
-* Later the statistician finds out that the voltmeter only goes to 100 Volts. Censored data. That means that the analysis has to change. The statistician cannot assume a Gaussian, but has to assume a distribution that is cut off at 100. Like a trimmed Gaussian.
-* So far, also the likelihoodist would agree (except that they wouldn't compute confidence intervals).  
-* But then the engineer also says that she has another voltmeter that goes to 1000 Volt. If the other voltmeter had maxed out, she would have switched to the 1000V one.
-* Alright, back to the non-censored analysis from the beginning. I think here every type of statistician would also agree.
-* A few day later it turns out that the 1000V voltmeter was broken. And the engineer admits that in that case she wouldn't have waited with the measurements and just reported 100V.     
-* For the likelihoodist, this new information doesn't change anything. In this one experiment, no measurement maxed out, so the analysis can stay the same.
-* The frequentist faces a more complex modeling problem now, because the imagined future experiment are now weirdly conditional on the probability that the 1000V voltmeter works.
-* Remember the confidence interval interpretation: "Would we repeat the experiment multiple times, the confidence interval has a 95% chance to cover the true mean. With this new information about the experiment ("would have reported the censored measurements if 1000V voltmeter broken") the confidence interval has to involve the probability. 
-* Repeating the experiment now involves the probability of the 1000V voltmeter working. It's a mixture of two distributions: If the 1000V device works the statistician would model the data with a Gaussian distribution. If 1000V voltmeter is broken, the statistician would model the data with a trimmed Gaussian distribution.
-* This couldn't even be estimated, since we don't know the probability that it works or not, and also can't estimate it.
-* It's an ugly situation.
-* Truth to be told. Most frequentist statistician would be pragmatic enough to ignore it and just decide for the uncensored model and pretend that this is what the future "imagined" experiments look like.
-* Nonetheless, there are still 3 options for confidence interval with different interpretations in the end.
-* The experimental setup decide on how to do analysis
-
--->
-
-
-<!-- 
-## Modeling and Likelihood Ratios
-
-When likelihoodists build models, it is very similar to how frequentist build their models.
-The big difference is in the interpetation of the models and how likehoodists deal with results.
-Or rather, it's in what likelihoodists do NOT do.
-Likelihoodists reject the idea of long-run frequences as the frequentists rely on.
-This also means that likelihoodists don't use hypothesis tests, p-value, confidence intervals and so on.
-Likelihoodists also reject the Bayesian interpretation of probability.
-They can't rely on posterior distributions, and their interpretation as beliefs about the parameters.
-How then, can likelihoodists say anything about the world with their models?
-
-When all is contained in the likelihood, then it is obvious that we should be comparing likelihoods.
-For likelihoodists, building a model means creating a hypothesis.
-The hypothesis can be: Daily vitamin D intake reduces the number of colds per year.
-An alternative hypothesis could be: Daily vitamin D intake reduces the number of colds per year, but also whether the person is a couch potatoe or very active.
-Both hypotheses can be modelled.
-Let's say $Y$ is the number of colds, $X_1$ is the binary information whether someone takes vitamin D (yes/no) and $X_2$ the random variable representing whether the person is a couch potatoe (potatoe/active). 
-As the outcome is a count, the statistician chooses a Poisson distribution for the outcome:
-
-$$Y | X_1, X_2 \sim Poi(\lambda)$$ 
-
-The parameter $\lambda$ describes the intensity of how often colds occur.  
-To connect the random variables $X_1$ and $X_2$ with the outcome, we say that the expected outcome is a function of the random variables.
-
-$$E(Y | X_1, X_2) = e^{\beta_0 + \beta_1 X_1}$$
-
-That's for the first model, where we only have vitamin D as variable.
-The other model also contains another variable:
-
-$$E(Y | X_1, X_2) = e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2}$$
-
-Both can then be optimized with a maximum likelihood appraoch, as presented in [chapter statistical modeling](#statistical-modeling).
-This gives us the best fitting parameters.
-But it gives us something else as well.
-And we haven't talked about it yet.
-We get the likelihood.
-Which is a number that can be interpreted as the likelihood of the model and its parameterization.
-This means for our made-up example, we get two models with different parameter estimates and also two likelihood numbers.
-
-This brings us to likelihood ratios.
-It's a simple equation: We divide the likelihood of model for hypothesis $H_1$ by the likelihood of model hypothesis $H_2$:
-
-$$\frac{L(H_1|X)}{L(H_2|X)}$$
-
-This allows one to compare the likelihood of two hypothesis.
-A likelihood ratio larger than 1 favors $H_1$, a ratio smaller than 1 favors $H_2$.
-
--->
 
 ## Likelihood Intervals
 
 <!-- using likelihood intervals -->
-Likelihood intervals or regions are the likelihoodist analogue to frequentist confidence interval and Bayesian credible intervals.
-The interpretation of likelihood regions is in terms of, you guessed it, relative likelihood.
-The likelihood interval of a model parameter $\theta$ (like a coefficient in a linear model) is the set of all $\theta$ values that yield a relative likelihood greater than a certain threshold:
+Likelihood intervals are the likelihoodist analogue to frequentist confidence interval and Bayesian credible intervals.
+Likelihood intervals are interpreted in terms of, you guessed it, relative likelihood.
+The likelihood interval of a model parameter $\theta$ is the set of all $\theta$ values that yield a relative likelihood greater than a certain threshold:
 
 $$\left\{\theta: \frac{L(\theta| X)}{L(\hat{\theta}| X)} \geq \frac{p}{100}\right\}$$
 
-The $\hat{\theta}$ is the "optimal" parameter that the modeler found using maximum likelihood (or a similar optimization method).
+The $\hat{\theta}$ is the optimal $\theta$ after fitting the model using maximum likelihood estimation or another optimization method.
 Let's say for a logistic regression model coefficient $\beta_j$: $\hat{\beta}_j = 1.1$. <!-- fix vim_ -->
-Then an interval might be $[0.9; 1.3]$.
-The constant $p$ is similar to the $\alpha$-level for confidence and credible intervals:
-It sets the size of the region.
-See Figure \@ref(fig:likelihood-interval).
-Any point within that interval can be seen as a different hypothesis.
-And these hypotheses are compared to the hypothesis with the model that $\theta = \hat{\theta}$.  
+Then an interval could be $[0.9; 1.3]$.
+The role of the constant $p$ is similar to the one of the $\alpha$-level for confidence and credible intervals:
+It specifies the size of the interval.
+See figure \@ref(fig:likelihood-interval).
+Each $\theta$-value within that interval can be seen as constituting a different hypothesis.
+And these hypotheses are compared with the optimal model $\theta = \hat{\theta}$.  
 
 ```{r likelihood-interval, fig.cap = "1/4 and 1/16 likelihood ratio intervals.", fig.height = 3, fig.width = 10}
 n = 1000
@@ -309,40 +229,38 @@ ggplot(dat) +
 ## Why Frequentism Violates the Likelihood Principle
 
 Many frequentist methods violate the likelihood principle because they require "imagined" experiments.
-Experiments that never happened.
-But we need these theoretic distribution to compute, for example, p-values.
-Statistical null hypothesis testing is also dependent on stopping criteria for collecting data, which is in conflict with the likelihood principle.
+But frequentists need these theoretic distribution to compute p-values, for example.
+Statistical null hypothesis tests also depend on stopping criteria for data collection, which is in conflict with the likelihood principle.
 
 <!-- motivation for example -->
-The following example shows how frequentism violates the likelihood principle based on stopping criteria.
-It's also a great illustration of the core idea of likelihoodism.
-
+The following example shows how frequentism violates the likelihood principle because of different stopping criteria.
 <!-- starting coin example -->
 Suppose we have a coin.
-We want to figure out whether it's fair, or whether maybe head turns up too often.
-We'll call $\theta$ the probability of head.
+We want to find out whether it's fair, or whether maybe head turns up too often.
+I still don't know why statistician's are so upset about unfair coins, but that's the way it is.
+We call $\theta$ the probability of head.
 We have two hypotheses:
 
 $$H_0: \theta = 0.5 \text{ and } H_1: \theta > 0.5$$
 
-$H_0$ means the coin is fair.
+$H_0$ means that the coin is fair.
 $H_1$ claims that head comes up more often than tail.
-We define two random variables: the number of heads $X$, and the number of coin tosses $Y$ .
+We define two random variables: the number of heads $X$, and the number of coin tosses $Y$.
 
 <!-- two types of experiments -->
-We conduct two experiments with a different setup, but with the same results:
+We perform two experiments with a different setup but with the same results:
 
-1. Toss the coin 12 times. We observe 9 heads out of the 12 tosses.
-1. Toss the coin until tail is observed 3 times. The third tail appears on the 12-th toss.
+1. Toss the coin 12 times. We observe head 9 out of 12 times.
+1. Toss the coin until tail is observed 3 times. The third tail appears on the 12th toss.
 
 Both experiments have the exact same outcome, but we defined the stopping criteria for the experiments differently:
-In experiment 1) we fixed the number of tosses $Y$.
-In experiment 2) we fixed the number of heads $X$.
-Should we both experiments come to different conclusions about the fairness of the coin?
+In experiment 1), we fixed the number of tosses $Y$.
+In experiment 2), we fixed the number of heads $X$.
+Should we reach different conclusions about the fairness of the coin?
 What do you think?
 
 <!-- likelihoodist view of the experiment -->
-Both experiments produce the same likelihood, up to a constant factor. Experiment 1):
+Both experiments give the same likelihood, up to a constant factor. Experiment 1):
 
 $$L(\theta | X = 3) = \binom{12}{3} \theta^3 (1 - \theta)^9  = 220 \theta^3 (1 - \theta)^9 $$
 
@@ -352,65 +270,59 @@ And experiment 2):
 $$L(\theta | Y = 12) = \binom{11}{2} \theta^3 (1 - \theta)^9  = 55 \theta^3 (1 - \theta)^9$$
 
 So the likelihoodists say that both experiments carry the same evidence.
-And they would get the same likelihood intervals for both experiments, for example.
+The likelihood intervals would be the same for both experiments.
 
 <!-- Frequentist view on the experiments -->
 Frequentists would come to different conclusions depending on the experiment.
-Frequentists incorporate results that did not happen, but are dependent on how the experiments are conducted.
-For both hypotheses tests, $H_1$ is framed as getting a more extreme event than the one observed, both in the direction of a higher probability for heads.
-But we never observed more extreme events.
-We just take what we observed (9 times head) and pretend that we observe the event more often.
-What "more extreme" means depends on whether we are in experiment 1) or 2).  
-When the number of tosses is fixed, $H_1$ includes probabilities of fictional experiments where 9,11, or 12 heads were observed.
+Frequentists include results that have not occurred but depend on how the experiments are conducted.
+They assume that $H_0$ is true and infer how the test statistic is distributed in future experiments under $H_0$.
+Then frequentists place the estimated value of $\hat{\theta}$ within this distribution of imagined experiments and see how extreme the result is.
+In experiment 1), where the number of tosses is fixed, experiment outcomes of 9, 10, 11, or 12 heads are more extreme than the actual experiment outcome.
 In the other experiment, the number of tails is fixed.
-More extreme in experiment 2) means all possible experiments where we observe more than 12 tosses.
-Which includes, for example that we tossed it 10234 times.
-Remember that number of tails $X = 3$ is fixed: more repetitions means that $\theta > 0.5$ is more likely.
+More extreme outcomes in experiment 2) are all possible experiments where we observe more than 12 tosses.
+This includes, for example, the  experiment where the third tail only comes up after 1108 tosses.
 
-When testing $H_0$ vs. $H_1$ in experiment 1), we get:
+When we test $H_0$ vs. $H_1$ in experiment 1), we get:
 
-$$P(X \geq 9| H_0) = \sum_{x = 9}^{12} \binom{x}{12} 0.5^x (1 - 0.5)^{12 - x} = 0.073$$
+$$P_{H_0}(X \geq 9) = \sum_{x = 9}^{12} \binom{x}{12} 0.5^x (1 - 0.5)^{12 - x} = 0.073$$
 
-For a significance level of $\alpha = 0.05$ we would not reject the hypothesis of a fair coin.
+At a significance level of $\alpha = 0.05$, we would not reject the fair coin hypothesis.
 
-For experiment 2) we assume a negative Binomial distribution:
+For experiment 2), we assume a negative binomial distribution:
 
-$$P(Y \geq 9 | H_0) = \sum_{y=9}^{\infty}\binom{3 + y - 1}{2} 0.5^y 0.5^3 = 0.0327$$
+$$P_{H_0}(Y \geq 12) = \sum_{y=12}^{\infty}\binom{3 + y - 1}{2} 0.5^y 0.5^3 = 0.0327$$
 
 The p-value is now smaller than 0.05, and with that the coin is significantly unfair.
 
-## Stopping Criteria
-
-This is becoming a bashing for frequentist inference.
-For frequentist inference, how data are sampled and how the experiments were designed has an influence on the results.
+In frequentist inference, the way data are collected and the way experiments are designed affect the results.
 
 This has much more subtle consequences than I've illustrated so far.
-Imagine you are a statistician, and a domain expert asks you to do an analysis with 1000 data points.
-As a frequentist, you need to know how these 1000 data points were collected.
-What was the stopping criterion?
-If the domain expert just planned to collect 1000, that's fine.
-But if the expert would say that, depending on the outcome of the analysis, she would collect even more data, than this changes the analysis, in a violation of the likelihood principle.
+Imagine a domain expert asks you to perform an analysis with 1000 data points.
+As a frequentist, you need to know how those 1000 data points were collected.
+What was the stopping criterion for data collection?
+If the domain expert only planned to collect 1000 data points, that's fine.
+But if the expert says she would collect more data  depending on the outcome of the analysis, then that changes the analysis, which is a violation of the likelihood principle.
 
 ## Strengths
 
-* Likelihoodism inherits all strengths of statistical models.
-* It's a coherent modeling approach: all information is contained in the likelihood. Frequentism, in contrast, is rather fragmented with different approaches such as statistical tests and confidence intervals.
-* Like Bayesian inference, likelihoodist inference conforms to the likelihood principle. Therefore both are not affected by experimental design like frequentism is.
-* Arguably, likelihoodism is the most objective of the statistical modeling mindsets. No priors, no imagined experiments.
-* Likelihoodist ideas can enhance the reporting of Bayesian results. For example, Bayesians can additionally report likelihood ratios as evidence.
-* A significance test might reject $H_0$, even though the evidence for $H_0$ is larger than for $H_1$. Likelihoodism doesn't have this problem.
+* Likelihoodism inherits all the strengths of statistical models.
+* It's a coherent modeling approach: all information is contained in the likelihood. Frequentism, in contrast, is more fragmented with long lists of differently motivated statistical tests and confidence intervals.
+* Like Bayesian inference, likelihoodist inference is also consistent with the likelihood principle. Therefore neither is affected by experimental design, as is the case with frequentism. 
+* Likelihoodism is arguably the most objective of the statistical modeling mindsets. No priors, no imagined experiments.
+* Likelihoodist ideas can improve the reporting of Bayesian results. For example, Bayesians can additionally report likelihood ratios as evidence.
+* A significance test might reject $H_0$, even if the evidence for $H_0$ is greater than for $H_1$. Likelihoodism doesn't have this problem.
 
 ## Limitations 
 
-
-* Likelihoodism doesn't give guidance in the form of belief or decision. Evidence is less practical, and the statistician has no clear answer on which model to work with. This is the strongest argument against likelihoodism, and maybe the reason why we don't see it in practice.
-* With a likelihoodist mindset, we can can only compare specific hypotheses where all parameters are specified. Compound hypotheses for ranges of parameters are impossible. Likelihoodism can't compare  $\theta > 0$ versus $\theta \leq 0$. Only, for example $\theta = 1$ against $\theta = 0$.
-* Likelihoodism allows only relative claims. It can't give the probability that some statistical hypothesis is true -- only how its evidence compares to another hypothesis.
+* Likelihoodism doesn't provide guidance in the form of belief or decision. Evidence is less practical, and the statistician has no certainty about which the final model is and how to work with it. This is the strongest argument against likelihoodism, and maybe the reason why we don't see it in practice.
+* To be more specific: There is no theoretical underpinning for saying when there is enough evidence to choose one hypothesis over another.
+* With a likelihoodist mindset, we can can only compare simple hypotheses where all parameters are specified. Composite hypotheses for ranges of parameters are impossible. Likelihoodism can't compare  $\theta > 0$ versus $\theta \leq 0$. Only, for example $\theta = 1$ against $\theta = 0$.
+* Likelihoodism allows only relative statements. It can't state the probability that a statistical hypothesis is true -- only how its evidence compares to another hypothesis.
 
 ## Resources
 
-* The book "Statistical Evidence: A Likelihood Paradigm" is good introduction into the topic of likelihoodism, if you have some background as a statistician.
-* I've found the [blog by Greg Gandenberger](http://gandenberger.org/) super helpful in learning about likelihoodism. He takes on a rather philosophical standpoint and argues against likelihoodism, and in favor of Bayesianism. This criticism is most elaborated in his essay "Why I am not a likelihoodist".[@gandenberger2016not] 
+* The book "Statistical Evidence: A Likelihood Paradigm" is good introduction to likelihoodism, if you have some background as a statistician.
+* I've found the [Greg Gandenberger's blog](http://gandenberger.org/) super helpful in learning about likelihoodism. He takes a more philosophical viewpoint and argues against likelihoodism and for Bayesianism. This critique is most detailed in his essay "Why I am not a likelihoodist".[@gandenberger2016not] 
 
 
-[^empirical-priors]: The likelihood principle is of course violated if the data is used to inform the pior. For example empirical priors.
+[^empirical-priors]: The likelihood principle is violated when data is used to inform the prior. For example, empirical priors which make use of the data violate the likelihood principle.
