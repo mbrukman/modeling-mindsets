@@ -361,7 +361,7 @@ Another Beta prior might put emphasis on <span class="math inline">\(p\)</span> 
 <!-- intuition for alpha = beta = 0.5: https://stats.stackexchange.com/questions/362728/whats-the-intuition-for-a-beta-distribution-with-alpha-and-or-beta-less-than -->
 It’s even possible to have a prior that that places the greatest probability symmetrically on 0 and 1.</p>
 <!-- uninformative and conjugate priors -->
-<p>Without expert knowledge about the parameter, the modeler can use “uninformative” or “objective” priors<span class="citation"><sup><a href="#ref-yang1996catalog" role="doc-biblioref">6</a></sup></span>.
+<p>Without expert knowledge about the parameter, the modeler can use “uninformative” or “objective” priors<span class="citation"><sup><a href="#ref-yang1996catalog" role="doc-biblioref">7</a></sup></span>.
 Uninformative priors often produce results similar to those of frequentist inference (for example for confidence/credible intervals). <!-- citation needed -->
 Another factor influencing the choice of prior is mathematical convenience.
 Conjugate priors are convenient choices.
@@ -469,7 +469,7 @@ So the chain is sampled at different points to ensure that there are enough MCMC
 Fortunately, most probabilistic software runs MCMC automatically.
 But this can take time.
 More time than fitting a frequentist model would take.
-A shorter alternative is variational inference.<span class="citation"><sup><a href="#ref-blei2017variational" role="doc-biblioref">7</a></sup></span>
+A shorter alternative is variational inference.<span class="citation"><sup><a href="#ref-blei2017variational" role="doc-biblioref">8</a></sup></span>
 But while MCMC delivers approximately exact estimates of the posterior probability, variational inference is more of a heuristic.</p>
 <!-- TODO: visualize MCMC -->
 <p>Frequentists have their parameter estimates.
@@ -489,6 +489,7 @@ The fewer and simpler, the better.
 You won’t get your manager to understand posterior distributions.
 They demand simple answers!
 So, let’s simplify the posterior.
+There’s advice about not summarizing the posterior<span class="citation"><sup><a href="#ref-tiao1973some" role="doc-biblioref">9</a></sup></span>, but people do it anyways.
 Summaries of the posterior can be points or intervals.
 Intervals can be defined via fixed boundaries or fixed probability mass.
 Some examples:</p>
@@ -640,10 +641,13 @@ Really, all frequentist method can be expressed as special cases of Bayesian mod
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-yang1996catalog" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Yang R, Berger JO. A catalog of noninformative priors. Institute of Statistics; Decision Sciences, Duke University Durham, NC, USA; 1996. </div>
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Yang R, Berger JO. A catalog of noninformative priors. Institute of Statistics; Decision Sciences, Duke University Durham, NC, USA; 1996. </div>
 </div>
 <div id="ref-blei2017variational" class="csl-entry">
-<div class="csl-left-margin">7. </div><div class="csl-right-inline">Blei DM, Kucukelbir A, McAuliffe JD. Variational inference: A review for statisticians. Journal of the American statistical Association. 2017;112(518):859–77. </div>
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Blei DM, Kucukelbir A, McAuliffe JD. Variational inference: A review for statisticians. Journal of the American statistical Association. 2017;112(518):859–77. </div>
+</div>
+<div id="ref-tiao1973some" class="csl-entry">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Tiao GC, Box GE. Some comments on <span>“bayes”</span> estimators. The American Statistician. 1973;27(1):12–4. </div>
 </div>
 </div>
 <div class="footnotes">

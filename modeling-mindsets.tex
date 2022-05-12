@@ -470,6 +470,7 @@ Or have we just updated prior information about the effect of fertilizer with ne
 Welcome to \textbf{Modeling Mindsets}.
 
 A modeling mindset is a specification of how to model the world using data.
+Modeling means investigating a real world phenomenon indirectly using a model.\textsuperscript{\protect\hyperlink{ref-weisberg2007modeler}{2}}
 Modeling mindsets are like different lenses.
 All lenses show us the world, but with a different focus.
 Some lenses magnify things that are close, some that are far away.
@@ -483,7 +484,7 @@ Each mindset invites you to ask different questions, and so shapes the way you v
 In supervised machine learning, for example, everything becomes a prediction or classification problem, while in Bayesian inference, the goal is to update our beliefs about the world using probability theory.
 
 Within a mindset there are two worlds: the model world and the real world (Figure \ref{fig:mindsets}.
-Or, as McElreath called them in his book ``Statistical Rethinking'': the ``small'' and the ``large'' world.\textsuperscript{\protect\hyperlink{ref-mcelreath2020statistical}{2}}
+Or, as McElreath called them in his book ``Statistical Rethinking'': the ``small'' and the ``large'' world.\textsuperscript{\protect\hyperlink{ref-mcelreath2020statistical}{3}}
 All modeling results are first and foremost statements about the model world, and to be interpreted within the simplified model world..
 How and if model results may be transferred from the model world to the real world, depends on the mindset.
 
@@ -1082,7 +1083,7 @@ A different but complimentary approach is \protect\hyperlink{design-based-infern
 \end{itemize}
 
 Drinking alcohol is associated with a higher risk of diabetes in middle-aged men.
-At least this is what a study claims.\textsuperscript{\protect\hyperlink{ref-kao2001alcohol}{3}}
+At least this is what a study claims.\textsuperscript{\protect\hyperlink{ref-kao2001alcohol}{4}}
 
 The study modeled type II diabetes as a function of various risk factors.
 The researchers found out that alcohol significantly increases the diabetes risk for middle-aged men by a factor of \(1.81\).
@@ -1102,7 +1103,7 @@ From analyzing A/B tests for a website to calculating portfolio risk to monitori
 
 As much as frequentism dominates the world of data, it's also criticized.
 Frequentist inference has been the analysis method for scientific ``findings'' that turned out to be a waste of research time.
-You may have heard about the replication crisis.\textsuperscript{\protect\hyperlink{ref-ioannidis2005most}{4}}
+You may have heard about the replication crisis.\textsuperscript{\protect\hyperlink{ref-ioannidis2005most}{5}}
 Many scientific findings in psychology, medicine, social sciences and other fields could not be replicated.
 The problem with that is that replication is at the center of the scientific method.
 Many causes have contributed to the replication crisis
@@ -1248,7 +1249,7 @@ The frequentist estimator for the number of teas is a random variable that is su
 We can make (frequentist) probabilistic statements about this estimator.
 And while the true value for \(\lambda\) is unknown, we can study the hypothesis of \(\lambda = 3.0\) by examining the random variable \(\hat{\lambda}\).
 
-This idea of proposing a hypothesis, and then accepting or rejecting it based on a statistical model or test is called null hypothesis significance testing. \footnote{There are two other ``main'' approaches for hypothesis testing: The Fisher approach, and the Neyman-Pearson approach. Null hypothesis significance testing is a combination of the two.\textsuperscript{\protect\hyperlink{ref-perezgonzalez2015fisher}{5}}}
+This idea of proposing a hypothesis, and then accepting or rejecting it based on a statistical model or test is called null hypothesis significance testing. \footnote{There are two other ``main'' approaches for hypothesis testing: The Fisher approach, and the Neyman-Pearson approach. Null hypothesis significance testing is a combination of the two.\textsuperscript{\protect\hyperlink{ref-perezgonzalez2015fisher}{6}}}
 Hypothesis testing is a central method in the frequentist modeling mindset.
 Hypothesis tests simplify decisions:
 The frequentist accepts or rejects the so-called null hypothesis based on the results of the statistical model.
@@ -1264,7 +1265,7 @@ How does a hypothesis test work?
 \item
   Formulate the \textbf{alternative or null hypothesis}.
 \item
-  Decide which statistical test to use. This step includes modeling the data. In fact, all statistical tests are statistical models\textsuperscript{\protect\hyperlink{ref-mcelreath2020statistical}{2}}
+  Decide which statistical test to use. This step includes modeling the data. In fact, all statistical tests are statistical models\textsuperscript{\protect\hyperlink{ref-mcelreath2020statistical}{3}}
 \item
   Calculate the distribution of the parameter estimates under the null hypothesis (or rather, the test statistic \(T\)).
 \item
@@ -1523,7 +1524,7 @@ Or maybe the parameter is lower, around 0.25?
 Another Beta prior might put emphasis on \(p\) being 1.
 It's even possible to have a prior that that places the greatest probability symmetrically on 0 and 1.
 
-Without expert knowledge about the parameter, the modeler can use ``uninformative'' or ``objective'' priors\textsuperscript{\protect\hyperlink{ref-yang1996catalog}{6}}.
+Without expert knowledge about the parameter, the modeler can use ``uninformative'' or ``objective'' priors\textsuperscript{\protect\hyperlink{ref-yang1996catalog}{7}}.
 Uninformative priors often produce results similar to those of frequentist inference (for example for confidence/credible intervals).
 Another factor influencing the choice of prior is mathematical convenience.
 Conjugate priors are convenient choices.
@@ -1645,7 +1646,7 @@ MCMC sampling can be complex and can take some time to compute.
 Fortunately, most probabilistic software runs MCMC automatically.
 But this can take time.
 More time than fitting a frequentist model would take.
-A shorter alternative is variational inference.\textsuperscript{\protect\hyperlink{ref-blei2017variational}{7}}
+A shorter alternative is variational inference.\textsuperscript{\protect\hyperlink{ref-blei2017variational}{8}}
 But while MCMC delivers approximately exact estimates of the posterior probability, variational inference is more of a heuristic.
 
 Frequentists have their parameter estimates.
@@ -1664,6 +1665,7 @@ The fewer and simpler, the better.
 You won't get your manager to understand posterior distributions.
 They demand simple answers!
 So, let's simplify the posterior.
+There's advice about not summarizing the posterior\textsuperscript{\protect\hyperlink{ref-tiao1973some}{9}}, but people do it anyways.
 Summaries of the posterior can be points or intervals.
 Intervals can be defined via fixed boundaries or fixed probability mass.
 Some examples:
@@ -1814,7 +1816,7 @@ Likelihoodists reject the frequentists' reliance on ``imagined'' experiments bec
 
 }
 
-\caption{How Bayesianism, frequentism, and likelihoodism overlap and differ. Figure inspired by [Greg Gandenberger](https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/).}\label{fig:three-stat-mindsets}
+\caption{How Bayesianism, frequentism, and likelihoodism overlap and differ. Figure inspired by Greg Gandenberger: https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/.}\label{fig:three-stat-mindsets}
 \end{figure}
 
 But what is the likelihood principle that is so central to likelihoodism?
@@ -1822,7 +1824,7 @@ But what is the likelihood principle that is so central to likelihoodism?
 \hypertarget{likelihood-principle}{%
 \section{Likelihood Principle}\label{likelihood-principle}}
 
-``The likelihood principle asserts that two observations that generate identical likelihood functions are equivalent as evidence.''\textsuperscript{\protect\hyperlink{ref-richard2017statistical}{8}}
+``The likelihood principle asserts that two observations that generate identical likelihood functions are equivalent as evidence.''\textsuperscript{\protect\hyperlink{ref-richard2017statistical}{10}}
 As a consequence, all evidence that comes from the data about a quantity of interest \(\theta\) has to be part of the likelihood function \(P(\theta;X)\).
 If we reverse the statement: If information from the data influences the analysis but is not part of the likelihood, then the likelihood principle is violated.
 
@@ -1860,7 +1862,7 @@ We need the law of likelihood.
 \section{Law of Likelihood}\label{law-of-likelihood}}
 
 The law of likelihood is the foundation for using the likelihood function alone formaking modeling decisions.
-The law of likelihood says\textsuperscript{\protect\hyperlink{ref-hacking1965logic}{9}}:
+The law of likelihood says\textsuperscript{\protect\hyperlink{ref-hacking1965logic}{11}}:
 
 \begin{itemize}
 \tightlist
@@ -1902,7 +1904,7 @@ In frequentism, likelihood ratios are often used as test statistics for hypothes
 In likelihoodism, the likelihood ratio is interpreted as evidence.
 
 Likelihoodists may use a rule of thumb for judging the strength of evidence.
-For example, a likelihood ratio of 8 is considered fairly strong and 32 or more is considered ``strong favoring''.\textsuperscript{\protect\hyperlink{ref-richard2017statistical}{8}}
+For example, a likelihood ratio of 8 is considered fairly strong and 32 or more is considered ``strong favoring''.\textsuperscript{\protect\hyperlink{ref-richard2017statistical}{10}}
 In our example, a likelihood ratio of 4 in favor of \(H_1: \lambda = 1\) over \(H_2: \lambda = 0.5\) is not enough to be ``fairly strong''.
 \(H_1\) and \(H_2\) can also be more complex hypotheses, such as regression models with different covariates or assumptions.
 
@@ -2068,7 +2070,7 @@ But if the expert says she would collect more data depending on the outcome of t
 \item
   The book ``Statistical Evidence: A Likelihood Paradigm'' is good introduction to likelihoodism, if you have some background as a statistician.
 \item
-  I've found the \href{http://gandenberger.org/}{Greg Gandenberger's blog} super helpful in learning about likelihoodism. He takes a more philosophical viewpoint and argues against likelihoodism and for Bayesianism. This critique is most detailed in his essay ``Why I am not a likelihoodist''.\textsuperscript{\protect\hyperlink{ref-gandenberger2016not}{10}}
+  I've found the \href{http://gandenberger.org/}{Greg Gandenberger's blog} super helpful in learning about likelihoodism. He takes a more philosophical viewpoint and argues against likelihoodism and for Bayesianism. This critique is most detailed in his essay ``Why I am not a likelihoodist''.\textsuperscript{\protect\hyperlink{ref-gandenberger2016not}{12}}
 \end{itemize}
 
 \hypertarget{causal-inference}{%
@@ -2141,40 +2143,48 @@ But if the expert says she would collect more data depending on the outcome of t
 \CSLLeftMargin{1. }
 \CSLRightInline{Weisberg M. Simulation and similarity: Using models to understand the world. Oxford University Press; 2012. }
 
-\leavevmode\vadjust pre{\hypertarget{ref-mcelreath2020statistical}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-weisberg2007modeler}{}}%
 \CSLLeftMargin{2. }
+\CSLRightInline{Weisberg M. Who is a modeler? The British journal for the philosophy of science. 2007;58(2):207--33. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-mcelreath2020statistical}{}}%
+\CSLLeftMargin{3. }
 \CSLRightInline{McElreath R. Statistical rethinking: A bayesian course with examples in r and stan. Chapman; Hall/CRC; 2020. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-kao2001alcohol}{}}%
-\CSLLeftMargin{3. }
+\CSLLeftMargin{4. }
 \CSLRightInline{Kao WL, Puddey IB, Boland LL, Watson RL, Brancati FL. Alcohol consumption and the risk of type 2 diabetes mellitus: Atherosclerosis risk in communities study. American journal of epidemiology. 2001;154(8):748--57. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-ioannidis2005most}{}}%
-\CSLLeftMargin{4. }
+\CSLLeftMargin{5. }
 \CSLRightInline{Ioannidis JP. Why most published research findings are false. PLoS medicine. 2005;2(8):e124. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-perezgonzalez2015fisher}{}}%
-\CSLLeftMargin{5. }
+\CSLLeftMargin{6. }
 \CSLRightInline{Perezgonzalez JD. Fisher, neyman-pearson or NHST? A tutorial for teaching data testing. Frontiers in psychology. 2015;223. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-yang1996catalog}{}}%
-\CSLLeftMargin{6. }
+\CSLLeftMargin{7. }
 \CSLRightInline{Yang R, Berger JO. A catalog of noninformative priors. Institute of Statistics; Decision Sciences, Duke University Durham, NC, USA; 1996. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-blei2017variational}{}}%
-\CSLLeftMargin{7. }
+\CSLLeftMargin{8. }
 \CSLRightInline{Blei DM, Kucukelbir A, McAuliffe JD. Variational inference: A review for statisticians. Journal of the American statistical Association. 2017;112(518):859--77. }
 
+\leavevmode\vadjust pre{\hypertarget{ref-tiao1973some}{}}%
+\CSLLeftMargin{9. }
+\CSLRightInline{Tiao GC, Box GE. Some comments on {``bayes''} estimators. The American Statistician. 1973;27(1):12--4. }
+
 \leavevmode\vadjust pre{\hypertarget{ref-richard2017statistical}{}}%
-\CSLLeftMargin{8. }
+\CSLLeftMargin{10. }
 \CSLRightInline{Richard R. Statistical evidence: A likelihood paradigm. Routledge; 2017. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-hacking1965logic}{}}%
-\CSLLeftMargin{9. }
+\CSLLeftMargin{11. }
 \CSLRightInline{Hacking I. Logic of statistical inference. 1965; }
 
 \leavevmode\vadjust pre{\hypertarget{ref-gandenberger2016not}{}}%
-\CSLLeftMargin{10. }
+\CSLLeftMargin{12. }
 \CSLRightInline{Gandenberger G. Why i am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library; 2016. }
 
 \end{CSLReferences}
