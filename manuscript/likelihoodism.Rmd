@@ -1,65 +1,41 @@
 # Likelihoodism {#likelihoodism}
 
-<!-- TODO
-
-- read: https://www.stat.fi/isi99/proceedings/arkisto/varasto/roya0578.pdf
-- Link he blog by Gandenberger
-- 
--->
-
-
-<!-- CONTENT TO ADD 
-
-* Instead of null hypothesis testing or beliefs about params, it's about testing one hypothesis over another
-* Likelihoodism invites to compare models via likelihood
-* Likelihoodism interprets data as evidence, not as means for making decisions [@richard2017statistical]
-* Imagine researcher coming to a statistician with only 50 data points. Results look promising, but not significant. Statistician when frequentist will discourage researcher to collect more data as this will change the p-values.
-* Likelihoodism is simple, objective.A
-* Wenn zwei sich streiten freut sich der Dritte
-* Seemingly: Frequentist is dominant, Bayesian tries to gain ground, but can't bc subjective elements. so everyone stays with weird frequentism.
-* Frequentism: illogical, especially hypothesis testing. Bayes: subjective.
-* Interpret likelihood ratios, not probabilities
-* Likelihood ratio = strength of evidence
-* "The significance-test approach to measuring the evidence is wrong because its dependence on the sample space leads to different answers in situations where the evidence is the same." [@richard2017statistical] 
-
--->
-
-
-* The likelihood function is all you need (law of likelihood).
-* Statistical models or hypotheses are compared by the ratio of their likelihoods.
+* The likelihood function is all you need, and interpreted as the evidence for a statistical hypothesis (law of likelihood)
+* Statistical hypotheses are compared by the ratio of their likelihoods.
 * A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequent-inference) and [Bayesianism](#bayesian-inference) as alternatives.
 
 <!-- metaphor -->
 A frequentist, a Bayesian, and a likelihoodist walk into a wine bar to taste wines.
 The sommelier brings the first wines.
-The Bayesian wants to hear the sommelier's opinion first before "analyzing" the data -- drinking the wine.
-The frequentist asks the sommelier about the tasting procedure: Is the numbers of wines pre-determined? Does the tasting conclude when the customer found a suitable wine? How are subsequent wines selected? Etc.
+The Bayesian wants to hear the sommelier's opinion first before trying the wine.
+The frequentist asks the sommelier about the tasting process: is the number of wines fixed in advance? Or is the tasting over when the customer has found a suitable wine? How are the subsequent wines selected? And so on.
 The likelihoodist politely tells the sommelier to fuck off.
 
 <!-- problem with frequentism -->
 [Frequentist inference](#frequentist-inference) has a long list of limitations.
-But still, it's the dominant mindset when it comes to statistical modeling in science and elsewhere.
-Bayesian analysis has seen a rise thanks to increased computational power for sampling from posteriors with MCMC.
-But using subjective prior probabilities just doesn't sit right with many people.
-Could there be another way to "reform" the frequentist mindset, but without priors?
-A mindset without the flawed hypothesis testing and p-values?
+Yet it's the dominant statistical mindset in science and elsewhere.
+Bayesian analysis has seen a resurgence thanks to increased computational power for sampling from posteriors with MCMC.
+But using subjective prior probabilities doesn't sit well with many statisticians.
+Could there be another way to "reform" the frequentist mindset?
+A mindset without the flawed hypothesis testing and without prior probabilities?
 
-Welcome to the **likelihoodist** mindset.
+Welcome to the **likelihoodist mindset**.
 
 <!-- underdog -->
-I studied statistics for 5 years, worked as statistician and data scientist for 3 years, then did my PhD studies for 4.5 years.
-In those 12 years of statistics I never learned about likelihoodism.
+I studied statistics for 5 years, worked as a statistician and data scientist for 3 years, then did my PhD studies for 4.5 years.
+In those 12 years of statistics, I never learned anything about likelihoodism.
 It's fair to say that likelihoodism is an underdog.
-Likelihoodism lurks in the shadows while Bayesianism and Frequentism are having an epic fight.
+Likelihoodism leads a shadowy existence  while Bayesianism and Frequentism are engaged in an epic battle.
 
 <!-- why learn about it -->
-Likelihoodism is the purist among the statistical modeling mindsets.
-A mindset that completely focuses on the likelihood function of statistical model.
+Likelihoodism is the purist of the statistical modeling mindsets.
+A mindset that focuses completely on the likelihood function of a statistical model.
 Likelihoodism is an attempt to make statistics as objective as possible.
-It doesn't rely on subjective prior probabilities, like in Bayesian inference.
-Frequentist inference also has a subjective component: As we will see later in this chapter, it depends on the intention of analyst, such as stopping criteria for collecting data and how the experiment is set up.
+It doesn't rely on subjective prior probabilities, as in Bayesian inference.
+Frequentist inference also has a subjective component:
+As we will see later in this chapter, it depends on the modeler's intent, such as the criteria for stopping data collection.
 
-```{r three-stat-mindsets, fig.cap = "How Bayesianism, frequentism and likelihoodism overlap and differ. Figure inspired by [Greg Gandenberger](https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/)"}
+```{r three-stat-mindsets, fig.cap = "How Bayesianism, frequentism, and likelihoodism overlap and differ. Figure inspired by [Greg Gandenberger](https://gandenberger.org/2014/07/28/intro-to-statistical-methods-2/)."}
 library(ggplot2)
 circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
   r = diameter / 2
@@ -90,29 +66,29 @@ ggplot(mapping = aes(x,y)) +
 ```
 
 <!-- short reminder: likelihood -->
-**All three mindsets use likelihood functions in different ways.**
-A short recap: The likelihood function is the same as the data density function, but with switched role of data and parameters.
+**All three mindsets use likelihood differently.**
+A quick recap: the likelihood function is the same as the data density function, but with roles of data and parameters reversed.
 Data $X$ are "fixed", and the likelihood is a function of the parameters $\theta$ $P(\theta | X) = P(X = x | \theta)$.[^not-bayesian]
-The likelihood bridges observed data and theoretic distributions.
+The likelihood function connects observed data and theoretical distributions.
 <!-- use of the likelihood function -->
-Bayesians use the likelihood function to update the prior of the parameters to the posterior distribution.
+Bayesians multiply the prior of the parameters with the likelihood to get the posterior distribution of the parameters.
 Frequentists use the likelihood to construct "imagined" experiments that teach us about long-run frequencies, such as hypothesis tests and confidence intervals.
-Likelihoodists use the likelihood as evidence from the data for a given hypothesis. 
-Likelihoodists puts all the focus on the likelihood and thereby reject the non-likelihood elements in the other mindsets:
-Likelihoodists reject priors, because they are subjective;
-Likelihoodists also reject the frequentists dependence on "imagined" experiments, because they violate the likelihood principle and are, arguably, subjective as well.
+Likelihoodists use the likelihood as evidence from the data for a given statistical hypothesis. 
+Likelihoodists focus entirely on the likelihood and thus reject the non-likelihood elements that you find in the other two mindsets:
+Likelihoodists reject priors because they are subjective;
+Likelihoodists also reject the frequentists' reliance on imagined experiments because these non-existing experiments violate the likelihood principle and are arguably subjective.
 
 <!-- likelihood principle as foundation -->
 But what is this likelihood principle?
 
 ### Likelihood Principle {-}
 
-"The likelihood principle asserts that two observations that generate identical likelihood functions are equivalent as evidence" [@richard2017statistical]
+"The likelihood principle asserts that two observations that generate identical likelihood functions are equivalent as evidence." [@richard2017statistical]
 As a consequence, all the evidence that comes from the data about a quantity of interest $\theta$ has to come from the likelihood function $P(\theta;X)$.
 If we reverse the statement: If any information about the data influences the parameters but is not part of the likelihood, then the likelihood principle is violated.
 
 Let's say we want to estimate the average waiting time for the bus.
-The exponential distribution is a typical contender as distribution assumption, so we would say that the waiting times $X \sim Exp(\lambda)$, where $\lambda$ can be interpreted as the inverse wait time, so the expected waiting time would be $\frac{1}{\lambda}$.
+The exponential distribution is typically uscontender as distribution assumption, so we would say that the waiting times $X \sim Exp(\lambda)$, where $\lambda$ can be interpreted as the inverse wait time, so the expected waiting time would be $\frac{1}{\lambda}$.
 We collected $n$ waiting times $x_1, \ldots, $x_n$.
 The likelihood function is $P(\lambda; x_1, \ldots, x_n) = \lambda^n exp(-\lambda \sum_{i=n}^n x^{(i)}$.
 
@@ -422,7 +398,11 @@ But if the expert would say that, depending on the outcome of the analysis, she 
 * The statistical hypotheses hypotheses to be compared with likelihood ratios have to be specific, simple hypothesis where all parameters are specified. Compound hypothesis for intervals of parameters are not possible. Likelihoodism can't compare  $\theta > 0$ versus $\theta \leq 0$. Only, for example $\theta = 1$ against $\theta = 0$.
 * Likelihoodism allows only relative claims. It can't give the probability that some statistical hypothesis is true -- only how its evidence compares to another hypothesis.
 
-I found [@gandenberger2016not] a good source on criticism of likelihoodism.
+## Resources
+
+* The book "Statistical Evidence: A Likelihood Paradigm" is good introduction into the topic of likelihoodism, if you have some background as a statistician.
+* I've found the [blog by Greg Gandenberger](http://gandenberger.org/) super helpful in learning about likelihoodism. He takes on a rather philosophical standpoint and argues against likelihoodism, and in favor of Bayesianism. This criticism is most elaborated in his essay "Why I am not a likelihoodist".[@gandenberger2016not] 
+
 
 [^not-bayesian]: Not interpreted in the Bayesian way. Just that $X$ are seen as given.
 
