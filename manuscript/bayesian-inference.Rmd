@@ -15,6 +15,9 @@
 * Model parameters are random variables with prior and posterior distributions.
 * A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentist-inference) and [likelihoodism](#likelihoodism) as alternatives.
 
+<!-- The Bayesian -->
+While frequentists analyze data to answer the question "What should I do?", Bayesians analyze data to answer "What should I believe?".
+
 <!-- relation to others -->
 If you haven't read the chapter on [Statistical Modeling](#statistical-modeling), I recommend that you do so first, since Bayesian inference is easier to understand if you have a good understanding of statistical inference.
 Bayesian inference is based on probability distributions, interpreting parameters, and learning from data through the likelihood.
@@ -34,7 +37,7 @@ A Bayesian model even works without data, by just using the prior distributions.
 ## Bayes Theorem
 
 Bayesians want to learn the distribution of the model parameters from the data: $P(\theta | X)$.
-P(\theta | X) is a strange way of looking at the probabilities involved.
+$P(\theta | X)$ is a strange way of looking at the probabilities involved.
 The data-generating process generates data as a function of the parameters: $P(X | \theta)$.
 So Bayesians look for the inverse of what the DGP would naturally do.
 
@@ -463,6 +466,7 @@ Really, all frequentist method can be expressed as special cases of Bayesian mod
 * A general benefit: Bayesian updating is an interesting mental model for how we update our own beliefs about the world.
 * Bayesian interpretation of probability is arguably more intuitive than frequentist interpretation: When practitioners misinterpret frequentist confidence intervals, it's often because they interpret them as credible intervals.
 * Since Bayesian inference always estimates the full posterior, decision based on the posterior always require another step. As a consequence, inference and decision making are decoupled. In frequentist inference, it's common to design the entire inference process around the decision (hypothesis tests).
+* Bayesian statistics adheres to the likelihood principle which states that all the evidence from the data relevant to a quantity of interest must be contained in the likelihood function. 
 
 ## Limitations
 

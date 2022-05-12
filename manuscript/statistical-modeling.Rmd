@@ -376,6 +376,28 @@ ggplot(dd, aes(x=x,y=y, group = type)) +
 
 ```
 
+### Statistical Hypothesis {-}
+
+A statistical hypothesis is a specification of a probability distribution for (observable) random variables.
+A statistical model can also embody a statistical hypthesis, because it specifies a probability distribution.
+For example, saying that the height of people follows a Gaussian distribution is a statistical hypothesis.
+The effect of a drug on disease progression could be modeled with a logistic regression model.
+After the model was fitted, the resulting statistical model also represents a statistical hypothesis.
+An alternative statistical hypothesis would be that the effect of the drug is zero, which also encodes a statistical model.
+
+As you can see there is a tight relationship between statistical models and statistical hypotheses.
+All statistical models can be your statistical hypotheses.
+But a statistical hypothesis is not necessarily fitted with data, or at least parts are manipulated.
+A statistical hypothesis can come purely from data plus the modeling assumptions.
+Or it can be purely come from assumptions.
+Or something inbetween, that some parameters from a statistical model are fitted, the other are assumed to take on a certain value.
+
+What we do with those hyptotheses depends on the mindset.
+Frequentist inference engages in null hypothesis significance testing: Define an alternative hypothesis to your statistical model (which is a hypothesis); then computed the probability to observe your model under the alternative hypothesis (= p-value).
+Likelihoodism compares the likelihoods of two statistical hypothesis.
+In Bayesian inference we can compare the Bayes factor to compare two hypothesis.
+
+
 ### Interpreting Parameters {-}
 
 <!-- role of the parameters -->
