@@ -27,7 +27,10 @@ Random notes
 
 * Statistical models are based on their components they are build of.
 * Machine learning models are based on how well they do their task, often involving prediction.
-* 
+* ml is what Breiman called the algorithmic modeling culture:
+  * Treat DGP as unknown and unknowable
+  * Find model that predicts data well (Breiman was more focused on supervised ml)
+  * Rashomon effext: Multiple models exist that describe the data equally well. The models might disagree on the modeled relationships
 
 
 Machine learners are a pragmatic people.
@@ -96,6 +99,20 @@ They are willing to sacfrifice model performance for interpretability of the mod
 
 Deep learner want to build everything with neural networks.
 They work more with text and images.
+
+
+```{r}
+library(ggplot2)
+c1 = circleFun(c(1, 1))
+c2 = circleFun(c(0.75, 1), 0.5)
+c3 = circleFun(c(0.75, 1), 0.5)
+c4 = circleFun(c(0.75, 1), 0.5)
+ggplot(mapping = aes(x,y)) +
+  geom_path(data = c1) + 
+  geom_path(data = c2) + 
+  coord_fixed()
+
+```
 
 
 
