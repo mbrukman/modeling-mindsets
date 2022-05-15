@@ -5,6 +5,8 @@
 * Reread: End of Theory. https://www.wired.com/2008/06/pb-theory/ [@anderson2008end] -> This one is more general and might fit into the model chapter
 * Read: https://hal.archives-ouvertes.fr/hal-03474791/
 * Recreate Leo Breiman figure from Two cultures
+* Create Venn diagram containing: Deep Learning, machine learning, artificial intelligence?, supervised learning 
+* CITE Breiman
 
 -->
 
@@ -15,40 +17,6 @@
 * A model is connected to the real world by helping in solving a real task.
 * Also a meta mindset and alternative to [statistical modeling](#statistical-ml). 
 * [Supervised machine learning](#supervised-ml), [deep learning](#deep-learning) are specializations of this mindset.
-
-<!-- metaphor -->
-* machine learner
-* statistician
-* walk into amusement park
-* they play game where you have to throw balls to win game
-* 
-
-Random notes
-
-* Statistical models are based on their components they are build of.
-* Machine learning models are based on how well they do their task, often involving prediction.
-* ml is what Breiman called the algorithmic modeling culture:
-  * Treat DGP as unknown and unknowable
-  * Find model that predicts data well (Breiman was more focused on supervised ml)
-  * Rashomon effext: Multiple models exist that describe the data equally well. The models might disagree on the modeled relationships
-
-
-Machine learners are a pragmatic people.
-Task-oriented, and much less principled than the pure statisticians.
-Statistics originated from pen and paper, evolving probability distributions from there.
-The take-up of computer was because it was practical, and a natural step.
-
-People with a machine learning mindset think of the computer from the start on.
-I'm equating machine learning folks with artificial intelligence folks here.
-They have the same goal -- make the computer more intelligent.
-But machine learners say that taking this path requires learning from data.
-The other paths that don't involve data, like expert systems, are not part of this book.
-
-
-
-* task-driven and pragmantic mindset
-* Make the computer do smart things
-* less principled than statistical
 
 
 
@@ -86,7 +54,74 @@ What machine learning approaches have in common
 * how can we make computer intelligent.
 
 
-## Diverse Mindsets Within ML
+<!-- ai vs ml -->
+I'm equating machine learning folks with artificial intelligence folks here.
+They have the same goal -- make the computer more intelligent.
+But machine learners say that taking this path requires learning from data.
+The other paths that don't involve data, like expert systems, are not part of this book.
+
+<!-- confusion about statistics versus ml -->
+Machine learning is statistics.
+Statistics is machiine learning.
+Is logistic regression machine learning or statistics?
+Machine learning uses many methods from statistic.
+It's even called statistical learning sometimes.
+
+<!-- depends on mindset -->   
+* ml and stats are different
+* it becomes clear when framed as mindset
+* mindset of how the world is viewed and what constitutes good models
+* and then stats and ml are clearly different
+* There is paper bei Breiman
+* It's called the two cultures
+* In fact, it's the motivation for the entire book
+* Paper was eye opening for me as a statistician
+* Written by a statistician for statisticians in favor of machine learning
+* he called it algorithm modeling and he called statistics dat amodeling
+* the subtitle 
+
+<!-- what is ml -->
+* Modeling is task-oriented and algorithmic.
+* External validity more important than internal validity (aka stats).
+* Lives from having lots of data
+* A good model allows the computer to solve a task, make it look "intelligent".
+* A model is connected to the real world by helping in solving a real task.
+* Also a meta mindset and alternative to [statistical modeling](#statistical-ml). 
+* [Supervised machine learning](#supervised-ml), [deep learning](#deep-learning) are specializations of this mindset.
+
+<!-- nature -->
+* Let's start with nature
+* X and Y
+* TODO: Image of nature (from Breiman). Maybe extend that view to general problems of X?
+* Unknown process inbetween
+* useful to replicate the process
+* how should we go onward with this task?
+
+<!-- statistics -->
+* fill the box with probability distributions
+* internal view of process
+* TODO: Replicate image from Breiman
+* principled, internal view of the process 
+* Statistical models are based on their components they are build of (internally motivated)
+* Statistics originated from pen and paper, evolving probability distributions from there.
+* The take-up of computer was because it was practical, and a natural step.
+
+
+
+<!-- machine learning -->
+* Machine learning models are based on how well they do their task, often involving prediction (externally motivated)
+* Treat DGP as unknown and unknowable
+* Find model that predicts data well (Breiman was more focused on supervised ml)
+* Rashomon effext: Multiple models exist that describe the data equally well. The models might disagree on the modeled relationships
+* TODO: Replicate image from Breiman about algorithmic modeling culture
+* People with a machine learning mindset think of the computer from the start on.
+* task-driven and pragmantic mindset
+* Make the computer do smart things
+* less principled than statistical
+
+
+
+## Many Mindsets Within ML
 
 Within machine learning, the mindsets are quite diverse
 
