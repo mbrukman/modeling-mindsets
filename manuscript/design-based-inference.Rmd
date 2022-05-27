@@ -1,4 +1,8 @@
-# Design-based inference {#design-based-inference}
+# Design-based Inference {#design-based-inference}
+
+* Focused on sampling data representatively rather than complex modeling.
+* Data population is finite; uncertainty about results is only due to sampling.
+* Often combined with [Statistical Modeling](#statistical-modeling), especially [Frequentist Inference](#frequentist-inference).
 
 <!-- TODO: Malte zum reviewn schicken -->
 
@@ -61,6 +65,23 @@ For example by stratified sampling design in all age and and professions.
 * Outcome is still random variable, but not due to epistemic randomness, but rather because of the sampling procedure
 * Finite population = all data points that have a chance of getting into the sample
 * Randomness of sampling is required 
+
+
+```{r finite-samples}
+library(ggplot2)
+
+# upper left: population. circle with dots
+# bottom left: smaple from population. circle with fewer dots
+# connection upper and bottom left: arrows
+# upper right: infinite data. distribution curve
+# bottom right: sample from distribution. 
+# connection upper and bottom right: arrows
+
+
+
+```
+
+
 
 ## Methods
 
