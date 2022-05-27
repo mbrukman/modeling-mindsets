@@ -89,7 +89,7 @@ densities = c("prior", "likelihood", "posterior")
 dat = pivot_longer(dat, cols = all_of(densities))
 dat$name = factor(dat$name, levels = densities)
 
-ggplot(dat, aes(x = x, y = value)) +
+p = ggplot(dat, aes(x = x, y = value)) +
   geom_area(size = 1.1, fill = "lightgrey") +
   geom_line() +
   #coord_fixed(ratio = 20) +
@@ -97,6 +97,8 @@ ggplot(dat, aes(x = x, y = value)) +
   theme_void() + 
  theme(axis.text.x = element_text(),
       strip.text.x = element_text(size = 18))
+
+add_cc(p)
 ```
 
 Next, let's explore the individual terms of Bayes' theorem, so that we can update our own beliefs about Bayesian inference.

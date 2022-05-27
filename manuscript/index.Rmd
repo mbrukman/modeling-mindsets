@@ -17,7 +17,7 @@ always_allow_html: yes
 ---
 
 ```{r global-knitr, echo=FALSE}
-library("knitr")
+devtools::load_all()
 # Setting global knitr options
 output <- opts_knit$get("rmarkdown.pandoc.to")
 is.html = !is.null(output) && output == "html"
