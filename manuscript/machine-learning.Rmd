@@ -1,199 +1,154 @@
-# Machine Learning and Artificial Intelligence {#machine-learning}
+# Machine Learning {#machine-learning}
 
 <!-- TODO
 
 * Reread: End of Theory. https://www.wired.com/2008/06/pb-theory/ [@anderson2008end] -> This one is more general and might fit into the model chapter
 * Read: https://hal.archives-ouvertes.fr/hal-03474791/
-* Recreate Leo Breiman figure from Two cultures
-* Create Venn diagram containing: Deep Learning, machine learning, artificial intelligence?, supervised learning 
-* CITE Breiman
 * Write external vs. internal views
+* Write about narrow AI mindset
 
 -->
 
 
-* Modeling is task-oriented and algorithmic. A model is connected to the real world by helping in solving a real task.
+* Machine learning is task-oriented and algorithmic. A model is connected to the real world by helping in solving a real task.
 * External validity more important than internal validity (aka stats).
-* A good model allows the computer to solve a task, make it look "intelligent".
+* A computer-first mindset that allows computers to solve tasks and look "intelligent" in the process.
 * Machine learning is a meta mindset and alternative to [statistical modeling](#statistical-ml). 
 * [Supervised machine learning](#supervised-ml) and [deep learning](#deep-learning) are specializations of the machine learning mindset.
 
 
 <!-- motivational introduction -->
 It's likely that you used a machine learning powered product today.
-Maybe you spoke to a smart assistant, used a navi or checked your mostly spam-free e-mails.
-Note how this differs from how I introduced statistical modeling with a science example:
-Machine learning is task-oriented, while statistical modeling is insights oriented.
+You might have asked your smart assistant to read out your agenda for today, used a navigation app to get from A to B, or checked your mostly spam-free e-mails.
+Machine learning is used in all these applications to make the product work: speech recognition, traffic jam prediction, and spam classification are just a few examples of what machine learning can help with.
+These examples show that machine learning is very task-oriented.
+Statistical modeling, in contrast, is more insight-oriented.
 
-<!-- ml is many things -->
-Machine learning -- an umbrella term under which we find many things.
-Deep learning, clustering, supervised machine learning, generative models and so on.
-Machine learning is often defined as a branch of artificial intelligence.
-Machine learning is about algorithms that improve themselves through the use of data.
-Any algorithm that makes a machine seem intelligent, and which involves learning from data.
-Which excludes things like expert systems.
+<!-- Artificial intelligence -->
+For some, machine learning is not only task-oriented, but rather about making the computer intelligent.
+Machine learning is the branch of artificial intelligence that is concerned with learning models directly from data.
+The computer improves itself at some task through the "experience" aka by learning from data.
+The machine learning mindset doesn't tell you **how** the computer shall learn from data.
+Machine learner may or may not use random variables.
+They might work on a prediction model with a clear definition of when the model is correct, or they might work on clustering where the model is more difficult to evaluate. 
+The models can be neural networks, decision trees, density estimators, statistical models and many more.
 
 <!-- not it's own mindset  -->
-I had some trouble defining machine learning.
-For starters, I come from a supervised machine learning mindset.
-Supervised machine learning is rather coherent because of its goal of prediction and its strict evaluation using unseen data.
-But machine learning in general is, regarding methods, very broad.
-And also in the goals: When not only prediction is considered, we also have clustering, outlier detection, pattern recognition, frequent itemset mining and much more.
-A kitchen sink of tasks.
-Is there even some common demoninator for all these machine learning approaches?
-Something worthy of being called a mindset?
-At first I though about not giving machine learning a chapter.
-Even the famous two cultures of statistial modeling by Breiman is only focusing on supervised ML.
+Given this broad set of tasks and no strict guidelines on how the computer has to learn: Can we really say that machine learning is it's own mindset?
+To answer the question, let's first have a look at subsets of tasks.
+Typically, machine learning is divided into supervised, unsupervised and reinforcement learning.
+Supervised machine learning and reinforcement learning are good examples of distinct modeling mindsets: They contain a specific view on the world, the relationship between the models and the world, and how to judge what a good model is.
+The [supervised machine learning](#supervised-ml) mindset frames everything as a prediction or classification problem, and comes with a clear definition of what a good model is: when it generalizes well to new data.
+The [reinforcement learning](#reinforcement-learning) mindset sees the world as dynamic, where an actor interacts with an environment guided by a reward.
+The troublemaker is unsupervised machine learning, which is basically defined as learning from data, and not falling into the category of unsupervised machine learning or reinforcement learning.
+Unsupervised machine learning is any learning algorithm that does not use labels and is not framed as actor in an environment.
+Unsupervised machine learning is like the random drawer in your house.
+The "unsupervised" drawer at my home contains a Swiss knife, a bike lock, a reading lamp, ear plugs, a torch, ...
+Maybe it's a bit to harsh.
+Because there is one commonality between most unsupervised approaches.
+Unsupervised machine learning techniques often have as result a description of the data distribution.
+Clustering finds the center of the distributions, dimensionality reduction the features that are most important to describe the data distribution, anomaly detection detects data points that are outside of the distribution and so on. 
+Is it then possible to frame all of machine learning, including the many-faced unsupervised machine learning as a coherent mindset?
 
 <!-- yes, ml has core mindset -->
-The answer is that I think there is a core mindset that unites all of machine learning.
 The machine learning mindset is not as united and principled as [statistical modeling](#statistical-modeling).
-But all machine learning approaches have something in common, and it's possible to discern a mindset: What constitutes a good machine learning model?
-How is the model connected to the real world? What models are permissible?
+But all machine learning approaches have a few things in common.
+So let's have a look at what machine learning has to say about what a good model is, and how , in the machine learning mindset, models are connected to the world.
 
 <!-- ml is computer-driven -->
-For starters, machine learning models are all based on data, but then again that's true for all mindsets in this book.
-As the name suggests, machine learning emphasizes the "machine", which means computing devices.
-Machine learning is about making the machine "learn" to do useful things.
-But aren't statisticians doing the same?
-Using the computer for insights?
-Yes, but differently.
-The archetypical statistician uses the computer out of convenience.
-A tool to help with fitting distributions.
-The statisticians says: I have theory. What now? Maybe the computer can be useful. [^computational-statistics]
-The machine learner **starts** with the prospect of working with a computer.
-The machine learning says: I have a computer. What now? Maybe I can make it learn things.
-The archetypical machine learner is fascinated by computers and their potential.
-Machine learning as a discipline really started seriously in the 80s when computers were more widely available. <!-- citation needed. check history paper -->
-TODO: Find some proofs?
+As all modeling mindsets in this book, machine learning is based on learning model from data.
+As the name suggests, machine learning emphasizes the "machine", the computer.
+Machine learning is about making the computer "learn" to solve tasks, such as prediction, recommendation, translation, and clustering.
+How is that different from what statisticians do, who also rely on computers?
+The motivation for using a computer differs between an archetypical statistician and an archetypical machine learner.
+The statistician uses the computer out of convenience and necessity.
+Most modern statistical models are only feasible because of the computer.
+Statisticians start with statistical theory.
+The computer is the aide that allows to apply the theory to data. [^computational-statistics]
+The machine learner, in contrast, starts with the computer as the premise.
+The machine learner says: "We have this new thing, the computer. How can we make it do intelligent and useful things?"
+Machine learning is therefore a computer-first mindset.
 
-<!-- ml is task-driven -->
-Alright, we have established that machine learning is a computer-first mindset, and machine learning is about making the computer learning things with data.
-The computer should generalize from experience and not being explicitly told (aka programmed) these experiences.
-It rather has to work by trial and error and learn from that.
-Machine learning is therefore inherently task-driven rather than insight-driven.
-It's about the algorithm doing something, like solving a task, and getting better at it by using data.
-Less so for insights, but it's also possible, see [interpretable machine learning](#interpretable-ml).  
-For example, the goal might be to cluster the data.
-If we were in the statistical modeling mindset, it would be important to think in probability distributions. But for machine learning mindset whatever get's the task done is fine. 
-
-<!-- learning as meta-algorithm -->
+<!-- algorithm-producing algorithm -->
 Machine learning can be understood as a meta-algorithm: An algorithm that produces algorithms using data.
 Machine learning produces algorithms, recipes that have an input and produce an output.
-Let's think about the already learned programs:
-A customer clustering model takes in data points of customers and says which cluster they belong to.
-An image classification model takes in pixel information and returns a class, such as dog or cat.
-A fraud detection model takes in financial information and flags it as possible outlier, and therefore possibly fraudulent.
-These are algorithms with clearly defined inputs and outputs.
-We could also attempt to program these algorithms ourselves (we humans).
-Machine learning is just a way to "learn" the algorithm from data, instead of programming it directly. [^still-programmed]
-This makes learning an algorithm itself.
-The data are the input, and the output is the model, which itself is the algorithm that solve the task.
+From a programmers standpoint, machine learning is a paradigm shift:
+Machine learning is just a way to "learn" an algorithm from data, instead of programming it directly. [^still-programmed]
 
-<!-- good machine learning model -->
-Could we say what constituts a good machine learning model?
-Not as easily as for statistial models or when we go into more specialized mindsets like supervised machine learning.
-Machine learning is a messy market of methods and tasks, so it's difficult to name a common principle for model goodness.
-Let's try anyways.
+<!-- ml is task-driven -->
+And machine learning is usually used to to some task.
+So compared to the insights-driven statistical modeling, machine learning is often motivated by some problem that needs to be solved.
+The task can be translation, image captioning, classification, and so on.
+Since solving a task is the focus, it's less imported that the model produces insights like statistical models do, but success is measured in how well the task was solved.
+A typical pattern in machine learning research is:
+Invent some new algorithm.
+Then the researchers show that the algorithm works on data, by showing that it beats some benchmark.
+The reason why the algorithm works in the first place is often discovered only in later scientific publications.
+
+<!-- external vs intrinsic motivation -->
+It's a difference between external and intrinsic motivation (for the models, not the people).
+The motivation and evaluation of a machine learning model is external, based on task performance.
+It's like judging food based on how it tastes.
+Statistical modeling is intrinsically motivated.
+The reasoning for how the model was constructed is important.
+It's like judging the food not only by taste, but also the cooking process: Did the chef use the right ingredients? Was the cooking time appropriate, and so on.
+How well the task is solved is quantified by some metric.
 The goodness of a machine learning model depends on the task it should do.
 For prediction it is the generalization error for new data.
+For classification it can be the accuracy of getting the right class.
 For clustering it can be how homogeneous the clusters are.
-A good machine learning model let's the computer solve the task.
-How well the task is solved is quantified by some metric.
 
+## Many Mindsets Within Machine Learning
 
-<!-- focus on task means more approaches -->
-Machine learning means using computers and data.
-Then solving some task with it, with the constraint that the computer learns to do so by "itself", in the sense that the data is used to improve the algorithm.
-This also explains why machine learning is such a messy place.
-Machine learning doesn't have the requirement that, for example, we model everything with probability distributions.
-That makes machine learning like mixed martial arts.
-Use what works.
-But it also makes for a pot-luck of approaches, which can be very confusing, especially if you are just starting out in the field of machine learning. 
+I know the chapter leaves you a bit hanging.
+But the picture becomes much clearer when we consider subsets of machine learning as individual mindsets:
 
-<!-- is statistics ml -->
-So, is statistical modeling just machine learning?
-Statistical models are algorithmic tools that make the computer more intelligent.
-I'd say that machine learning is so broad and "unprincipled" that it can easily absorb statistical models in a technical fashion.
-Machine learning is like free style fighting, and statistics is like karate.
-Mixed martial arts = use anything that works.
-Karate = very stylized, inherently thought through, katas.
-A freestyle fighter that use some kicks and punches from karate does not become a karateka.
-The mindsets of the two fighters are different.
+* [Supervised machine learning](#supervised-ml): They wouldn't dare get their hands dirty with problems where no label is defined.
+* [Interpretable machine learning](#interpretable-ml):  Interpretable machine learning folks share a lot of the mindset with supervised learners, as they usually work on supervised. But they have the goal to find something out about the data. They are willing to sacfrifice model performance for interpretability of the model.
+* [Deep learning](#deep-learning): Deep learner want to build everything with neural networks. They work more with text and images.
+* [Reinforcement learning](#reinforcement-learning)
 
-
-## Many Mindsets Within ML
-
-Within machine learning, the mindsets are quite diverse
-
-There are supervised machine learner.
-They wouldn't dare get their hands dirty with problems where no label is defined.
-
-Interpretable machine learning folks share a lot of the mindset with supervised learners, as they usually work on supervised.
-But they have the goal to find something out about the data.
-They are willing to sacfrifice model performance for interpretability of the model.
-
-Deep learner want to build everything with neural networks.
-They work more with text and images.
-
-
-```{r ml-venn, fig.cap = "Machine Learning is a subset of artificial intelligence. Within machine learning, there is a an important mindset called supervised machine learning. Overlapping are deep learning approaches."}
+TODO: Add stub reinforcement learning
+```{r ml-venn, fig.cap = "Machine Learning is a subset of artificial intelligence. Within machine learning, there is a an important mindset called supervised machine learning. Overlapping are deep learning approaches.", fig.height = 4, fig.width = 6}
 library(ggplot2)
 r1 = rectFun(c(0, 0), 2, 3)
 r2 = rectFun(c(0.2, -0.1), 1.7, 2.5)
 r3 = rectFun(c(0.9, -0.2), 1.4, 1)
 r4 = rectFun(c(0.35, -0.4), 0.9, 2)
 
-p = ggplot(mapping = aes(x,y)) +
-  geom_path(data = r1) + 
-  annotate("text", -1, 0.93, label = "Artificial Intelligence") +
-  geom_path(data = r2) + 
-  annotate("text", -0.6, 0.67, label = "Machine Learning") +
-  geom_path(data = r3) + 
-  annotate("text", 0.73, 0.43, label = "Deep Learning") +
-  geom_path(data = r4, lty = 2) + 
-  annotate("text", -0.2, -0.05, label = "Supervised Learning") +
-  theme_void()
+addBox = function(p, center, height, width, label, lty = 1){
+  r1 = rectFun(center, height, width)
+  labelpos = c(center[1] - width/2 + 0.05, center[2] + height/2 - 0.05) 
+  p +
+  geom_path(data = r1, lty = lty) + 
+  annotate("text", labelpos[1], labelpos[2], label = label, hjust = 0, vjust = 1)
+}
 
+
+p = ggplot(mapping = aes(x,y)) + theme_void() 
+p = addBox(p, c(0, 0), 2, 3, "Artificial Intelligence")
+p = addBox(p, c(0.2, -0.1), 1.7, 2.5, "Machine Learning")
+p = addBox(p, c(0.9, -0.2), 1.4, 1, "Deep Learning")
+p = addBox(p, c(0.35, 0.1), 0.5, 2, "Reinforcement Learning")
+p = addBox(p, c(0.35, -0.6), 0.5, 2, "Supervised Learning")
 
 add_cc(p)
 ```
 
 
-
-## Model in Machine Learning
-
-A model in machine learning is an algorithm that was produced by another algorithm.
-This other algorithm is a learning algorithm that leverages data to produce the other algorithm, the machine learning model.
-The model is usually used to allow the machine do some task.
-
-There is little shared basis between models in machine learning.
-They can be based on decision trees, support vectors, random variables, neurons, density-based heuristics and so on.
-Anything that can be leveraged to improve with more data.
-
-A common theme throughout machine learning is that models are benchmarked.
-Meaning they are compared to each other based on.
-For supervised ml it's the clearest bc there you have  clear metrics of success bc the true labels are known.
-For language models there is the BLEU score. stands for bi-lingual evaluation understudy, BLEU compares translation to human tranlsation.
-
-A good model solves a task with a computer algorithm and data
-Want to caption images automatically? Goal is to find the best algorithm to do it.
-A good model of the world is one that helps in solving a task
-How good the task is solved is determined by a score or so
-Scores naturally turn it into a competition between models
-Machine Learning is very "competitive" in the sense that the model with the best score wins.
- 
 ## Strengths
 
 * Task-oriented, very practical. Can-do attitude.
-* Machine learning jobs earn you good money.
-* Computer-focused mindset in a computer-focused world. That makes a lot of sense.
+* A job in machine learning jobs potentially earns you lots of money.
+* A computer-focused mindset in a computer-focused world. 
+* Allows to automate tasks.
 
 ## Limitations
 
 * Not as principled as statistical modeling.
 * A confusing amount of approaches with different motivations and technical foundations.
-* A model that works well in solving a task is not necesarrily a good model for understanding. A model that predicts diabetes well may be useful, but less insightful than a statistical model that explictly and understandably models the diabetes risk.
+* A model that works well in solving a task is not necessarily a good model for understanding. A model that predicts diabetes well may be useful, but less insightful than a statistical model that explicitly and understandably models the diabetes risk.
+* Often data- and compute-intense.
 
 
 [^computational-statistics]: There is a field called computational statistics, which also thinks very compute-oriented. But we are talking here about archetypes of mindsets. One can think of computational statistics as a statistical mindset, slightly infused with the machine learning mindset.
