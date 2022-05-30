@@ -15,6 +15,9 @@
 * Model parameters are random variables with prior and posterior distributions.
 * A [statistical modeling mindset](#statistical-modeling) with [frequentism](#frequentist-inference) and [likelihoodism](#likelihoodism) as alternatives.
 
+<!-- The Bayesian -->
+While frequentists analyze data to answer the question "What should I do?", Bayesians analyze data to answer "What should I believe?".
+
 <!-- relation to others -->
 If you haven't read the chapter on [Statistical Modeling](#statistical-modeling), I recommend that you do so first, since Bayesian inference is easier to understand if you have a good understanding of statistical inference.
 Bayesian inference is based on probability distributions, interpreting parameters, and learning from data through the likelihood.
@@ -34,7 +37,7 @@ A Bayesian model even works without data, by just using the prior distributions.
 ## Bayes Theorem
 
 Bayesians want to learn the distribution of the model parameters from the data: $P(\theta | X)$.
-P(\theta | X) is a strange way of looking at the probabilities involved.
+$P(\theta | X)$ is a strange way of looking at the probabilities involved.
 The data-generating process generates data as a function of the parameters: $P(X | \theta)$.
 So Bayesians look for the inverse of what the DGP would naturally do.
 
@@ -297,6 +300,7 @@ The fewer and simpler, the better.
 You won't get your manager to understand posterior distributions.
 They demand simple answers!
 So, let's simplify the posterior.
+There's advice about not summarizing the posterior [@tiao1973some], but people do it anyways.
 Summaries of the posterior can be  points or intervals.
 Intervals can be defined via fixed boundaries or fixed probability mass.
 Some examples:
