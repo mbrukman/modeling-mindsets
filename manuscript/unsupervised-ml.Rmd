@@ -1,0 +1,11 @@
+# Unsupervised Machine Learning {#unsupervised-ml}
+
+
+Unsupervised machine learning is any learning algorithm that does not use labels and is not framed as actor in an environment.
+Unsupervised machine learning is like the random drawer in your house.
+The "unsupervised" drawer at my home contains a Swiss knife, a bike lock, a reading lamp, ear plugs, a torch, ...
+Maybe it's a bit to harsh.
+Because there is one commonality between most unsupervised approaches.
+Unsupervised machine learning techniques often have as result a description of the data distribution.
+Clustering finds the center of the distributions, dimensionality reduction the features that are most important to describe the data distribution, anomaly detection detects data points that are outside of the distribution and so on. 
+
