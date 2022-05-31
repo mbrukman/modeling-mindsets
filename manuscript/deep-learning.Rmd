@@ -1,4 +1,17 @@
-# Deep Learning
+# Deep Learning {#deep-learning}
+
+* Neural networks based on stacking various layers of neurons.
+* World of feature embeddings, transfer learning and foundation models.
+* A machine learning mindset, can also be used for [supervised learning](#supervised-ml).
+
+
+
+
+* Language Models
+  * powerful connector of tasks and concepts
+  * the importance of a prompt
+  * any knowledge is hidden somewhere in the embeddings
+* Vision Models
 
 
 * Special case of risk-based mindset

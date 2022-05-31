@@ -1,0 +1,8 @@
+# Machine Learning {#machine-learning}
+
+* Not really a single mindset, but a collection of mindsets.
+* Many approaches are focused on risk-minimization, but not all.
+* [Supervised machine learning](#supervised-ml) is a prominent mindset.
+
+
+

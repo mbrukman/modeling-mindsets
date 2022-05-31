@@ -1,0 +1,12 @@
+# Interpretable Machine Learning {#interpretable-ml}
+
+* Models are built with a machine learning mindset: The best approximation of the task at hand.
+* The model is interpreted with additional tools.
+* Often takes an external view of the model: Describing how it behaves instead of analyzing the components.
+* A [machine learning mindset](#machine-learning).
+
+
+```{r, results = "asis"}
+cat(under_construction)
+```
+

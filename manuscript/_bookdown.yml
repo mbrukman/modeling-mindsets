@@ -1,5 +1,5 @@
 book_filename: modeling-mindsets
-repo: https://github.com/christophM/interpretable-ml-book
+repo: https://github.com/christophM/modeling-mindsets
 output_dir: "_book"
 rmd_subdir: FALSE
 language:
@@ -15,8 +15,8 @@ rmd_files: ["index.Rmd",
             #"introduction.Rmd",
             "models.Rmd",
             "mindsets.Rmd",
-            #            "example.Rmd",
-            #          "human.Rmd",
+            # "example.Rmd",
+            # "human.Rmd",
             "statistical-modeling.Rmd",
             "frequentism.Rmd",
             "bayesian-inference.Rmd",
@@ -24,18 +24,22 @@ rmd_files: ["index.Rmd",
             #"nonparametric-statistics.Rmd",
             "stub-causal-inference.Rmd",
             #"causal-inference.Rmd",
-            #"machine-learning.Rmd",
+            #"design-based-inference.Rmd",
+            "machine-learning.Rmd",
             "stub-supervised-ml.Rmd",
             #"supervised-ml.Rmd",
+            "stub-reinforcement-learning.Rmd",
+            #"reinforcement-learning.Rmd",
             "stub-deep-learning.Rmd",
             #"deep-learning.Rmd",
             "design-based-inference.Rmd",
+            "stub-interpretable-ml.Rmd",
+            #"interpretable-ml.Rmd",
             #"exploratory-analysis.Rmd",
             #"expert-systems.Rmd",
             #"logic-programming.Rmd",
             #"symbolic-artificial-intelligence.Rmd",
-            #"interpretable-ml.Rmd",
-            #            "visualization.Rmd",
+            # "visualization.Rmd",
             #"information-theory.Rmd",
             "references.Rmd"
             ]
