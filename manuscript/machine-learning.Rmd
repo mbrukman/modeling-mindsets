@@ -16,6 +16,9 @@ It's likely that you've used a machine learning product today.
 Maybe you have asked your smart assistant to read out your schedule for today, used a navigation app to get from A to B, or checked your mostly spam-free e-mails.
 In all of these applications, machine learning is used to make the product work: speech recognition, traffic jam prediction, and spam classification are just a few examples of what machine learning can do.
 
+
+## One or Many Mindsets?
+
 <!-- Artificial intelligence -->
 Machine learning is the branch of artificial intelligence that deals with learning models directly from data.
 The computer improves at a given task through "experience" which means learning from data.
@@ -65,6 +68,9 @@ add_cc(p)
 The machine learning mindset may not be as unified and principled as [statistical modeling](#statistical-modeling).
 But all machine learning approaches have a few things in common.
 Let's take a look at what makes a good machine learning model and how these models relate to the real world.
+
+
+## Computer-Oriented, Task-Driven and Externally Motivated 
 
 <!-- ml is computer-driven -->
 Like all modeling mindsets in this book, machine learning is based on learning models from data.
