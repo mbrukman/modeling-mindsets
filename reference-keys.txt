@@ -56,10 +56,12 @@ limitations-3
 resources
 causal-inference
 machine-learning
-many-mindsets-within-machine-learning
+one-or-many-mindsets
+computer-oriented-task-driven-and-externally-motivated
 strengths-4
 limitations-4
 supervised-ml
+unsupervised-ml
 reinforcement-learning
 deep-learning
 interpretable-ml

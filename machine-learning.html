@@ -227,15 +227,17 @@ div.csl-indent {
 <li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="machine-learning.html"><a href="machine-learning.html#many-mindsets-within-machine-learning"><i class="fa fa-check"></i><b>9.1</b> Many Mindsets Within Machine Learning</a></li>
-<li class="chapter" data-level="9.2" data-path="machine-learning.html"><a href="machine-learning.html#strengths-4"><i class="fa fa-check"></i><b>9.2</b> Strengths</a></li>
-<li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#limitations-4"><i class="fa fa-check"></i><b>9.3</b> Limitations</a></li>
+<li class="chapter" data-level="9.1" data-path="machine-learning.html"><a href="machine-learning.html#one-or-many-mindsets"><i class="fa fa-check"></i><b>9.1</b> One or Many Mindsets?</a></li>
+<li class="chapter" data-level="9.2" data-path="machine-learning.html"><a href="machine-learning.html#computer-oriented-task-driven-and-externally-motivated"><i class="fa fa-check"></i><b>9.2</b> Computer-Oriented, Task-Driven and Externally Motivated</a></li>
+<li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-4"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
+<li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-4"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>10</b> Supervised Machine Learning</a></li>
-<li class="chapter" data-level="11" data-path="reinforcement-learning.html"><a href="reinforcement-learning.html"><i class="fa fa-check"></i><b>11</b> Reinforcement Learning</a></li>
-<li class="chapter" data-level="12" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>12</b> Deep Learning</a></li>
-<li class="chapter" data-level="13" data-path="interpretable-ml.html"><a href="interpretable-ml.html"><i class="fa fa-check"></i><b>13</b> Interpretable Machine Learning</a></li>
-<li class="chapter" data-level="14" data-path="design-based-inference.html"><a href="design-based-inference.html"><i class="fa fa-check"></i><b>14</b> Design-based Inference</a></li>
+<li class="chapter" data-level="11" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html"><i class="fa fa-check"></i><b>11</b> Unsupervised Machine Learning</a></li>
+<li class="chapter" data-level="12" data-path="reinforcement-learning.html"><a href="reinforcement-learning.html"><i class="fa fa-check"></i><b>12</b> Reinforcement Learning</a></li>
+<li class="chapter" data-level="13" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>13</b> Deep Learning</a></li>
+<li class="chapter" data-level="14" data-path="interpretable-ml.html"><a href="interpretable-ml.html"><i class="fa fa-check"></i><b>14</b> Interpretable Machine Learning</a></li>
+<li class="chapter" data-level="15" data-path="design-based-inference.html"><a href="design-based-inference.html"><i class="fa fa-check"></i><b>15</b> Design-based Inference</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> 
@@ -267,127 +269,103 @@ div.csl-indent {
 <div id="machine-learning" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Machine Learning<a href="machine-learning.html#machine-learning" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <!-- TODO
-
-* Reread: End of Theory. https://www.wired.com/2008/06/pb-theory/ [@anderson2008end] -> This one is more general and might fit into the model chapter
 * Read: https://hal.archives-ouvertes.fr/hal-03474791/
-* Write external vs. internal views
-* Write about narrow AI mindset
-
 -->
 <ul>
-<li>Machine learning is task-oriented and algorithmic. A model is connected to the real world by helping in solving a real task.</li>
-<li>External validity more important than internal validity (aka stats).</li>
-<li>A computer-first mindset that allows computers to solve tasks and look “intelligent” in the process.</li>
-<li>Machine learning is a meta mindset and alternative to <a href="#statistical-ml">statistical modeling</a>.</li>
-<li><a href="supervised-ml.html#supervised-ml">Supervised machine learning</a> and <a href="deep-learning.html#deep-learning">deep learning</a> are specializations of the machine learning mindset.</li>
+<li>Machine learning is a mindset concerned with making a computer “intelligent”.</li>
+<li>A good machine learning model solves a task well: external evaluation of task performance is more important than the internal validity of the model.</li>
+<li>Machine learning is an alternative meta mindset to <a href="#statistical-ml">statistical modeling</a>.</li>
+<li><a href="supervised-ml.html#supervised-ml">Supervised machine learning</a>, <a href="unsupervised-ml.html#unsupervised-ml">unsupervised machine learning</a>, <a href="reinforcement-learning.html#reinforcement-learning">reinforcement learning</a>, and <a href="deep-learning.html#deep-learning">deep learning</a> are specializations of the machine learning mindset.</li>
 </ul>
 <!-- motivational introduction -->
-<p>It’s likely that you used a machine learning powered product today.
-You might have asked your smart assistant to read out your agenda for today, used a navigation app to get from A to B, or checked your mostly spam-free e-mails.
-Machine learning is used in all these applications to make the product work: speech recognition, traffic jam prediction, and spam classification are just a few examples of what machine learning can help with.
-These examples show that machine learning is very task-oriented.
-Statistical modeling, in contrast, is more insight-oriented.</p>
+<p>It’s likely that you’ve used a machine learning product today.
+Maybe you have asked your smart assistant to read out your schedule for today, used a navigation app to get from A to B, or checked your mostly spam-free e-mails.
+In all of these applications, machine learning is used to make the product work: speech recognition, traffic jam prediction, and spam classification are just a few examples of what machine learning can do.</p>
+<div id="one-or-many-mindsets" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> One or Many Mindsets?<a href="machine-learning.html#one-or-many-mindsets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- Artificial intelligence -->
-<p>For some, machine learning is not only task-oriented, but rather about making the computer intelligent.
-Machine learning is the branch of artificial intelligence that is concerned with learning models directly from data.
-The computer improves itself at some task through the “experience” aka by learning from data.
-The machine learning mindset doesn’t tell you <strong>how</strong> the computer shall learn from data.
-Machine learner may or may not use random variables.
-They might work on a prediction model with a clear definition of when the model is correct, or they might work on clustering where the model is more difficult to evaluate.
-The models can be neural networks, decision trees, density estimators, statistical models and many more.</p>
+<p>Machine learning is the branch of artificial intelligence that deals with learning models directly from data.
+The computer improves at a given task through “experience” which means learning from data.
+The machine learning mindset doesn’t tell you <strong>how</strong> the computer should learn from data.
+For example, machine learner may use random variables, but they don’t have to.
+They can work on a prediction model where it is clearlt of defined when the model is correct, or they can work on clustering where the model is harder to evaluate.
+The models can be neural networks, decision trees, density estimators, statistical models and many more.
 <!-- not it's own mindset  -->
-<p>Given this broad set of tasks and no strict guidelines on how the computer has to learn: Can we really say that machine learning is it’s own mindset?
-To answer the question, let’s first have a look at subsets of tasks.
-Typically, machine learning is divided into supervised, unsupervised and reinforcement learning.
-Supervised machine learning and reinforcement learning are good examples of distinct modeling mindsets: They contain a specific view on the world, the relationship between the models and the world, and how to judge what a good model is.
-The <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> mindset frames everything as a prediction or classification problem, and comes with a clear definition of what a good model is: when it generalizes well to new data.
-The <a href="reinforcement-learning.html#reinforcement-learning">reinforcement learning</a> mindset sees the world as dynamic, where an actor interacts with an environment guided by a reward.
-The troublemaker is unsupervised machine learning, which is basically defined as learning from data, and not falling into the category of unsupervised machine learning or reinforcement learning.
-Unsupervised machine learning is any learning algorithm that does not use labels and is not framed as actor in an environment.
-Unsupervised machine learning is like the random drawer in your house.
-The “unsupervised” drawer at my home contains a Swiss knife, a bike lock, a reading lamp, ear plugs, a torch, …
-Maybe it’s a bit to harsh.
-Because there is one commonality between most unsupervised approaches.
-Unsupervised machine learning techniques often have as result a description of the data distribution.
-Clustering finds the center of the distributions, dimensionality reduction the features that are most important to describe the data distribution, anomaly detection detects data points that are outside of the distribution and so on.
-Is it then possible to frame all of machine learning, including the many-faced unsupervised machine learning as a coherent mindset?</p>
+Given this wide range of tasks, and without strict guidelines on how the computer must learn: Can we really say that machine learning is a distinct mindset?
+To answer the question, let’s first look at more specific mindsets within machine learning.
+Machine learning is usually divided into supervised, unsupervised and reinforcement learning.
+Each of these subsets also represents a distinct modeling mindset: They involve a particular view of the world and of the relationship between the models and the world.
+The <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> mindset frames everything as a prediction or classification problem and has a clear definition of what a good model is: when it generalizes well to new data.
+In <a href="unsupervised-ml.html#unsupervised-ml">unsupervised machine learning</a>, the goal is to find patterns in the data.
+The <a href="reinforcement-learning.html#reinforcement-learning">reinforcement learning</a> mindset views the world as dynamic, in which an actor interacts with an environment guided by a reward.
+In <a href="deep-learning.html#deep-learning">deep learning</a>, all models are neural networks.
+What are the commonalities between all these mindsets?
+Is there a unified machine learning mindset?</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ml-venn"></span>
+<img src="figures/ml-venn-1.png" alt="Machine Learning is a subfield of artificial intelligence. Within machine learning, there is supervised, unsupervised and reinforcement learning. Deep learning approaches overlap with these three." width="\textwidth" />
+<p class="caption">
+FIGURE 9.1: Machine Learning is a subfield of artificial intelligence. Within machine learning, there is supervised, unsupervised and reinforcement learning. Deep learning approaches overlap with these three.
+</p>
+</div>
 <!-- yes, ml has core mindset -->
-<p>The machine learning mindset is not as united and principled as <a href="statistical-modeling.html#statistical-modeling">statistical modeling</a>.
+<p>The machine learning mindset may not be as unified and principled as <a href="statistical-modeling.html#statistical-modeling">statistical modeling</a>.
 But all machine learning approaches have a few things in common.
-So let’s have a look at what machine learning has to say about what a good model is, and how , in the machine learning mindset, models are connected to the world.</p>
+Let’s take a look at what makes a good machine learning model and how these models relate to the real world.</p>
+</div>
+<div id="computer-oriented-task-driven-and-externally-motivated" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Computer-Oriented, Task-Driven and Externally Motivated<a href="machine-learning.html#computer-oriented-task-driven-and-externally-motivated" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- ml is computer-driven -->
-<p>As all modeling mindsets in this book, machine learning is based on learning model from data.
-As the name suggests, machine learning emphasizes the “machine”, the computer.
-Machine learning is about making the computer “learn” to solve tasks, such as prediction, recommendation, translation, and clustering.
-How is that different from what statisticians do, who also rely on computers?
-The motivation for using a computer differs between an archetypical statistician and an archetypical machine learner.
+<p>Like all modeling mindsets in this book, machine learning is based on learning models from data.
+As the name implies, machine learning focuses on the “machine”, meaning the computer.
+Machine learning is about the computer “learning” to solve tasks such as prediction, recommendation, translation, and clustering.
+How is this different from the work what statisticians, who also rely on computers?
+The motivation for using a computer differs between an archetypal statistician and an archetypal machine learner.
 The statistician uses the computer out of convenience and necessity.
-Most modern statistical models are only feasible because of the computer.
-Statisticians start with statistical theory.
-The computer is the aide that allows to apply the theory to data. <a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
-The machine learner, in contrast, starts with the computer as the premise.
-The machine learner says: “We have this new thing, the computer. How can we make it do intelligent and useful things?”
-Machine learning is therefore a computer-first mindset.</p>
+Modern statistics wouldn’t be possible without the computer.
+But the computer is not the starting point.
+The starting point is statistical theory.
+And the computer is only a tool to apply statistical theory to data. <a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
+The machine learner, in contrast, starts with the computer.
+The machine learner says, “We have this new thing, the computer. How can we get it do intelligent and useful things?”</p>
 <!-- algorithm-producing algorithm -->
-<p>Machine learning can be understood as a meta-algorithm: An algorithm that produces algorithms using data.
-Machine learning produces algorithms, recipes that have an input and produce an output.
-From a programmers standpoint, machine learning is a paradigm shift:
-Machine learning is just a way to “learn” an algorithm from data, instead of programming it directly. <a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<p>Machine learning can be understood as a meta-algorithm:
+An algorithm that uses data to produce machine learning models that are also algorithms.
+From a programmer’s point of view, machine learning is a paradigm shift:
+Machine learning is just a way of “learning” an algorithm from data, rather than programming it directly. <a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
 <!-- ml is task-driven -->
-<p>And machine learning is usually used to to some task.
-So compared to the insights-driven statistical modeling, machine learning is often motivated by some problem that needs to be solved.
-The task can be translation, image captioning, classification, and so on.
-Since solving a task is the focus, it’s less imported that the model produces insights like statistical models do, but success is measured in how well the task was solved.
-A typical pattern in machine learning research is:
-Invent some new algorithm.
-Then the researchers show that the algorithm works on data, by showing that it beats some benchmark.
-The reason why the algorithm works in the first place is often discovered only in later scientific publications.</p>
+<p>In contrat to more insight-driven statistical mdoeling, machine learning is typically used to solve a task.
+The task may be language translation, image captioning, classification, and so on.
+The success of the model is measured by how well the task was solved using some type of metric.
+In prediction and classification tasks, the machine learner measures the generalization error for new data.
+Specifically, for a classification model, this could be the accuracy with which the model assigns classes correctly in a new data set.
+In clustering tasks, success metrics usually measure how homogeneous the data points in the clusters are and how much the data differs between clusters.
+This external focus is also reflected in the way machine learning research works:
+Researchers invent a new machine learning algorithm and show that it works by comparing it to other algorithms in some task benchmarks.
+The reason why the algorithm works well is often discovered in later scientific publications, if at all.</p>
 <!-- external vs intrinsic motivation -->
-<p>It’s a difference between external and intrinsic motivation (for the models, not the people).
+<p>We can distinguish between external and intrinsic modeling motivation.
 The motivation and evaluation of a machine learning model is external, based on task performance.
 It’s like judging food based on how it tastes.
 Statistical modeling is intrinsically motivated.
-The reasoning for how the model was constructed is important.
-It’s like judging the food not only by taste, but also the cooking process: Did the chef use the right ingredients? Was the cooking time appropriate, and so on.
-How well the task is solved is quantified by some metric.
-The goodness of a machine learning model depends on the task it should do.
-For prediction it is the generalization error for new data.
-For classification it can be the accuracy of getting the right class.
-For clustering it can be how homogeneous the clusters are.</p>
-<div id="many-mindsets-within-machine-learning" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Many Mindsets Within Machine Learning<a href="machine-learning.html#many-mindsets-within-machine-learning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I know the chapter leaves you a bit hanging.
-But the picture becomes much clearer when we consider subsets of machine learning as individual mindsets:</p>
-<ul>
-<li><a href="supervised-ml.html#supervised-ml">Supervised machine learning</a>: They wouldn’t dare get their hands dirty with problems where no label is defined.</li>
-<li><a href="interpretable-ml.html#interpretable-ml">Interpretable machine learning</a>: Interpretable machine learning folks share a lot of the mindset with supervised learners, as they usually work on supervised. But they have the goal to find something out about the data. They are willing to sacfrifice model performance for interpretability of the model.</li>
-<li><a href="deep-learning.html#deep-learning">Deep learning</a>: Deep learner want to build everything with neural networks. They work more with text and images.</li>
-<li><a href="reinforcement-learning.html#reinforcement-learning">Reinforcement learning</a></li>
-</ul>
-TODO: Add stub reinforcement learning
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ml-venn"></span>
-<img src="figures/ml-venn-1.png" alt="Machine Learning is a subset of artificial intelligence. Within machine learning, there is a an important mindset called supervised machine learning. Overlapping are deep learning approaches." width="\textwidth" />
-<p class="caption">
-FIGURE 9.1: Machine Learning is a subset of artificial intelligence. Within machine learning, there is a an important mindset called supervised machine learning. Overlapping are deep learning approaches.
-</p>
+The rationale for constructing the model is important.
+It’s like judging food not only by how it tastes, but also by the cooking process: did the chef use the right ingredients? Was the cooking time appropriate, and so on.</p>
 </div>
-</div>
-<div id="strengths-4" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Strengths<a href="machine-learning.html#strengths-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="strengths-4" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Strengths<a href="machine-learning.html#strengths-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Task-oriented, very practical. Can-do attitude.</li>
-<li>A job in machine learning jobs potentially earns you lots of money.</li>
-<li>A computer-focused mindset in a computer-focused world.</li>
-<li>Allows to automate tasks.</li>
+<li>Task-oriented and very practical.</li>
+<li>A job in machine learning potentially pays you lots of money.</li>
+<li>A computer-oriented mindset in a computer-oriented world.</li>
+<li>Machine learning is predestined for automating tasks and building digital products.</li>
 </ul>
 </div>
-<div id="limitations-4" class="section level2 hasAnchor" number="9.3">
-<h2><span class="header-section-number">9.3</span> Limitations<a href="machine-learning.html#limitations-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="limitations-4" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Limitations<a href="machine-learning.html#limitations-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Not as principled as statistical modeling.</li>
-<li>A confusing amount of approaches with different motivations and technical foundations.</li>
-<li>A model that works well in solving a task is not necessarily a good model for understanding. A model that predicts diabetes well may be useful, but less insightful than a statistical model that explicitly and understandably models the diabetes risk.</li>
-<li>Often data- and compute-intense.</li>
+<li>A confusing amount of approaches with different motivations and technical bases.</li>
+<li>A model that works well in solving a task is not necessarily a good model for insights. A model that predicts diabetes well can be useful, but is less insightful than a statistical model that models diabetes risk explicitly and understandably.</li>
+<li>Often requires a lot of data and is computationally intensive.</li>
 </ul>
 
 </div>
@@ -395,8 +373,8 @@ FIGURE 9.1: Machine Learning is a subset of artificial intelligence. Within mach
 <div class="footnotes">
 <hr />
 <ol start="8">
-<li id="fn8"><p>There is a field called computational statistics, which also thinks very compute-oriented. But we are talking here about archetypes of mindsets. One can think of computational statistics as a statistical mindset, slightly infused with the machine learning mindset.<a href="machine-learning.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>I find it difficult to say that the machine learns by itself. Because also machine learning requires programming. You have to implement the learning part, and all the glue code to integrate the final model into the product.<a href="machine-learning.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>There is a field called computational statistics, which is computer-oriented. But we are talking about archetypes of mindsets here. You can think of computational statistics as a statistical mindset that is slightly infused with the machine learning mindset.<a href="machine-learning.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>I find it difficult to say that the machine learns by itself. Because machine learning also requires programming. You have to implement the learning part and all the glue code to integrate the final model into the product.<a href="machine-learning.html#fnref9" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
