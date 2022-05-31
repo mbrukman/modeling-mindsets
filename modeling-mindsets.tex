@@ -162,7 +162,7 @@
 \makeatother
 \subtitle{The Many Cultures of Learning From Data}
 \author{Christoph Molnar}
-\date{2022-05-12}
+\date{2022-05-31}
 
 \begin{document}
 \maketitle
@@ -259,6 +259,81 @@ This book is licensed under the Creative Commons Attribution-NonCommercial-Share
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+\begin{verbatim}
+## i Loading book
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: bookdown
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: Cairo
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: data.table
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: devtools
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: usethis
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: dplyr
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:data.table':
+## 
+##     between, first, last
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: knitr
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: patchwork
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: readr
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: rmarkdown
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: tidyr
+\end{verbatim}
+
 \hypertarget{summary}{%
 \chapter*{Summary}\label{summary}}
 
@@ -573,6 +648,8 @@ Having an open mind about modeling ultimately makes you a better modeler.
   Assumes the world is best described by probability distributions.
 \item
   Requires additional assumptions for drawing conclusions. See \protect\hyperlink{frequentist-inference}{Frequentism Inference}, \protect\hyperlink{bayesian-inference}{Bayesian Inference} and \protect\hyperlink{likelihoodism}{Likelihoodism}.
+\item
+  \protect\hyperlink{machine-learning}{Machine learning} is an alternative mindset.
 \end{itemize}
 
 Do you become more productive when you drink a lot of water?
@@ -2088,6 +2165,155 @@ But if the expert says she would collect more data depending on the outcome of t
 
 \textbf{This chapter is under construction! Stay tuned.}
 
+\hypertarget{machine-learning}{%
+\chapter{Machine Learning}\label{machine-learning}}
+
+\begin{itemize}
+\tightlist
+\item
+  Machine learning is task-oriented and algorithmic. A model is connected to the real world by helping in solving a real task.
+\item
+  External validity more important than internal validity (aka stats).
+\item
+  A computer-first mindset that allows computers to solve tasks and look ``intelligent'' in the process.
+\item
+  Machine learning is a meta mindset and alternative to \protect\hyperlink{statistical-ml}{statistical modeling}.
+\item
+  \protect\hyperlink{supervised-ml}{Supervised machine learning} and \protect\hyperlink{deep-learning}{deep learning} are specializations of the machine learning mindset.
+\end{itemize}
+
+It's likely that you used a machine learning powered product today.
+You might have asked your smart assistant to read out your agenda for today, used a navigation app to get from A to B, or checked your mostly spam-free e-mails.
+Machine learning is used in all these applications to make the product work: speech recognition, traffic jam prediction, and spam classification are just a few examples of what machine learning can help with.
+These examples show that machine learning is very task-oriented.
+Statistical modeling, in contrast, is more insight-oriented.
+
+For some, machine learning is not only task-oriented, but rather about making the computer intelligent.
+Machine learning is the branch of artificial intelligence that is concerned with learning models directly from data.
+The computer improves itself at some task through the ``experience'' aka by learning from data.
+The machine learning mindset doesn't tell you \textbf{how} the computer shall learn from data.
+Machine learner may or may not use random variables.
+They might work on a prediction model with a clear definition of when the model is correct, or they might work on clustering where the model is more difficult to evaluate.
+The models can be neural networks, decision trees, density estimators, statistical models and many more.
+
+Given this broad set of tasks and no strict guidelines on how the computer has to learn: Can we really say that machine learning is it's own mindset?
+To answer the question, let's first have a look at subsets of tasks.
+Typically, machine learning is divided into supervised, unsupervised and reinforcement learning.
+Supervised machine learning and reinforcement learning are good examples of distinct modeling mindsets: They contain a specific view on the world, the relationship between the models and the world, and how to judge what a good model is.
+The \protect\hyperlink{supervised-ml}{supervised machine learning} mindset frames everything as a prediction or classification problem, and comes with a clear definition of what a good model is: when it generalizes well to new data.
+The \protect\hyperlink{reinforcement-learning}{reinforcement learning} mindset sees the world as dynamic, where an actor interacts with an environment guided by a reward.
+The troublemaker is unsupervised machine learning, which is basically defined as learning from data, and not falling into the category of unsupervised machine learning or reinforcement learning.
+Unsupervised machine learning is any learning algorithm that does not use labels and is not framed as actor in an environment.
+Unsupervised machine learning is like the random drawer in your house.
+The ``unsupervised'' drawer at my home contains a Swiss knife, a bike lock, a reading lamp, ear plugs, a torch, \ldots{}
+Maybe it's a bit to harsh.
+Because there is one commonality between most unsupervised approaches.
+Unsupervised machine learning techniques often have as result a description of the data distribution.
+Clustering finds the center of the distributions, dimensionality reduction the features that are most important to describe the data distribution, anomaly detection detects data points that are outside of the distribution and so on.
+Is it then possible to frame all of machine learning, including the many-faced unsupervised machine learning as a coherent mindset?
+
+The machine learning mindset is not as united and principled as \protect\hyperlink{statistical-modeling}{statistical modeling}.
+But all machine learning approaches have a few things in common.
+So let's have a look at what machine learning has to say about what a good model is, and how , in the machine learning mindset, models are connected to the world.
+
+As all modeling mindsets in this book, machine learning is based on learning model from data.
+As the name suggests, machine learning emphasizes the ``machine'', the computer.
+Machine learning is about making the computer ``learn'' to solve tasks, such as prediction, recommendation, translation, and clustering.
+How is that different from what statisticians do, who also rely on computers?
+The motivation for using a computer differs between an archetypical statistician and an archetypical machine learner.
+The statistician uses the computer out of convenience and necessity.
+Most modern statistical models are only feasible because of the computer.
+Statisticians start with statistical theory.
+The computer is the aide that allows to apply the theory to data. \footnote{There is a field called computational statistics, which also thinks very compute-oriented. But we are talking here about archetypes of mindsets. One can think of computational statistics as a statistical mindset, slightly infused with the machine learning mindset.}
+The machine learner, in contrast, starts with the computer as the premise.
+The machine learner says: ``We have this new thing, the computer. How can we make it do intelligent and useful things?''
+Machine learning is therefore a computer-first mindset.
+
+Machine learning can be understood as a meta-algorithm: An algorithm that produces algorithms using data.
+Machine learning produces algorithms, recipes that have an input and produce an output.
+From a programmers standpoint, machine learning is a paradigm shift:
+Machine learning is just a way to ``learn'' an algorithm from data, instead of programming it directly. \footnote{I find it difficult to say that the machine learns by itself. Because also machine learning requires programming. You have to implement the learning part, and all the glue code to integrate the final model into the product.}
+
+And machine learning is usually used to to some task.
+So compared to the insights-driven statistical modeling, machine learning is often motivated by some problem that needs to be solved.
+The task can be translation, image captioning, classification, and so on.
+Since solving a task is the focus, it's less imported that the model produces insights like statistical models do, but success is measured in how well the task was solved.
+A typical pattern in machine learning research is:
+Invent some new algorithm.
+Then the researchers show that the algorithm works on data, by showing that it beats some benchmark.
+The reason why the algorithm works in the first place is often discovered only in later scientific publications.
+
+It's a difference between external and intrinsic motivation (for the models, not the people).
+The motivation and evaluation of a machine learning model is external, based on task performance.
+It's like judging food based on how it tastes.
+Statistical modeling is intrinsically motivated.
+The reasoning for how the model was constructed is important.
+It's like judging the food not only by taste, but also the cooking process: Did the chef use the right ingredients? Was the cooking time appropriate, and so on.
+How well the task is solved is quantified by some metric.
+The goodness of a machine learning model depends on the task it should do.
+For prediction it is the generalization error for new data.
+For classification it can be the accuracy of getting the right class.
+For clustering it can be how homogeneous the clusters are.
+
+\hypertarget{many-mindsets-within-machine-learning}{%
+\section{Many Mindsets Within Machine Learning}\label{many-mindsets-within-machine-learning}}
+
+I know the chapter leaves you a bit hanging.
+But the picture becomes much clearer when we consider subsets of machine learning as individual mindsets:
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{supervised-ml}{Supervised machine learning}: They wouldn't dare get their hands dirty with problems where no label is defined.
+\item
+  \protect\hyperlink{interpretable-ml}{Interpretable machine learning}: Interpretable machine learning folks share a lot of the mindset with supervised learners, as they usually work on supervised. But they have the goal to find something out about the data. They are willing to sacfrifice model performance for interpretability of the model.
+\item
+  \protect\hyperlink{deep-learning}{Deep learning}: Deep learner want to build everything with neural networks. They work more with text and images.
+\item
+  \protect\hyperlink{reinforcement-learning}{Reinforcement learning}
+\end{itemize}
+
+TODO: Add stub reinforcement learning
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/ml-venn-1} 
+
+}
+
+\caption{Machine Learning is a subset of artificial intelligence. Within machine learning, there is a an important mindset called supervised machine learning. Overlapping are deep learning approaches.}\label{fig:ml-venn}
+\end{figure}
+
+\hypertarget{strengths-4}{%
+\section{Strengths}\label{strengths-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  Task-oriented, very practical. Can-do attitude.
+\item
+  A job in machine learning jobs potentially earns you lots of money.
+\item
+  A computer-focused mindset in a computer-focused world.
+\item
+  Allows to automate tasks.
+\end{itemize}
+
+\hypertarget{limitations-4}{%
+\section{Limitations}\label{limitations-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  Not as principled as statistical modeling.
+\item
+  A confusing amount of approaches with different motivations and technical foundations.
+\item
+  A model that works well in solving a task is not necessarily a good model for understanding. A model that predicts diabetes well may be useful, but less insightful than a statistical model that explicitly and understandably models the diabetes risk.
+\item
+  Often data- and compute-intense.
+\end{itemize}
+
 \hypertarget{supervised-ml}{%
 \chapter{Supervised Machine Learning}\label{supervised-ml}}
 
@@ -2103,6 +2329,21 @@ But if the expert says she would collect more data depending on the outcome of t
 
 \textbf{This chapter is under construction! Stay tuned.}
 
+\hypertarget{reinforcement-learning}{%
+\chapter{Reinforcement Learning}\label{reinforcement-learning}}
+
+\begin{itemize}
+\tightlist
+\item
+  The world is dynamic: The model is about an actor acting in an environment. The actions of the agent are only rewarded at the end.
+\item
+  Reinforcement learning balances exploration and exploitation,
+\item
+  A sub-mindset of \protect\hyperlink{machine-learning}{machine learning}.
+\end{itemize}
+
+\textbf{This chapter is under construction! Stay tuned.}
+
 \hypertarget{deep-learning}{%
 \chapter{Deep Learning}\label{deep-learning}}
 
@@ -2114,6 +2355,23 @@ But if the expert says she would collect more data depending on the outcome of t
   World of feature embeddings, transfer learning and foundation models.
 \item
   A machine learning mindset, can also be used for \protect\hyperlink{supervised-ml}{supervised learning}.
+\end{itemize}
+
+\textbf{This chapter is under construction! Stay tuned.}
+
+\hypertarget{interpretable-ml}{%
+\chapter{Interpretable Machine Learning}\label{interpretable-ml}}
+
+\begin{itemize}
+\tightlist
+\item
+  Models are built with a machine learning mindset: The best approximation of the task at hand.
+\item
+  The model is interpreted with additional tools.
+\item
+  Often takes an external view of the model: Describing how it behaves instead of analyzing the components.
+\item
+  A \protect\hyperlink{machine-learning}{machine learning mindset}.
 \end{itemize}
 
 \textbf{This chapter is under construction! Stay tuned.}

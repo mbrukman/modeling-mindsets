@@ -11,6 +11,7 @@ fig:priors
 fig:posterior
 fig:three-stat-mindsets
 fig:likelihood-interval
+fig:ml-venn
 what-this-book-is-about
 who-this-book-is-for
 models
@@ -54,6 +55,12 @@ strengths-3
 limitations-3
 resources
 causal-inference
+machine-learning
+many-mindsets-within-machine-learning
+strengths-4
+limitations-4
 supervised-ml
+reinforcement-learning
 deep-learning
+interpretable-ml
 design-based-inference
