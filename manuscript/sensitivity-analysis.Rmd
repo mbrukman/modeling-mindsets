@@ -1,0 +1,18 @@
+# Sensitivity Analysis
+
+
+* Attribute the uncertainty of a models or systems output to the inputs.
+* Related to [Design-based Inference](#design-based): Both focus on the data collection process
+
+
+
+Tidbits:
+
+* Related: uncertainty analysis
+* assumes that we already have a model or system to study
+* therefore can be applied to many of the other models
+* maybe not its own mindset since it does not produce models itself
+* or it can be seen as ancillary mindset which 
+
+
+## Design of Experiments

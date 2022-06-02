@@ -1,7 +1,14 @@
-# Design-based Inference {#design-based-inference}
+# Design-based Inference or Survey Sampling {#design-based-inference}
+
+TODO: Split into more chapters:
+- design-based inference as meta-mindset: data collection focused, and simple models
+- survey sampling: finite population, sampling weights
+- experiments: do experiments or use natural experiments. similar to causal inference, but with potential outcomes framework. contains clinical trials 
+- sensitivity analysis / design of experiments: given model/system analyze behaviour 
 
 * Focused on sampling data representatively rather than complex modeling.
-* Data population is finite; uncertainty about results is only due to sampling.
+* Design of experiments and survey sampling
+* Data population is finite, therefore uncertainty about results are only due to sampling.
 * Often combined with [Statistical Modeling](#statistical-modeling), especially [Frequentist Inference](#frequentist-inference).
 
 <!-- TODO: Malte zum reviewn schicken -->
@@ -11,6 +18,47 @@
 <!-- TODO: Checkout Stichprobentheorie Material from LMU -->
 <!-- TODO: Checkout Experiment of Design material from LMU -->
 
+* Stichprobentheorie
+* finite samples vs infinite samples
+* source of variance changes
+* amtliche statistik
+* surveys
+* what is Fixed vs. Superpopulation model?
+* sampling designs
+* Inference
+* also called survey sampling
+
+
+Information from the paper Alternative Model-Based and Design-Based Frameworks for Inference From Samples to Populations: From Polarization to Integration
+<!--   https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/ -->
+* [@sterba2009alternative]
+* there is model-based framework by fisher and design-based framework by Neyman
+* model-based: random samples, analytic inference, infinite population
+* design-based: nonrandom + random samples, descriptive inference, finite population
+* nonrandom sampling = selecting observations with unknown probability from finite population
+* design refers to "sampling design". it should emphasize that the sampling design is the basis for inference from the data.
+* by the way, before the 20th century, there was no statistical inference used. Instead data was collected by collecting all data, not just a sample. [@stephan1948history]
+* TODO: Recreate figure: most inner bubble: sample, inner bubble: finite population, outer bubble: infinite population. Arrow from most inner to inner: design-based inference; arrow from sample to infinite pop: model-based inference.
+TODO: Create table of model- vs design-based.
+* Model-based: All the other mindsets here in the book basically
+* in design-based, y is still random variable, but for different reason than in the model-based approach. y is random because we did not sample all of the population.
+* Step 1: specify sampling design
+* define which units have a probability larger than zero to be sampled.
+* sampling frame: list of units in the finite population. kind of defines the finite population.
+* sampling design: the provcess by which sampling probabilities are assigned
+* sampling scheme: implementation o the sampling design. mechanism to draw units.
+* Step 2: using known sampling probabilities, estimate means and the variances.
+* The step 2 involves sampling weights
+* The math in the end is just averaging stuff and computing variances
+* The model that we have of the world is that we have finite populations.
+* In the statistical sense, the model is just a mean estimator
+* And the model contains also the design 
+* no distributional assumptions were needed to turn the target $Y$ into a random variable
+* only descriptive inference possible, since we can only describe the population.
+* descriptive inferences are special: if all units of the populations would be observed, than the uncertainty would be zero.
+* In design-based, each unit has a sampling weight.
+
+
 Design-based modeling favors strong research designs over complex statistical models. 
 Instead of focus on model, focus on sampling data.
 Sample right data, have simple estimators for your quantities of interest.
@@ -18,22 +66,55 @@ Design-based vs. model-based.
 
 
 ```{r finite-vs-infinite, fig.cap = "Mindset assuming finite versus mindset assuming infinite data."}
-
-c1 = circleFun(c(1,3), 1)
-c2 = circleFun(c(1,1), 1)
-c3 = circleFun(c(3,1), 1)
-
+set.seed(8)
+# finite population
+c1 = circleFun(c(1,3), 1.2)
+# sample from finite population
+c2 = circleFun(c(1,1), 1.2)
+# sample from infinite population 
+c3 = circleFun(c(3,1), 1.2)
+# infinite population
 x = seq(from = -3, 3, length.out = 100)
 y = dnorm(x)
 ddat = data.frame(x = x, y = y)
-ddat$x = ddat$x/6  + 3
+ddat$x = ddat$x/5  + 3
 ddat$y = 2 * ddat$y + 2.7
 
-ggplot(mapping = aes(x = x, y = y)) +
+# Data points infinite population
+ninf = 3
+dinf = data.frame(x = rnorm(ninf))
+dinf$y = 2 * dnorm(dinf$x) + 2.7
+dinf$x = dinf$x/5 + 3
+dinf$yend = 1 + 2 * dnorm(dinf$x) +  0.5 * sin(runif(0, 2*pi, n = ninf)) 
+
+# Data points finite population
+npop = 30
+tt = runif(0,2*pi, n = npop)
+r = runif(0.2,1/2.1, n = npop) 
+dd = data.frame(x = 1 + r * cos(tt), y = 3 + r * sin(tt))
+dd2 = dd[1:3,]
+dd2$y = dd2$y - 2
+
+# TODO: Fix arrow
+
+p = ggplot(mapping = aes(x = x, y = y)) +
   geom_path(data = c1) +
   geom_path(data = c2) +
   geom_path(data = c3) +
-  geom_path(data = ddat)
+  geom_path(data = ddat) +
+  geom_segment(data = dinf, size = .5, aes(xend = x, yend = yend + 0.05), arrow = arrow(angle = 20, type = "closed", length = unit(0.15, "inches")), color = "darkgrey" ) +
+  geom_segment(data = dd2, size = .5, aes(xend = x, y = y + 2, yend = y + 0.05), arrow = arrow(angle = 20, type = "closed", length = unit(0.15, "inches")), color = "darkgrey") +
+  geom_point(data = dd, size = 2) +
+  geom_point(data = dd2, size = 2) +
+  geom_point(data = dinf, size = 2, aes(x = x, y= yend)) +
+  annotate("text", x = 2, y = 1, label = "Sample") +
+  annotate("text", x = 2, y = 3, label = "Population") +
+  annotate("label", x = 1, y = 3, label = "Finite") +
+  annotate("label", x = 3, y = 3, label = "Infinite") +
+  coord_fixed() + 
+  theme_void()
+
+add_cc(p)
 
 ```
 
@@ -44,6 +125,8 @@ I see two things as design-based:
 * also do experiment
 
 Why does such a design-based approach reduce the need for complex modeling?
+If viewed from the lense of causal inference, design-based can reduce confounders by design.
+
 
 e.g. want to know the effect of a nudge on eating behaviour of people.
 For example, do people buy more things if they cost 0.99 instead of 1?
@@ -74,6 +157,59 @@ So we have to include it into the model as a variable (predictor / covariate).
 For design-based modeling, we design our sampling / experiment to account for such things.
 For example by stratified sampling design in all age and and professions.
 
+
+<!-- too simple mindset? -->
+
+- wow, sounds boring
+- just mean estimates and simple stuff
+- but even the simple stuff is not simple
+- it can even be hard to estimate the most simple stuff
+- even harder to predict stuff
+- shouldn't we be doing the estimation much better
+- good example from pandemic: how many people have covid
+- that's just counting, a mean estimate
+- but that's already very difficult
+- TODO: Find other example
+- It **seems** simple, because such estimate, when printed, radiated an authority.
+- But look closer at any estimate, and its authority begins to crumble
+- there is a reason for things like the census.
+- administrations don't even know how many people live in their nation
+- and census is expensive
+
+
+
+<!-- natural experiments -->
+
+- example: snow on cholera, 1855
+- people drinking from that one well got sick, the other didn't
+- natural experiment
+- analysis is not complicated statistical model.
+- just comparing the frequency of cholera deaths per household between two water suppliers.
+- one of the suppliers turned out to have bad water giving their customers cholera
+-
+
+
+<!-- five steps of survey sampling -->
+
+- you have finite population
+- and want to know something
+- can't ask entire populaion
+- then the following is what you do, according to [@valliant2000finite], p. 2  
+
+1. define population and what information to collect
+1. choose tool for getting information: questionnaire, experts, physical measurement
+1. Choose the sample
+1. Gather the data from the sample
+1. analyze the data
+
+Step 3 is the most important for the survey sampling mindset.
+Model-based inference frameworks put all the focus on step 5 and often don't care at all what the first four steps have been.
+Because the modelers sometimes even come only in at step 5.
+The data was already collected.
+And sometimes the information on the population was lost, or at least ignored.
+For example many machine learning papers do this.
+One example: predict covid from x-ray images.
+many used flawed data with biased sampled from unclear population (CITE critique paper)
 
 
 ## Assumptions
@@ -219,13 +355,60 @@ Not yet at least, and even then we might jump into the "unethical" category.
 You can't just go ahead and change the GDP of a country.
 
 
+## Where to find the design-based approach
+
+Some places where to find design-based inference
+
+* official statistics
+* census
+* Rent index
+* (Clinical trials)
+
+### Rent Index {-}
+
+* TODO: Kick out example since it's not about finite population. Check how in table-based approach  the variance is reported.
+* Goal: Estimate what is a fair rent, based on 
+* landlords can be forced to adhere to the rent index, within a certain range of euro per square meter
+* two version: Table-based and regression-based, which is the more modern approach
+* lets first focus on table-based, because it is purely design-based
+* TODO: Evaluate whether table-based is pure design-based or not
+* how does rent-index work?
+* TODO: Read about rent index from lmu: How was sampling done and so on
+* i have some experience because the LMU did the rent index for Munich
+* And I was involved in the rent index for Germering
+* First,  a sample of households is drawn from ALL households in Munich, in this case
+* All these households get a letter with survey
+* They fill out survey
+* Dependent on answer, they either get included or not.
+* Included if change in rent or moving in the last 2 years, bc. rent index represents only the latest rent
+* Also excluded: student housing, social housing and anything that is supported by government
+* Then these surveys are used to decide what is the average rent per square meter
+* But there are important factors at play: location, building year, and so on
+* So in the table-based approach, there were literally tables that express the rent per square meter for each combination of rents
+* This is a purely design-based approach: use designed data collection to estimate something
+* Mietspiegel 2015: https://www.mietspiegel-muenchen.de/broschueren/Mietspiegel-fuer-Muenchen_2015_Broschuere-ohne-Karten.pdf
+* Mietspiegel 2021: https://2021.mietspiegel-muenchen.de/broschueren/Mietspiegel_2021_Broschuere.pdf
+* variance usually shown as ranges in which, for a given category of appartment, the rent was within the samples.
+* Even for regression based rent index, Munich still shows the tables for each category
+* Table categories: Baujahr, size, location, apartment equipment such as bath, balcony, type of heating, ...
+* important: actual rents, not predictions. also should be realistic, high pressure bc very political.
+*
+
+
+: collect representative sample, based on criteria. Estimate mean index. formerly it was purely design-based:   
+
+For clinical trials, the design-based approach is a must-have.
+It's usually combined with 
+
 ## Strengths
 
-* Can cancel out lots of confounders.Randomization is one way to remove confounding.
+* Can cancel out lots of confounders. Randomization is one way to remove confounding.
 * Simpler models
+* Simpler to understand than complex models since no fancy assumptions are put in.
 * No distributional assumptions are needed. All variance and such can be directly derived from the sampling approach.
 * Less opportunities for p-hacking and false modeling. For example not always clear which factors to control for. Can be tempting to choose the one the deliver smaller p-value for your hypothesis.
 * More realistic assumptions than statistical models.
+* Gives the focus back to the data. Model-based inference often has the problem that people lose themselves in the details and intricacies of the model, but fail to see that their data sucks. [@dunning2010design]
 
 ## Limitations
 
@@ -237,13 +420,16 @@ You can't just go ahead and change the GDP of a country.
 * And often, in reality, you need statistical models after all
 * For causal questions: You still need some form of causal model. Because this influences your sampling design.
 * "n practice, large, complex regression models are often fitted to the data  produced by these strong research designs" http://www.thaddunning.com/wp-content/uploads/2010/05/Dunning_Rethinking-Social-Inquiry.pdf 
+* not suitable when data samples are small. need to put in more assumptions
+*
+*
 
 
-
+## References
 
 References
 
-* https://ies.ed.gov/ncee/pubs/20174025/pdf/20174025.pdf
+* Paper comparing model and design-based inference [@sterba2009alternative]: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
 * http://thaddunning.com/wp-content/uploads/2010/05/Dunning_Rethinking-Social-Inquiry.pdf
-* Paper comparing model and design-based inference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/
 * Book on natural experiments, and the design-based approach: https://jonnyphillips.github.io/FLS6415/Class_5/Dunning%20Natural%20Experiments.pdf
+* Book on Survey Sampling: [@valliant2000finite] https://www.researchgate.net/profile/Richard-Valliant/publication/351559479_Finite_Population_Sampling_and_Inference_A_Prediction_Approach_2000/links/609d3aed458515c2658c431a/Finite-Population-Sampling-and-Inference-A-Prediction-Approach-2000.pdf?_sg%5B0%5D=bxvvRmPRe-zDqsMcSaTJkPsqtc0iJZ8Qo47aus90YZ3uKIM-R4nyTWfHP5QjMh2bQoUNKM3Ki5fT2ZsHn3YcMw.ghZ-BoueewJi5X5hLLXPZNwAw5iZA3LBGC2WiZwjmQd6pSxjBq0iwgCpa2GRqkYfeeQFYMCQEB4YkP-xbuvYNQ&_sg%5B1%5D=BOeuKG_LrtfCCBdcNWekq27b3Ph9HYvZh0owIV4Mx9Uz6xBcGPLszIH-RkA7j0ZCN_0-w2G6B9X8-kWfwOWpQfBKaKpeyEQglcc1TjTPRIeQ.ghZ-BoueewJi5X5hLLXPZNwAw5iZA3LBGC2WiZwjmQd6pSxjBq0iwgCpa2GRqkYfeeQFYMCQEB4YkP-xbuvYNQ&_iepl=
