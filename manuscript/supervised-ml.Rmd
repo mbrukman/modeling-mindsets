@@ -134,7 +134,7 @@ Imagine the hypothesis space as a dark forest.
 Machine learning algorithm are like flashlights that illuminate parts of the space so that within these illuminated regions we can look for the best $f$.
 The machine learning algorithms vary in the shape and complexity that they allow for $f$.
 Decision tree algorithms produce $f$'s that look like step functions, as most trees algorithms only allow discrete jumps of the prediction.
-Neural network are universal function approximators that can, in theory, approximate any function $f$. <!-- citation needed -->
+Neural network are universal function approximators that can, in theory, approximate any function $f$. [@hornik1989multilayer]
 
 <!-- optimization procedures -->
 Each machine learning algorithm has it's own procedure of searching through the hypothesis space.
@@ -211,7 +211,7 @@ This allows you to test your skills without having to waste your chances in the 
 <!-- test data -->
 Rigorous evaluation is close to the supervised machine learners heart.
 A model generalizes well to the real world when the generalization error is low.
-A typical recommendation of supervised machine learners is to set up the evaluation pipeline even before training the first model. <!-- citation needed -->
+A typical recommendation of supervised machine learners is to set up the evaluation pipeline even before training the first model.
 In supervised machine learning, evaluation means measuring some loss $L$ for unseen data, usually called "test data".
 The test data is like the jury in the cooking contest.
 The machine learner is not allowed to use this data to train the model or test it prematurely.
@@ -404,7 +404,7 @@ If your task requires a model with well-grounded theory that can explain relatio
 * Supervised learning is not as theoretically well founded as statistical modeling.
 * Uncertainty quantification is not a first class citizen in supervised learning like it is in [Bayesian inference](#bayesian), for example. Either the modeler has to rely on a subset of machine learning models that quantify uncertainty (for example Gaussian processes) or they have to use additional tools such as conformal prediction.
 * Automation can lead to overlooking issues with the data and the task formulation.
-* Generalization error is a good way to quantify generalization, but it can fail in the dumbest ways. There are many examples, like using an asthma diagnosis as a predictor for lower risk of pneumonia<!--citation needed-->, classifying images because of watermarks<!--citation needed-->, wrongly classifying dogs as wolfs because of snow in the background<!--citation needed-->.
+* Generalization error is a good way to quantify generalization, but it can fail in the dumbest ways. There are many examples, like using an asthma diagnosis as a predictor for lower risk of pneumonia[@caruana2015intelligible], classifying images because of watermarks [@lapuschkin2019unmasking], wrongly classifying dogs as wolfs because of snow in the background[@ribeiro2016should].
 
 ## References
 
