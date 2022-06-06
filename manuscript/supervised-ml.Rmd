@@ -169,9 +169,6 @@ fcurve = data.frame(x = x, y = f(x))
 sampl = data.frame(x = c(-2.9, -2.8, -1, -0.4, -0.3, -0.1, 0, 1, 2, 2.5, 2.8))
 sampl$y = f(sampl$x) + rnorm(n = nrow(sampl), sd = 3)
 
-g1 = loess(y ~ x, data = sampl, span = 0.2)
-fcurve$g1 = predict(g1, newdata = fcurve)
-
 g2 = loess(y ~ x, data = sampl, span = 2)
 fcurve$g2 = predict(g2, newdata = fcurve)
 
