@@ -1,15 +1,51 @@
 # Unsupervised Machine Learning {#unsupervised-ml}
 
+<!-- TODOs
+
+-
+
+-->
+
+
 * Focus on finding patterns in the data with clustering, dimensionality reduction and finding associations.
 * One of the three [machine learning](#machine learning) mindsets along with [supervised machine learning](#supervised-ml) and [reinforcement learning](#reinforcement-learning).
 
 
+- friends dont let friends do unsupervised machine learning
+- i hate the term unsupervised
+- what does it mean
+- the modeler has no supervision?
+- btw also hate supervised 
 
-Unsupervised machine learning is any learning algorithm that does not use labels and is not framed as actor in an environment.
-Unsupervised machine learning is like the random drawer in your house.
-The "unsupervised" drawer at my home contains a Swiss knife, a bike lock, a reading lamp, ear plugs, a torch, ...
-Maybe it's a bit to harsh.
-Because there is one commonality between most unsupervised approaches.
-Unsupervised machine learning techniques often have as result a description of the data distribution.
-Clustering finds the center of the distributions, dimensionality reduction the features that are most important to describe the data distribution, anomaly detection detects data points that are outside of the distribution and so on. 
+- better name would be label-based ml and distribution-based ml or so.
+
+## Examples
+
+- customer segmentation: TODO: find example on internet
+- fraud detection using outlier detection. TODO: find example from financial industry
+- dimensionality reduction for ???
+
+## Unsupervised Machine Learning
+
+- we'll use a statistical language to describe unsupervised ml
+- even if many approaches are not motivated by stats at all
+- but stats still useful language to describe what unsupervised methods have in common
+- let's call the distribution of $P(X)$
+- there is no $Y$ as we don't have to distinguish the variables
+- all unsupervised have in common that the simplify or extract aspects of $P(X)$, favoring features that contribute to $P(X)$ or are important
+- is the defintion to big and also includes supervised?
+- no, because it's $P(Y|X)$ for supervised machine learning 
+- Unsupervised machine learning techniques often have as result a description of the data distribution.
+- Clustering finds the center of the distributions, dimensionality reduction the features that are most important to describe the data distribution, anomaly detection detects data points that are outside of the distribution and so on. 
+
+-  Unsupervised machine learning is any learning algorithm that does not use labels and is not framed as actor in an environment.
+## Many Tasks
+
+TODO: Visualize the different tasks: outlier/cluster, association rules, dim red, association rules
+
+
+## Difficult Evaluation 
+
+
+
 
