@@ -1,5 +1,9 @@
 # Unsupervised Machine Learning {#unsupervised-ml}
 
+* Focus on finding patterns in the data with clustering, dimensionality reduction and finding associations.
+* One of the three [machine learning](#machine learning) mindsets along with [supervised machine learning](#supervised-ml) and [reinforcement learning](#reinforcement-learning).
+
+
 
 Unsupervised machine learning is any learning algorithm that does not use labels and is not framed as actor in an environment.
 Unsupervised machine learning is like the random drawer in your house.
