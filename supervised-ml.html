@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-05-31" />
+<meta name="date" content="2022-06-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -232,13 +232,26 @@ div.csl-indent {
 <li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-4"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
 <li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-4"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>10</b> Supervised Machine Learning</a></li>
+<li class="chapter" data-level="10" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>10</b> Supervised Machine Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="supervised-ml.html"><a href="supervised-ml.html#competing-with-the-wrong-mindset"><i class="fa fa-check"></i><b>10.1</b> Competing With the Wrong Mindset</a></li>
+<li class="chapter" data-level="10.2" data-path="supervised-ml.html"><a href="supervised-ml.html#predict-everything"><i class="fa fa-check"></i><b>10.2</b> Predict Everything</a></li>
+<li class="chapter" data-level="10.3" data-path="supervised-ml.html"><a href="supervised-ml.html#supervised-machine-learning"><i class="fa fa-check"></i><b>10.3</b> Supervised Machine Learning</a></li>
+<li class="chapter" data-level="10.4" data-path="supervised-ml.html"><a href="supervised-ml.html#learning-is-searching"><i class="fa fa-check"></i><b>10.4</b> Learning Is Searching</a></li>
+<li class="chapter" data-level="10.5" data-path="supervised-ml.html"><a href="supervised-ml.html#evaluation"><i class="fa fa-check"></i><b>10.5</b> Evaluation</a></li>
+<li class="chapter" data-level="10.6" data-path="supervised-ml.html"><a href="supervised-ml.html#an-automatable-mindset"><i class="fa fa-check"></i><b>10.6</b> An Automatable Mindset</a></li>
+<li class="chapter" data-level="10.7" data-path="supervised-ml.html"><a href="supervised-ml.html#a-competitive-mindset"><i class="fa fa-check"></i><b>10.7</b> A Competitive Mindset</a></li>
+<li class="chapter" data-level="10.8" data-path="supervised-ml.html"><a href="supervised-ml.html#nature-statistics-and-supervised-learning"><i class="fa fa-check"></i><b>10.8</b> Nature, Statistics and Supervised Learning</a></li>
+<li class="chapter" data-level="10.9" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-5"><i class="fa fa-check"></i><b>10.9</b> Strengths</a></li>
+<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-5"><i class="fa fa-check"></i><b>10.10</b> Limitations</a></li>
+<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#references"><i class="fa fa-check"></i><b>10.11</b> References</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html"><i class="fa fa-check"></i><b>11</b> Unsupervised Machine Learning</a></li>
 <li class="chapter" data-level="12" data-path="reinforcement-learning.html"><a href="reinforcement-learning.html"><i class="fa fa-check"></i><b>12</b> Reinforcement Learning</a></li>
 <li class="chapter" data-level="13" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>13</b> Deep Learning</a></li>
 <li class="chapter" data-level="14" data-path="interpretable-ml.html"><a href="interpretable-ml.html"><i class="fa fa-check"></i><b>14</b> Interpretable Machine Learning</a></li>
 <li class="chapter" data-level="15" data-path="design-based-inference.html"><a href="design-based-inference.html"><i class="fa fa-check"></i><b>15</b> Design-based Inference</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li> 
 <li><a href="https://christophmolnar.com/impressum/" target="_blank">Impressum</a></li>
@@ -268,13 +281,312 @@ div.csl-indent {
 
 <div id="supervised-ml" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Supervised Machine Learning<a href="supervised-ml.html#supervised-ml" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<ul>
-<li>Focus on prediction rather than understanding the data-generating process.</li>
-<li>Focus on loss minimization and evaluation with unseen data.</li>
-<li>Alternative to the random variable focused <a href="statistical-modeling.html#statistical-modeling">statistical modeling mindset</a>, but also draws heavily from it, method-wise.</li>
-</ul>
-<p><strong>This chapter is under construction! Stay tuned.</strong></p>
+<!-- TODO
 
+* mention semi-supervised learning?
+
+-->
+<ul>
+<li>Prediction-focused mindset which invites automation and competition.</li>
+<li>A good model has a low generalization error - it predicts unseen data well.</li>
+<li>A type of <a href="machine-learning.html#machine-learning">machine learning</a> mindset.</li>
+</ul>
+<div id="competing-with-the-wrong-mindset" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Competing With the Wrong Mindset<a href="supervised-ml.html#competing-with-the-wrong-mindset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- Motivation: short-coming of stats mindset in ML competition -->
+<p>It was 2012, and I had just fitted a statistical model to predict type 2 diabetes given risk factors.
+And now it was time to put the model to the test.
+You see, I wasn’t the only one modeling diabetes:
+I was competing with many others data scientist on who predicts diabetes best.
+I uploaded the CSV-file with the prediction results.
+High hopes, fingers crossed.
+But then the disappointment.
+My model was far away from the best results.
+What had happened?</p>
+<p>At the time, I was a Master’s student of statistics.
+I modeled diabetes risk using a generalized additive model, a model often used in statistical modeling.
+But more importantly, I built the model with a frequentist modeling mindset, thinking about the data-generating process, manually adding or removing features to the model, and so on.
+The statistical modeling mindset failed me in this prediction competition.
+And that’s what confused me at first: statistical models can be used for prediction and classification, and you find the same statistical models also used in machine learning.
+Heck, statistical learning is even one of the foundations of machine learning!
+This overlap in theory and methods can trick one into thinking that statistical modeling and supervised machine learning are exchangeable.<br />
+But the (archetypal) modeling mindsets are fundamentally different, especially the idea of what constitutes a good model and how evaluation works.
+Personally, the disappointing model performance had been a catalyst for me in understanding the supervised machine learning mindset.
+More so than any university lecture could have been.
+For this competition, I seriously started learning about specific machine learning models such as boosting and random forests, but also about how to properly evaluate the performance of machine learning models.
+While I didn’t win any money in the competition (place 59 out of 145), I gained something more valuable:
+With supervised machine learning, I could add a new modeling mindset to my tool set.</p>
+</div>
+<div id="predict-everything" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Predict Everything<a href="supervised-ml.html#predict-everything" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In supervised machine learning, everything is a prediction task.
+If it’s not a prediction task, it’s not supervised machine learning.
+<!-- Definition of Prediction -->
+Quick not before complaints come flowing in: I define as prediction, a proposition of a value that is unknown at a certain point in time, but interesting to know, and in theory also knowable.
+To assign a cluster to a data point is not a prediction, since we can never know whether the cluster exists.
+Prediction can mean assigning a classification score, a numerical value (regression), a survival time, and many more.<br />
+It’s quite surprising just how many applications can be framed as prediction task:</p>
+<ul>
+<li>Credit worthiness can be expressed as the probability that someone will pay back the loan. Based on information about the person’s finances and the particulars of the loan they want to take out, a predictive model can assign a score that says how likely the person will pay back the loan.</li>
+<li>Predictive maintenance: Many machines and other equipment have to be regularly checked and repaired. Supervised machine learning models can be used to predict when the machines might fail, based on the current condition.</li>
+<li>Demand forecast: Using historical sales data to estimate the demand for a product.</li>
+<li>Image classification: Based on the image pixels, how should the image be classified? For example, can be used for detecting cancer cells on cell images.</li>
+</ul>
+<p>As these examples show, supervised machine learning inherits the “task-oriented” trait from the machine learning mindset.
+Prediction is a task and can be used to do practical things.
+Only allow prediction tasks in a mindset might seem very narrow.
+There is not only a huge array of application and fields where prediction can be used, but also the data types that can be used vary:
+The input to the predictive model, usually called features, can be text, an image, a time series, a DNA sequence, a video, a good old Excel table, …</p>
+<p>A supervised machine learner translates any problem, if possible, into a prediction problem.
+That’s a quite curious trait which I experienced for myself as well.
+It really changes ones view on problems, when for each problem you try to translated it into a prediction problem.</p>
+</div>
+<div id="supervised-machine-learning" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Supervised Machine Learning<a href="supervised-ml.html#supervised-machine-learning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- risk minimization -->
+<p>Seeing everything as a prediction problem is not the only defining trait of the supervised machine learning mindset.
+A core idea of supervised machine learning is risk minimization with the goal of getting a low generalization error.
+This is expressed as a loss function <span class="math inline">\(L\)</span> which measures how far away the prediction <span class="math inline">\(f(x)\)</span> based on features <span class="math inline">\(x\)</span> is from the actual value <span class="math inline">\(y\)</span>.
+The goal in supervised machine learning is to find the function <span class="math inline">\(f\)</span> that minimizes the loss across the data:</p>
+<p><span class="math display">\[\arg \min_{f} L(y, x, f(y))\]</span></p>
+<!-- externally motivated -->
+<p>The emphasis here is on optimization of the loss, and there are no specific restrictions on what type of functions are allowed for <span class="math inline">\(f\)</span>.
+In statistical modeling, <span class="math inline">\(f\)</span> would have to be motivated based on probability distributions, but in machine learning, anything is allowed in principle.
+This makes supervised learning a true child of machine learning: It’s externally motivated by how well it works in predicting the values we are interested in.
+In the section about evaluation, the external motivation will become even clearer.</p>
+<!-- difference from unsupervised -->
+<!-- why own mindset -->
+<p>Is there enough meat to the claim that supervised machine learning is its own mindset, and not just one subtype of machine learning?
+I think very strongly about supervised machine learning being its own mindset.
+The reason why sounds very clergical, but has strong implications on the mindset: ground truth.
+Compared to unsupervised and reinforcement learning, we need a ground truth for the data to train a model.
+Whatever it is the model should predict, we need to have the actual values, at least for some data points.
+I know many machine learning researchers that exclusively work on supervised machine learning.
+And they wouldn’t even consider working on unsupervised learning.
+Just because there is no ground truth available, by definition, so it’s unclear how to evaluate the models.
+The availability of a ground truth makes it very straightforward to measure how well the model performs.
+It means that you try to stay away from problems that don’t have a ground truth.</p>
+</div>
+<div id="learning-is-searching" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Learning Is Searching<a href="supervised-ml.html#learning-is-searching" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We have danced around the question of what is <span class="math inline">\(f\)</span>, the function that maps from the features <span class="math inline">\(x\)</span> to the desired values <span class="math inline">\(y\)</span>.
+If infinitely many forms and shapes are allowed for <span class="math inline">\(f\)</span>, how is there any chance to find the best <span class="math inline">\(f\)</span>?
+In statistical modeling it’s “easy”: From the theoretical distributions we can derive estimators for <span class="math inline">\(f\)</span>.
+For machine learning we have, with the loss function <span class="math inline">\(L\)</span> a way to evaluate the <span class="math inline">\(f\)</span>’s, but it’s not a way to search <span class="math inline">\(f\)</span>’s.</p>
+<p>We have to go where the functions <span class="math inline">\(f\)</span> live: That would be the hypothesis space.
+It’s a large space.
+I mean infinitely many functions have to live their.
+To meaningfully search this space, we have to make some restrictions on <span class="math inline">\(f\)</span>.
+And that’s where all the different model classes come into play: decision trees, support vector machines, linear regression models, random forests, boosting, neural networks, and so on.</p>
+<p>For simplicity, let’s say we have only one feature <span class="math inline">\(x_1\)</span> and want to predict <span class="math inline">\(y\)</span> from it.
+So the prediction function would be <span class="math inline">\(f(x_1)\)</span>.
+If we restrict ourselves to linear regression models, the <span class="math inline">\(f\)</span>’s to search are of the form <span class="math inline">\(f(x_1) = \beta_0 + \beta_1 x_1\)</span>.
+We have just simplified searching the vast hypothesis space to searching for optimal parameter values <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.
+A much simpler task.</p>
+<p>Similarly all other machine learning algorithm make the hypothesis space manageable, meaning searchable.
+They vary in their expressiveness.
+Trees only allow <span class="math inline">\(f\)</span>’s that look like step functions, as most decision trees algorithms only allow discrete jumps of the prediction.
+Neural network are universal function approximators that can, in theory, approximate any function <span class="math inline">\(f\)</span>.
+Each machine learning algorithm has it’s own procedure of searching through the hypothesis space.
+Most of the times this search is about finding the right parameters for a model, such as neural network weights, but not always.
+Trees for example grow their structure with greedy heuristics.
+Neural networks have gradient descent with backpropagation, regression models use maximum likelihood, and so on.
+All these approaches use training data to find a good <span class="math inline">\(f\)</span>.
+Not the optimal as there are no guarantees that you have found the optimal <span class="math inline">\(f\)</span>.</p>
+<!-- Overfitting -->
+<p>There is one huge problem, which is called overfitting.
+Remember the goal is to get a low generalization error.
+But as long as we only train with training data, we don’t really know how well the model will work with new data.
+But if the training data follows the same hidden patterns like the new data that we expect, than the model surely will learn the right patterns and generalize well?
+Unfortunately, the machine learning models can easily overfit.
+The best mental model for overfitting is thinking of it as memorizing the training data.
+In case of memorization, the model will work perfectly well for the training data, but hasn’t learned generalizable patterns and will fail at predicting new data.
+A typical fix for this is to restrict the hypothesis space so that not arbitrarily flexible functions are learned.
+This is called regularization.</p>
+<p>The opposite problem to overfitting is underfitting.
+When the hypothesis space is too strongly restricted, than we might have an <span class="math inline">\(f\)</span> that underfits the true relationship between features and target.
+Meaning the model will not be flexible enough to model the more complex relationships.</p>
+<p>TODO: Visualize under- and overfitting.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:underoverfitting"></span>
+<img src="figures/underoverfitting-1.png" alt="The true relationship between feature and target (dotted line) is what we look for. But the data generated (points) have some randomness. Two models are shown. One that overfits to the randomness in the training data (black line), and one that underfits (grey line)." width="\textwidth" />
+<p class="caption">
+FIGURE 10.1: The true relationship between feature and target (dotted line) is what we look for. But the data generated (points) have some randomness. Two models are shown. One that overfits to the randomness in the training data (black line), and one that underfits (grey line).
+</p>
+</div>
+<p>But the true guardian against overfitting is the rigorous evaluation that is inherent in the supervised machine learning mindset.</p>
+</div>
+<div id="evaluation" class="section level2 hasAnchor" number="10.5">
+<h2><span class="header-section-number">10.5</span> Evaluation<a href="supervised-ml.html#evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s say you want to enter a cooking competition.
+Like a competition with a jury who judges your food and insults you live on national television if it tastes like ass.
+You’ve been cooking for a while now.
+Fortunately, you have some ground truth data on how well your food is received.
+You often cook for family and friends, and they gave you feedback on how well your dishes tasted.
+Over time your food got better and better, and you always get excellent ratings from family and friends.</p>
+<p>The jury is the ultimate test of your cooking skills.
+You have never cooked for these jurors before.
+So this test is about how well your cooking skills generalize to new data points.
+But are your really confident enough already?
+What if your supposed kitchen prowess is overfitting some weird tastes?
+Like your family could be addicted to salt.
+And the jurors would be like: “Did you cook this with sea water?”, “What is this? Bread? Or a salt lick stone for goats?”.
+To avoid disgrace to family and your name, you decide to validate your skills before this ultimate test.
+So you cook for some more people you haven’t cooked before.
+They allow you to assess your skills without having to “burn” the ultimate test, the cooking competition.</p>
+<!-- test data -->
+<p>Evaluation is close to the machine learners heart.
+A model generalizes well to the real world when the generalization error is low.
+A typical recommendation of supervised machine learners is to set up the evaluation pipeline even before training the first model. <!-- citation needed -->
+In supervised machine learning, evaluation means measuring some loss <span class="math inline">\(L\)</span> for unseen data, usually called “test data”.
+The test data is like the jury in the little introduction story.
+The machine learner is not allowed to use this data to train the model or test it prematurely.
+The test data may only be used for the final evaluation.
+If this is evaluated, the test data will not show the true performance of the model(s) but may be over-optimistic.</p>
+<!-- validation data -->
+<p>Because of this “burning” of the test data, machine learners need another strategy to guide their model building.
+The test data are set apart.
+Whether to compare models or to try different configurations of a model, the machine learner needs unseen data.
+The trick is to replicate this train / test -split again with the test data.
+So we cut off a part of the training data which can be used for evaluating modeling decisions.
+This data set is usually called validation data.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:evaluation"></span>
+<img src="figures/evaluation-1.png" alt="For evaluation, data is usually split into training, validation and test data. More complex splitting schemes exist that do this split multiple times" width="\textwidth" />
+<p class="caption">
+FIGURE 10.2: For evaluation, data is usually split into training, validation and test data. More complex splitting schemes exist that do this split multiple times
+</p>
+</div>
+<!-- many ways for splits -->
+<p>In the simplest version the data is split once in the beginning into training, validation and test data.
+But in reality, multiple such splits are made so that the data is reused in the best way.</p>
+<p>What deserves attention at this point is the emphasis on unseen data.
+This emphasis distinguishes supervised machine learning from the other mindsets.
+In the statistical modeling mindset models are usually evaluated terms of goodness-of-fit, often on training data itself, and diagnostic plots.
+A particular trade of supervised machine learning is the almost exclusive focus on the generalization error as the selection criterion for models.
+This focus, as a consequence, encourages automation and competition – with far reaching consequences for the supervised machine learning mindset.</p>
+<!--
+Interestingly, the evaluation of machine learning algorithms has a [frequentist](#frequentism) character, and is best approached with a frequentist mindset.
+Each evaluation of a model can be seen as an experiment.
+If repeated, but with a different sample of the data, we have exactly the condition of a repeated experiment.
+-->
+<p>CONTINUE HERE</p>
+</div>
+<div id="an-automatable-mindset" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> An Automatable Mindset<a href="supervised-ml.html#an-automatable-mindset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- Invites Automation  -->
+<p>Supervised machine learning, like none of the other mindset, lends itself to automation.
+Guided by one well-defined metric, the generalization error, it’s straightforward to automate the entire process of model training.
+Supervised machine learning is basically an optimization algorithm.
+And computers are good at optimizing.
+For statistical modeling, such as Bayesian and frequentist inference, we need humans to make all the assumptions, pick the right distributions, decide over variables to use, look at diagnostic plots.</p>
+<!-- AutoML -->
+<p>There is an entire subfield of machine learning, AutoML which is concerned with automating the entire training pipeline.
+This can include feature engineering, model training, hyperparameter optimization, evaluation and so on.
+It is computationally expensive to do this, so a lot of research how to cleverly do automated machine learning.
+The complete automation is also a weakness.
+It removes the modelers involvement with the data and the model.
+Automation makes modelers less aware of shortcomings of the data for the task at hand.
+On paper, the model might look mightily fine, based on generalization error.
+But underneath, it might be a garbage, because it uses feature that should not be available at prediction time, or the data are terribly biased, or missing data was not handled correctly to name just a few potential flaws.
+<!-- automl tools -->
+The automation can be witnessed by looking at products.
+Many products, and even entire companies have sprung up to completely automate that part of machine learning.</p>
+</div>
+<div id="a-competitive-mindset" class="section level2 hasAnchor" number="10.7">
+<h2><span class="header-section-number">10.7</span> A Competitive Mindset<a href="supervised-ml.html#a-competitive-mindset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- kaggle and competition -->
+<p>Another consequence of the single-minded evaluation is that supervised learning is a mindset of competition.
+Modeling becomes a sport: Which is the best model for the task?
+But also competition between people.
+Entire websites are dedicated to hosting machine learning competitions, where the top performing modelers get money prices.
+Sometimes substantial ones.
+Your skills as a modeler are reduced to a single metric that can place you on a leaderboard, forming a simple ranking of modelers.
+And ignoring anything else, like domain expertise, model interpretability, coding skills, runtime, …
+The competitive mindset has also invaded machine learning research itself.
+Scientific progress in large parts means finding machine learning algorithms that outperform other algorithms on certain modeling tasks.</p>
+</div>
+<div id="nature-statistics-and-supervised-learning" class="section level2 hasAnchor" number="10.8">
+<h2><span class="header-section-number">10.8</span> Nature, Statistics and Supervised Learning<a href="supervised-ml.html#nature-statistics-and-supervised-learning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As we have seen, the mindsets of statistical modeling and supervised machine learning can differ quite substantially.
+At the core, both mindsets entail very different ideas of what it means to have a model of some aspect of the world.
+This comparison is more or less a summary of the famous paper “Statistical Modeling: The Two Cultures” by Leo Breiman<span class="citation"><sup><a href="#ref-breiman2001statistical" role="doc-biblioref">13</a></sup></span>.</p>
+<p>In a prediction setting, we can think of nature as a mechanism that takes in the features <span class="math inline">\(X\)</span> and produces the output <span class="math inline">\(Y\)</span>.
+This mechanism is unknown, but we would like to approximate it.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nature"></span>
+<img src="figures/nature-1.png" alt="Nature" width="\textwidth" />
+<p class="caption">
+FIGURE 10.3: Nature
+</p>
+</div>
+<p>Statistical modelers “fill” this box with a statistical model.
+The statistical model ought to represent nature.
+To replicate the inner workings of nature.
+That’s why we interpret model parameters and make inference for the real world.
+Since we don’t know nature, we have to make some assumptions.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:stats"></span>
+<img src="figures/stats-1.png" alt="Statistical Model" width="\textwidth" />
+<p class="caption">
+FIGURE 10.4: Statistical Model
+</p>
+</div>
+<p>In supervised machine learning, nature is seen as unknowable, or at least it’s not even attempted to replicate the inner mechanisms of nature.
+Instead of the intrinsic approach, supervised learning takes an external one.
+There is no attempt to uncover the inner workings.
+Instead nature is mimicked.
+We only want to replicate the behaviour of nature, that is getting the predictions right.
+How we get there does not matter.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:supervised"></span>
+<img src="figures/supervised-1.png" alt="Supervised Machine Learning Model" width="\textwidth" />
+<p class="caption">
+FIGURE 10.5: Supervised Machine Learning Model
+</p>
+</div>
+<p>Again, a cooking analogy:
+Let’s say you want to replicate a dish that you had in a restaurant.
+As a statistician would try to get a plausible recipe, even if the end result is not perfect.
+The machine learners are only interested in the end result, it doesn’t matter whether it’s the right recipe.</p>
+<p>None of the approaches is inherently better or more useful than the other.
+They are different mindsets with different strengths and limitations.
+If a task involves evaluation with unseen data against a well-defined performance metrics, the best mindset to approach this task is probably machine learning.
+If your task requires a model with well-grounded theory that can explain relationship in the data, statistical modeling is the way to go.</p>
+</div>
+<div id="strengths-5" class="section level2 hasAnchor" number="10.9">
+<h2><span class="header-section-number">10.9</span> Strengths<a href="supervised-ml.html#strengths-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>The most reasonable mindset when it comes to making predictions.</li>
+<li>Through the loss function <span class="math inline">\(L\)</span> the model can be adapted quite well to the task at hand. Adding further constraints to the model can encode other requirements.<br />
+</li>
+<li>Supervised machine learning is highly automatable.</li>
+<li>Works especially well for working with images and text data.</li>
+<li>Supervised learning has a very coherent evaluation approach, that I personally find very convincing, if maybe to single-minded. Measuring how well new data is predicted by the model is a very compelling way to define a good model.</li>
+</ul>
+</div>
+<div id="limitations-5" class="section level2 hasAnchor" number="10.10">
+<h2><span class="header-section-number">10.10</span> Limitations<a href="supervised-ml.html#limitations-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Supervised learning, without constraints, does usually not produce interpretable models and therefore is not as suitable to extract insights about the modeled relationships. In fact, all relationship is reduced to the generalization error.</li>
+<li>Supervised learning is not as theoretically well founded as statistical modeling.</li>
+<li>Uncertainty quantification, is not a first class citizen in supervised learning. It’s not part of most models, like in <a href="#bayesian">Bayesian inference</a>. Either the modeler has to pick a model that allows uncertainty quantification, or</li>
+<li>Automation can lead to overlooking issues with the data and the task formulation.</li>
+<li>Generalization error is a good way to quantify generalization, but it can fail in the dumbest ways. There are many examples, like using an asthma diagnosis as a predictor for lower risk of pneumonia, classifying images because of watermarks [2], wrongly classifying dogs as wolfs because of snow in the background [3], or predicting a better pneumonia outcome for asthma patients [4]. And, of course, the big issue of adversarial attacks, where a change in even one pixel can derail an image classifier.</li>
+</ul>
+</div>
+<div id="references" class="section level2 hasAnchor" number="10.11">
+<h2><span class="header-section-number">10.11</span> References<a href="supervised-ml.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Statistical Modeling: The Two Cultures by Leo Breiman<span class="citation"><sup><a href="#ref-breiman2001statistical" role="doc-biblioref">13</a></sup></span>. Highly recommend read to understand different modeling mindsets between statistical modeling and supervised machine learning.</li>
+<li>Elements of Statistical Learning<span class="citation"><sup><a href="#ref-hastie2009elements" role="doc-biblioref">14</a></sup></span> is a highly recommended book. It covers not only supervised learning, but also other machine learning topics. It’s written partially from a statistical modeling mindset.</li>
+</ul>
+
+</div>
+</div>
+<h3>References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-breiman2001statistical" class="csl-entry">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Breiman L. Statistical modeling: The two cultures (with comments and a rejoinder by the author). Statistical science. 2001;16(3):199–231. </div>
+</div>
+<div id="ref-hastie2009elements" class="csl-entry">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Hastie T, Tibshirani R, Friedman JH, Friedman JH. The elements of statistical learning: Data mining, inference, and prediction. Vol. 2. Springer; 2009. </div>
+</div>
 </div>
             </section>
 
@@ -313,7 +625,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/christophM/modeling-mindsets/edit/master/manuscript/stub-supervised-ml.Rmd",
+"link": "https://github.com/christophM/modeling-mindsets/edit/master/manuscript/supervised-ml.Rmd",
 "text": "Edit"
 },
 "history": {
