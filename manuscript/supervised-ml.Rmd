@@ -142,6 +142,37 @@ Meaning the model will not be flexible enough to model the more complex relation
 
 TODO: Visualize under- and overfitting.
 
+```{r underoverfitting, fig.cap = "The true relationship between feature and target (dotted line) is what we look for. But the data generated (points) have some randomness. Two models are shown. One that overfits to the randomness in the training data (black line), and one that underfits (grey line)."}
+library(mgcv)
+set.seed(5)
+x = seq(from = -3, to = 3, length.out = 100)
+f = function(x) {
+x - 0.5 * x^2 + 0.3 * x^3 -  10 * sin(x)
+}
+eps = rnorm(length(x)) 
+
+fcurve = data.frame(x = x, y = f(x))
+
+sampl = data.frame(x = c(-2.9, -2.8, -1, -0.4, -0.3, -0.1, 0, 1, 2, 2.5, 2.8))
+sampl$y = f(sampl$x) + rnorm(n = nrow(sampl), sd = 3)
+
+g1 = loess(y ~ x, data = sampl, span = 0.2)
+fcurve$g1 = predict(g1, newdata = fcurve)
+
+g2 = loess(y ~ x, data = sampl, span = 2)
+fcurve$g2 = predict(g2, newdata = fcurve)
+
+ggplot(mapping = aes(x = x, y = y)) +
+  geom_line(data = fcurve, lty = 2, size = 2) +
+  geom_line(aes(y = y), data = sampl, color = "black", size = 2) +
+  geom_line(aes(y = g2), data = fcurve, color = "grey", size = 2) +
+  geom_point(data = sampl, size = 6, color = "grey") +
+  geom_point(data = sampl, size = 5) +
+  theme_void()
+
+```
+
+
 But the true guardian against overfitting is the rigorous evaluation that is inherent in the supervised machine learning mindset.
 
 ## Evaluation
