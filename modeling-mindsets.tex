@@ -162,7 +162,7 @@
 \makeatother
 \subtitle{The Many Cultures of Learning From Data}
 \author{Christoph Molnar}
-\date{2022-05-31}
+\date{2022-06-06}
 
 \begin{document}
 \maketitle
@@ -2291,14 +2291,352 @@ It's like judging food not only by how it tastes, but also by the cooking proces
 \begin{itemize}
 \tightlist
 \item
-  Focus on prediction rather than understanding the data-generating process.
+  Prediction-focused mindset that invites automation and competition.
 \item
-  Focus on loss minimization and evaluation with unseen data.
+  A good model has low generalization error - it predicts unseen data well.
 \item
-  Alternative to the random variable focused \protect\hyperlink{statistical-modeling}{statistical modeling mindset}, but also draws heavily from it, method-wise.
+  A \protect\hyperlink{machine-learning}{machine learning} mindset.
 \end{itemize}
 
-\textbf{This chapter is under construction! Stay tuned.}
+\hypertarget{competing-with-the-wrong-mindset}{%
+\section{Competing With the Wrong Mindset}\label{competing-with-the-wrong-mindset}}
+
+It was 2012, and I had just fitted a statistical model to predict whether a patient would develop type 2 diabetes given some risk factors.
+And now it was time to test the model.
+You see, I wasn't the only one modeling diabetes:
+I was competing with many other data scientists.
+I uploaded the CSV-file with the prediction results to the competition website.
+A table with two columns: One with the patient identifier and one with the probability for that patient to develop diabetes.
+One row per patient.
+Fingers crossed.
+But then came the disappointing results.
+The predictions of my model sucked.
+What had happened?
+
+At the time, I was a master's student in statistics.
+I modeled diabetes risk using a generalized additive model, a model often used in statistical modeling.
+Most importantly, I created the model coming from a frequentist modeling mindset.
+So I thought a lot about the data-generating process, manually added or removed variables, and evaluated the model based on goodness of fit on the training data.
+The statistical modeling mindset failed me in this prediction competition.
+And that what confused me at first.
+After all, statistical models can be used for prediction and classification, and the same statistical models are also used in machine learning.
+Heck! Statistical learning is even one of the foundations of machine learning!
+This overlap of theory and methods may mislead one to believe that statistical modeling and supervised machine learning are interchangeable.
+But the (archetypal) modeling mindsets are fundamentally different, especially the idea of what makes a good model and how evaluation works.
+For me, the disappointing model performance was a catalyst for understanding the supervised machine learning mindset.
+For the diabetes competition, I began to seriously study machine learning models like boosting and random forests, but also how to properly evaluate the performance of machine learning models.
+While I didn't win any money in the competition (59th place out of 145), I did win something more valuable:
+With supervised machine learning, I gained a new modeling mindset.
+
+\hypertarget{predict-everything}{%
+\section{Predict Everything}\label{predict-everything}}
+
+In supervised machine learning, everything is a prediction task.
+Before complaints come rolling in, here is my definition of prediction:
+The proposition of values that are unknown at a given time, but for which a ground truth exists or will exist.
+Assigning data points to a cluster is not prediction because there is no ground truth for the clusters.
+Prediction can mean assigning a classification score, a numerical value (regression), a survival time, etc.\\
+It's amazing how many applications can be formulated as prediction tasks:
+
+\begin{itemize}
+\tightlist
+\item
+  Credit score can be expressed as the probability that someone will repay their loan. Based on information about the person's financial situation, a predictive model assigns a score that indicates how likely it is that the person will pay back the money.
+\item
+  Predictive maintenance: Many machines require regular inspection and repair. Supervised machine learning models can be used to predict when machines might fail based on current conditions.
+\item
+  Demand forecasting: using historical sales data to estimate demand for a product.
+\item
+  Image classification: how should the image be classified? For example, image classification can be used to detect cancer on CT images.
+\end{itemize}
+
+As these examples show, supervised machine learning adopts the ``task-oriented'' trait of the machine learning mindset.
+Prediction is a task and can be used to do practical things.
+A modeling mindset that deals only with prediction tasks seems very narrow.
+But there is a surprisingly large number of applications for which prediction can be useful.
+And the type of data that can be used in predictive models can also be quite diverse:
+The input to the predictive model, usually called features, can be text, an image, a time series, a DNA sequence, a video, a good old Excel spreadsheet, \ldots{}
+
+\hypertarget{supervised-machine-learning}{%
+\section{Supervised Machine Learning}\label{supervised-machine-learning}}
+
+Turning any modeling task into a prediction problem is not the only defining trait of the supervised machine learning mindset.
+A core idea of supervised machine learning is risk minimization.
+And a good supervised model has a low generalization error, meaning that the prediction for new data points is close to the respective ground truth.
+To quantify how close a prediction is to the ground truth, the machine learner uses a loss function \(L(y, f(x))\).
+The loss function \(L\) takes the ground truth value \(y\) and the predicted value \(\hat{y}\) and returns a number.
+The larger the number, the worse the prediction.
+In the diabetes example, \(y\) could be 1 for diabetes and 0 for healthy.
+Accordingly, \(f(x)\) could be the predicted diabetes probability between 0 and 1.
+
+The goal in supervised machine learning is now to find the function \(f\) that minimizes the loss across the data:
+
+\[\arg \min_{f} L(y, x, f(y))\]
+
+The focus here is on optimizing the loss, and there are no specific constraints on what the function \(f\) may look like.
+In statistical modeling, \(f\) would have to be motivated based on probability distributions, but in machine learning, any form is allowed.
+This makes supervised learning a true machine learning mindset:
+The modeling approach is externally motivated by how the model predictions performs on new data.
+The model is trained using one part of the data (training data) and evaluated on another part (test data).
+
+Is there enough to the claim that supervised machine learning is its own mindset?
+I believe that supervised machine learning is mindset of its own.
+The reason sounds very ``bureaucratic'', but it has strong implications on the mindset: supervised machine learning ALWAYS requires a ground truth.
+That's also what separates supervised from unsupervised and reinforcement learning.
+We want the model to predict diabetes? For the training data, we actually need to know if a patients have diabetes.
+The model is supposed to predict machine failure? We need a data set where we have actually observed many machines, some of which have also failed at some point.
+
+The archetypal supervised learner wouldn't even consider working on unsupervised learning.
+For example, I know many machine learning researchers who work exclusively with supervised machine learning.
+There is no ground truth, so what the heck should the model ``predict'' anyway?
+And even if we defined something that the model should ``predict'', without ground truth we wouldn't really know how to evaluate it properly.
+My observation is that in industry people are more pragmatic and it would be harder to find a pure supervised machine learning because there are many problems without labels.
+
+\hypertarget{learning-is-searching}{%
+\section{Learning Is Searching}\label{learning-is-searching}}
+
+We have danced around the question of what the function \(f\) is; the function that maps from the features \(x\) to the desired values \(y\).
+Without any restrictions on the form of \(f\), finding the best or at least a good \(f\) can seem infeasible.
+In statistical modeling it's ``simple'':
+We can derive estimators for \(f\) from the theoretical distributions.
+This makes the search space much smaller, and searching \(f\) is simplified to finding the best parameterization of a statistical model.
+In cases such as the linear regression model, we can even be sure that we have the optimal parameterization.
+In supervised machine learning, the loss \(L\) helps us evaluate the \(f\)'s, but it does not tell us how to search for it.
+
+We have to go where the functions \(f\) live:
+This would be the hypothesis space.
+It's a big space.
+I mean, the space has to hold infinitely many functions, even if you have only one feature from which to predict the target \(y\).
+In order to search within this space, we have to at least put some constraints on what \(f\) might look like.
+And that's where all the different model classes come into play: \textbf{decision trees, support vector machines, linear regression models, random forests, boosting, neural networks}, \ldots{}
+
+For simplicity, let's say we have only one feature \(x_1\) and want to predict \(y\) from it.
+The prediction function would then be \(f(x_1)\).
+If we restrict \(f\) to be a linear model, we only have to search all \(f\)'s of the form \(f(x_1) = \beta_0 + \beta_1 x_1\).
+We have just simplified the search in the vast hypothesis space to the search for the optimal parameters \(\beta_0\) and \(\beta_1\).
+A much simpler task.
+Similarly, all other machine learning algorithms make the hypothesis space manageable so that it can be searched.
+Think of the hypothesis space as a dark forest.
+Machine learning algorithms illuminate paths through the forest so that we can search for the best \(f\) within the these paths.
+The globally best \(f\) might not be within this illuminated path, so we will usually only find a locally optimal \(f\).
+Machine learning algorithms differ in the form and complexity they allow for \(f\).
+Decision tree algorithms produce \(f\)'s that look like step functions, since most trees algorithms only allow discrete jumps in prediction.
+Neural network are universal function approximators that can, in theory, approximate any function \(f\).\textsuperscript{\protect\hyperlink{ref-hornik1989multilayer}{13}}
+
+Each machine learning algorithm has its own procedure to search the hypothesis space.
+Most of the time, this search is about finding the right parameters for a model:
+Neural networks use gradient descent with backpropagation to adjust the weights, regression models use maximum likelihood to find the ideal values for the coefficients, and so on.
+
+\hypertarget{overfitting}{%
+\section{Overfitting}\label{overfitting}}
+
+Supervised machine learning has one major nemesis: overfitting.
+Remember, the goal is to achieve a low generalization error.
+But as long as we only use training data, we don't know how well the model will perform with new data.
+Worse, machine learning models can easily overfit the training data.
+Think of overfitting as memorization of the training data.
+When the model perfectly memorizes the training data, it will have have zero loss on the training data, but will likely perform badly with new data.
+
+The opposite of overfitting is underfitting.
+If the hypothesis space is too constrained, then model may not be flexible enough to represent the true relationship between the input features and the target.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/underoverfitting-1} 
+
+}
+
+\caption{The target y is dependent on x through a function f(x) (dotted line). The observed data (points) have an additional random error. One model overfits the randomness in the training data (black line), and the other underfits (grey line).}\label{fig:underoverfitting}
+\end{figure}
+
+Fitting a supervised model means walking a fine line between underfitting and overfitting.
+Model evaluation is central to finding this delicate balance and not ending up on one side of the cliff or the other.
+
+\hypertarget{evaluation}{%
+\section{Evaluation}\label{evaluation}}
+
+Let's say you want to enter a cooking competition.
+A contest with a panel of judges who will evaluate your food and insult you on live TV if it tastes like crap.
+You've been practicing your cooking skills for a while.
+Fortunately, you have some ``ground truth data'' about how well your food is received.
+You cook for family and friends often, and they've given you feedback on how good your dishes tasted.
+Over time, your dishes got better and better, and today you consistently get excellent reviews from family and friends.
+
+The jury is the ultimate test of your cooking skills.
+You have never cooked for these judges before.
+So this test is about how well your cooking skills generalize to new data points.
+But are your confident enough about your skills?
+What if your supposed kitchen prowess is attuned to strange tastes?
+Your your family might be addicted to salt, for example.
+And the jurors would be like: ``Did you cook this with seawater?'', ``What is this? Bread? Or a salt lick for goats?''.
+In order not to bring shame to your family and name, you decide to validate your skills before this ultimate test.
+So you cook for some new people who have never tried your dishes before.
+This way you can evaluate your skills without having to waste your shot in the contest.
+
+Rigorous evaluation is close to the heart of supervised machine learners.
+A model generalizes well to the real world if the generalization error is low.
+A typical recommendation of supervised machine learners is to set up the evaluation pipeline even before training the first model.
+In supervised machine learning, evaluation means measuring a loss \(L\) for unseen data, usually called ``test data''.
+The test data is like the judges in a cooking competition.
+The machine learner may not to use the test data to train the model or test it prematurely.
+The test data may only be used for the final evaluation.
+If the test data influences the model training or choice in any way, it's ``burned'' and does not show the true performance of the model.
+Rather the evaluation will be too optimistic.
+
+Because of this ``burning'' of the test data, machine learners need different strategy to guide their model building.
+The test data are set aside.
+Whether to compare models or to try different configurations of a model, the machine learner needs unseen data.
+The trick is to repeat this train/test split within the training data.
+So we cut off a portion of the training data that can be used to evaluate modeling decisions.
+This data set is usually referred to as validation data.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/evaluation-1} 
+
+}
+
+\caption{For evaluation, the data is usually split into training, validation and test data. There are more complex splitting schemes where the data is split multiple times.}\label{fig:evaluation}
+\end{figure}
+
+In the simplest version, the data is split once before model training into training, validation and test data.
+In reality, techniques such as cross-validation are used to split the data multiple times and reuse the data intelligently.
+
+\hypertarget{an-automatable-mindset}{%
+\section{An Automatable Mindset}\label{an-automatable-mindset}}
+
+Supervised machine learning is automatable to a degree that surpasses all other mindsets.
+Using a well-defined evaluation procedure, the generalization error, the entire process of model building can be automated.
+Supervised machine learning is essentially an optimization algorithm.
+In statistical modeling, such as Bayesian and frequentist inference, we have to make all the assumptions, choose the right distributions, decide on the variables to use in the model, look at diagnostic plots, \ldots{}
+
+There is an entire subfield of machine learning, AutoML, that deals with automating the entire training pipeline.
+This can include feature engineering, model training, hyperparameter optimization, evaluation, etc.
+Automating the supervised machine learning pipeline is computationally intensive, so there is a lot of research on how to automate everything in a smart way.
+As a result of this automation capability, there is an entire industry with hundreds of web services and products that automate the training process for you.
+
+But automation is also problematic.
+It creates distance between the modelers and the underlying modeling task.
+Automation makes modelers less aware of the shortcomings of the data.
+On paper, the model may look very good, because the generalization error is small.
+But under the surface, the model may be a garbage because it uses features that are not available at the time of the prediction, or the data are terribly biased, or missing data were not handled correctly to, name just a few possible errors.
+
+\hypertarget{a-competitive-mindset}{%
+\section{A Competitive Mindset}\label{a-competitive-mindset}}
+
+Another consequence of the one-dimensional evaluation is that supervised learning is a competitive mindset.
+Modeling becomes a sport: which is best model for a task?
+It also invites competition between people.
+Entire websites are dedicated to hosting machine learning competitions where the best modelers can win money.
+Sometimes a lot of money.
+Your skills as a modeler are reduced to your ability to optimize a single metric.
+That metric puts you on the leaderboard, which ranks modelers.
+A ranking that ignores many things, such as domain expertise, model interpretability, coding skills, runtime, \ldots{}
+The idea of competition has also taken hold of machine learning research itself.
+Scientific progress, in large parts, has become a sport.
+Progress in machine learning research is when a new machine learning algorithm beats other algorithms in benchmarks.
+
+\hypertarget{nature-statistics-and-supervised-learning}{%
+\section{Nature, Statistics and Supervised Learning}\label{nature-statistics-and-supervised-learning}}
+
+As we have seen, the mindsets of statistical modeling and supervised machine learning can be quite different.
+At their core, the two mindsets involve different ideas of how to model aspects of the world.
+The following comparison is more or less a summary of Leo Breiman's famous article ``Statistical Modeling: The Two Cultures''.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{14}}
+
+In the context of prediction, we can think of nature as a mechanism that takes features \(X\) and produces output \(Y\).
+This mechanism is unknown and we want to learn about it using models.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/nature-1} 
+
+}
+
+\caption{Nature}\label{fig:nature}
+\end{figure}
+
+Statistical modelers fill this box with a statistical model.
+The statistical model is supposed to represent nature.
+It is supposed to reproduce the inner workings of nature.
+If we are somewhat convinced that we have found the mechanism, we can then take the model parameters and interpret them as if it was the true mechanism in nature.
+Nature's true mechanism is unknown and not fully specified by the data, we have to make some assumptions about the forms of this mechanism, which we represent with the function \(f\).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/stats-1} 
+
+}
+
+\caption{Statistical Model}\label{fig:stats}
+\end{figure}
+
+In supervised machine learning, nature is seen as unknowable, or at least no attempt is even made to reverse-engineer the inner mechanisms of nature.
+Instead of the intrinsic approach, supervised machine learning takes an extrinsic approach.
+The supervised model is supposed to mimic nature.
+It should show the same behaviour as nature, but it doesn't matter if it achieves this behaviour in the same way.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/supervised-1} 
+
+}
+
+\caption{Supervised Machine Learning Model}\label{fig:supervised}
+\end{figure}
+
+Again, a cooking analogy:
+Suppose you want to recreate a dish that you ate in a restaurant.
+A statistician cook would try to find a plausible recipe, even if the end result is not perfect.
+The supervised machine learner cook would only be interested in the end result;
+it doesn't matter whether it's was exactly the same recipe.
+
+No one mindset is inherently better or more useful than another.
+They are different mindsets with different strengths and limitations.
+If a task involves evaluating unseen data against a well-defined performance metric, the best approach to that task is probably supervised machine learning.
+If your task requires a model with a strong theory that can explain the relationships in the data, statistical modeling is the way to go.
+
+\hypertarget{strengths-5}{%
+\section{Strengths}\label{strengths-5}}
+
+\begin{itemize}
+\tightlist
+\item
+  The most straightforward mindset when it comes to making predictions.
+\item
+  Loss function \(L\) allows the model to be adapted quite well to the task at hand.
+\item
+  Supervised machine learning is highly automatable.
+\item
+  Supervised learning has a very coherent evaluation approach that I personally find very convincing, though quite one-sided. Measuring how well the model predicts new data is a very compelling way to define a good model.
+\end{itemize}
+
+\hypertarget{limitations-5}{%
+\section{Limitations}\label{limitations-5}}
+
+\begin{itemize}
+\tightlist
+\item
+  Supervised learning without constraints does not lead to interpretable models and is therefore not as well suited to for gaining insights.
+\item
+  Supervised learning is not as theoretically sound as statistical modeling.
+\item
+  Uncertainty quantification is not a first class citizen as it is in, for example, \protect\hyperlink{bayesian}{Bayesian inference}. The modeler has to rely on a subset of machine learning algorithms that quantify uncertainty (for example Gaussian processes) or they have to use additional tools such as conformal prediction.
+\item
+  Automation can lead to overlooking issues with the data and the task formulation.
+\item
+  Generalization error is a good way to quantify generalization, relying solely on this metric will fail in the dumbest ways. There are many examples, such as using asthma as a predictor of lower risk of pneumonia\textsuperscript{\protect\hyperlink{ref-caruana2015intelligible}{15}}, classifying based on watermarks\textsuperscript{\protect\hyperlink{ref-lapuschkin2019unmasking}{16}}, and misclassifying dogs as wolfs based on snow in the background\textsuperscript{\protect\hyperlink{ref-ribeiro2016should}{17}}.
+\end{itemize}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begin{itemize}
+\tightlist
+\item
+  Statistical Modeling: The Two Cultures by Leo Breiman.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{14}} Highly recommended to understand differences between statistical modeling and supervised machine learning.
+\item
+  I can recommend the book ``Elements of Statistical Learning''\textsuperscript{\protect\hyperlink{ref-hastie2009elements}{18}} which covers not only supervised learning but also other machine learning topics. The book has a strong influence from the statistical modeling mindset.
+\end{itemize}
 
 \hypertarget{unsupervised-ml}{%
 \chapter{Unsupervised Machine Learning}\label{unsupervised-ml}}
@@ -2375,8 +2713,8 @@ It's like judging food not only by how it tastes, but also by the cooking proces
 
 \textbf{This chapter is under construction! Stay tuned.}
 
-\hypertarget{references}{%
-\chapter*{References}\label{references}}
+\hypertarget{references-1}{%
+\chapter*{References}\label{references-1}}
 
 
 \hypertarget{refs}{}
@@ -2428,6 +2766,30 @@ It's like judging food not only by how it tastes, but also by the cooking proces
 \leavevmode\vadjust pre{\hypertarget{ref-gandenberger2016not}{}}%
 \CSLLeftMargin{12. }
 \CSLRightInline{Gandenberger G. Why i am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library; 2016. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-hornik1989multilayer}{}}%
+\CSLLeftMargin{13. }
+\CSLRightInline{Hornik K, Stinchcombe M, White H. Multilayer feedforward networks are universal approximators. Neural networks. 1989;2(5):359--66. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-breiman2001statistical}{}}%
+\CSLLeftMargin{14. }
+\CSLRightInline{Breiman L. Statistical modeling: The two cultures (with comments and a rejoinder by the author). Statistical science. 2001;16(3):199--231. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-caruana2015intelligible}{}}%
+\CSLLeftMargin{15. }
+\CSLRightInline{Caruana R, Lou Y, Gehrke J, Koch P, Sturm M, Elhadad N. Intelligible models for healthcare: Predicting pneumonia risk and hospital 30-day readmission. In: Proceedings of the 21th ACM SIGKDD international conference on knowledge discovery and data mining. 2015. p. 1721--30. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-lapuschkin2019unmasking}{}}%
+\CSLLeftMargin{16. }
+\CSLRightInline{Lapuschkin S, Wäldchen S, Binder A, Montavon G, Samek W, Müller KR. Unmasking clever hans predictors and assessing what machines really learn. Nature communications. 2019;10(1):1--8. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-ribeiro2016should}{}}%
+\CSLLeftMargin{17. }
+\CSLRightInline{Ribeiro MT, Singh S, Guestrin C. " why should i trust you?" Explaining the predictions of any classifier. In: Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining. 2016. p. 1135--44. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-hastie2009elements}{}}%
+\CSLLeftMargin{18. }
+\CSLRightInline{Hastie T, Tibshirani R, Friedman JH, Friedman JH. The elements of statistical learning: Data mining, inference, and prediction. Vol. 2. Springer; 2009. }
 
 \end{CSLReferences}
 
