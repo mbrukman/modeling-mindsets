@@ -43,6 +43,7 @@ Combine different models: SM Socrates models: https://arxiv.org/pdf/2204.00598.p
 
 ## Limitations
 
+* Adversarial attacks
 
 References:
 
