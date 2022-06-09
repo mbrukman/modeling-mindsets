@@ -1,0 +1,103 @@
+# Reinforcement Learning {#reinforcement-learning}
+
+* The world is dynamic: The model is about an actor acting in an environment. The actions of the agent are only rewarded at the end.
+* Reinforcement learning balances exploration and exploitation,
+* A sub-mindset of [machine learning](#machine-learning).
+
+
+<!-- motivation: joke about how static other mindsets are -->
+- start with some joke about how static the other mindsets are
+-
+
+<!-- examples of reinforcement learning -->
+I guess since AlphaGos win against human, even many layperson might have heard about reinforcement learning.
+- AlphaGO, Starcraft, ...
+- very general mindset, applicable in many areas
+- TODO: Find list of application areas
+- example 1: baking cookies in the Google cafeteria. TODO: research the story
+- example 2: cooling servers (also google?). TODO: Checkout story
+- example 3? TODO: research another cool application 
+
+
+## The Reinforcement Learning Mindset
+
+- Dynamic mindset
+- instead of just inspecting static dataset, an agent "explores" and interacts with an environment
+- machine learning mindset
+- different from supervised: no labelled input output pairs needed. supervised would need for every agent decision some information how good the decision was.
+- reinforcement learning, in contrast, gets the reward in the end. and has to propagate it all the way back to learn
+- finding balance between exploration and exploitation
+- exploitation: exploiting current knowledge of how to get a nice reward
+- exploration: venture out into uncharterd territory and find out what rewards await there.
+
+
+## Reinforcement Learning Theory
+
+- goal: agent should find optimal policy to maximize the reward function
+- the model of the  world is described with:
+  - state of agent and environment ($S$), for each time step
+  - time
+    - time is a differentiator to the other mindsets
+    - there is of course time series forecasting in supervised and in stats, but time is different in RL
+  - an agent
+  - a set of possible actions $A$ the agent could take. can also change at each time step
+  - the action that was taken for each time step
+  - a policy
+  - the reinforcement learning algorithm
+  - a reward, which the agent receives at the very end of the "game", or at intermediate time points
+  - value: the expected long-term value (discounted) of a state?
+  - value function: maps from state to value.
+- agent interacts with environment via actions which changes the state
+- the policy is a mapping/function from the states and a possible action to a probability. The probability of the agent to take a certain action given a certain state $P(a_t = a | s_t = s)$.
+-
+
+## Misc
+
+- deep reinforcement learning?
+- in general, there are many different types of reinforcement learning algorithms (next to deep reinforcement learning): Q-learning, SARSA, ...
+- we talked about RL assuming full observability of all states.
+  - but you might also have partial observability only. like fog of war in games, or the fact that you don't even know what's happening in the room next to you.
+  - 
+
+## AI fails
+
+- I always looked for opportunities to cite this paper
+- mischieveous AI
+- malicious compliance
+- just too funny 
+- TODO: Cite this paper where the reward fails
+- example: jumping really high, and instead it learns to make a salto
+-
+
+## Strengths
+
+- dynamic
+- with interactions in mind
+- often more realistic to think of a model interacting with an environemnt
+- especially if understanding policy better
+-
+
+## Limitations
+
+- requires lots of simulations or runs. since so many are required, usually have to resort to simulation
+- requires that the task of interest can be sufficiently simulated in some way
+- also the transfer from simulation to real world is tricky
+- I think there is a reason why we are not seeing RL to be used very often.
+- The big wins and big headlines are because of games. In those cases, the code could be directly adapted for simulation. And then when applied "in real life" the game was exactly the same environment
+- Training can be difficult
+- Difficult to define the reward correctly. RL algo might finish task in unexpected ways
+-
+
+## References
+
+- AI Fail paper
+- Some book?
+
+
+
+visualizations
+
+- state, policy, agent. arrow from agent to environment, labelled action. arrow from environment to agent, labelled state,reward. maybe should be two arrows, one for rewards, one for observation/state.
+  - agent could be a box further containing policy, and rl algo: state arrow goes into agent, and splits into two, one to policy, one to rl algo, one arrow from algo to policy, labelled policy update; one arrow out of policy, splitting to one as action into environment, the other goes back into the algo.
+  - see: https://www.mathworks.com/help/reinforcement-learning/ug/what-is-reinforcement-learning.html
+-  
