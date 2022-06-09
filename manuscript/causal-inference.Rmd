@@ -1,4 +1,8 @@
-# Causal Inference
+# Causal inference {#causal-inference}
+
+* Assumes that random variables are connected through cause and effect.
+* Builds a causal model from which statistical estimators are derived.
+* A [statistical modeling mindset](#statistical-modeling) that adds causality to [frequentist](#frequentist-inference) and [Bayesian](#bayesian-inference) inference.
 
 <!-- TODO 
 
