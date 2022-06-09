@@ -1,10 +1,16 @@
-# Supervised Machine Learning {#supervised-ml}
+# Supervised Learning {#supervised-ml}
 
 <!-- TODO
 
 * mention semi-supervised learning?
 * Write about global and local maxima?
-
+* Write more about how the supervised mindset influences current discourses and reality
+  * election forecasting
+  * surveillance (e.g. flagging suspicious conversations by Microsoft)
+  * diagnosis as binary decisions
+  * however: often lacks causality, so decision made in the light of prediction might create havoc
+* Read and cite "The forecast trap"
+  *  
 -->
 
 * Prediction-focused mindset that invites automation and competition.
@@ -405,9 +411,11 @@ If your task requires a model with a strong theory that can explain the relation
 
 * Supervised learning without constraints does not lead to interpretable models and is therefore not as well suited to for gaining insights.
 * Supervised learning is not as theoretically sound as statistical modeling.
+* Making decisions based on only the most likely outcome ignores tail risks from less likely, but possible extreme outcomes.
 * Uncertainty quantification is not a first class citizen as it is in, for example, [Bayesian inference](#bayesian). The modeler has to rely on a subset of machine learning algorithms that quantify uncertainty (for example Gaussian processes) or they have to use additional tools such as conformal prediction.
 * Automation can lead to overlooking issues with the data and the task formulation.
 * Generalization error is a good way to quantify generalization, relying solely on this metric will fail in the dumbest ways. There are many examples, such as using asthma as a predictor of lower risk of pneumonia[@caruana2015intelligible], classifying based on watermarks [@lapuschkin2019unmasking], and misclassifying dogs as wolfs based on snow in the background[@ribeiro2016should].
+* Feedback loops can break the models. Deployed into the wild, supervised learning models influences and even creates data that might end up training a future version of the same model. But this feedback loop is not well understood and difficult to respect in the modeling process.
 
 ## References
 
