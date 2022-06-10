@@ -1,5 +1,10 @@
 # Reinforcement Learning {#reinforcement-learning}
 
+<!-- 
+TODO: checkout https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+
+-->
+
 * The world is dynamic: The model is about an actor acting in an environment. The actions of the agent are only rewarded at the end.
 * Reinforcement learning balances exploration and exploitation,
 * A sub-mindset of [machine learning](#machine-learning).
