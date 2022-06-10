@@ -51,6 +51,16 @@ I guess since AlphaGos win against human, even many layperson might have heard a
 - the policy is a mapping/function from the states and a possible action to a probability. The probability of the agent to take a certain action given a certain state $P(a_t = a | s_t = s)$.
 -
 
+## The Bellman Equations
+
+TODO: check reinforcement learning book p. 79 
+$$V(s) = \arg \max_{a} \left{R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') \right} $$
+
+- Value of state s
+- defined recursively, based on the value of the next state
+- think of the last step where the value is clear when you get the reward, like win or lose a game
+-
+
 ## Misc
 
 - deep reinforcement learning?
@@ -91,7 +101,7 @@ I guess since AlphaGos win against human, even many layperson might have heard a
 ## References
 
 - AI Fail paper
-- Some book?
+- Reinforcement Learning, An introduction [@sutton2018reinforcement]
 
 
 
