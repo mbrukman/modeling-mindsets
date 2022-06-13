@@ -16,7 +16,7 @@ description: "Statistics, machine learning, causality, ... The best data scienti
 always_allow_html: yes
 ---
 
-```{r global-knitr, echo=FALSE}
+```{r global-knitr, echo=FALSE, message=FALSE}
 devtools::load_all()
 # Setting global knitr options
 output <- opts_knit$get("rmarkdown.pandoc.to")

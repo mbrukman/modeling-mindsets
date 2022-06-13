@@ -49,3 +49,5 @@ manuscript/figures
 # macOS specific stuff
 .DS_Store
 
+# literature
+literature/*
