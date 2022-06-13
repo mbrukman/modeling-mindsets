@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Unsupervised Machine Learning | Modeling Mindsets</title>
+  <title>Chapter 11 Unsupervised Learning | Modeling Mindsets</title>
   <meta name="description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Unsupervised Machine Learning | Modeling Mindsets" />
+  <meta property="og:title" content="Chapter 11 Unsupervised Learning | Modeling Mindsets" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Unsupervised Machine Learning | Modeling Mindsets" />
+  <meta name="twitter:title" content="Chapter 11 Unsupervised Learning | Modeling Mindsets" />
   
   <meta name="twitter:description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-06-06" />
+<meta name="date" content="2022-06-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -232,21 +232,36 @@ div.csl-indent {
 <li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-4"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
 <li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-4"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>10</b> Supervised Machine Learning</a>
+<li class="chapter" data-level="10" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>10</b> Supervised Learning</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="supervised-ml.html"><a href="supervised-ml.html#competing-with-the-wrong-mindset"><i class="fa fa-check"></i><b>10.1</b> Competing With the Wrong Mindset</a></li>
 <li class="chapter" data-level="10.2" data-path="supervised-ml.html"><a href="supervised-ml.html#predict-everything"><i class="fa fa-check"></i><b>10.2</b> Predict Everything</a></li>
 <li class="chapter" data-level="10.3" data-path="supervised-ml.html"><a href="supervised-ml.html#supervised-machine-learning"><i class="fa fa-check"></i><b>10.3</b> Supervised Machine Learning</a></li>
 <li class="chapter" data-level="10.4" data-path="supervised-ml.html"><a href="supervised-ml.html#learning-is-searching"><i class="fa fa-check"></i><b>10.4</b> Learning Is Searching</a></li>
-<li class="chapter" data-level="10.5" data-path="supervised-ml.html"><a href="supervised-ml.html#evaluation"><i class="fa fa-check"></i><b>10.5</b> Evaluation</a></li>
-<li class="chapter" data-level="10.6" data-path="supervised-ml.html"><a href="supervised-ml.html#an-automatable-mindset"><i class="fa fa-check"></i><b>10.6</b> An Automatable Mindset</a></li>
-<li class="chapter" data-level="10.7" data-path="supervised-ml.html"><a href="supervised-ml.html#a-competitive-mindset"><i class="fa fa-check"></i><b>10.7</b> A Competitive Mindset</a></li>
-<li class="chapter" data-level="10.8" data-path="supervised-ml.html"><a href="supervised-ml.html#nature-statistics-and-supervised-learning"><i class="fa fa-check"></i><b>10.8</b> Nature, Statistics and Supervised Learning</a></li>
-<li class="chapter" data-level="10.9" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-5"><i class="fa fa-check"></i><b>10.9</b> Strengths</a></li>
-<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-5"><i class="fa fa-check"></i><b>10.10</b> Limitations</a></li>
-<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#references"><i class="fa fa-check"></i><b>10.11</b> References</a></li>
+<li class="chapter" data-level="10.5" data-path="supervised-ml.html"><a href="supervised-ml.html#overfitting"><i class="fa fa-check"></i><b>10.5</b> Overfitting</a></li>
+<li class="chapter" data-level="10.6" data-path="supervised-ml.html"><a href="supervised-ml.html#evaluation"><i class="fa fa-check"></i><b>10.6</b> Evaluation</a></li>
+<li class="chapter" data-level="10.7" data-path="supervised-ml.html"><a href="supervised-ml.html#an-automatable-mindset"><i class="fa fa-check"></i><b>10.7</b> An Automatable Mindset</a></li>
+<li class="chapter" data-level="10.8" data-path="supervised-ml.html"><a href="supervised-ml.html#a-competitive-mindset"><i class="fa fa-check"></i><b>10.8</b> A Competitive Mindset</a></li>
+<li class="chapter" data-level="10.9" data-path="supervised-ml.html"><a href="supervised-ml.html#nature-statistics-and-supervised-learning"><i class="fa fa-check"></i><b>10.9</b> Nature, Statistics and Supervised Learning</a></li>
+<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-5"><i class="fa fa-check"></i><b>10.10</b> Strengths</a></li>
+<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-5"><i class="fa fa-check"></i><b>10.11</b> Limitations</a></li>
+<li class="chapter" data-level="10.12" data-path="supervised-ml.html"><a href="supervised-ml.html#references"><i class="fa fa-check"></i><b>10.12</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html"><i class="fa fa-check"></i><b>11</b> Unsupervised Machine Learning</a></li>
+<li class="chapter" data-level="11" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html"><i class="fa fa-check"></i><b>11</b> Unsupervised Learning</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#what-type-of-traveler-are-you"><i class="fa fa-check"></i><b>11.1</b> What Type of Traveler are you?</a></li>
+<li class="chapter" data-level="11.2" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#unsupervised-machine-learning-mindset"><i class="fa fa-check"></i><b>11.2</b> Unsupervised Machine Learning Mindset</a></li>
+<li class="chapter" data-level="11.3" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#many-tasks"><i class="fa fa-check"></i><b>11.3</b> Many Tasks</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#clustering-and-outlier-detection"><i class="fa fa-check"></i><b>11.3.1</b> Clustering and Outlier Detection</a></li>
+<li class="chapter" data-level="11.3.2" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#anomaly-detection"><i class="fa fa-check"></i><b>11.3.2</b> Anomaly Detection</a></li>
+<li class="chapter" data-level="11.3.3" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#association-rule-learning"><i class="fa fa-check"></i><b>11.3.3</b> Association Rule Learning</a></li>
+<li class="chapter" data-level="11.3.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#dimensionality-reduction"><i class="fa fa-check"></i><b>11.3.4</b> Dimensionality Reduction</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#strengths-6"><i class="fa fa-check"></i><b>11.4</b> Strengths</a></li>
+<li class="chapter" data-level="11.5" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#limitations-6"><i class="fa fa-check"></i><b>11.5</b> Limitations</a></li>
+<li class="chapter" data-level="11.6" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#resources-1"><i class="fa fa-check"></i><b>11.6</b> Resources</a></li>
+</ul></li>
 <li class="chapter" data-level="12" data-path="reinforcement-learning.html"><a href="reinforcement-learning.html"><i class="fa fa-check"></i><b>12</b> Reinforcement Learning</a></li>
 <li class="chapter" data-level="13" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>13</b> Deep Learning</a></li>
 <li class="chapter" data-level="14" data-path="interpretable-ml.html"><a href="interpretable-ml.html"><i class="fa fa-check"></i><b>14</b> Interpretable Machine Learning</a></li>
@@ -280,13 +295,357 @@ div.csl-indent {
   
 
 <div id="unsupervised-ml" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Unsupervised Machine Learning<a href="unsupervised-ml.html#unsupervised-ml" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<ul>
-<li>Focus on finding patterns in the data with clustering, dimensionality reduction and finding associations.</li>
-<li>One of the three <a href="#machine%20learning">machine learning</a> mindsets along with <a href="supervised-ml.html#supervised-ml">supervised machine learning</a> and <a href="reinforcement-learning.html#reinforcement-learning">reinforcement learning</a>.</li>
-</ul>
-<p><strong>This chapter is under construction! Stay tuned.</strong></p>
+<h1><span class="header-section-number">Chapter 11</span> Unsupervised Learning<a href="unsupervised-ml.html#unsupervised-ml" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- TODOs
 
+- find best resources on unsupervised learning 
+-
+
+-->
+<ul>
+<li>Uncovering hidden patterns in the data</li>
+<li>Typical tasks: clustering, anomaly detection, dimensionality reduction, and association rule mining.</li>
+<li>One of the three <a href="#machine%20learning">machine learning</a> mindsets along with <a href="supervised-ml.html#supervised-ml">supervised learning</a> and <a href="reinforcement-learning.html#reinforcement-learning">reinforcement learning</a>.</li>
+</ul>
+<!-- a joke -->
+<p>A bunch of supervised learners and an unsupervised machine learner decide to climb a mountain.
+The trip quickly turns into a race: Who is the first to reach the top of the mountain, and who will be back first at the hut?
+The supervised learners give all their best, trying to outperform each other, but the unsupervised learner quickly falls behind.
+After a tough day, one after the other return to their hut, exhausted.
+To their surprise, they find that the unsupervised learner was back at the hut first.
+Cheerfully waiting for the others to return, and with a steaming cup of coffee in his hands, he gives a report on his adventures:
+“When all of you started sprinting, I took a detour. You wouldn’t believe it, but I found a rare mushroom that is not supposed to grow in this region. I also clustered the areas around the hut, by the type of vegetation you can find. But the best thing is that, …”
+“Wait”, one of the supervised learners stops him, “You were not only the first to be back, but you also did all these other things?”
+“I suppose”, the unsupervised learner admits, slightly puzzled why it’s such a big deal.
+“How long did it take you to climb the mountain? Did you find a shortcut? We didn’t see you all day.”, another supervised learner asks.
+“Mountain? What mountain?”</p>
+<!-- unsupervised term associations -->
+<p>Unsupervised always sounds to me like one step away from chaos and anarchy.
+Letting kids to play alone. Discovering all types of new “artwork” on the walls.
+Forgetting about that pizza in the oven, and discovering that the oven has become a gate to the underworld.<br />
+Unsupervised learning, on the other hand, sounds very promising.
+It sounds like the model will figure things out on its own.
+The truth is that unsupervised learning is just another form of machine learning.
+Unsupervised learning is without a ground truth like supervised learning requires.
+It’s also without a reward function as reinforcement learning is built upon.
+The mindset is one or two steps closer to anarchy than the other machine learning mindsets, but it’s far from chaos.
+In fact, it’s a very useful mindset for finding patterns in the data.</p>
+<div id="what-type-of-traveler-are-you" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> What Type of Traveler are you?<a href="unsupervised-ml.html#what-type-of-traveler-are-you" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- example customer segmentation -->
+<p>Tip Top Travel, a traveling agency I just made up, offers a broad range of travels, ranging from all-inclusive hotels in Spain, to hiking and camping weekends in Norway and weekend city trips to Paris.
+They have lots of records about their long-term customers traveling behavior: Frequency, time of the year, destination, group size, cost of the trip, and so on.
+And yet, they <strong>know</strong> surprisingly little about the overall patterns in their data: Are there some prototypes of customers?
+Are the frequent combinations, say, do trips to Norway imply that the customer will also book trips to Sweden?
+That’s like the dream setup for unsupervised machine learners.
+They would probably start with a cluster analysis, and find out what types of customers Tip Top Travel has.
+Customers are in the same cluster when their past bookings look similar.
+<!-- some clustering details using k-means -->
+We can measure this similarity based on the features (frequency, location, budget, …) and the distances.
+If Tom books 4 trips per year he is more similar to Tina who books 5 a year than to Timo who books 1 per year.
+It get’s more tricky because the measure of distance between travelers has to combine features on very different scales, like money, geographical location, counts, and so on.
+But I’ll rant about this problem later.
+We could use, for example, the k-means algorithm to find clusters.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:clustering1"></span>
+<img src="figures/clustering1-1.png" alt="Good clustering solution based on k-means." width="\textwidth" />
+<p class="caption">
+FIGURE 11.1: Good clustering solution based on k-means.
+</p>
+</div>
+<p>The k-means algorithm partitions our customers into <span class="math inline">\(k\)</span> clusters.
+And the modeler can say what <span class="math inline">\(k\)</span> should be.
+Each customer is assigned to the cluster with the closets center (mean).
+These cluster centers are iteratively optimized so that all customers in the same cluster are near each other.
+The objective of this entire algorithm is to find cluster centers so that the distances between cluster centers and their assigned data points is minimal, averaged over all customers.</p>
+<!-- clustering done -->
+<p>Great! We now have clusters.
+What now?
+We wanted to know what type of customers Tip Top Travel has.
+We’ll leverage the cluster centers for that, which represent prototype customers.
+One cluster could be “Relaxation-seeking families”.
+The cluster center is a customer who books, roughly twice a year, for 1.9 adults and 2.1 children.
+The most common destination is all-inclusive hotels with pool and beach access where parents can shove their kids to some all-day entertainment program and themselves have their first beer at 11 AM at the pool bar.
+Cluster numero dos is “Luxury Explorer”.
+Customers in this cluster on average book 0.7 trips per year for 1.7 adults, with varying destinations but always in nature with some adventure aspect: hiking, canoeing and camping.
+Of course, there are more cluster.
+But I made those two up anyways and I guess you get the idea.
+The marketing department would absolutely love such results.
+Such clusters deliver data-driven insights about the customers and offers a narrative angle on which marketing campaigns can be built on.
+For example, the company can have marketing campaigns for each cluster.</p>
+</div>
+<div id="unsupervised-machine-learning-mindset" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Unsupervised Machine Learning Mindset<a href="unsupervised-ml.html#unsupervised-machine-learning-mindset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- A mindset of excitement -->
+<p>Unsupervised machine learning has the excitement of an exploration.
+A dataset suddenly becomes a potential treasure.
+Or a new land to discover.
+The supervised machine learner watches from the side lines, gulping an energy drink, preparing for their next attempt in the high jump.
+The only excitement in supervised learning is whether or not the performance of the model will be good or bad.</p>
+<!-- what is unsupervised learning? -->
+<p>Unsupervised learning is a machine learning mindset: task-drive, computer-oriented, and externally motivated.
+It’s task driven – we use it to solve some task, be it clustering, anomaly detection or finding a better representation of the data.
+It’s algorithmic and externally motivated: unsupervised learning is also about reaching the goal, with the “how” not being the primary concern.</p>
+<!-- uniting traits of unsupervised -->
+<p>Unsupervised learning is less coherent than supervised learning with its super tight evaluation and zen-like mindset of optimization.
+The common goal or mindset of all unsupervised learning approaches and tasks has to be described in more fuzzy ways.
+All unsupervised methods are about discovering patterns in the data.
+Still fuzzy.
+Fortunately we can use the language of probability theory.
+Unsupervised learning is about finding a more compact representation of the joint distribution <span class="math inline">\(P(X)\)</span>, or expose some aspects of <span class="math inline">\(P(X)\)</span>.
+That doesn’t mean that the respective algorithms are based on statistical models.
+Some unsupervised methods are based on statistics, but many are not.</p>
+<p>Exposing <span class="math inline">\(P(X)\)</span> includes a long range of tasks:</p>
+<ul>
+<li>Clustering finds the mass centers of the distribution</li>
+<li>Anomaly detection finds extreme data points.</li>
+<li>Association rule learning finds modes in binary featured distributions.</li>
+<li>Dimensionality reduction finds lower-dimensional descriptions of the data.</li>
+<li>…</li>
+</ul>
+<!-- why not full distribution? -->
+<p>It’s funny, why don’t we just estimate <span class="math inline">\(P(X)\)</span> directly and derive all interesting aspects such as anomalies from that?
+Well, estimating the joint distribution is extremely difficult in higher-dimensional spaces.
+And “higher-dimensional” already start when you have just a handful of features.</p>
+<!-- supervised versus unsupervised -->
+<p>We can also express supervised learning as learning a distribution.
+But it’s “just” the conditional distribution <span class="math inline">\(P(Y|X)\)</span> which is much easier to learn than the full joint distribution <span class="math inline">\(P(X)\)</span>.
+Supervised learning is about choosing one feature and making it “special”, and also calling it <span class="math inline">\(Y\)</span>.
+But in unsupervised learning, all features are treated equally, at least in the beginning.
+Of course, each algorithm might give different weight to the features, depending on the task.</p>
+<!-- absence of Y -->
+<p>The absence of the <span class="math inline">\(Y\)</span> to predict also means that we have no ground truth to predict.
+It’s more like, “Here are <span class="math inline">\(n\)</span> data points, please find out something interesting.”
+Then you say “Here is something interesting: I found these 10 clusters.”
+But you will never get feedback if these were the “right” clusters.
+There is no one to pad you on the back, saying “you did great”.
+Your strength as an unsupervised learner has to come from within!
+That’s why unsupervised learning is sometimes called learning without a teacher.
+There is not teacher to correct what the model does.
+That’s why we can also sharply distinguish supervised learning as its own mindset from unsupervised learning.</p>
+<!-- An Open  Mindset -->
+<p>To be more cheerful about unsupervised learning:
+It’s an open mindset in many ways.
+Unsupervised learning means being open to surprises and discovering hidden patterns.
+Already the word patterns hides a pot luck of types of patterns: clusters, outliers, feature representations, association rules, …
+The mindset is also open about methods to get to those discoveries.
+The range of methods is huge, even for a machine learning mindset.
+For clustering alone there are so many different approaches.
+If I had to pick one modeling mindset that’s the most inclusive, it’s unsupervised learning.
+Next to this hippie community, supervised machine learners seem rather dull optimizers that sit with fine suits in their offices looking to increase sales for Q2, so they can get a bonus and add a Porsche to their meaningless lives.</p>
+<!-- still optimization -->
+<p>To be fully honest.
+Unsupervised learning also usually involves optimization.
+Sometimes even with very explicit loss functions.
+But there is much more freedom in what to optimize for, because, hey, where there is no ground truth, there is no wrongdoing.
+And there are even metrics to evaluate the results.
+But again, with lots of freedom to pick one and no correct one.</p>
+</div>
+<div id="many-tasks" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Many Tasks<a href="unsupervised-ml.html#many-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I think it’s best to get a better understanding for the mindset when looking at the, quite different, tasks that fall into the unsupervised learning mindset.</p>
+<div id="clustering-and-outlier-detection" class="section level3 hasAnchor" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Clustering and Outlier Detection<a href="unsupervised-ml.html#clustering-and-outlier-detection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Both clustering and outlier or anomaly detection are two opposites sides of the same coin.
+In both cases were are concerned about where the mass of the data lies, or where not.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:clustering"></span>
+<img src="figures/clustering-1.png" alt="Example of 3 clusters in a two-dimensional feature space. The top right data point could be labelled as outlier." width="\textwidth" />
+<p class="caption">
+FIGURE 11.2: Example of 3 clusters in a two-dimensional feature space. The top right data point could be labelled as outlier.
+</p>
+</div>
+<p>Clusters are, in terms of the joint distribution <span class="math inline">\(P(X)\)</span>, regions in the feature space with many data points.
+Clusters are, ideally, the modes or peaks of the distribution.
+Outliers or anomalies lie in regions where <span class="math inline">\(P(X)\)</span> is small, so a barren desert when it comes to data.
+The clusters are usually defined such that all the data points within a cluster a rather similar in their feature values.
+But between clusters the data should be rather different.
+There are many different approaches for finding clusters: hierarchical clustering, k-means, k-medoids, DB-SCAN, PRIM, Gaussian mixture models, self-organizing maps, …
+They have various motivations, ranging from statistical to more algorithmical, showing again how also unsupervised machine learning is externally motivated: It doesn’t particularly matter <em>how</em> the clusters are detected.
+It’s more important that they successfully find clusters.
+They can produce different clusters.
+Let’s have a look at another solution to the small example:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:clustering2"></span>
+<img src="figures/clustering2-1.png" alt="Worse clustering solution based on ... just picking something by hand." width="\textwidth" />
+<p class="caption">
+FIGURE 11.3: Worse clustering solution based on … just picking something by hand.
+</p>
+</div>
+<!-- distance is difficult -->
+<p>This one is clearly the worse option, at least based on the Euclidean distance.
+But that assumes that the distance in all directions matters equally.
+Maybe the feature that spreads the data in the horizontal direction is rather irrelevant, and we want to give it a smaller weight in the distance computation?
+Domain experts could tell you which features matter and which don’t, but many if not most ambiguities will remain.
+Often the solution is some kind of “give all features the same weight”, which seems like the fair Salomonian solution.
+But the truth is that equal weights is as good as any other solution.
+For example, two of the features might be strongly correlated.
+Take fruits for example:
+We could have the feature “volume” and another one as “volume after peeling”.
+In reality we now have two features with almost the same information.
+De facto this doubles the weight of the feature “fruit volume” for the computation of distances.</p>
+<p>And it gets worse.
+What do we do when features are measured on different scales, like one is a weight, the other is a length, and the third is amount of money?
+How would we even combine those into a single measure of distance, especially when things are even measured in either numerical or categorical features?
+“Excuse me, how do I get from point A to B?”
+“You walk down this street and turn right after 10 meters. Then walk another 7$ and turn left, until red has turned to blue!”.
+And also: What’s closer to a banana? An apple or a lemon?
+Sounds almost like an obscure interview question to get a data scientist position in a FAANG company.
+But it’s a question for which you better have some answer when you cluster fruits.</p>
+<p>So, no one can tell you what’s right.
+As an unsupervised machine learner, you have to live with the ambiguity.
+Going to bed every night, questioning the fabric of space and time.
+Supervised machine learners don’t have this problem, at least not to this degree.
+The weight of the features are guided by the target to predict.
+It’s all supervised.</p>
+</div>
+<div id="anomaly-detection" class="section level3 hasAnchor" number="11.3.2">
+<h3><span class="header-section-number">11.3.2</span> Anomaly Detection<a href="unsupervised-ml.html#anomaly-detection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cyber security specialist monitors the events and logs of the traffic in the intranet.
+Their job is to protect the company against cyber threats: Stealing of trade secrets, malware, digital blackmail, you name it.
+But there are thousands of employees leaving their daily footprint.
+A mass, or rather mess, of data.
+What does an attack look like?
+For some form of attacks, the specialist has rules:
+If someone tries to brute force a password to log into a service, this raises a flag.
+But what about all the behaviors that don’t follow such simple patterns, maybe even some unknown type of attacks?
+Fortunately for the cyber security specialist, there is unsupervised machine learning.
+An anomaly is a data point that is, in some form, extreme or rare data points.
+And Anomaly detection is concerned with finding such extreme data points.
+Typical applications are financial fraud detection and cyber security.
+Many anomaly detection algorithms work by modeling what is “normal” and flag data points that get a low score.
+Isolation forests, a popular anomaly detection tool, instead works by isolating data points that are extreme.
+Other algorithms are directly motivated by probability distribution and flag data points as anomalies when they have a low probability.
+Isolation forests, statistical tests, but also one-class support vector machines and hidden markov models – the pot luck of methods show yet again that machine learning, in this case unsupervised, is a very pragmatic modeling mindset where people just want to get shit done.</p>
+</div>
+<div id="association-rule-learning" class="section level3 hasAnchor" number="11.3.3">
+<h3><span class="header-section-number">11.3.3</span> Association Rule Learning<a href="unsupervised-ml.html#association-rule-learning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I love going shopping.
+Like groceries.
+Many people hate it, but, think about it:
+Supermarkets are incredible places that deserve awe and wonder, and embody humanities progress and ingenuity.
+Supermarkets are like the Schlaraffenland where honey and milk flows in rivers.
+Okay, okay, you have to spent some money to get stuff, but it’s incredible what exotic things you can buy, and just the fact that if you are hungry you can buy whatever there.
+But I am digressions.
+Let’s talk about association rule learning, which is usually introduced along with a shopping basket example.
+When you go grocery shopping, you can see your basket as a binary dataset.
+Either you buy a certain item (1) or you don’t (0).
+Other people go shopping to, generating strings of 0’s and 1’s.</p>
+<p>Baskets may look like this: <span class="math inline">\(\{yeast, flour, salt\}\)</span>, <span class="math inline">\(\{beer, chips\}\)</span>, <span class="math inline">\(\{sandwich, lemonade, chips\}\)</span>, {cheese, onions, tomatoes, potatoes, flour, olive oil, chocolate, beer, chips}$.
+I think you get it, I assume you have been to a supermarket before.</p>
+<p>The goal of association rule learning is to detect the patterns of which item is associated with which other item.
+Do people that buy flour also often buy yeast?
+If this association rule<br />
+Association rule mining is, again, a case of describing <span class="math inline">\(P(X)\)</span>.
+An association rule could be <span class="math inline">\(\{beer\} \Rightarrow \{chips\}\)</span> and would mean that people who buy beer frequently also buy chips.
+Then there are usually constraints that all the items should be frequent, because the modeler would mostly care about modes in the distribution.
+An association <span class="math inline">\(\{pizza Hawaii\} \Rightarrow \{Gatorade\}\)</span> would just be not as interesting (I just assumed that it is infrequent).
+In more formal terms, association rules are short descriptions using conjunctive rules to describe regions of high density regions.
+A well-known algorithm is the apriori algorithm.
+Next time you go to the supermarket, please take a moment.
+Take it all in.
+The fact that you have all these choices.
+The fact that sitting for some hours a day at a computer earns you tokens that you can trade for whatever food it is that you want to have.
+Yes, many bad things are happening in the world, but if you stand in a supermarket with enough tokens, you are living what humanity must have dreamt of for thousands of years, and what we take for granted.
+I hope you can appreciate it as much as I do.</p>
+</div>
+<div id="dimensionality-reduction" class="section level3 hasAnchor" number="11.3.4">
+<h3><span class="header-section-number">11.3.4</span> Dimensionality Reduction<a href="unsupervised-ml.html#dimensionality-reduction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Unfortunately, there is the “curse of dimensionality”.
+The curse lies in the data density decreasing exponentially with each added features.
+So, when we think of the number of data points as staying fixed, adding more features makes any job harder to do, not only for unsupervised learning, such as clustering, but for every modeling approach.
+You can break the curse by finding a priest who is willing to …
+Joke aside, the answer is of course dimensionality reduction.</p>
+<p>This can be images, but also tabular data with lots of columns.
+A common task is to reduce the dimensions, have less features to work with and look at.
+If all features are regarded equally, on what basis can we reduce the dimensionality, you might ask.
+Not all features contribute towards <span class="math inline">\(P(X)\)</span>.
+Some features might have almost no variance.
+Other features might be strongly correlated with other features.
+In both cases we can select a subset of the features.
+There are various methods for feature selection, based on information-theoretic measures such as statistical correlation.</p>
+<p>Or we can take our data and map it into a lower-dimensional space.
+Those dimensionality reductions techniques usually make you wish you had paid better attention in linear algebra.
+They can usually be represented as matrix multiplication of your original feature matrix: principal component analysis (PCA), ICA, non-negative matrix factorization, multidimensional scaling, t-SNE, and so on.
+Data projection sounds a bit like science fiction, but it’s mostly multiplying some matrices with each other, so just science without the fiction.
+If each of your data point represents a vegetables, all of the features height, width and weight could be mapped to one variable that expresses the size of the vegetable.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dimred"></span>
+<img src="figures/dimred-1.png" alt="Dimensionalty reduction" width="\textwidth" />
+<p class="caption">
+FIGURE 11.4: Dimensionalty reduction
+</p>
+</div>
+<p>There are many more tasks besides clustering, outlier detection, association rule learning and dimensionality reduction.
+For example archetypal analysis, latent variables, factor analysis, and much more.
+Unsupervised learning truly is the colorful bird among the modeling mindsets.</p>
+<!-- 
+## Difficult Evaluation 
+
+I have already mentioned it.
+Unsupervised means having no ground truth.
+- no clear measure of success
+- TODO: quote elements of statistical learning
+- different from supervised in this regard
+- supervised learning has clear target
+- deviation from the target is clear measure of success
+- unsupervised learning often evaluated with heuristics
+- this lead to many different approaches of evaluation 
+
+## Unsupervised versus Supervised 
+
+- supervised first
+- if you have labels, and you are interested in them, always use supervised first
+- why?
+- supervised is guided
+- if you have clear goal, you should take this guidance
+- another way: start with unsupervised learning
+- whatever you discover, can be useful for next round of modeling 
+- then you might switch mindset to, for example, supervised learning
+- insights from unsupervised might help to remove some features, do feature engineering and son on
+- how is unsupervised different from simple descriptive statistics?
+- descriptive statistics = mean, median, variance
+- in short, descriptive stats describes distribution
+- difference: it's mostly univariate distribution. only one feature
+- Sometimes two, like correlation and two-dimensional plots of something
+
+## Misc
+
+- difference to descriptive statistics: descriptive often one- or two-dimensional variables only looked at.
+
+-->
+</div>
+</div>
+<div id="strengths-6" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> Strengths<a href="unsupervised-ml.html#strengths-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Find hidden pattern in the data that the modelers with a supervised learning mindset would likely overlook.</li>
+<li>Unsupervised learning works without a ground truth. That means no effort spent labeling data or finding the right variable to predict.</li>
+<li>The entire mindset is just very open-minded in the range of tasks that are included, in the way success can be evaluated, and also open about results and making new discoveries. Unsupervised machine learning is exploration, supervised machine learning is exploitation.</li>
+<li>The potential for discovery can also mean that you discover new business opportunities, learn something new, or get scientific insights.</li>
+<li>The world is messy. It’s common to have data, and the gut feeling that these are unique and potentially insightful. For this case, an unsupervised learning mindset is wonderful, as it gives you the ability to just start diving in, and working out the next steps from there.</li>
+<li>As a more exploratory mindset, unsupervised learning can be a good starting point for further analysis of the data. These further steps might happen within a different mindset.</li>
+<li>Like no other mindset, unsupervised machine learning is poised to somewhat automatically sift through high-dimensional and complex data, and return meaningful results.</li>
+</ul>
+</div>
+<div id="limitations-6" class="section level2 hasAnchor" number="11.5">
+<h2><span class="header-section-number">11.5</span> Limitations<a href="unsupervised-ml.html#limitations-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>One of the biggest limitation is the lack of ground truth which comes hand in hand with the difficulty of evaluating the resulting models. As a consequence, there are so many methods with often very different results.</li>
+<li>Unsupervised machine learning is a good approach against the curse of dimensionality, but still also unsupervised machine learning can suffer greatly from it. The more features, the more meaningless and hard to interpret the clusters become, any data point can seem far away from the “center” making it an outlier.</li>
+<li>After the modeling, to make use of the results, usually requires to interpret the patterns. Especially for clustering and association rule learning. This requires domain expertise and human intervention.</li>
+<li>There is no guarantee that unsupervised learning will reveal meaningful patterns. But even if none are revealed there is no guarantee that it was simply the wrong algorithm, but another might have uncovered something interesting.</li>
+</ul>
+</div>
+<div id="resources-1" class="section level2 hasAnchor" number="11.6">
+<h2><span class="header-section-number">11.6</span> Resources<a href="unsupervised-ml.html#resources-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>The book Machine learning: a probabilistic perspective by Keven Murphy<span class="citation"><sup><a href="#ref-murphy2012machine" role="doc-biblioref">19</a></sup></span></li>
+</ul>
+
+</div>
+</div>
+<h3>References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-murphy2012machine" class="csl-entry">
+<div class="csl-left-margin">19. </div><div class="csl-right-inline">Murphy KP. Machine learning: A probabilistic perspective. MIT press; 2012. </div>
+</div>
 </div>
             </section>
 
@@ -325,7 +684,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/christophM/modeling-mindsets/edit/master/manuscript/stub-unsupervised-ml.Rmd",
+"link": "https://github.com/christophM/modeling-mindsets/edit/master/manuscript/unsupervised-ml.Rmd",
 "text": "Edit"
 },
 "history": {
