@@ -30,7 +30,7 @@ The mindset is one or two steps closer to anarchy than the other machine learnin
 In fact, it's a very useful mindset for finding patterns in the data.
 -->
 
-## What Type of Traveler are you?
+## What Type of Traveler Are You?
 
 <!-- example customer segmentation -->
 Tip Top Travel, a travel agency I just made up, offers a wide range of trips, from all-inclusive holidays in Spain to hiking trips in Norway and weekend city trips to Paris.
@@ -72,10 +72,10 @@ perf = mean(sqrt((datp$x - datp$x.cl)^2 + (datp$y - datp$y.cl)^2))
 p1 = ggplot(dat, aes(x = x, y = y)) +
   geom_point(aes(shape = cl, color = cl), size = 3) +
 #  geom_path(data = outlier_circle) +
-  annotate("label", x = cl$centers[1, 1], y = cl$centers[1, 2] + 0.3, label = "Cluster 1") +
-  annotate("label", x = cl$centers[2, 1], y = cl$centers[2, 2] + 0.3, label = "Cluster 2") +
-  annotate("label", x = cl$centers[3, 1], y = cl$centers[3, 2] + 0.3, label = "Cluster 3") +
-  annotate("text", x = 5, y = 4.5, label = sprintf("Avg. distance: %.2f", perf), size = 5) +
+  annotate("label", x = cl$centers[1, 1], y = cl$centers[1, 2] + 0.5, label = "Cluster 1") +
+  annotate("label", x = cl$centers[2, 1], y = cl$centers[2, 2] + 0.5, label = "Cluster 2") +
+  annotate("label", x = cl$centers[3, 1], y = cl$centers[3, 2] + 0.5, label = "Cluster 3") +
+#  annotate("text", x = 5, y = 4.5, label = sprintf("Avg. distance: %.2f", perf), size = 5) +
   geom_point(data = centers, aes(shape = cl, color = cl), size = 10) +
   coord_fixed() +
   scale_shape_discrete(guide = "none") +
@@ -188,7 +188,7 @@ To get a better understanding of unsupervised learning, let's take a look  at so
 Both clustering and outlier or anomaly detection are two opposites sides of the same coin.
 In both cases, the question is where the mass of the data lies.
 
-```{r clustering, fig.cap = "Example of three clusters in a two-dimensional feature space. The data point on the top right could be called an outlier.", fig.height = 5, fig.width = 10}
+```{r clustering, fig.cap = "Example of three clusters in a two-dimensional feature space. The data point on the top right could be called an outlier.", fig.height = 4, fig.width = 8}
 
 outlier = data.frame(x = 9, y = 4, cl = 1)
 outlier_circle = circleFun(c(outlier$x, outlier$y), 1)
@@ -237,9 +237,9 @@ perf = mean(sqrt((dat2$x - dat2$x.cl)^2 + (dat2$y - dat2$y.cl)^2))
 
 p2 = ggplot(dat2, aes(x = x, y = y)) +
   geom_point(aes(shape = cl, color = cl), size = 3) +
-  annotate("label", x = cl2$x[1], y = cl2$y[1] + 0.3, label = "Cluster 1") +
-  annotate("label", x = cl2$x[2], y = cl2$y[2] + 0.3, label = "Cluster 2") +
-  annotate("label", x = cl2$x[3], y = cl2$y[3] + 0.3, label = "Cluster 3") +
+  annotate("label", x = cl2$x[1], y = cl2$y[1] + 0.5, label = "Cluster 1") +
+  annotate("label", x = cl2$x[2], y = cl2$y[2] + 0.5, label = "Cluster 2") +
+  annotate("label", x = cl2$x[3], y = cl2$y[3] + 0.5, label = "Cluster 3") +
 #  annotate("text", x = 5, y = 4.5, label = sprintf("Avg. distance: %.2f", perf), size = 5) +
   geom_point(data = cl2, aes(shape = cl, color = cl), size = 10) +
   coord_fixed() +
