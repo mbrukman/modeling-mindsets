@@ -17,6 +17,10 @@ fig:evaluation
 fig:nature
 fig:stats
 fig:supervised
+fig:clustering1
+fig:clustering
+fig:clustering2
+fig:dimred
 what-this-book-is-about
 who-this-book-is-for
 models
@@ -79,6 +83,16 @@ strengths-5
 limitations-5
 references
 unsupervised-ml
+what-type-of-traveler-are-you
+the-unsupervised-learning-mindset
+many-tasks
+clustering-and-outlier-detection
+anomaly-detection
+association-rule-learning
+dimensionality-reduction
+strengths-6
+limitations-6
+resources-1
 reinforcement-learning
 deep-learning
 interpretable-ml
