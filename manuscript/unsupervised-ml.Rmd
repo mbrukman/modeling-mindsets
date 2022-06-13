@@ -7,7 +7,7 @@
 
 -->
 
-* Uncovering hidden patterns in the data
+* A more open-ended and diverse mindset focused on uncovering hidden patterns in the data.
 * Typical tasks: clustering, anomaly detection, dimensionality reduction, and association rule mining. 
 * One of the three [machine learning](#machine learning) mindsets along with [supervised learning](#supervised-ml) and [reinforcement learning](#reinforcement-learning).
 
@@ -16,18 +16,17 @@ A bunch of supervised learners and an unsupervised machine learner decide to cli
 The trip quickly turns into a race: Who is the first to reach the top of the mountain, and who will be back first at the hut?
 The supervised learners give all their best, trying to outperform each other, but the unsupervised learner quickly falls behind.
 After a tough day, one after the other return to their hut, exhausted.
-To their surprise, they find that the unsupervised learner was back at the hut first.
-Cheerfully waiting for the others to return, and with a steaming cup of coffee in his hands, he gives a report on his adventures:
-"When all of you started sprinting, I took a detour. You wouldn't believe it, but I found a rare mushroom that is not supposed to grow in this region. I also clustered the areas around the hut, by the type of vegetation you can find. But the best thing is that, ..."
-"Wait", one of the supervised learners stops him, "You were not only the first to be back, but you also did all these other things?"
+To their surprise, they the unsupervised learner already cheerfully waiting for them at the hut.
+"When all of you started sprinting, I took a detour.", the unsupervised learner reported,"You wouldn't believe it, but I found a rare mushroom that is not supposed to grow in this region. I also clustered the areas around the hut, by the type of vegetation you can find. But the best thing is that, ..."
+"Wait!", one of the supervised learners interrupts, "You were not only the first to be back, but you also did all these other things?"
 "I suppose", the unsupervised learner admits, slightly puzzled why it's such a big deal.
 "How long did it take you to climb the mountain? Did you find a shortcut? We didn't see you all day.", another supervised learner asks.
 "Mountain? What mountain?"
 
 <!-- unsupervised term associations -->
 Unsupervised always sounds to me like one step away from chaos and anarchy.
-Letting kids to play alone. Discovering all types of new "artwork" on the walls.
-Forgetting about that pizza in the oven, and discovering that the oven has become a gate to the underworld.     
+Unsupervised is letting kids play alone, only to discover new "artwork" on the walls later.
+Unsupervised is forgetting about that pizza in the oven, and later discovering that the oven has become some kind of gate to the underworld.     
 Unsupervised learning, on the other hand, sounds very promising.
 It sounds like the model will figure things out on its own.
 The truth is that unsupervised learning is just another form of machine learning.
@@ -42,18 +41,19 @@ In fact, it's a very useful mindset for finding patterns in the data.
 Tip Top Travel, a traveling agency I just made up, offers a broad range of travels, ranging from all-inclusive hotels in Spain, to hiking and camping weekends in Norway and weekend city trips to Paris.
 They have lots of records about their long-term customers traveling behavior: Frequency, time of the year, destination, group size, cost of the trip, and so on.
 And yet, they **know** surprisingly little about the overall patterns in their data: Are there some prototypes of customers?
-Are the frequent combinations, say, do trips to Norway imply that the customer will also book trips to Sweden?
-That's like the dream setup for unsupervised machine learners.
-They would probably start with a cluster analysis, and find out what types of customers Tip Top Travel has.
-Customers are in the same cluster when their past bookings look similar.
+Do customers that book, for example, trips to Norway also book trips to Sweden?
+The rich data from our imaginary travel company is like a dream to unsupervised machine learners.
+They would probably start with a cluster analysis to get a grasp on the different types of customers Tip Top Travel has.
+A cluster is a group of customers with similar traveling patterns.
 <!-- some clustering details using k-means -->
-We can measure this similarity based on the features (frequency, location, budget, ...) and the distances.
+Similar means that customers in a cluster are "close" in terms of their feature values, such as booking frequency, travel locations, and average cost of the trip.
 If Tom books 4 trips per year he is more similar to Tina who books 5 a year than to Timo who books 1 per year.
 It get's more tricky because the measure of distance between travelers has to combine features on very different scales, like money, geographical location, counts, and so on.
 But I'll rant about this problem later.
-We could use, for example, the k-means algorithm to find clusters.
+With such a measure of distance at hand, there is many clustering algorithms to pick from, that can deliver clusters.
+For example the  k-means algorithm.
 
-```{r clustering1, fig.cap = "Good clustering solution based on k-means.", fig.height = 5, fig.width = 9}
+```{r clustering1, fig.cap = "Three clusters for two features (x-axis and y-axis) based on k-means clustering.", fig.height = 5, fig.width = 9}
 set.seed(3)
 
 cl1 = data.frame(x = rnorm(20, mean = 0, sd = 1),
@@ -90,9 +90,10 @@ p1 = ggplot(dat, aes(x = x, y = y)) +
 p1
 ```
 
+<!-- how k-means works -->
 The k-means algorithm partitions our customers into $k$ clusters.
-And the modeler can say what $k$ should be.
-Each customer is assigned to the cluster with the closets center (mean).
+The modeler has to pick a $k$, something larger than 2 but smaller than the number of data points.
+Each customer is assigned to the cluster with the closest center.
 These cluster centers are iteratively optimized so that all customers in the same cluster are near each other.
 The objective of this entire algorithm is to find cluster centers so that the distances between cluster centers and their assigned data points is minimal, averaged over all customers.
 
@@ -104,61 +105,58 @@ We wanted to know what type of customers Tip Top Travel has.
 We'll leverage the cluster centers for that, which represent prototype customers.
 One cluster could be "Relaxation-seeking families".
 The cluster center is a customer who books, roughly twice a year, for 1.9 adults and 2.1 children.
-The most common destination is all-inclusive hotels with pool and beach access where parents can shove their kids to some all-day entertainment program and themselves have their first beer at 11 AM at the pool bar.
+The most common destination is all-inclusive hotels with pool and beach access where parents can shove their kids to some all-day entertainment program and then the adults can have their first beer at 11 AM at the pool bar.
 Cluster numero dos is "Luxury Explorer".
 Customers in this cluster on average book 0.7 trips per year for 1.7 adults, with varying destinations but always in nature with some adventure aspect: hiking, canoeing and camping.
-Of course, there are more cluster.
+Of course, there are more clusters.
 But I made those two up anyways and I guess you get the idea.
 The marketing department would absolutely love such results.
-Such clusters deliver data-driven insights about the customers and offers a narrative angle on which marketing campaigns can be built on.
-For example, the company can have marketing campaigns for each cluster.
+Such cluster analysis delivers data-driven insights about the customers and offers a narrative angle on which marketing campaigns can be built.
 
-## Unsupervised Machine Learning Mindset
+## The Unsupervised Learning Mindset
 
 <!-- A mindset of excitement -->
-Unsupervised machine learning has the excitement of an exploration.
-A dataset suddenly becomes a potential treasure.
-Or a new land to discover.
-The supervised machine learner watches from the side lines, gulping an energy drink, preparing for their next attempt in the high jump.
-The only excitement in supervised learning is whether or not the performance of the model will be good or bad.
+Unsupervised learning is like an exploration.
+A dataset suddenly becomes a potential treasure, with valuable insights to be made, and to be surprised what patterns will emerge (or not).
+The supervised learner can only watch from the side lines: gulping an energy drink; preparing for their next race; the only excitement being what the stopwatch will say this time.
 
 <!-- what is unsupervised learning? -->
-Unsupervised learning is a machine learning mindset: task-drive, computer-oriented, and externally motivated.
-It's task driven -- we use it to solve some task, be it clustering, anomaly detection or finding a better representation of the data.
-It's algorithmic and externally motivated: unsupervised learning is also about reaching the goal, with the "how" not being the primary concern.
+Unsupervised learning is a machine learning mindset: task-driven, computer-oriented, and externally motivated.
+Task-driven: we use unsupervised learning to solve specific tasks such as clustering, anomaly detection or finding a better representation of the data.
+Computer-oriented: Like supervised learning, the unsupervised counterpart is motivated by the premise of having a computer instead of the premise of some theory where it's merely handy to have help from a computer.
+Unsupervised learning is externally motivated: while measuring performance is more difficult than in other machine learning mindsets, fulfilling the task successfully is more important than following a certain "recipe" to fulfill it (such as using probability theory).
 
 <!-- uniting traits of unsupervised -->
-Unsupervised learning is less coherent than supervised learning with its super tight evaluation and zen-like mindset of optimization.
-The common goal or mindset of all unsupervised learning approaches and tasks has to be described in more fuzzy ways.
-All unsupervised methods are about discovering patterns in the data.
-Still fuzzy.
-Fortunately we can use the language of probability theory.
+Unsupervised learning is less coherent mindset than supervised learning with its super tight evaluation and zen-like mindset of optimization.
+The unsupervised learning mindset is about discovering patterns in the data, which sounds a bit fuzzy.
+Fortunately, we can use the language of probability theory.
 Unsupervised learning is about finding a more compact representation of the joint distribution $P(X)$, or expose some aspects of $P(X)$.
 That doesn't mean that the respective algorithms are based on statistical models.
-Some unsupervised methods are based on statistics, but many are not.
+Some unsupervised methods are based on statistical modeling, but many are not.
 
-Exposing $P(X)$ includes a long range of tasks:
+Exposing $P(X)$ includes a broad range of tasks:
 
-* Clustering finds the mass centers of the distribution
+* Clustering finds the mass centers of the distribution.
 * Anomaly detection finds extreme data points.
-* Association rule learning finds modes in binary featured distributions.
+* Association rule learning finds modes in binary feature distributions.
 * Dimensionality reduction finds lower-dimensional descriptions of the data.
 * ...
 
 <!-- why not full distribution? -->
-It's funny, why don't we just estimate $P(X)$ directly and derive all interesting aspects such as anomalies from that?
-Well, estimating the joint distribution is extremely difficult in higher-dimensional spaces.
-And "higher-dimensional" already start when you have just a handful of features.
+Why do we need unsupervised learning anyways?
+Can't we just get us some statistician to estimate $P(X)$ and to derive all these interesting aspects from this estimate?
+Well, estimating the joint distribution is extremely difficult for high-dimensional data.
+The difficulties for estimating $P(X)$ already becomes difficult for more than a handful of features if the distribution is complex , not to speak of image or text data.
 
 <!-- supervised versus unsupervised -->
 We can also express supervised learning as learning a distribution.
 But it's "just" the conditional distribution $P(Y|X)$ which is much easier to learn than the full joint distribution $P(X)$.
-Supervised learning is about choosing one feature and making it "special", and also calling it $Y$.
+Supervised learning is about choosing one feature and making it "special" which we also express by giving it a different letter ($Y$).
 But in unsupervised learning, all features are treated equally, at least in the beginning.
 Of course, each algorithm might give different weight to the features, depending on the task.
 
 <!-- absence of Y -->
-The absence of the $Y$ to predict also means that we have no ground truth to predict.
+The absence of the $Y$ to predict also means that we have no ground truth to compare our results to.
 It's more like, "Here are $n$ data points, please find out something interesting."
 Then you say "Here is something interesting: I found these 10 clusters."
 But you will never get feedback if these were the "right" clusters.
@@ -172,26 +170,22 @@ That's why we can also sharply distinguish supervised learning as its own mindse
 To be more cheerful about unsupervised learning:
 It's an open mindset in many ways.
 Unsupervised learning means being open to surprises and discovering hidden patterns.
-Already the word patterns hides a pot luck of types of patterns: clusters, outliers, feature representations, association rules, ...
+The word "pattern" hides a pot luck of diverse meanings: clusters, outliers, feature representations, association rules, ...
 The mindset is also open about methods to get to those discoveries.
 The range of methods is huge, even for a machine learning mindset.
 For clustering alone there are so many different approaches.
-If I had to pick one modeling mindset that's the most inclusive, it's unsupervised learning.
-Next to this hippie community, supervised machine learners seem rather dull optimizers that sit with fine suits in their offices looking to increase sales for Q2, so they can get a bonus and add a Porsche to their meaningless lives.
+If I had to pick one modeling mindset that's the most inclusive, it's unsupervised learning (in terms of methods, not necessarily people).
+Next to this hippie community, supervised learners look like dull optimizers that sit with fine suits in their offices looking to increase sales for Q2, so they can get a bonus and add a Porsche to their meaningless lives.
 
 <!-- still optimization -->
-To be fully honest.
-Unsupervised learning also usually involves optimization.
-Sometimes even with very explicit loss functions.
+Full disclosure: unsupervised learning also involves optimization.
+Sometimes even with clearly motivated loss functions.
 But there is much more freedom in what to optimize for, because, hey, where there is no ground truth, there is no wrongdoing.
-And there are even metrics to evaluate the results.
-But again, with lots of freedom to pick one and no correct one.
+And there are also performance metrics to compare models, but, again, with lots of freedom to pick one.
 
 ## Many Tasks
 
-
-I think it's best to get a better understanding for the mindset when looking at the, quite different, tasks that fall into the unsupervised learning mindset.
-
+To get a better understanding of the unsupervised learning we have a look at some of the tasks that are typical for the mindset.
 
 ### Clustering and Outlier Detection
 
@@ -203,9 +197,9 @@ In both cases were are concerned about where the mass of the data lies, or where
 outlier = data.frame(x = 9, y = 4, cl = 1)
 outlier_circle = circleFun(c(outlier$x, outlier$y), 1)
 
-dat = rbind(dat, outlier)
+dato = rbind(dat, outlier)
 
-ggplot(dat, aes(x = x, y = y)) +
+ggplot(dato, aes(x = x, y = y)) +
   geom_point(aes(shape = cl), size = 3) +
 #  geom_path(data = outlier_circle) +
   annotate("label", x = 8.7, y = 3.3, label = "Anomaly/Outlier") +
@@ -221,16 +215,17 @@ ggplot(dat, aes(x = x, y = y)) +
 
 ```
 
-Clusters are, in terms of the joint distribution $P(X)$, regions in the feature space with many data points.
-Clusters are, ideally, the modes or peaks of the distribution.
-Outliers or anomalies lie in regions where $P(X)$ is small, so a barren desert when it comes to data.
+Clusters are regions in the feature space with a high concentration of data points.
+In terms of $P(X)$, these regions are modes of the distribution.
+Outliers or anomalies lie in regions where $P(X)$ is small, which are regions in the feature space with almost no data points.
 The clusters are usually defined such that all the data points within a cluster a rather similar in their feature values.
 But between clusters the data should be rather different.
 There are many different approaches for finding clusters: hierarchical clustering, k-means, k-medoids, DB-SCAN, PRIM, Gaussian mixture models, self-organizing maps, ...
-They have various motivations, ranging from statistical to more algorithmical, showing again how also unsupervised machine learning is externally motivated: It doesn't particularly matter *how* the clusters are detected.
+These clustering methods have various motivations, ranging from statistical to more algorithmical, showing again how unsupervised learning is externally motivated:
+It doesn't particularly matter *how* the clusters are detected.
 It's more important that they successfully find clusters.
-They can produce different clusters.
-Let's have a look at another solution to the small example:
+Different clustering methods may find very different clusters.
+Let's have a look at a different solution to the cluster analysis from Figure \@ref(fig:clustering1).
 
 ```{r clustering2, fig.cap = "Worse clustering solution based on ... just picking something by hand.", fig.height = 5, fig.width = 9}
 cl2 = data.frame(x = c(2, 0, -0.5), y = c(4, 2, 0))
@@ -263,38 +258,37 @@ p2
 ```
 
 <!-- distance is difficult -->
-This one is clearly the worse option, at least based on the Euclidean distance.
-But that assumes that the distance in all directions matters equally.
+The clusters in Figure \@ref(fig:clustering2) are clearly a bad solution based on the Euclidean distance.
+But this assumes that for computing similarity, both features matter equally.
 Maybe the feature that spreads the data in the horizontal direction is rather irrelevant, and we want to give it a smaller weight in the distance computation?
-Domain experts could tell you which features matter and which don't, but many if not most ambiguities will remain.
-Often the solution is some kind of "give all features the same weight", which seems like the fair Salomonian solution.
-But the truth is that equal weights is as good as any other solution.
-For example, two of the features might be strongly correlated.
-Take fruits for example:
+Domain experts could tell you which features matter and which don't.
+The default is usually to give all features the same weight, which seems like a smart thing to do.
+But in truth, it's the lazy and uninformed thing to do.
+Any other weighting is as good as equal weights.
+For example, when clustering fruts, two of the features might be strongly correlated:
 We could have the feature "volume" and another one as "volume after peeling".
 In reality we now have two features with almost the same information.
 De facto this doubles the weight of the feature "fruit volume" for the computation of distances.
 
 And it gets worse.
 What do we do when features are measured on different scales, like one is a weight, the other is a length, and the third is amount of money?
-How would we even combine those into a single measure of distance, especially when things are even measured in either numerical or categorical features?
-"Excuse me, how do I get from point A to B?"
-"You walk down this street and turn right after 10 meters. Then walk another 7$ and turn left, until red has turned to blue!".
+How would we even combine those features into a single measure of distance, especially when features are even in different cardinalities, like numerical versus categorical features?
+"Excuse me, how do I get from point A to point B?"
+"You walk down this street and turn right after 10 meters. Then you walk another $7 and turn left, until red has turned to blue!".
 And also: What's closer to a banana? An apple or a lemon?
-Sounds almost like an obscure interview question to get a data scientist position in a FAANG company.
-But it's a question for which you better have some answer when you cluster fruits. 
+Sounds almost like an obscure interview question for a data scientist position in a FAANG company.
+But it's a question for which you better have some answers when you do cluster analysis.
 
 So, no one can tell you what's right.
 As an unsupervised machine learner, you have to live with the ambiguity.
 Going to bed every night, questioning the fabric of space and time.
 Supervised machine learners don't have this problem, at least not to this degree.
-The weight of the features are guided by the target to predict.
-It's all supervised.
+The weight of the features is "supervised" by the relationship between the features and the target, for which we know the ground truth.
 
 
 ### Anomaly Detection  
 
-Cyber security specialist monitors the events and logs of the traffic in the intranet.
+Cyber security specialists monitor events and logs of the traffic in the intranet.
 Their job is to protect the company against cyber threats: Stealing of trade secrets, malware, digital blackmail, you name it.
 But there are thousands of employees leaving their daily footprint.
 A mass, or rather mess, of data.
@@ -303,40 +297,39 @@ For some form of attacks, the specialist has rules:
 If someone tries to brute force a password to log into a service, this raises a flag.
 But what about all the behaviors that don't follow such simple patterns, maybe even some unknown type of attacks?
 Fortunately for the cyber security specialist, there is unsupervised machine learning.
-An anomaly is a data point that is, in some form, extreme or rare data points.
-And Anomaly detection is concerned with finding such extreme data points.
+An anomaly is an extreme or rare data point.
+Anomaly detection is concerned with finding such extreme data points.
 Typical applications are financial fraud detection and cyber security.
 Many anomaly detection algorithms work by modeling what is "normal" and flag data points that get a low score.
-Isolation forests, a popular anomaly detection tool, instead works by isolating data points that are extreme.
-Other algorithms are directly motivated by probability distribution and flag data points as anomalies when they have a low probability.
+Isolation forests, a popular anomaly detection tool, instead work by isolating data points that are extreme.
+Other algorithms are directly motivated by probability distributions and flag data points as anomalies when they have a low probability.
 Isolation forests, statistical tests, but also one-class support vector machines and hidden markov models -- the pot luck of methods show yet again that machine learning, in this case unsupervised, is a very pragmatic modeling mindset where people just want to get shit done. 
 
 ### Association Rule Learning
 
 I love going shopping.
 Like groceries.
-Many people hate it, but, think about it:
+Many people hate it, but, because they are unaware of it's magnificence:
 Supermarkets are incredible places that deserve awe and wonder, and embody humanities progress and ingenuity.
 Supermarkets are like the Schlaraffenland where honey and milk flows in rivers.
-Okay, okay, you have to spent some money to get stuff, but it's incredible what exotic things you can buy, and just the fact that if you are hungry you can buy whatever there.
-But I am digressions.
-Let's talk about association rule learning, which is usually introduced along with a shopping basket example. 
+It's incredible what you can get at a supermarket: exotic fruits; spices from all over the world; products with months or even years in the making, like soy sauce, wine and cheese. 
+But I am disgressing.
+Let's talk about association rule learning, which is usually introduced with a shopping basket example. 
 When you go grocery shopping, you can see your basket as a binary dataset.
 Either you buy a certain item (1) or you don't (0).
-Other people go shopping to, generating strings of 0's and 1's. 
+Other people go shopping too, generating their personal strings of 0's and 1's. 
 
-Baskets may look like this: $\{yeast, flour, salt\}$, $\{beer, chips\}$, $\{sandwich, lemonade, chips\}$, \{cheese, onions, tomatoes, potatoes, flour, olive oil, chocolate, beer, chips\}$.
-I think you get it, I assume you have been to a supermarket before.
+Baskets may look like this: $\{yeast, flour, salt\}$, $\{beer, chips\}$, $\{sandwich, lemonade, chips\}$, $\{cheese, onions, tomatoes, potatoes, flour, olive oil, chocolate, beer, chips\}$.
+I think you get the concept and assume that you have been to a supermarket before.
 
-The goal of association rule learning is to detect the patterns of which item is associated with which other item.
-Do people that buy flour also often buy yeast?
-If this association rule  
+The goal of association rule learning is to detect the patterns of which items are associated with which other items.
+Do people who buy flour also often buy yeast?
 Association rule mining is, again, a case of describing $P(X)$.
 An association rule could be $\{beer\} \Rightarrow \{chips\}$ and would mean that people who buy beer frequently also buy chips.
 Then there are usually constraints that all the items should be frequent, because the modeler would mostly care about modes in the distribution.
-An association $\{pizza Hawaii\} \Rightarrow \{Gatorade\}$ would just be not as interesting (I just assumed that it is infrequent).
-In more formal terms, association rules are short descriptions using conjunctive rules to describe regions of high density regions.
-A well-known algorithm is the apriori algorithm.
+An association rule $\{pizza Hawaii\} \Rightarrow \{Gatorade\}$ might be very infrequent and therefore not interesting.
+In more formal terms, association rules are short descriptions using conjunctive rules to describe high density regions in a binary feature space.
+A well-known algorithm is the apriori algorithm, but again, there are many option to choose from.
 Next time you go to the supermarket, please take a moment.
 Take it all in.
 The fact that you have all these choices.
@@ -347,13 +340,9 @@ I hope you can appreciate it as much as I do.
 ### Dimensionality Reduction
 
 Unfortunately, there is the "curse of dimensionality".
-The curse lies in the data density decreasing exponentially with each added features.
-So, when we think of the number of data points as staying fixed, adding more features makes any job harder to do, not only for unsupervised learning, such as clustering, but for every modeling approach.
-You can break the curse by finding a priest who is willing to ...
-Joke aside, the answer is of course dimensionality reduction.
-
-This can be images, but also tabular data with lots of columns.
-A common task is to reduce the dimensions, have less features to work with and look at.
+The curse is that the data density decreases exponentially with each added features.
+When the number of data points stays fixed, adding more features makes any modeling job more difficult, no matter the mindset.
+You can break the curse or at least lessen it's burden by using dimensionality reduction.
 If all features are regarded equally, on what basis can we reduce the dimensionality, you might ask.
 Not all features contribute towards $P(X)$.
 Some features might have almost no variance.
@@ -362,10 +351,10 @@ In both cases we can select a subset of the features.
 There are various methods for feature selection, based on information-theoretic measures such as statistical correlation.
 
 Or we can take our data and map it into a lower-dimensional space.
-Those dimensionality reductions techniques usually make you wish you had paid better attention in linear algebra.
+Those dimensionality reduction techniques usually make you wish you had paid better attention in linear algebra.
 They can usually be represented as matrix multiplication of your original feature matrix: principal component analysis (PCA), ICA, non-negative matrix factorization,   multidimensional scaling, t-SNE, and so on.
 Data projection sounds a bit like science fiction, but it's mostly multiplying some matrices with each other, so just science without the fiction.
-If each of your data point represents a vegetables, all of the features height, width and weight could be mapped to one variable that expresses the size of the vegetable.
+If each of your data point represents a fruit, features like height, width and weight could be mapped to one feature that represents the volume of the fruit.
 
 ```{r dimred, fig.cap = "Dimensionalty reduction", fig.height = 10, fig.width = 20}
 set.seed(1)
@@ -382,7 +371,7 @@ plot(data.frame(x,y))
 ```
 
 
-There are many more tasks besides clustering, outlier detection, association rule learning and dimensionality reduction.
+Unsupervised learning covers more tasks than just clustering, outlier detection, association rule learning and dimensionality reduction.
 For example archetypal analysis, latent variables, factor analysis, and much more.
 Unsupervised learning truly is the colorful bird among the modeling mindsets.
 
@@ -426,7 +415,7 @@ Unsupervised means having no ground truth.
 ## Strengths
 
 - Find hidden pattern in the data that the modelers with a supervised learning mindset would likely overlook.
-- Unsupervised learning works without a ground truth. That means no effort spent labeling data or finding the right variable to predict.
+- Unsupervised learning works without a ground truth. That means no effort spent labeling data or finding the right feature to predict.
 - The entire mindset is just very open-minded in the range of tasks that are included, in the way success can be evaluated, and also open about results and making new discoveries. Unsupervised machine learning is exploration, supervised machine learning is exploitation.
 - The potential for discovery can also mean that you discover new business opportunities, learn something new, or get scientific insights.
 - The world is messy. It's common to have data, and the gut feeling that these are unique and potentially insightful. For this case, an unsupervised learning mindset is wonderful, as it gives you the ability to just start diving in, and working out the next steps from there.
@@ -436,9 +425,9 @@ Unsupervised means having no ground truth.
 ## Limitations
 
 - One of the biggest limitation is the lack of ground truth which comes hand in hand with the difficulty of evaluating the resulting models. As a consequence, there are so many methods with often very different results.
-- Unsupervised machine learning is a good approach against the curse of dimensionality, but still also unsupervised machine learning can suffer greatly from it. The more features, the more meaningless and hard to interpret the clusters become, any data point can seem far away from the "center" making it an outlier.
-- After the modeling, to make use of the results, usually requires to interpret the patterns. Especially for clustering and association rule learning. This requires domain expertise and human intervention.
-- There is no guarantee that unsupervised learning will reveal meaningful patterns. But even if none are revealed there is no guarantee that it was simply the wrong algorithm, but another might have uncovered something interesting.
+- Unsupervised machine learning is a good approach against the curse of dimensionality, but still also unsupervised machine learning can suffer greatly from it. For example, the more features, the more meaningless and harder to interpret the clusters become.
+- Making sense of the modeling results usually requires to interpret the patterns. Especially for clustering and association rule learning. This requires domain expertise and human intervention.
+- There is no guarantee that unsupervised learning will reveal meaningful patterns. But even if none are revealed there is no guarantee that it was simply the wrong algorithm and another might have uncovered interesting patterns.
 
 ## Resources
 
