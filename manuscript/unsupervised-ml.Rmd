@@ -12,23 +12,20 @@
 * One of the three [machine learning](#machine learning) mindsets along with [supervised learning](#supervised-ml) and [reinforcement learning](#reinforcement-learning).
 
 <!-- a joke -->
-A supervised learner and an unsupervised learner decide to go hiking together.
-The supervised hiker literally runs up the mountain, always taking the most direct path.
-The unsupervised learner takes a more relaxed approach, walking off the designated path, finding solace in nature, discovering some funny animals and plants.
-After a long day, both meet again in a hut in the valley.
-The supervised modeler asks: "How long did it take you to the top of the mountain? I think I set a new record".
-The unsupervised learner said: "What mountain? You wouldn't believe what interesting landscapes and hidden parts of nature I have discovered!"
-Further in the back, an old man chuckles, face hidden in the shadow of his hood. 
-"You fools", he says with a raspy voice , "You must be new here."
-Slightly intimidated, they look over to the old man. 
-The old man points a finger at the supervised learner: "You might have set a new record, but in your madness you have trampled forbidden paths and disturbed nature."
-"And you!", he now glares at the unsupervised learner: "You might have discovered new things, but you lack the wisdom to grasp them and the words to name them."
-"You are lucky that I'm here", he murmurs into his beard as her approaches their table.
-As he sits down, he produces an ancient book from his satchel: "You see, in the beginning, there was the data-generating process, ..."
-
+A bunch of supervised learners and an unsupervised machine learner decide to climb a mountain.
+The trip quickly turns into a race: Who is the first to reach the top of the mountain, and who will be back first at the hut?
+The supervised learners give all their best, trying to outperform each other, but the unsupervised learner quickly falls behind.
+After a tough day, one after the other return to their hut, exhausted.
+To their surprise, they find that the unsupervised learner was back at the hut first.
+Cheerfully waiting for the others to return, and with a steaming cup of coffee in his hands, he gives a report on his adventures:
+"When all of you started sprinting, I took a detour. You wouldn't believe it, but I found a rare mushroom that is not supposed to grow in this region. I also clustered the areas around the hut, by the type of vegetation you can find. But the best thing is that, ..."
+"Wait", one of the supervised learners stops him, "You were not only the first to be back, but you also did all these other things?"
+"I suppose", the unsupervised learner admits, slightly puzzled why it's such a big deal.
+"How long did it take you to climb the mountain? Did you find a shortcut? We didn't see you all day.", another supervised learner asks.
+"Mountain? What mountain?"
 
 <!-- unsupervised term associations -->
-Unsupervised sound like one step away from chaos and anarchy.
+Unsupervised always sounds to me like one step away from chaos and anarchy.
 Letting kids to play alone. Discovering all types of new "artwork" on the walls.
 Forgetting about that pizza in the oven, and discovering that the oven has become a gate to the underworld.     
 Unsupervised learning, on the other hand, sounds very promising.
