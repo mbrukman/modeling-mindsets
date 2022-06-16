@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Causal inference | Modeling Mindsets</title>
   <meta name="description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Causal inference | Modeling Mindsets" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-06-13" />
+<meta name="date" content="2022-06-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -224,13 +224,24 @@ div.csl-indent {
 <li class="chapter" data-level="7.6" data-path="likelihoodism.html"><a href="likelihoodism.html#limitations-3"><i class="fa fa-check"></i><b>7.6</b> Limitations</a></li>
 <li class="chapter" data-level="7.7" data-path="likelihoodism.html"><a href="likelihoodism.html#resources"><i class="fa fa-check"></i><b>7.7</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="causal-inference.html"><a href="causal-inference.html#does-the-drug-help"><i class="fa fa-check"></i><b>8.1</b> Does The Drug Help?</a></li>
+<li class="chapter" data-level="8.2" data-path="causal-inference.html"><a href="causal-inference.html#causality"><i class="fa fa-check"></i><b>8.2</b> Causality</a></li>
+<li class="chapter" data-level="8.3" data-path="causal-inference.html"><a href="causal-inference.html#the-causal-mindset"><i class="fa fa-check"></i><b>8.3</b> The Causal Mindset</a></li>
+<li class="chapter" data-level="8.4" data-path="causal-inference.html"><a href="causal-inference.html#directed-acyclical-graphs"><i class="fa fa-check"></i><b>8.4</b> Directed Acyclical Graphs</a></li>
+<li class="chapter" data-level="8.5" data-path="causal-inference.html"><a href="causal-inference.html#many-frameworks-for-causality"><i class="fa fa-check"></i><b>8.5</b> Many Frameworks For Causality</a></li>
+<li class="chapter" data-level="8.6" data-path="causal-inference.html"><a href="causal-inference.html#from-causal-to-conditional"><i class="fa fa-check"></i><b>8.6</b> From Causal to Conditional</a></li>
+<li class="chapter" data-level="8.7" data-path="causal-inference.html"><a href="causal-inference.html#strengths-4"><i class="fa fa-check"></i><b>8.7</b> Strengths</a></li>
+<li class="chapter" data-level="8.8" data-path="causal-inference.html"><a href="causal-inference.html#limitations-4"><i class="fa fa-check"></i><b>8.8</b> Limitations</a></li>
+<li class="chapter" data-level="8.9" data-path="causal-inference.html"><a href="causal-inference.html#further-reading"><i class="fa fa-check"></i><b>8.9</b> Further Reading</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="machine-learning.html"><a href="machine-learning.html#one-or-many-mindsets"><i class="fa fa-check"></i><b>9.1</b> One or Many Mindsets?</a></li>
 <li class="chapter" data-level="9.2" data-path="machine-learning.html"><a href="machine-learning.html#computer-oriented-task-driven-and-externally-motivated"><i class="fa fa-check"></i><b>9.2</b> Computer-Oriented, Task-Driven and Externally Motivated</a></li>
-<li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-4"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
-<li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-4"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
+<li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-5"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
+<li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-5"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>10</b> Supervised Learning</a>
 <ul>
@@ -243,14 +254,14 @@ div.csl-indent {
 <li class="chapter" data-level="10.7" data-path="supervised-ml.html"><a href="supervised-ml.html#an-automatable-mindset"><i class="fa fa-check"></i><b>10.7</b> An Automatable Mindset</a></li>
 <li class="chapter" data-level="10.8" data-path="supervised-ml.html"><a href="supervised-ml.html#a-competitive-mindset"><i class="fa fa-check"></i><b>10.8</b> A Competitive Mindset</a></li>
 <li class="chapter" data-level="10.9" data-path="supervised-ml.html"><a href="supervised-ml.html#nature-statistics-and-supervised-learning"><i class="fa fa-check"></i><b>10.9</b> Nature, Statistics and Supervised Learning</a></li>
-<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-5"><i class="fa fa-check"></i><b>10.10</b> Strengths</a></li>
-<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-5"><i class="fa fa-check"></i><b>10.11</b> Limitations</a></li>
+<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-6"><i class="fa fa-check"></i><b>10.10</b> Strengths</a></li>
+<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-6"><i class="fa fa-check"></i><b>10.11</b> Limitations</a></li>
 <li class="chapter" data-level="10.12" data-path="supervised-ml.html"><a href="supervised-ml.html#references"><i class="fa fa-check"></i><b>10.12</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html"><i class="fa fa-check"></i><b>11</b> Unsupervised Learning</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#what-type-of-traveler-are-you"><i class="fa fa-check"></i><b>11.1</b> What Type of Traveler are you?</a></li>
-<li class="chapter" data-level="11.2" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#unsupervised-machine-learning-mindset"><i class="fa fa-check"></i><b>11.2</b> Unsupervised Machine Learning Mindset</a></li>
+<li class="chapter" data-level="11.1" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#what-type-of-traveler-are-you"><i class="fa fa-check"></i><b>11.1</b> What Type of Traveler Are You?</a></li>
+<li class="chapter" data-level="11.2" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#the-unsupervised-learning-mindset"><i class="fa fa-check"></i><b>11.2</b> The Unsupervised Learning Mindset</a></li>
 <li class="chapter" data-level="11.3" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#many-tasks"><i class="fa fa-check"></i><b>11.3</b> Many Tasks</a>
 <ul>
 <li class="chapter" data-level="11.3.1" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#clustering-and-outlier-detection"><i class="fa fa-check"></i><b>11.3.1</b> Clustering and Outlier Detection</a></li>
@@ -258,8 +269,8 @@ div.csl-indent {
 <li class="chapter" data-level="11.3.3" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#association-rule-learning"><i class="fa fa-check"></i><b>11.3.3</b> Association Rule Learning</a></li>
 <li class="chapter" data-level="11.3.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#dimensionality-reduction"><i class="fa fa-check"></i><b>11.3.4</b> Dimensionality Reduction</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#strengths-6"><i class="fa fa-check"></i><b>11.4</b> Strengths</a></li>
-<li class="chapter" data-level="11.5" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#limitations-6"><i class="fa fa-check"></i><b>11.5</b> Limitations</a></li>
+<li class="chapter" data-level="11.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#strengths-7"><i class="fa fa-check"></i><b>11.4</b> Strengths</a></li>
+<li class="chapter" data-level="11.5" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#limitations-7"><i class="fa fa-check"></i><b>11.5</b> Limitations</a></li>
 <li class="chapter" data-level="11.6" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#resources-1"><i class="fa fa-check"></i><b>11.6</b> Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="reinforcement-learning.html"><a href="reinforcement-learning.html"><i class="fa fa-check"></i><b>12</b> Reinforcement Learning</a></li>
@@ -301,8 +312,373 @@ div.csl-indent {
 <li>Builds a causal model from which statistical estimators are derived.</li>
 <li>A <a href="statistical-modeling.html#statistical-modeling">statistical modeling mindset</a> that adds causality to <a href="frequentist-inference.html#frequentist-inference">frequentist</a> and <a href="bayesian-inference.html#bayesian-inference">Bayesian</a> inference.</li>
 </ul>
-<p><strong>This chapter is under construction! Stay tuned.</strong></p>
+<!-- TODO 
 
+- add personal story at the beginning
+- Add some story about causalists to the beginning?
+- write about randomized tests / A-B tests, but more as in that  I describe it in another mindset
+-->
+<p>“Thank you very much for this statistical model,” the ecologist says to the statistician.
+“Very nice p-values, and interesting results! Would it be correct to say that the droughts caused the crop failures?”
+The statistician looks at the biologist, with a hint of concern.
+As if practiced, the statistician says: “Correlation does not imply causation”.
+Unsatisfied, the ecologist responds: “But it would make a lot of sense to say drought was the cause!”
+The statistician frowns, clenching teeth as if in pain.
+“Correlation does not imply causation”, the statistician repeats, the words having a weird melody, as if in prayer.
+“But without a causal interpretation, how can the results be made useful?”, the biologist insists.
+“Correlation does not imply causation. Correlation does not imply causation. Correlation …”, the statistician now chants, eyes closed shut, face twisted as if in great pain.</p>
+<div id="does-the-drug-help" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Does The Drug Help?<a href="causal-inference.html#does-the-drug-help" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- SCQM story -->
+<p>A while back, I worked with a rheumatologist on the question whether a certain type of drug (TNF-alpha blockers) reduces the ossification of the spine of patients with axial spondyloarthritis.
+Axial spondyloarthritis is an incurable disease that usually leads to inflammation of the spine, and in the long-term the joints in the spine may fuse to bone formation (ossification).
+These TNF-alpha blockers work well to reduce inflammation, but it’s unclear whether they can prevent the ossification.
+Because these drugs help so much, it would be unethical to do a clinical trial and withhold those drugs from the control group.
+At the time I worked at the foundation that had a huge data base of patients with axial spondyloarthritis: doctor visits, blood values, x-ray images, …
+With a frequentist mindset, and in collaboration with the rheumatologist as the domain expert, I built a statistical model to answer the scientific question.
+I modeled the ossification within a time interval of two years as a function of drug yes/no, age of the patient, disease duration, the inflammation level and so on.
+The data is purely observational, meaning some patients got the medication, some didn’t and the factors that influenced the drug choice potentially also influenced the outcome.
+So we included all factors that were potential confounders of the decision to give the drug, and of the bone development.
+Result: The drug did not reduce the ossification, which was in contradiction with the initial hypothesis that the drug also helps long-term.
+The lead statistician happened to participate in a causal inference course around the same time.
+She had the epiphany that we approached the modeling question the wrong way.
+She drew the DAG, like this:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tnfdag"></span>
+<img src="figures/tnfdag-1.png" alt="The drug was known to influence inflammation (reduce it). Inflammation was thought to cause ossification (new bone formation). More inflammation, more ossification. The drug has, potentially, two pathways to reduce ossification: directly, or indirectly via reducing inflammation." width="\textwidth" />
+<p class="caption">
+FIGURE 8.1: The drug was known to influence inflammation (reduce it). Inflammation was thought to cause ossification (new bone formation). More inflammation, more ossification. The drug has, potentially, two pathways to reduce ossification: directly, or indirectly via reducing inflammation.
+</p>
+</div>
+<!-- the solution of the story -->
+<p>It became immediately clear what the problem with our current model was:
+Inflammation was a potential mediator of the effect of TNF-alpha blockers on long-term ossification.
+Figure @ref{fig:tnfdag} shows that the effect of the drug can be split into a direct effect and an indirect effect.
+By having the inflammation level as part of the model, the indirect effect of the treatment was “swallowed” by the effect of the inflammation on ossification.<br />
+Our initial model only measured the direct effect, but we were actually interested in the total effect which is the sum of direct and indirect effects.
+So we adjusted the model accordingly, removing the inflammation variable <a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>, with the result that the coefficient for the treatment measured the total effect instead of only the direct effect.
+Now the model clearly showed an that the treatment could reduce ossification by decreasing the inflammation levels.
+It sounds like common sense in hindsight, but coming from a frequentist mindset, you easily overlook such things.
+This moment was such a revelation and got me interested in causal inference.</p>
+<!-- Motivation
+Does eating chicken broth fasten your recovery when your have cold?
+Did the tax reform lead to more new businesses?
+Why were the sales so low yesterday?
+These questions ask for causes to certain events or facts.
+I would go as far as saying that most of the times when we learn a model from data, we want it to encode causal relationship.
+Models that don't might yield misleading insights and might make false predictions.
+
+-->
+</div>
+<div id="causality" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Causality<a href="causal-inference.html#causality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- what is causality -->
+<p><span class="math inline">\(X\)</span> is a cause of <span class="math inline">\(Y\)</span> if changing <span class="math inline">\(X\)</span> changes the probability distribution <span class="math inline">\(P(Y)\)</span>.
+I think we all have an intuition what a cause and its effect are.
+Causality, brought to the world of random variables means:
+If you could <strong>force</strong> a random variable to have a certain value, how would the distribution of another random variable change?
+A cause is different from a mere association: If you would merely <strong>observe</strong> a certain value for a random variable, how would the distribution of another random variable look like?<br />
+We know that a wet lawn does not <em>cause</em> rain.
+How do we know it? Try watering your lawn for one year, every day, and see whether the probability for rain has changed.
+But the two are associated:
+When you observe that your lawn is wet, the probability that it rains is higher than without that observation.</p>
+<!-- not for the statisticians -->
+<p>The archetypal statisticians avoids speaking of causality, as if it were to esoteric to speak about.
+As an anecdote: I have a Bachelor’s and Master’s degree in Statistics.
+What I learned about causality in those 5 years can be summarized in two statements: 1) Always add all confounders when building a statistical model [^confounders], and 2) correlation is not causation so don’t interpret your models in a causal way.
+Or in short: We students were taught to not speak of the elephant in the room.
+Causality was presented as an unreachable goal, that should not even be attempted with statistical modeling.
+We were taught how to dance around the topic.
+A variable is “associated with and increase in the outcome”, the variable is not causing the change.</p>
+<p>“Correlation does not imply causation” truly is a mantra that you hear multiple times when you learn about statistics.
+I find that very curious, especially given that statistical modeling is supposed to be THE research tool of our times.
+Isn’t research all about detecting how the world works?
+The “how”, at least for me, implies that scientists are supposed to uncover causal structures.
+On the other hand, statisticians do, to some degree, care for causality.
+They have discovered that models need to be adjusted for confounders.
+Even if you can’t provide causality:
+Knowing that the user of the models will in many cases make a causal interpretation, maybe we should at least attempt to make the model “as causal as possible”?</p>
+<p>Welcome to the <strong>causal inference</strong> mindset.</p>
+</div>
+<div id="the-causal-mindset" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> The Causal Mindset<a href="causal-inference.html#the-causal-mindset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- causal inference framework in a nutshell -->
+<p>The causal inference mindset puts causality in the center.
+The goal of causal inference is to identify and quantify the <strong>causal</strong> effect a random variables had on the outcome of interest.</p>
+<!-- Relation to other mindsets -->
+<p>I would say that causal inference is a <a href="statistical-modeling.html#statistical-modeling">statistical modeling mindset</a>, because it relies on probability distributions and random variables.
+But causal inference could also be seen as an “add-on” to other mindsets like <a href="#frequentism">frequentist</a> or <a href="#bayesian">Bayesian</a> inference, but also for <a href="machine-learning.html#machine-learning">machine leanring</a>.
+But causality is not a mere cherry on top of another mindset.
+It’s not like adding a new type of model to, for example, the arsenal of a frequentist.
+By bringing causality to the table, it challenges the culture of statistical modeling that only speaks of associations.</p>
+<!-- generalization mindset -->
+<p>Causalists think of causality as the central ingredient to learning about the world.
+The world is assumed to work by cause and effect, so of course the models have to reflect these causalities as well.
+A model generalizes well when it encodes the correct causal relationships.
+Because only then can also be applied in other circumstances.
+Take Google Flu prediction model.
+Google predicted outbreaks of the flu based on frequencies of certain search terms.
+Clearly, the prediction model was not a causal model, and missed, for example, the nonseasonal 2009 flu.<span class="citation"><sup><a href="#ref-lazer2014parable" role="doc-biblioref">13</a></sup></span>
+Or otherwise this would mean you can <strong>cause</strong> flu by hitting the right keys in the Google search bar.
+What happened is that the model in production quickly declined in performance, because the search patterns changed.
+For the causalist the case is very clear.
+Such a pure associational model is as fragile as an egg shell.</p>
+<!-- data can't speak for itself -->
+<p>The causalist knows: Data can’t speak for itself.
+We can look at it as hard as we want to, but it won’t reveal the causal structures that produced it.
+It can reveal associations, but it can’t even reveal the simplest structures.
+Sunshine duration on a given day can be seen causal for the number of people going into a park.
+In a dataset, we would see two columns with numbers.
+If we compute the correlation, we see that they are positively correlated.
+The more sun, the more people.
+The more people, the more sun.
+To everyone, the causal relation is clear, because people showing up in the park certainly doesn’t bother the sun even a little bit.
+But your computer can’t tell the difference.
+You fit a regression model predicting number of people.
+The computer will do it.
+You fit a regression model to predict hours of sunshine.
+The computer will do it.
+Upcoming headline: In the next heat wave, people are forbidden to go to the park, in an effort to reduce sunshine.
+Of course, non-causalist statisticians and machine learner wouldn’t try to predict sunshine in this obvious non-causal way.
+But they also don’t go all the way to think causality through.
+It’s a weird situation.
+The causalist has to put in causal assumption, in order to build a causal model.</p>
+<!-- encoding causality -->
+<p>The best way to visualize causal models is with a directed acyclic graph that you have already seen in Figure <a href="causal-inference.html#fig:tnfdag">8.1</a>.
+As I said, at the core causality is a statistical modeling mindset.
+As such it employs probability distributions.
+But, as we learned, in the causal mindset, these distributions cannot capture the causal structures.
+The joint distribution of lawn wet and rain can tell us about associations between the two, but not the causal directions.
+Causal inference put’s a causal model <em>on top</em> of the joint distribution.
+A causal model can be expressed in visual form: the directed acyclical graph.</p>
+</div>
+<div id="directed-acyclical-graphs" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Directed Acyclical Graphs<a href="causal-inference.html#directed-acyclical-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- short DAG intro -->
+<p>The causal inference mindset naturally comes with a visual language to lay out the causal relationships of the random variables.
+Directed Acyclical Graphs (DAGs) are graphical models of variables and their causal relationships.
+From DAGs you can directly see which variable is a cause of another variable.
+Variables are nodes.
+Causal directions are arrows.
+It’s an acyclic graph, meaning we are not allowed to have arrows going in circles.
+For example, another arrow from <span class="math inline">\(Y\)</span> to <span class="math inline">\(X_1\)</span> would make this a cyclic graph.
+Acyclicality is an assumption needed for causal inference.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dag"></span>
+<img src="figures/dag-1.png" alt="A Directed Acyclic Graph (DAG) with 5 variables." width="\textwidth" />
+<p class="caption">
+FIGURE 8.2: A Directed Acyclic Graph (DAG) with 5 variables.
+</p>
+</div>
+<!-- Structures in a DAG -->
+<p>What can we see from the DAG in Figure <a href="causal-inference.html#fig:dag">8.2</a>?
+Variables <span class="math inline">\(X_2\)</span> and $X_3 are direct causes for target <span class="math inline">\(Y\)</span>.
+We can also see that <span class="math inline">\(X_5\)</span> does not directly influence <span class="math inline">\(Y\)</span>.
+So the DAG already shows us a lot about the dependencies and independencies.</p>
+<!-- TODO: Visualize Fork, Pipe, Collider, Descendant, see p. 185 in statistical rethinking -->
+<!-- DAG in Bayesian -->
+<p>DAGs are simple visual tools, not specific to causal inference: These graphs are basically a bunch of circles that are connected with arrows, and you are not allowed to go in circles.
+DAGs also make an appearance in <a href="#bayesian">Bayesianism</a>, or more specifically in Bayesian networks aka probabilistic graphical models.
+There they <em>might</em> represent causality, but they don’t have to.</p>
+<!--
+* Elements: chain, fork, collider
+* Roles of variables: confounders, mediators
+* Also conditional dependence and conditional independence
+* Conditioning model on a variable can make two variables conditional dependent to independent or vice versa.
+* Goal: When modeling from, e.g. X1 to Y, make sure some paths are blocked
+* A variable is seen as a cause of another variable if changing it's value changes the value of the other variable
+* DAG is a tool to discuss causality
+* Also a tool to detect which variables to condition on and which not in your model
+* A part of causal inference is just about the identification of DAGs
+* While you can't fully discover causal relationships, it's possible to make some progress
+* For example, X -> Y and Y <- X would have same correlation in data.
+* But you can detectd when X and Y are independent just from data
+* We can see that $X_3$ is not only a cause of $Y$, but also of $X_2$, therefore being a confounder to $Y$.
+-->
+<p>DAGs visually encode the causal model.
+How do we know which variables to include, where to place the arrows and in which directions they have to point?
+There are a bunch of indicators that help us build up the causal model:</p>
+<ul>
+<li>Direction of time: If one variable comes earlier, it might be the cause of the other. But confounders could be problematic here.</li>
+<li>Domain experts: In many cases layman knowledge does not suffice. But respective experts such as medical doctors, engineers and ecologists have a good idea how the graph should look like (once they have been introduced to the graph language).</li>
+<li>Causal structure learning: There are numerous approaches to detect the causal structure from the data. We can’t perfectly deduct all relationships, but there is a lot: For example if two variables are completely independent from each other, we know that there is no arrow between the two. Causal structure learning can identify sets of plausible DAGs, sometimes leaving out which ways the arrows have to point.</li>
+<li>Everyday knowledge. See rain/lawn example.</li>
+</ul>
+<!-- subjectivity -->
+<p>The causal model has substantial subjectivity built in.
+It’s a criticism of the causal mindset as well.
+But thanks to DAGs, these causal decisions are made explicit.
+This makes it possible to discuss them.</p>
+<!-- how to calculate P(Y|do(X)) -->
+<p>So, causalists got themselves a language to talk about causality.
+They have a tools to visualize causal structures.
+But how do we learn something about the world?
+How do we estimate the causal effect of a variable on some outcome we are interested in?
+And is it even always possible to calculate causal effects?
+But how do they translate to a model, like with numbers and stuff?</p>
+</div>
+<div id="many-frameworks-for-causality" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Many Frameworks For Causality<a href="causal-inference.html#many-frameworks-for-causality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are many “schools” or frameworks of causal inference, each with their own notation and approaches.<span class="citation"><sup><a href="#ref-hernan2010causal" role="doc-biblioref">14</a></sup></span>
+One such school is around the works of Judea Pearl, who invented the do-calculus <span class="math inline">\(P(Y|do(X))\)</span>, a mathematical language to express interventions on data.<span class="citation"><sup><a href="#ref-pearl2012calculus" role="doc-biblioref">15</a></sup></span>
+But really, you find various frameworks and approaches that have causality at the center.
+Here is an overview.
+You can see these as various entry points for diving deeper into the world of causal inference.</p>
+<ul>
+<li>A huge part of causal inference works puts the focus on designing the experiment rather than a causal model that operates on observational data. The claim for causality is generated through randomization instead of pure modeling. Here we have clinical trials, A/B - tests.</li>
+<li>Natural experiments are observational data which originate from a data-generating process that looks very similar to an experiment. When John Snow investigated cholera cases, he worked with a natural experiment involving to water companies: John Snow identified contaminated drinking water as the source of cholera, because the customers of one water company got sick of cholera much more often. The association of households to one company or the other served as a natural experiment, randomizing factors such as age, comorbidities, education, and so on.</li>
+<li>Propensity score methods aim to emulate group versus control group setups for also comparing the effect of a binary variable on some outcome. One of the groups, usually the control group, is created by “matching” data points that are similar to the treatment group.<br />
+</li>
+<li>Do-calculus, structural causal models, and the backdoor criterion offer a very general modeling language and tools for causal inference.<span class="citation"><sup><a href="#ref-pearl2009causal" role="doc-biblioref">16</a></sup></span></li>
+<li>The <strong>potential outcomes framework</strong><span class="citation"><sup><a href="#ref-athey2016recursive" role="doc-biblioref">17</a></sup></span> is another big causal framework, mostly useful for studying the causal effect of binary variables, and originated from the social sciences. For example drug treatment effects on a disease outcome.</li>
+<li>Causal discovery or structure identification is a subset of causal inference that aims to discover causal relationships from merely observational data. Against what I said earlier, it is possible to automatically derive a set of DAG’s from pure observational data. But: You have to make some assumptions, and there will be multiple possible DAGs.</li>
+<li>And there are many individual methods for causal inference. To name an individual approach: “honest causal forests”, for example, are based on random forests which are typically used in in supervised learning. Honest causal forests are designed to model heterogeneity in treatment effects.<span class="citation"><sup><a href="#ref-athey2016recursiv" role="doc-biblioref"><strong>athey2016recursiv?</strong></a></sup></span></li>
+<li></li>
+<li>…</li>
+</ul>
+<p>All approaches have in common that they assume a causal model.
+This causal model can be rather implicit, like deciding on mechanisms for generating the control and treatment groups, or rather explicit, by drawing a DAG.
+The causal model is then translated into a statistical estimator.
+For setups that design the experiments, the estimates can be very simple, such as just comparing the means of two groups, for example to get the treatment effect of a drug.
+Or, especially with observational data, involve translating a causal model into a statistical estimator.
+And that’s the case we will have a closer look next.</p>
+</div>
+<div id="from-causal-to-conditional" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> From Causal to Conditional<a href="causal-inference.html#from-causal-to-conditional" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- option 1: experiments  -->
+<p>Based on our DAG, we could start designing an experiment, in which we control the variable of interest <span class="math inline">\(X\)</span>.
+That’s being done already, of course.
+For example, that’s what randomized clinical trials do:
+The goal of these trials is to understand the <em>causal</em> effect of a treatment on a disease.
+So in those trials the random variable “treatment” is controlled.
+I considered this as a distinct mindset in <a href="#design-based">design-based inference</a>.
+Anyways, controlled experiments are expensive, time-consuming.
+Sometimes they are not feasible, unethical or outright impossible.
+Imagine you study data on the country level.
+You couldn’t just interfere with a countries GDP or number of new births.</p>
+<!-- observational data it is -->
+<p>Observational data it is, in so many cases.
+With observational data, the first casualty is causality – at least from the point of view of non-causalists.
+But observational data is when causalists become excited and start stretch-exercises for their hand-wrists to warm up for the statistical programming ahead.</p>
+<!-- from causal to observational -->
+<p>But causalists claim to have a way to calculate causal effects, even without experiments.
+It’s a bit of an industry secret, but I am willing to spill it: The secret is LHC.
+LHC stands for large hadron collider.
+The causalists collide particles at a high-energy – producing black holes in the process.
+Each black hole contains a parallel universe, and with enough of those we can study what-if scenarios.
+Joke aside, there is no magical ingredient for the estimation.
+The “secret”: We can’t estimate causal estimands directly.
+Causalists translate causal estimands into statistical expressions that can be estimated using observational data.
+In the end, causal inference is just boring old stats.</p>
+<!-- recipe -->
+<p>But one step after another: How do we answer causal questions with models and data?
+Causalists follow these steps<span class="citation"><sup><a href="#ref-pearl2009causal" role="doc-biblioref">16</a></sup></span>:</p>
+<ol style="list-style-type: decimal">
+<li>Formulate causal estimand, like: What is the causal effect of <span class="math inline">\(X_1\)</span> on <span class="math inline">\(Y\)</span>?</li>
+<li>Build a causal model: Draw DAG.</li>
+<li>Identify whether causal estimand can be estimated, given the causal model. Requires translating it into conditional probability statements.</li>
+<li>Estimate the (translated) target quantity.</li>
+</ol>
+<p>CONTINUE HERE</p>
+<!-- Step 1: Causal estimand-->
+<p>Let’s have a look at the individual steps.
+The first question is, what causal relationship we want to study.
+This can then be expressed as some causal estimand, for example how would the air pollution be reduced when we ban car traffic in the inner city.
+By choosing the target and the possible cause, we can now proceed to building the causal model.</p>
+<!-- Step 2: Causal Model -->
+<p>The causal model can be build using visual tools like the DAG.
+Besides the target and the potential causal variable, all other variables that are relevant to both should be included in the causal model.
+It’s kind of collecting all the nodes for the DAG.
+But we also need the arrows that connect the variables, with the direction of the arrows showing the causal direction.
+Identifying between which variables an arrow should be and in which direction it should point can be narrowed down, in parts, automatically.
+But in the end, a lot of those causal directions will be based on domain knowledge and subjectivity.
+But in the end, we do have a DAG.
+Not all approaches and frameworks will necessarily encourage or require to draw such a DAG, but you always have to decide on what the confounders are and so on.</p>
+<p>CONTINUE HERE</p>
+<!-- Step 3: Identify -->
+<p>In the identification step the causalists find out whether the causal estimand can be even answered with the observational data at hand.
+This means that the causalist has to check whether the assumptions of the causal inference hold, given the causal model.
+If that’s the case, the causal estimand can be transformed into a statistical estimand.
+Or a machine learning model, depending on where the causal model was put on top.
+For some approaches, the process is not so complicated, especially when methods are based on randomized experiments, or are restricted to certain variable constellations.
+Identification can be a complicated process.
+But there are also many “simple” rules that tell you how to turn a causal estimand into a conditional estimand.
+It’s important to know that in the end we usually have some regression model, and our goal is to pick the right subset of random variables to use in the model (to adjust for).
+The simpler rules are visualized in Figure <a href="causal-inference.html#fig:dag-rules">8.3</a>.</p>
+<ul>
+<li>Include confounders. Confounder are variables that cause both the variable of interest and the outcome. For example in Figure <a href="causal-inference.html#fig:dag">8.2</a> <span class="math inline">\(X_3\)</span> confounds <span class="math inline">\(X_2\)</span> and <span class="math inline">\(Y\)</span>. So we have to include it in our statistical estimand.</li>
+<li>Exclude mediators. When we want to measure the causal effect of <span class="math inline">\(X_1\)</span> on <span class="math inline">\(Y\)</span>, we have make sure not to include <span class="math inline">\(X_2\)</span>. If we include <span class="math inline">\(X_2\)</span> it will completely block the path, meaning we will find out that <span class="math inline">\(X_1\)</span> does not influence <span class="math inline">\(Y\)</span>. But it does. Just via <span class="math inline">\(X_2\)</span>. In general don’t condition on descendants of treatment variable.</li>
+<li>Exclude colliders. If not <span class="math inline">\(Y\)</span> were our target, but <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span> the effect of interest, then <span class="math inline">\(Y\)</span> would be a collider. Adding colliders adds a fake causal path. For example: sweating -&gt; wet shirt &lt;- it’s raining. sweating and rain not correlated (or just weakly). But when we condition on wet shirt, they suddenly are strongly correlated! Bc. when shirt wet, but no rain, we can conclude that the person is likely to be sweating.</li>
+<li>There are more such rules, but by doing the above, you already exclude some bad non-causal paths.</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dag-rules"></span>
+<img src="figures/dag-rules-1.png" alt="To understand the causal effect of X1 on Y, we have to build a regression model with $Y$ as target and X1 and X2 as predictor variables. Roles: Y is the target, X1 the variable of interest, X2 a confounder of X1 and X2, X3 a mediator to the effect of X1 on Y, and X4 is a collider." width="\textwidth" />
+<p class="caption">
+FIGURE 8.3: To understand the causal effect of X1 on Y, we have to build a regression model with <span class="math inline">\(Y\)</span> as target and X1 and X2 as predictor variables. Roles: Y is the target, X1 the variable of interest, X2 a confounder of X1 and X2, X3 a mediator to the effect of X1 on Y, and X4 is a collider.
+</p>
+</div>
+<!-- Step 3: Estimation -->
+<p>For the estimation, we need to make assumptions about how the random variable are (conditionally) distributed.
+But really, we are in the frequentist/Bayesian mindset again.
+But it could also be supervised machine learning.
+And you can read up on those chapters again, so I don’t have to repeat myself here.
+Then, usually for the interpretation, you interpret the regression coefficient as you normally would.
+Except that you may interpret the effect as a cause.
+If you are interested in different variables, you have to repeat all the steps for all variables, as you might need different models.</p>
+</div>
+<div id="strengths-4" class="section level2 hasAnchor" number="8.7">
+<h2><span class="header-section-number">8.7</span> Strengths<a href="causal-inference.html#strengths-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Arguably, causality is central to modeling the world. Causal inference is the mindset that takes causes to heart.</li>
+<li>Causal inference allows to argue causal questions: An important ingredient for generalization.</li>
+<li>I’d say in most cases the modeler actually wants causality. Scientists make causal interpretations. In marketing you want to know how measures impact customers causally.<br />
+</li>
+<li>Causal models are more robust against changes in the environment. Or rather: Models that use non-causal, merely associative information might break more easily. For example: Google had a flu detector which predicted flu waves based on searches for flu-related terms. But searches are not causal, so the model broke.</li>
+<li>The mindset is flexible and can enhance many other mindsets such as frequentism, Bayesianism, machine learning. Inherits strengths from the statistical modeling approach it builds upon.</li>
+<li>DAGs make causal assumptions explicit. I would go as far and say that the subtext of many frequentist and Bayesian analyses is already a causal one. Or at least once the results get out of the hand of the modeller, the journalists, manager, decision maker and so on are likely to make causal interpretation anyway. Causal inference talks explicitly about causality, and especially about the causal structure assumptions that were made for the model. These can then be challenged and discussed.</li>
+</ul>
+</div>
+<div id="limitations-4" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> Limitations<a href="causal-inference.html#limitations-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>There is no commonly accepted way to do causal inference yet <!-- citation needed -->. Do calculus by Pearl and co is a strong contender though.</li>
+<li>Some people that causality does not exist <!-- citation needed --></li>
+<li>Building the causal model is an inherently subjective task. The causalist can never be sure whether the causal model is correct. Some assumptions about causal directions and arrows can never be verified.</li>
+<li>Confounders, causes of both variable of interest and target, are especially tricky. For a causal interpretation, you have to assume that you found all the confounders. But you can’t prove that you have.</li>
+<li>Inherits limitations from the statistical modeling approach it builds upon (except for lack of causality).</li>
+<li>Using non-causal variables can enhance predictive performance, but make your model non-causal. So causal inference is not with predictive power first.</li>
+<li>Causal inference assumes directionality, as becomes very visual in DAGs, which even have the word directed in it. So, no feedback loops are allowed. This is a strong restrictions. Often potential feedback loops can be built around by introducing time: Instead of saying that the populations of predators and prey are in a feedback loop, you operationalize these two variables as four: Predator at time <span class="math inline">\(t-1\)</span> causally affects predator at time <span class="math inline">\(t\)</span>; prey at time <span class="math inline">\(t-1\)</span> also causally affects predator and prey at time <span class="math inline">\(t\)</span> .</li>
+</ul>
+</div>
+<div id="further-reading" class="section level2 hasAnchor" number="8.9">
+<h2><span class="header-section-number">8.9</span> Further Reading<a href="causal-inference.html#further-reading" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li></li>
+</ul>
+
+</div>
+</div>
+<h3>References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-lazer2014parable" class="csl-entry">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Lazer D, Kennedy R, King G, Vespignani A. The parable of google flu: Traps in big data analysis. Science. 2014;343(6176):1203–5. </div>
+</div>
+<div id="ref-hernan2010causal" class="csl-entry">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Hernán MA, Robins JM. Causal inference. CRC Boca Raton, FL; 2010. </div>
+</div>
+<div id="ref-pearl2012calculus" class="csl-entry">
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Pearl J. The do-calculus revisited. arXiv preprint arXiv:12104852. 2012; </div>
+</div>
+<div id="ref-pearl2009causal" class="csl-entry">
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Pearl J. Causal inference in statistics: An overview. Statistics surveys. 2009;3:96–146. </div>
+</div>
+<div id="ref-athey2016recursive" class="csl-entry">
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">Athey S, Imbens G. Recursive partitioning for heterogeneous causal effects. Proceedings of the National Academy of Sciences. 2016;113(27):7353–60. </div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>The attentive reader might object that I referred to inflammation now as both confounder and mediator. Both is correct, if we distinguish different time points. The initial model had inflammation after treatment begin as variable, so it acted as mediator. We later also adjusted the model for inflammation before treatment, when it acts a confounder.<a href="causal-inference.html#fnref8" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -341,7 +717,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/christophM/modeling-mindsets/edit/master/manuscript/stub-causal-inference.Rmd",
+"link": "https://github.com/christophM/modeling-mindsets/edit/master/manuscript/causal-inference.Rmd",
 "text": "Edit"
 },
 "history": {

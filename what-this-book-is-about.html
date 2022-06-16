@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 What This Book is About | Modeling Mindsets</title>
   <meta name="description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 What This Book is About | Modeling Mindsets" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-06-13" />
+<meta name="date" content="2022-06-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -224,13 +224,24 @@ div.csl-indent {
 <li class="chapter" data-level="7.6" data-path="likelihoodism.html"><a href="likelihoodism.html#limitations-3"><i class="fa fa-check"></i><b>7.6</b> Limitations</a></li>
 <li class="chapter" data-level="7.7" data-path="likelihoodism.html"><a href="likelihoodism.html#resources"><i class="fa fa-check"></i><b>7.7</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="causal-inference.html"><a href="causal-inference.html#does-the-drug-help"><i class="fa fa-check"></i><b>8.1</b> Does The Drug Help?</a></li>
+<li class="chapter" data-level="8.2" data-path="causal-inference.html"><a href="causal-inference.html#causality"><i class="fa fa-check"></i><b>8.2</b> Causality</a></li>
+<li class="chapter" data-level="8.3" data-path="causal-inference.html"><a href="causal-inference.html#the-causal-mindset"><i class="fa fa-check"></i><b>8.3</b> The Causal Mindset</a></li>
+<li class="chapter" data-level="8.4" data-path="causal-inference.html"><a href="causal-inference.html#directed-acyclical-graphs"><i class="fa fa-check"></i><b>8.4</b> Directed Acyclical Graphs</a></li>
+<li class="chapter" data-level="8.5" data-path="causal-inference.html"><a href="causal-inference.html#many-frameworks-for-causality"><i class="fa fa-check"></i><b>8.5</b> Many Frameworks For Causality</a></li>
+<li class="chapter" data-level="8.6" data-path="causal-inference.html"><a href="causal-inference.html#from-causal-to-conditional"><i class="fa fa-check"></i><b>8.6</b> From Causal to Conditional</a></li>
+<li class="chapter" data-level="8.7" data-path="causal-inference.html"><a href="causal-inference.html#strengths-4"><i class="fa fa-check"></i><b>8.7</b> Strengths</a></li>
+<li class="chapter" data-level="8.8" data-path="causal-inference.html"><a href="causal-inference.html#limitations-4"><i class="fa fa-check"></i><b>8.8</b> Limitations</a></li>
+<li class="chapter" data-level="8.9" data-path="causal-inference.html"><a href="causal-inference.html#further-reading"><i class="fa fa-check"></i><b>8.9</b> Further Reading</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="machine-learning.html"><a href="machine-learning.html#one-or-many-mindsets"><i class="fa fa-check"></i><b>9.1</b> One or Many Mindsets?</a></li>
 <li class="chapter" data-level="9.2" data-path="machine-learning.html"><a href="machine-learning.html#computer-oriented-task-driven-and-externally-motivated"><i class="fa fa-check"></i><b>9.2</b> Computer-Oriented, Task-Driven and Externally Motivated</a></li>
-<li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-4"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
-<li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-4"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
+<li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-5"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
+<li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-5"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>10</b> Supervised Learning</a>
 <ul>
@@ -243,14 +254,14 @@ div.csl-indent {
 <li class="chapter" data-level="10.7" data-path="supervised-ml.html"><a href="supervised-ml.html#an-automatable-mindset"><i class="fa fa-check"></i><b>10.7</b> An Automatable Mindset</a></li>
 <li class="chapter" data-level="10.8" data-path="supervised-ml.html"><a href="supervised-ml.html#a-competitive-mindset"><i class="fa fa-check"></i><b>10.8</b> A Competitive Mindset</a></li>
 <li class="chapter" data-level="10.9" data-path="supervised-ml.html"><a href="supervised-ml.html#nature-statistics-and-supervised-learning"><i class="fa fa-check"></i><b>10.9</b> Nature, Statistics and Supervised Learning</a></li>
-<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-5"><i class="fa fa-check"></i><b>10.10</b> Strengths</a></li>
-<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-5"><i class="fa fa-check"></i><b>10.11</b> Limitations</a></li>
+<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-6"><i class="fa fa-check"></i><b>10.10</b> Strengths</a></li>
+<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-6"><i class="fa fa-check"></i><b>10.11</b> Limitations</a></li>
 <li class="chapter" data-level="10.12" data-path="supervised-ml.html"><a href="supervised-ml.html#references"><i class="fa fa-check"></i><b>10.12</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html"><i class="fa fa-check"></i><b>11</b> Unsupervised Learning</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#what-type-of-traveler-are-you"><i class="fa fa-check"></i><b>11.1</b> What Type of Traveler are you?</a></li>
-<li class="chapter" data-level="11.2" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#unsupervised-machine-learning-mindset"><i class="fa fa-check"></i><b>11.2</b> Unsupervised Machine Learning Mindset</a></li>
+<li class="chapter" data-level="11.1" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#what-type-of-traveler-are-you"><i class="fa fa-check"></i><b>11.1</b> What Type of Traveler Are You?</a></li>
+<li class="chapter" data-level="11.2" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#the-unsupervised-learning-mindset"><i class="fa fa-check"></i><b>11.2</b> The Unsupervised Learning Mindset</a></li>
 <li class="chapter" data-level="11.3" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#many-tasks"><i class="fa fa-check"></i><b>11.3</b> Many Tasks</a>
 <ul>
 <li class="chapter" data-level="11.3.1" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#clustering-and-outlier-detection"><i class="fa fa-check"></i><b>11.3.1</b> Clustering and Outlier Detection</a></li>
@@ -258,8 +269,8 @@ div.csl-indent {
 <li class="chapter" data-level="11.3.3" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#association-rule-learning"><i class="fa fa-check"></i><b>11.3.3</b> Association Rule Learning</a></li>
 <li class="chapter" data-level="11.3.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#dimensionality-reduction"><i class="fa fa-check"></i><b>11.3.4</b> Dimensionality Reduction</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#strengths-6"><i class="fa fa-check"></i><b>11.4</b> Strengths</a></li>
-<li class="chapter" data-level="11.5" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#limitations-6"><i class="fa fa-check"></i><b>11.5</b> Limitations</a></li>
+<li class="chapter" data-level="11.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#strengths-7"><i class="fa fa-check"></i><b>11.4</b> Strengths</a></li>
+<li class="chapter" data-level="11.5" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#limitations-7"><i class="fa fa-check"></i><b>11.5</b> Limitations</a></li>
 <li class="chapter" data-level="11.6" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#resources-1"><i class="fa fa-check"></i><b>11.6</b> Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="reinforcement-learning.html"><a href="reinforcement-learning.html"><i class="fa fa-check"></i><b>12</b> Reinforcement Learning</a></li>

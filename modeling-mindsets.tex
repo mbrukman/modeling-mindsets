@@ -162,7 +162,7 @@
 \makeatother
 \subtitle{The Many Cultures of Learning From Data}
 \author{Christoph Molnar}
-\date{2022-06-13}
+\date{2022-06-16}
 
 \begin{document}
 \maketitle
@@ -2088,7 +2088,379 @@ But if the expert says she would collect more data depending on the outcome of t
   A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} that adds causality to \protect\hyperlink{frequentist-inference}{frequentist} and \protect\hyperlink{bayesian-inference}{Bayesian} inference.
 \end{itemize}
 
-\textbf{This chapter is under construction! Stay tuned.}
+``Thank you very much for this statistical model,'' the ecologist says to the statistician.
+``Very nice p-values, and interesting results! Would it be correct to say that the droughts caused the crop failures?''
+The statistician looks at the biologist, with a hint of concern.
+As if practiced, the statistician says: ``Correlation does not imply causation''.
+Unsatisfied, the ecologist responds: ``But it would make a lot of sense to say drought was the cause!''
+The statistician frowns, clenching teeth as if in pain.
+``Correlation does not imply causation'', the statistician repeats, the words having a weird melody, as if in prayer.
+``But without a causal interpretation, how can the results be made useful?'', the biologist insists.
+``Correlation does not imply causation. Correlation does not imply causation. Correlation \ldots{}'', the statistician now chants, eyes closed shut, face twisted as if in great pain.
+
+\hypertarget{does-the-drug-help}{%
+\section{Does The Drug Help?}\label{does-the-drug-help}}
+
+A while back, I worked with a rheumatologist on the question whether a certain type of drug (TNF-alpha blockers) reduces the ossification of the spine of patients with axial spondyloarthritis.
+Axial spondyloarthritis is an incurable disease that usually leads to inflammation of the spine, and in the long-term the joints in the spine may fuse to bone formation (ossification).
+These TNF-alpha blockers work well to reduce inflammation, but it's unclear whether they can prevent the ossification.
+Because these drugs help so much, it would be unethical to do a clinical trial and withhold those drugs from the control group.
+At the time I worked at the foundation that had a huge data base of patients with axial spondyloarthritis: doctor visits, blood values, x-ray images, \ldots{}
+With a frequentist mindset, and in collaboration with the rheumatologist as the domain expert, I built a statistical model to answer the scientific question.
+I modeled the ossification within a time interval of two years as a function of drug yes/no, age of the patient, disease duration, the inflammation level and so on.
+The data is purely observational, meaning some patients got the medication, some didn't and the factors that influenced the drug choice potentially also influenced the outcome.
+So we included all factors that were potential confounders of the decision to give the drug, and of the bone development.
+Result: The drug did not reduce the ossification, which was in contradiction with the initial hypothesis that the drug also helps long-term.
+The lead statistician happened to participate in a causal inference course around the same time.
+She had the epiphany that we approached the modeling question the wrong way.
+She drew the DAG, like this:
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/tnfdag-1} 
+
+}
+
+\caption{The drug was known to influence inflammation (reduce it). Inflammation was thought to cause ossification (new bone formation). More inflammation, more ossification. The drug has, potentially, two pathways to reduce ossification: directly, or indirectly via reducing inflammation.}\label{fig:tnfdag}
+\end{figure}
+
+It became immediately clear what the problem with our current model was:
+Inflammation was a potential mediator of the effect of TNF-alpha blockers on long-term ossification.
+Figure @ref\{fig:tnfdag\} shows that the effect of the drug can be split into a direct effect and an indirect effect.
+By having the inflammation level as part of the model, the indirect effect of the treatment was ``swallowed'' by the effect of the inflammation on ossification.\\
+Our initial model only measured the direct effect, but we were actually interested in the total effect which is the sum of direct and indirect effects.
+So we adjusted the model accordingly, removing the inflammation variable \footnote{The attentive reader might object that I referred to inflammation now as both confounder and mediator. Both is correct, if we distinguish different time points. The initial model had inflammation after treatment begin as variable, so it acted as mediator. We later also adjusted the model for inflammation before treatment, when it acts a confounder.}, with the result that the coefficient for the treatment measured the total effect instead of only the direct effect.
+Now the model clearly showed an that the treatment could reduce ossification by decreasing the inflammation levels.
+It sounds like common sense in hindsight, but coming from a frequentist mindset, you easily overlook such things.
+This moment was such a revelation and got me interested in causal inference.
+
+\hypertarget{causality}{%
+\section{Causality}\label{causality}}
+
+\(X\) is a cause of \(Y\) if changing \(X\) changes the probability distribution \(P(Y)\).
+I think we all have an intuition what a cause and its effect are.
+Causality, brought to the world of random variables means:
+If you could \textbf{force} a random variable to have a certain value, how would the distribution of another random variable change?
+A cause is different from a mere association: If you would merely \textbf{observe} a certain value for a random variable, how would the distribution of another random variable look like?\\
+We know that a wet lawn does not \emph{cause} rain.
+How do we know it? Try watering your lawn for one year, every day, and see whether the probability for rain has changed.
+But the two are associated:
+When you observe that your lawn is wet, the probability that it rains is higher than without that observation.
+
+The archetypal statisticians avoids speaking of causality, as if it were to esoteric to speak about.
+As an anecdote: I have a Bachelor's and Master's degree in Statistics.
+What I learned about causality in those 5 years can be summarized in two statements: 1) Always add all confounders when building a statistical model {[}\^{}confounders{]}, and 2) correlation is not causation so don't interpret your models in a causal way.
+Or in short: We students were taught to not speak of the elephant in the room.
+Causality was presented as an unreachable goal, that should not even be attempted with statistical modeling.
+We were taught how to dance around the topic.
+A variable is ``associated with and increase in the outcome'', the variable is not causing the change.
+
+``Correlation does not imply causation'' truly is a mantra that you hear multiple times when you learn about statistics.
+I find that very curious, especially given that statistical modeling is supposed to be THE research tool of our times.
+Isn't research all about detecting how the world works?
+The ``how'', at least for me, implies that scientists are supposed to uncover causal structures.
+On the other hand, statisticians do, to some degree, care for causality.
+They have discovered that models need to be adjusted for confounders.
+Even if you can't provide causality:
+Knowing that the user of the models will in many cases make a causal interpretation, maybe we should at least attempt to make the model ``as causal as possible''?
+
+Welcome to the \textbf{causal inference} mindset.
+
+\hypertarget{the-causal-mindset}{%
+\section{The Causal Mindset}\label{the-causal-mindset}}
+
+The causal inference mindset puts causality in the center.
+The goal of causal inference is to identify and quantify the \textbf{causal} effect a random variables had on the outcome of interest.
+
+I would say that causal inference is a \protect\hyperlink{statistical-modeling}{statistical modeling mindset}, because it relies on probability distributions and random variables.
+But causal inference could also be seen as an ``add-on'' to other mindsets like \protect\hyperlink{frequentism}{frequentist} or \protect\hyperlink{bayesian}{Bayesian} inference, but also for \protect\hyperlink{machine-learning}{machine leanring}.
+But causality is not a mere cherry on top of another mindset.
+It's not like adding a new type of model to, for example, the arsenal of a frequentist.
+By bringing causality to the table, it challenges the culture of statistical modeling that only speaks of associations.
+
+Causalists think of causality as the central ingredient to learning about the world.
+The world is assumed to work by cause and effect, so of course the models have to reflect these causalities as well.
+A model generalizes well when it encodes the correct causal relationships.
+Because only then can also be applied in other circumstances.
+Take Google Flu prediction model.
+Google predicted outbreaks of the flu based on frequencies of certain search terms.
+Clearly, the prediction model was not a causal model, and missed, for example, the nonseasonal 2009 flu.\textsuperscript{\protect\hyperlink{ref-lazer2014parable}{13}}
+Or otherwise this would mean you can \textbf{cause} flu by hitting the right keys in the Google search bar.
+What happened is that the model in production quickly declined in performance, because the search patterns changed.
+For the causalist the case is very clear.
+Such a pure associational model is as fragile as an egg shell.
+
+The causalist knows: Data can't speak for itself.
+We can look at it as hard as we want to, but it won't reveal the causal structures that produced it.
+It can reveal associations, but it can't even reveal the simplest structures.
+Sunshine duration on a given day can be seen causal for the number of people going into a park.
+In a dataset, we would see two columns with numbers.
+If we compute the correlation, we see that they are positively correlated.
+The more sun, the more people.
+The more people, the more sun.
+To everyone, the causal relation is clear, because people showing up in the park certainly doesn't bother the sun even a little bit.
+But your computer can't tell the difference.
+You fit a regression model predicting number of people.
+The computer will do it.
+You fit a regression model to predict hours of sunshine.
+The computer will do it.
+Upcoming headline: In the next heat wave, people are forbidden to go to the park, in an effort to reduce sunshine.
+Of course, non-causalist statisticians and machine learner wouldn't try to predict sunshine in this obvious non-causal way.
+But they also don't go all the way to think causality through.
+It's a weird situation.
+The causalist has to put in causal assumption, in order to build a causal model.
+
+The best way to visualize causal models is with a directed acyclic graph that you have already seen in Figure \ref{fig:tnfdag}.
+As I said, at the core causality is a statistical modeling mindset.
+As such it employs probability distributions.
+But, as we learned, in the causal mindset, these distributions cannot capture the causal structures.
+The joint distribution of lawn wet and rain can tell us about associations between the two, but not the causal directions.
+Causal inference put's a causal model \emph{on top} of the joint distribution.
+A causal model can be expressed in visual form: the directed acyclical graph.
+
+\hypertarget{directed-acyclical-graphs}{%
+\section{Directed Acyclical Graphs}\label{directed-acyclical-graphs}}
+
+The causal inference mindset naturally comes with a visual language to lay out the causal relationships of the random variables.
+Directed Acyclical Graphs (DAGs) are graphical models of variables and their causal relationships.
+From DAGs you can directly see which variable is a cause of another variable.
+Variables are nodes.
+Causal directions are arrows.
+It's an acyclic graph, meaning we are not allowed to have arrows going in circles.
+For example, another arrow from \(Y\) to \(X_1\) would make this a cyclic graph.
+Acyclicality is an assumption needed for causal inference.
+
+\begin{figure}
+
+{\centering \includegraphics[width=\textwidth]{figures/dag-1} 
+
+}
+
+\caption{A Directed Acyclic Graph (DAG) with 5 variables.}\label{fig:dag}
+\end{figure}
+
+What can we see from the DAG in Figure \ref{fig:dag}?
+Variables \(X_2\) and \$X\_3 are direct causes for target \(Y\).
+We can also see that \(X_5\) does not directly influence \(Y\).
+So the DAG already shows us a lot about the dependencies and independencies.
+
+DAGs are simple visual tools, not specific to causal inference: These graphs are basically a bunch of circles that are connected with arrows, and you are not allowed to go in circles.
+DAGs also make an appearance in \protect\hyperlink{bayesian}{Bayesianism}, or more specifically in Bayesian networks aka probabilistic graphical models.
+There they \emph{might} represent causality, but they don't have to.
+
+DAGs visually encode the causal model.
+How do we know which variables to include, where to place the arrows and in which directions they have to point?
+There are a bunch of indicators that help us build up the causal model:
+
+\begin{itemize}
+\tightlist
+\item
+  Direction of time: If one variable comes earlier, it might be the cause of the other. But confounders could be problematic here.
+\item
+  Domain experts: In many cases layman knowledge does not suffice. But respective experts such as medical doctors, engineers and ecologists have a good idea how the graph should look like (once they have been introduced to the graph language).
+\item
+  Causal structure learning: There are numerous approaches to detect the causal structure from the data. We can't perfectly deduct all relationships, but there is a lot: For example if two variables are completely independent from each other, we know that there is no arrow between the two. Causal structure learning can identify sets of plausible DAGs, sometimes leaving out which ways the arrows have to point.
+\item
+  Everyday knowledge. See rain/lawn example.
+\end{itemize}
+
+The causal model has substantial subjectivity built in.
+It's a criticism of the causal mindset as well.
+But thanks to DAGs, these causal decisions are made explicit.
+This makes it possible to discuss them.
+
+So, causalists got themselves a language to talk about causality.
+They have a tools to visualize causal structures.
+But how do we learn something about the world?
+How do we estimate the causal effect of a variable on some outcome we are interested in?
+And is it even always possible to calculate causal effects?
+But how do they translate to a model, like with numbers and stuff?
+
+\hypertarget{many-frameworks-for-causality}{%
+\section{Many Frameworks For Causality}\label{many-frameworks-for-causality}}
+
+There are many ``schools'' or frameworks of causal inference, each with their own notation and approaches.\textsuperscript{\protect\hyperlink{ref-hernan2010causal}{14}}
+One such school is around the works of Judea Pearl, who invented the do-calculus \(P(Y|do(X))\), a mathematical language to express interventions on data.\textsuperscript{\protect\hyperlink{ref-pearl2012calculus}{15}}
+But really, you find various frameworks and approaches that have causality at the center.
+Here is an overview.
+You can see these as various entry points for diving deeper into the world of causal inference.
+
+\begin{itemize}
+\tightlist
+\item
+  A huge part of causal inference works puts the focus on designing the experiment rather than a causal model that operates on observational data. The claim for causality is generated through randomization instead of pure modeling. Here we have clinical trials, A/B - tests.
+\item
+  Natural experiments are observational data which originate from a data-generating process that looks very similar to an experiment. When John Snow investigated cholera cases, he worked with a natural experiment involving to water companies: John Snow identified contaminated drinking water as the source of cholera, because the customers of one water company got sick of cholera much more often. The association of households to one company or the other served as a natural experiment, randomizing factors such as age, comorbidities, education, and so on.
+\item
+  Propensity score methods aim to emulate group versus control group setups for also comparing the effect of a binary variable on some outcome. One of the groups, usually the control group, is created by ``matching'' data points that are similar to the treatment group.\\
+\item
+  Do-calculus, structural causal models, and the backdoor criterion offer a very general modeling language and tools for causal inference.\textsuperscript{\protect\hyperlink{ref-pearl2009causal}{16}}
+\item
+  The \textbf{potential outcomes framework}\textsuperscript{\protect\hyperlink{ref-athey2016recursive}{17}} is another big causal framework, mostly useful for studying the causal effect of binary variables, and originated from the social sciences. For example drug treatment effects on a disease outcome.
+\item
+  Causal discovery or structure identification is a subset of causal inference that aims to discover causal relationships from merely observational data. Against what I said earlier, it is possible to automatically derive a set of DAG's from pure observational data. But: You have to make some assumptions, and there will be multiple possible DAGs.
+\item
+  And there are many individual methods for causal inference. To name an individual approach: ``honest causal forests'', for example, are based on random forests which are typically used in in supervised learning. Honest causal forests are designed to model heterogeneity in treatment effects.\textsuperscript{\protect\hyperlink{ref-athey2016recursiv}{\textbf{athey2016recursiv?}}}
+\item
+\item
+  \ldots{}
+\end{itemize}
+
+All approaches have in common that they assume a causal model.
+This causal model can be rather implicit, like deciding on mechanisms for generating the control and treatment groups, or rather explicit, by drawing a DAG.
+The causal model is then translated into a statistical estimator.
+For setups that design the experiments, the estimates can be very simple, such as just comparing the means of two groups, for example to get the treatment effect of a drug.
+Or, especially with observational data, involve translating a causal model into a statistical estimator.
+And that's the case we will have a closer look next.
+
+\hypertarget{from-causal-to-conditional}{%
+\section{From Causal to Conditional}\label{from-causal-to-conditional}}
+
+Based on our DAG, we could start designing an experiment, in which we control the variable of interest \(X\).
+That's being done already, of course.
+For example, that's what randomized clinical trials do:
+The goal of these trials is to understand the \emph{causal} effect of a treatment on a disease.
+So in those trials the random variable ``treatment'' is controlled.
+I considered this as a distinct mindset in \protect\hyperlink{design-based}{design-based inference}.
+Anyways, controlled experiments are expensive, time-consuming.
+Sometimes they are not feasible, unethical or outright impossible.
+Imagine you study data on the country level.
+You couldn't just interfere with a countries GDP or number of new births.
+
+Observational data it is, in so many cases.
+With observational data, the first casualty is causality -- at least from the point of view of non-causalists.
+But observational data is when causalists become excited and start stretch-exercises for their hand-wrists to warm up for the statistical programming ahead.
+
+But causalists claim to have a way to calculate causal effects, even without experiments.
+It's a bit of an industry secret, but I am willing to spill it: The secret is LHC.
+LHC stands for large hadron collider.
+The causalists collide particles at a high-energy -- producing black holes in the process.
+Each black hole contains a parallel universe, and with enough of those we can study what-if scenarios.
+Joke aside, there is no magical ingredient for the estimation.
+The ``secret'': We can't estimate causal estimands directly.
+Causalists translate causal estimands into statistical expressions that can be estimated using observational data.
+In the end, causal inference is just boring old stats.
+
+But one step after another: How do we answer causal questions with models and data?
+Causalists follow these steps\textsuperscript{\protect\hyperlink{ref-pearl2009causal}{16}}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Formulate causal estimand, like: What is the causal effect of \(X_1\) on \(Y\)?
+\item
+  Build a causal model: Draw DAG.
+\item
+  Identify whether causal estimand can be estimated, given the causal model. Requires translating it into conditional probability statements.
+\item
+  Estimate the (translated) target quantity.
+\end{enumerate}
+
+CONTINUE HERE
+
+Let's have a look at the individual steps.
+The first question is, what causal relationship we want to study.
+This can then be expressed as some causal estimand, for example how would the air pollution be reduced when we ban car traffic in the inner city.
+By choosing the target and the possible cause, we can now proceed to building the causal model.
+
+The causal model can be build using visual tools like the DAG.
+Besides the target and the potential causal variable, all other variables that are relevant to both should be included in the causal model.
+It's kind of collecting all the nodes for the DAG.
+But we also need the arrows that connect the variables, with the direction of the arrows showing the causal direction.
+Identifying between which variables an arrow should be and in which direction it should point can be narrowed down, in parts, automatically.
+But in the end, a lot of those causal directions will be based on domain knowledge and subjectivity.
+But in the end, we do have a DAG.
+Not all approaches and frameworks will necessarily encourage or require to draw such a DAG, but you always have to decide on what the confounders are and so on.
+
+CONTINUE HERE
+
+In the identification step the causalists find out whether the causal estimand can be even answered with the observational data at hand.
+This means that the causalist has to check whether the assumptions of the causal inference hold, given the causal model.
+If that's the case, the causal estimand can be transformed into a statistical estimand.
+Or a machine learning model, depending on where the causal model was put on top.
+For some approaches, the process is not so complicated, especially when methods are based on randomized experiments, or are restricted to certain variable constellations.
+Identification can be a complicated process.
+But there are also many ``simple'' rules that tell you how to turn a causal estimand into a conditional estimand.
+It's important to know that in the end we usually have some regression model, and our goal is to pick the right subset of random variables to use in the model (to adjust for).
+The simpler rules are visualized in Figure \ref{fig:dag-rules}.
+
+\begin{itemize}
+\tightlist
+\item
+  Include confounders. Confounder are variables that cause both the variable of interest and the outcome. For example in Figure \ref{fig:dag} \(X_3\) confounds \(X_2\) and \(Y\). So we have to include it in our statistical estimand.
+\item
+  Exclude mediators. When we want to measure the causal effect of \(X_1\) on \(Y\), we have make sure not to include \(X_2\). If we include \(X_2\) it will completely block the path, meaning we will find out that \(X_1\) does not influence \(Y\). But it does. Just via \(X_2\). In general don't condition on descendants of treatment variable.
+\item
+  Exclude colliders. If not \(Y\) were our target, but \(X_2\) and \(X_3\) the effect of interest, then \(Y\) would be a collider. Adding colliders adds a fake causal path. For example: sweating -\textgreater{} wet shirt \textless- it's raining. sweating and rain not correlated (or just weakly). But when we condition on wet shirt, they suddenly are strongly correlated! Bc. when shirt wet, but no rain, we can conclude that the person is likely to be sweating.
+\item
+  There are more such rules, but by doing the above, you already exclude some bad non-causal paths.
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/dag-rules-1} 
+
+}
+
+\caption{To understand the causal effect of X1 on Y, we have to build a regression model with $Y$ as target and X1 and X2 as predictor variables. Roles: Y is the target, X1 the variable of interest, X2 a confounder of X1 and X2, X3 a mediator to the effect of X1 on Y, and X4 is a collider.}\label{fig:dag-rules}
+\end{figure}
+
+For the estimation, we need to make assumptions about how the random variable are (conditionally) distributed.
+But really, we are in the frequentist/Bayesian mindset again.
+But it could also be supervised machine learning.
+And you can read up on those chapters again, so I don't have to repeat myself here.
+Then, usually for the interpretation, you interpret the regression coefficient as you normally would.
+Except that you may interpret the effect as a cause.
+If you are interested in different variables, you have to repeat all the steps for all variables, as you might need different models.
+
+\hypertarget{strengths-4}{%
+\section{Strengths}\label{strengths-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  Arguably, causality is central to modeling the world. Causal inference is the mindset that takes causes to heart.
+\item
+  Causal inference allows to argue causal questions: An important ingredient for generalization.
+\item
+  I'd say in most cases the modeler actually wants causality. Scientists make causal interpretations. In marketing you want to know how measures impact customers causally.\\
+\item
+  Causal models are more robust against changes in the environment. Or rather: Models that use non-causal, merely associative information might break more easily. For example: Google had a flu detector which predicted flu waves based on searches for flu-related terms. But searches are not causal, so the model broke.
+\item
+  The mindset is flexible and can enhance many other mindsets such as frequentism, Bayesianism, machine learning. Inherits strengths from the statistical modeling approach it builds upon.
+\item
+  DAGs make causal assumptions explicit. I would go as far and say that the subtext of many frequentist and Bayesian analyses is already a causal one. Or at least once the results get out of the hand of the modeller, the journalists, manager, decision maker and so on are likely to make causal interpretation anyway. Causal inference talks explicitly about causality, and especially about the causal structure assumptions that were made for the model. These can then be challenged and discussed.
+\end{itemize}
+
+\hypertarget{limitations-4}{%
+\section{Limitations}\label{limitations-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  There is no commonly accepted way to do causal inference yet . Do calculus by Pearl and co is a strong contender though.
+\item
+  Some people that causality does not exist
+\item
+  Building the causal model is an inherently subjective task. The causalist can never be sure whether the causal model is correct. Some assumptions about causal directions and arrows can never be verified.
+\item
+  Confounders, causes of both variable of interest and target, are especially tricky. For a causal interpretation, you have to assume that you found all the confounders. But you can't prove that you have.
+\item
+  Inherits limitations from the statistical modeling approach it builds upon (except for lack of causality).
+\item
+  Using non-causal variables can enhance predictive performance, but make your model non-causal. So causal inference is not with predictive power first.
+\item
+  Causal inference assumes directionality, as becomes very visual in DAGs, which even have the word directed in it. So, no feedback loops are allowed. This is a strong restrictions. Often potential feedback loops can be built around by introducing time: Instead of saying that the populations of predators and prey are in a feedback loop, you operationalize these two variables as four: Predator at time \(t-1\) causally affects predator at time \(t\); prey at time \(t-1\) also causally affects predator and prey at time \(t\) .
+\end{itemize}
+
+\hypertarget{further-reading}{%
+\section{Further Reading}\label{further-reading}}
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
 
 \hypertarget{machine-learning}{%
 \chapter{Machine Learning}\label{machine-learning}}
@@ -2180,8 +2552,8 @@ Statistical modeling is intrinsically motivated.
 The rationale for constructing the model is important.
 It's like judging food not only by how it tastes, but also by the cooking process: did the chef use the right ingredients? Was the cooking time appropriate, and so on.
 
-\hypertarget{strengths-4}{%
-\section{Strengths}\label{strengths-4}}
+\hypertarget{strengths-5}{%
+\section{Strengths}\label{strengths-5}}
 
 \begin{itemize}
 \tightlist
@@ -2195,8 +2567,8 @@ It's like judging food not only by how it tastes, but also by the cooking proces
   Machine learning is predestined for automating tasks and building digital products.
 \end{itemize}
 
-\hypertarget{limitations-4}{%
-\section{Limitations}\label{limitations-4}}
+\hypertarget{limitations-5}{%
+\section{Limitations}\label{limitations-5}}
 
 \begin{itemize}
 \tightlist
@@ -2346,7 +2718,7 @@ Machine learning algorithms illuminate paths through the forest so that we can s
 The globally best \(f\) might not be within this illuminated path, so we will usually only find a locally optimal \(f\).
 Machine learning algorithms differ in the form and complexity they allow for \(f\).
 Decision tree algorithms produce \(f\)'s that look like step functions, since most trees algorithms only allow discrete jumps in prediction.
-Neural network are universal function approximators that can, in theory, approximate any function \(f\).\textsuperscript{\protect\hyperlink{ref-hornik1989multilayer}{13}}
+Neural network are universal function approximators that can, in theory, approximate any function \(f\).\textsuperscript{\protect\hyperlink{ref-hornik1989multilayer}{18}}
 
 Each machine learning algorithm has its own procedure to search the hypothesis space.
 Most of the time, this search is about finding the right parameters for a model:
@@ -2466,7 +2838,7 @@ Progress in machine learning research is when a new machine learning algorithm b
 
 As we have seen, the mindsets of statistical modeling and supervised machine learning can be quite different.
 At their core, the two mindsets involve different ideas of how to model aspects of the world.
-The following comparison is more or less a summary of Leo Breiman's famous article ``Statistical Modeling: The Two Cultures''.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{14}}
+The following comparison is more or less a summary of Leo Breiman's famous article ``Statistical Modeling: The Two Cultures''.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{19}}
 
 In the context of prediction, we can think of nature as a mechanism that takes features \(X\) and produces output \(Y\).
 This mechanism is unknown and we want to learn about it using models.
@@ -2520,8 +2892,8 @@ They are different mindsets with different strengths and limitations.
 If a task involves evaluating unseen data against a well-defined performance metric, the best approach to that task is probably supervised machine learning.
 If your task requires a model with a strong theory that can explain the relationships in the data, statistical modeling is the way to go.
 
-\hypertarget{strengths-5}{%
-\section{Strengths}\label{strengths-5}}
+\hypertarget{strengths-6}{%
+\section{Strengths}\label{strengths-6}}
 
 \begin{itemize}
 \tightlist
@@ -2535,8 +2907,8 @@ If your task requires a model with a strong theory that can explain the relation
   Supervised learning has a very coherent evaluation approach that I personally find very convincing, though quite one-sided. Measuring how well the model predicts new data is a very compelling way to define a good model.
 \end{itemize}
 
-\hypertarget{limitations-5}{%
-\section{Limitations}\label{limitations-5}}
+\hypertarget{limitations-6}{%
+\section{Limitations}\label{limitations-6}}
 
 \begin{itemize}
 \tightlist
@@ -2551,7 +2923,7 @@ If your task requires a model with a strong theory that can explain the relation
 \item
   Automation can lead to overlooking issues with the data and the task formulation.
 \item
-  Generalization error is a good way to quantify generalization, relying solely on this metric will fail in the dumbest ways. There are many examples, such as using asthma as a predictor of lower risk of pneumonia\textsuperscript{\protect\hyperlink{ref-caruana2015intelligible}{15}}, classifying based on watermarks\textsuperscript{\protect\hyperlink{ref-lapuschkin2019unmasking}{16}}, and misclassifying dogs as wolfs based on snow in the background\textsuperscript{\protect\hyperlink{ref-ribeiro2016should}{17}}.
+  Generalization error is a good way to quantify generalization, relying solely on this metric will fail in the dumbest ways. There are many examples, such as using asthma as a predictor of lower risk of pneumonia\textsuperscript{\protect\hyperlink{ref-caruana2015intelligible}{20}}, classifying based on watermarks\textsuperscript{\protect\hyperlink{ref-lapuschkin2019unmasking}{21}}, and misclassifying dogs as wolfs based on snow in the background\textsuperscript{\protect\hyperlink{ref-ribeiro2016should}{22}}.
 \item
   Feedback loops can break the models. Deployed into the wild, supervised learning models influences and even creates data that might end up training a future version of the same model. But this feedback loop is not well understood and difficult to respect in the modeling process.
 \end{itemize}
@@ -2562,9 +2934,9 @@ If your task requires a model with a strong theory that can explain the relation
 \begin{itemize}
 \tightlist
 \item
-  Statistical Modeling: The Two Cultures by Leo Breiman.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{14}} Highly recommended to understand differences between statistical modeling and supervised machine learning.
+  Statistical Modeling: The Two Cultures by Leo Breiman.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{19}} Highly recommended to understand differences between statistical modeling and supervised machine learning.
 \item
-  I can recommend the book ``Elements of Statistical Learning''\textsuperscript{\protect\hyperlink{ref-hastie2009elements}{18}} which covers not only supervised learning but also other machine learning topics. The book has a strong influence from the statistical modeling mindset.
+  I can recommend the book ``Elements of Statistical Learning''\textsuperscript{\protect\hyperlink{ref-hastie2009elements}{23}} which covers not only supervised learning but also other machine learning topics. The book has a strong influence from the statistical modeling mindset.
 \end{itemize}
 
 \hypertarget{unsupervised-ml}{%
@@ -2573,51 +2945,44 @@ If your task requires a model with a strong theory that can explain the relation
 \begin{itemize}
 \tightlist
 \item
-  Uncovering hidden patterns in the data
+  A more open and diverse mindset focused on uncovering hidden patterns in the data.
 \item
-  Typical tasks: clustering, anomaly detection, dimensionality reduction, and association rule mining.
+  Typical tasks: Clustering, anomaly detection, dimensionality reduction, and association rule learning.
 \item
   One of the three \protect\hyperlink{machineux5cux2520learning}{machine learning} mindsets along with \protect\hyperlink{supervised-ml}{supervised learning} and \protect\hyperlink{reinforcement-learning}{reinforcement learning}.
 \end{itemize}
 
-A bunch of supervised learners and an unsupervised machine learner decide to climb a mountain.
-The trip quickly turns into a race: Who is the first to reach the top of the mountain, and who will be back first at the hut?
-The supervised learners give all their best, trying to outperform each other, but the unsupervised learner quickly falls behind.
-After a tough day, one after the other return to their hut, exhausted.
-To their surprise, they find that the unsupervised learner was back at the hut first.
-Cheerfully waiting for the others to return, and with a steaming cup of coffee in his hands, he gives a report on his adventures:
-``When all of you started sprinting, I took a detour. You wouldn't believe it, but I found a rare mushroom that is not supposed to grow in this region. I also clustered the areas around the hut, by the type of vegetation you can find. But the best thing is that, \ldots{}''
-``Wait'', one of the supervised learners stops him, ``You were not only the first to be back, but you also did all these other things?''
-``I suppose'', the unsupervised learner admits, slightly puzzled why it's such a big deal.
-``How long did it take you to climb the mountain? Did you find a shortcut? We didn't see you all day.'', another supervised learner asks.
-``Mountain? What mountain?''
-
-Unsupervised always sounds to me like one step away from chaos and anarchy.
-Letting kids to play alone. Discovering all types of new ``artwork'' on the walls.
-Forgetting about that pizza in the oven, and discovering that the oven has become a gate to the underworld.\\
-Unsupervised learning, on the other hand, sounds very promising.
-It sounds like the model will figure things out on its own.
-The truth is that unsupervised learning is just another form of machine learning.
-Unsupervised learning is without a ground truth like supervised learning requires.
-It's also without a reward function as reinforcement learning is built upon.
-The mindset is one or two steps closer to anarchy than the other machine learning mindsets, but it's far from chaos.
-In fact, it's a very useful mindset for finding patterns in the data.
+A group of supervised learners and one unsupervised learner decide to climb a mountain.
+The trip quickly turns into a race: Who will be the first to reach the top of the mountain, and who will be the first back to the hut?
+The supervised learners try to outrun each other, one faster than the other.
+The unsupervised learner quickly falls behind.
+After an exhausting day, one by one, they return to their hut.
+To their surprise, the unsupervised learner is already joyfully waiting for them in the hut.
+Everyone was eager to know how the unsupervised learner managed to climb faster than them.
+``When you all sprinted off, I took a detour,'' the unsupervised learner reported,``You won't believe this, but I found a rare mushroom that is not supposed to grow in this area. I have also divided the area around the hut according to the vegetation you find there. But the best part is that \ldots{}''
+``Wait!'' interrupts one of the supervised learners, ``You were not only the first one back, but you also did all these other things?''
+``I guess so'', the unsupervised learner admits, a little puzzled.
+``How long did it take you to climb the mountain? Did you find a shortcut? We haven't seen you all day.'', asks another supervised learner.
+``Mountain? I didn't see any mountains.''
 
 \hypertarget{what-type-of-traveler-are-you}{%
-\section{What Type of Traveler are you?}\label{what-type-of-traveler-are-you}}
+\section{What Type of Traveler Are You?}\label{what-type-of-traveler-are-you}}
 
-Tip Top Travel, a traveling agency I just made up, offers a broad range of travels, ranging from all-inclusive hotels in Spain, to hiking and camping weekends in Norway and weekend city trips to Paris.
-They have lots of records about their long-term customers traveling behavior: Frequency, time of the year, destination, group size, cost of the trip, and so on.
-And yet, they \textbf{know} surprisingly little about the overall patterns in their data: Are there some prototypes of customers?
-Are the frequent combinations, say, do trips to Norway imply that the customer will also book trips to Sweden?
-That's like the dream setup for unsupervised machine learners.
-They would probably start with a cluster analysis, and find out what types of customers Tip Top Travel has.
-Customers are in the same cluster when their past bookings look similar.
-We can measure this similarity based on the features (frequency, location, budget, \ldots) and the distances.
-If Tom books 4 trips per year he is more similar to Tina who books 5 a year than to Timo who books 1 per year.
-It get's more tricky because the measure of distance between travelers has to combine features on very different scales, like money, geographical location, counts, and so on.
-But I'll rant about this problem later.
-We could use, for example, the k-means algorithm to find clusters.
+Tip Top Travel, a travel agency I just made up, offers a wide range of trips, from all-inclusive holidays in Spain to hiking trips in Norway and weekend city trips to Paris.
+They have a huge database on the booking history of their customers:
+The date of the trip, the destination, group size, cost of the trip, and so on.
+And yet, they know surprisingly little about the general patterns in their data:
+Are there certain prototypes of customers?
+Do customers who book trips to Norway, for example, also book trips to Sweden?
+Our imaginary travel company's big data is a dream for unsupervised learners.
+They might start with a cluster analysis to get an overview Tip Top Travel's different customer types.
+A cluster is a group of customers with similar travel patterns.
+Similar means that the customers in a cluster are ``close'' in terms of their feature values, such as booking frequency, travel locations, and average cost of the trip.
+If Tom books 4 trips per year, he is more similar to Tina, who books 5 trips per year than Philipp, who books 1 per year.
+It gets more tricky because the measure of distance between travelers has to combine features that were measured at very different scales, such as amount of money, geographical location, counts, and so on.
+But I'll rant about that problem later.
+With such a distance measure, there are many clustering algorithms to choose from that can detect clusters.
+For example, the k-means algorithm.
 
 \begin{figure}
 
@@ -2625,115 +2990,110 @@ We could use, for example, the k-means algorithm to find clusters.
 
 }
 
-\caption{Good clustering solution based on k-means.}\label{fig:clustering1}
+\caption{Three clusters for two features (x-axis and y-axis) based on k-means clustering.}\label{fig:clustering1}
 \end{figure}
 
-The k-means algorithm partitions our customers into \(k\) clusters.
-And the modeler can say what \(k\) should be.
-Each customer is assigned to the cluster with the closets center (mean).
-These cluster centers are iteratively optimized so that all customers in the same cluster are near each other.
-The objective of this entire algorithm is to find cluster centers so that the distances between cluster centers and their assigned data points is minimal, averaged over all customers.
+The k-means algorithm divides our customers into \(k\) clusters.
+The number of clusters \(k\) must be chosen by the modeler.
+The algorithm start with random cluster centers.
+These cluster centers are iteratively optimized so that all customers in the same cluster are close to each other.
+Each customer is assigned to the cluster with the closest center.
+The objective of the k-means algorithm is to find cluster centers that minimize the distances between centers and assigned data points, averaged over all customers.
 
-Great! We now have clusters.
-What now?
-We wanted to know what type of customers Tip Top Travel has.
-We'll leverage the cluster centers for that, which represent prototype customers.
-One cluster could be ``Relaxation-seeking families''.
-The cluster center is a customer who books, roughly twice a year, for 1.9 adults and 2.1 children.
-The most common destination is all-inclusive hotels with pool and beach access where parents can shove their kids to some all-day entertainment program and themselves have their first beer at 11 AM at the pool bar.
-Cluster numero dos is ``Luxury Explorer''.
-Customers in this cluster on average book 0.7 trips per year for 1.7 adults, with varying destinations but always in nature with some adventure aspect: hiking, canoeing and camping.
-Of course, there are more cluster.
-But I made those two up anyways and I guess you get the idea.
-The marketing department would absolutely love such results.
-Such clusters deliver data-driven insights about the customers and offers a narrative angle on which marketing campaigns can be built on.
-For example, the company can have marketing campaigns for each cluster.
+Great! We have clusters.
+Now what?
+We wanted to know what kind of customers Tip Top Travel has.
+To do this, we can interpret the cluster centers as prototypes of customers.
+One cluster could be ``families looking for relaxation''.
+The cluster center is a customer that books about twice a year for 1.9 adults and 2.1 children.
+The most common destination is all-inclusive hotels with pool and beach access, where parents can drop off their kids for an all-day entertainment program and then the adults can have their first beer at the pool bar 11 AM.
+Cluster numero dos is ``luxury explorer''.
+Customers in this cluster book an average of 0.7 trips per year for 1.7 adults, with varying destinations in nature with some adventure aspect: hiking, canoeing and camping.
+Depending on the \(k\) chosen by the modelers, there might be more clusters, and they might not always map to some easily interpretable group of travelers.
+The more interpretable the clusters are, the more the marketing department will love the results.
+Cluster analysis can provide data-driven insights about customers and offers a narrative angle on which to build marketing campaigns.
 
-\hypertarget{unsupervised-machine-learning-mindset}{%
-\section{Unsupervised Machine Learning Mindset}\label{unsupervised-machine-learning-mindset}}
+\hypertarget{the-unsupervised-learning-mindset}{%
+\section{The Unsupervised Learning Mindset}\label{the-unsupervised-learning-mindset}}
 
-Unsupervised machine learning has the excitement of an exploration.
-A dataset suddenly becomes a potential treasure.
-Or a new land to discover.
-The supervised machine learner watches from the side lines, gulping an energy drink, preparing for their next attempt in the high jump.
-The only excitement in supervised learning is whether or not the performance of the model will be good or bad.
+Unsupervised learning is like a journey of discovery.
+A dataset suddenly becomes a treasure chest potentially filled with valuable insights.
+The supervised learner can only watch from the sidelines: sipping an energy drink, preparing for the next race; the only excitement is what the stopwatch will show this time.
 
-Unsupervised learning is a machine learning mindset: task-drive, computer-oriented, and externally motivated.
-It's task driven -- we use it to solve some task, be it clustering, anomaly detection or finding a better representation of the data.
-It's algorithmic and externally motivated: unsupervised learning is also about reaching the goal, with the ``how'' not being the primary concern.
+Unsupervised learning is a machine learning mindset: task-driven, computer-oriented, and externally motivated.
+Task-driven: We use unsupervised learning to solve specific tasks, such as clustering, anomaly detection, or finding a better representation of the data.
+Computer-oriented: Like supervised learning, its unsupervised counterpart is motivated by the premise of having a computer, rather than by the premise of a theory where it's simply convenient to have a computer.
+Unsupervised learning is externally motivated: While measuring performance is more difficult than in other machine learning mindsets, successfully completing the task is more important than following a particular ``recipe'' (such as using probability theory).
 
-Unsupervised learning is less coherent than supervised learning with its super tight evaluation and zen-like mindset of optimization.
-The common goal or mindset of all unsupervised learning approaches and tasks has to be described in more fuzzy ways.
-All unsupervised methods are about discovering patterns in the data.
-Still fuzzy.
-Fortunately we can use the language of probability theory.
-Unsupervised learning is about finding a more compact representation of the joint distribution \(P(X)\), or expose some aspects of \(P(X)\).
-That doesn't mean that the respective algorithms are based on statistical models.
-Some unsupervised methods are based on statistics, but many are not.
-
-Exposing \(P(X)\) includes a long range of tasks:
+Unsupervised learning is a less coherent mindset than supervised learning with its very rigorous evaluation and Zen-like mindset of optimization.
+Unsupervised learning is about discovering patterns in the data, which sounds a bit fuzzy.
+Fortunately, we can use the language of probability theory to make it more understandable.
+Unsupervised learning is about finding a more compact representation of the joint distribution \(P(X)\) or revealing some aspects of \(P(X)\).
+Unsupervised learning includes a broad range of tasks:
 
 \begin{itemize}
 \tightlist
 \item
-  Clustering finds the mass centers of the distribution
+  Clustering finds modes of the distribution.
 \item
   Anomaly detection finds extreme data points.
 \item
-  Association rule learning finds modes in binary featured distributions.
+  Association rule learning finds modes in binary feature distributions.
 \item
   Dimensionality reduction finds lower-dimensional descriptions of the data.
 \item
   \ldots{}
 \end{itemize}
 
-It's funny, why don't we just estimate \(P(X)\) directly and derive all interesting aspects such as anomalies from that?
-Well, estimating the joint distribution is extremely difficult in higher-dimensional spaces.
-And ``higher-dimensional'' already start when you have just a handful of features.
+Why do we need unsupervised learning anyway?
+Can't we just hire a statistician to estimate \(P(X)\) and derive all these interesting aspects from that estimate?
+Well, estimating the joint distribution is extremely difficult with high-dimensional data.
+The difficulties in estimating \(P(X)\) become difficult even with more than a handful of features when the distribution is complex, let alone image or text data.
 
 We can also express supervised learning as learning a distribution.
-But it's ``just'' the conditional distribution \(P(Y|X)\) which is much easier to learn than the full joint distribution \(P(X)\).
-Supervised learning is about choosing one feature and making it ``special'', and also calling it \(Y\).
-But in unsupervised learning, all features are treated equally, at least in the beginning.
-Of course, each algorithm might give different weight to the features, depending on the task.
+But it's ``only'' the conditional distribution \(P(Y|X)\), which is much easier to learn than the full joint distribution \(P(X)\).
+Supervised learning is about selecting one feature and making it ``special'', which we also express by giving it a different letter (\(Y\)).
+In unsupervised learning, on the other hand, all features are treated the same.
+Of course, each algorithm can give different weights to the features depending on the task.
 
-The absence of the \(Y\) to predict also means that we have no ground truth to predict.
-It's more like, ``Here are \(n\) data points, please find out something interesting.''
-Then you say ``Here is something interesting: I found these 10 clusters.''
-But you will never get feedback if these were the ``right'' clusters.
-There is no one to pad you on the back, saying ``you did great''.
-Your strength as an unsupervised learner has to come from within!
-That's why unsupervised learning is sometimes called learning without a teacher.
-There is not teacher to correct what the model does.
-That's why we can also sharply distinguish supervised learning as its own mindset from unsupervised learning.
+The lack of a target \(Y\) to predict also means we have no ground truth to compare our results to.
+It's more like, ``Here are \(n\) data points, please find something interesting.''
+Then you say ``Here's something interesting: I found these 10 clusters.''
+But you'll never get any feedback on whether these were the ``right'' clusters.
+There is no one to pat you on the back and say ``You did a great job.''
+Your strength as an unsupervised learner must come from within!
+That's why unsupervised learning is sometimes called learning without a teacher:
+There is not teacher to correct the model.
+This is also why we can clearly distinguish supervised learning as its own mindset and why it's not just a special case of unsupervised learning.
 
 To be more cheerful about unsupervised learning:
-It's an open mindset in many ways.
+It's, in many ways, an open mindset.
 Unsupervised learning means being open to surprises and discovering hidden patterns.
-Already the word patterns hides a pot luck of types of patterns: clusters, outliers, feature representations, association rules, \ldots{}
-The mindset is also open about methods to get to those discoveries.
-The range of methods is huge, even for a machine learning mindset.
-For clustering alone there are so many different approaches.
-If I had to pick one modeling mindset that's the most inclusive, it's unsupervised learning.
-Next to this hippie community, supervised machine learners seem rather dull optimizers that sit with fine suits in their offices looking to increase sales for Q2, so they can get a bonus and add a Porsche to their meaningless lives.
+The word ``pattern'' hides a potpourri of meanings: clusters, outliers, feature representations, association rules, \ldots{}
+The mindset is also open in the sense that the range of methods is huge, even for a machine learning mindset.
+For clustering alone, there are so many different approaches.
+If I had to pick one modeling mindset that is the most inclusive, I would choose unsupervised learning (in terms of methods, not necessarily people).
+Next to this hippie community, supervised learners look like dull optimizers who sit in their offices with fine suits trying to increase sales for the second quarter.
 
-To be fully honest.
-Unsupervised learning also usually involves optimization.
-Sometimes even with very explicit loss functions.
-But there is much more freedom in what to optimize for, because, hey, where there is no ground truth, there is no wrongdoing.
-And there are even metrics to evaluate the results.
-But again, with lots of freedom to pick one and no correct one.
+Full disclosure: unsupervised learning also involves optimization.
+But there is much more freedom in the optimization objective because there is no ground truth.
+The same is true for performance metrics and benchmarks:
+It's part of the mindset to evaluate models, but there's a lot of ambiguity about how to evaluate unsupervised solutions.
+For example, in cluster analysis, we could measure cluster purity, the silhouette score, various indexes, look at elbow plots, and so on.
+One can also create a long list of metrics for supervised learning, but at least they agree on when they become zero (or reach their minimum):
+When the target is accurately predicted.
+A luxury that doesn't exist in unsupervised learning.
 
 \hypertarget{many-tasks}{%
 \section{Many Tasks}\label{many-tasks}}
 
-I think it's best to get a better understanding for the mindset when looking at the, quite different, tasks that fall into the unsupervised learning mindset.
+To get a better understanding of unsupervised learning, let's take a look at some of the tasks that are typical of the mindset.
 
 \hypertarget{clustering-and-outlier-detection}{%
 \subsection{Clustering and Outlier Detection}\label{clustering-and-outlier-detection}}
 
 Both clustering and outlier or anomaly detection are two opposites sides of the same coin.
-In both cases were are concerned about where the mass of the data lies, or where not.
+In both cases, the question is where the mass of the data lies.
 
 \begin{figure}
 
@@ -2741,19 +3101,18 @@ In both cases were are concerned about where the mass of the data lies, or where
 
 }
 
-\caption{Example of 3 clusters in a two-dimensional feature space. The top right data point could be labelled as outlier.}\label{fig:clustering}
+\caption{Example of three clusters in a two-dimensional feature space. The data point on the top right could be called an outlier.}\label{fig:clustering}
 \end{figure}
 
-Clusters are, in terms of the joint distribution \(P(X)\), regions in the feature space with many data points.
-Clusters are, ideally, the modes or peaks of the distribution.
-Outliers or anomalies lie in regions where \(P(X)\) is small, so a barren desert when it comes to data.
-The clusters are usually defined such that all the data points within a cluster a rather similar in their feature values.
-But between clusters the data should be rather different.
+Clusters are regions in the feature space with a high concentration of data points.
+In terms of \(P(X)\), these regions are modes of the distribution.
+Outliers or anomalies are in regions where \(P(X)\) is small, which are regions in the feature space with almost no data points.
+Clusters are usually defined such that all the data points within a cluster a similar in their feature values.
 There are many different approaches for finding clusters: hierarchical clustering, k-means, k-medoids, DB-SCAN, PRIM, Gaussian mixture models, self-organizing maps, \ldots{}
-They have various motivations, ranging from statistical to more algorithmical, showing again how also unsupervised machine learning is externally motivated: It doesn't particularly matter \emph{how} the clusters are detected.
-It's more important that they successfully find clusters.
-They can produce different clusters.
-Let's have a look at another solution to the small example:
+These clustering methods have various motivations, ranging from statistical to more algorithmic, again showing that unsupervised learning is externally motivated:
+It isn't particularly important \emph{how} the clusters are detected.
+Different clustering methods can find very different clusters.
+Let's take a look at a another solution for cluster analysis from Figure \ref{fig:clustering1}.
 
 \begin{figure}
 
@@ -2761,114 +3120,99 @@ Let's have a look at another solution to the small example:
 
 }
 
-\caption{Worse clustering solution based on ... just picking something by hand.}\label{fig:clustering2}
+\caption{Bad clustering solution, measured by Euclidean distance. But good solution if we are only interested in the horizontal direction, giving a weight of zero to the feature that distributes the data in the vertical direction.}\label{fig:clustering2}
 \end{figure}
 
-This one is clearly the worse option, at least based on the Euclidean distance.
-But that assumes that the distance in all directions matters equally.
-Maybe the feature that spreads the data in the horizontal direction is rather irrelevant, and we want to give it a smaller weight in the distance computation?
-Domain experts could tell you which features matter and which don't, but many if not most ambiguities will remain.
-Often the solution is some kind of ``give all features the same weight'', which seems like the fair Salomonian solution.
-But the truth is that equal weights is as good as any other solution.
-For example, two of the features might be strongly correlated.
-Take fruits for example:
-We could have the feature ``volume'' and another one as ``volume after peeling''.
-In reality we now have two features with almost the same information.
-De facto this doubles the weight of the feature ``fruit volume'' for the computation of distances.
+The clusters in Figure \ref{fig:clustering2} are clearly a poor solution based on Euclidean distance.
+But this assumes that both features matter are equally important for computing similarity.
+Perhaps the feature that spreads the data in the horizontal direction is rather irrelevant, and we want to give it less weight in the distance computation?
+Domain experts can tell you which features are important and which aren't.
+Usually, all features are weighted equally, which seems to be a sensible decision at first glance.
+But in truth, any other weighting can an equally good choice.
+For example, when clustering fruits, two of the features might be highly correlated:
+We could use the features ``volume'' and ``volume after peeling''.
+In practice, we now have two features with almost the same information.
+If we use both of the feature for clustering, it's as if we give twice as much weight to the volume of the fruit as to any other feature.
 
 And it gets worse.
-What do we do when features are measured on different scales, like one is a weight, the other is a length, and the third is amount of money?
-How would we even combine those into a single measure of distance, especially when things are even measured in either numerical or categorical features?
-``Excuse me, how do I get from point A to B?''
-``You walk down this street and turn right after 10 meters. Then walk another 7\$ and turn left, until red has turned to blue!''.
-And also: What's closer to a banana? An apple or a lemon?
-Sounds almost like an obscure interview question to get a data scientist position in a FAANG company.
-But it's a question for which you better have some answer when you cluster fruits.
+What do we do when features are measured at different scales, such as a weight, a length, and a sum of money?
+How can we even combine these features into a single distance measure, especially when the features even have different cardinalities, like numerical and categorical features?
 
-So, no one can tell you what's right.
-As an unsupervised machine learner, you have to live with the ambiguity.
+``Excuse me, how do I get from point A to point B?''
+``You go down this street and turn right after 10 meters. Then you go another \$7 and turn left until red becomes blue!''.
+And also, what's closer to a banana? An apple or a lemon?
+Sounds almost like an obscure interview question for a data scientist position at large web search company.
+But it's a question you better have some answers to if you do cluster analysis.
+
+So no one can tell you what's right.
+As an unsupervised machine learner, you have to live with ambiguity.
 Going to bed every night, questioning the fabric of space and time.
-Supervised machine learners don't have this problem, at least not to this degree.
-The weight of the features are guided by the target to predict.
-It's all supervised.
+Supervised machine learners don't have this problem, at least not to this extent.
+The weighting of features is ``supervised'' by the relationship between the features and the target for which we know the ground truth.
 
 \hypertarget{anomaly-detection}{%
 \subsection{Anomaly Detection}\label{anomaly-detection}}
 
-Cyber security specialist monitors the events and logs of the traffic in the intranet.
-Their job is to protect the company against cyber threats: Stealing of trade secrets, malware, digital blackmail, you name it.
-But there are thousands of employees leaving their daily footprint.
-A mass, or rather mess, of data.
+Cybersecurity specialists monitor events in the intranet.
+Their job is to protect the company from cyber threats: Trade secret theft, malware, digital blackmail, you name it.
+But there are thousands of employees who leave their digital footprint every day.
+A mass, or rather, mess of data.
 What does an attack look like?
-For some form of attacks, the specialist has rules:
-If someone tries to brute force a password to log into a service, this raises a flag.
-But what about all the behaviors that don't follow such simple patterns, maybe even some unknown type of attacks?
-Fortunately for the cyber security specialist, there is unsupervised machine learning.
-An anomaly is a data point that is, in some form, extreme or rare data points.
-And Anomaly detection is concerned with finding such extreme data points.
-Typical applications are financial fraud detection and cyber security.
-Many anomaly detection algorithms work by modeling what is ``normal'' and flag data points that get a low score.
-Isolation forests, a popular anomaly detection tool, instead works by isolating data points that are extreme.
-Other algorithms are directly motivated by probability distribution and flag data points as anomalies when they have a low probability.
-Isolation forests, statistical tests, but also one-class support vector machines and hidden markov models -- the pot luck of methods show yet again that machine learning, in this case unsupervised, is a very pragmatic modeling mindset where people just want to get shit done.
+The specialist has rules to detect some forms of attacks:
+If someone tries to brute force a password to log into a service, that's a red flag.
+But what about all the behaviors that don't follow such simple patterns, perhaps even unknown type of attacks?
+Fortunately for the cybersecurity specialist, there is unsupervised learning.
+Anomaly detection, an unsupervised learning task, is concerned with finding extreme data points.
+Typical applications include financial fraud detection and cybersecurity.
+Isolation forests, a popular anomaly detection tool, instead work by isolating data points that are extreme.
+Other algorithms are directly motivated by probability distributions and flag data points as anomalies if they have a low probability.
+Isolation forests, statistical tests, but also one-class support vector machines and hidden Markov models -- the variety of methods shows yet again that machine learning, in this case unsupervised, is a very pragmatic modeling mindset.
 
 \hypertarget{association-rule-learning}{%
 \subsection{Association Rule Learning}\label{association-rule-learning}}
 
-I love going shopping.
-Like groceries.
-Many people hate it, but, think about it:
-Supermarkets are incredible places that deserve awe and wonder, and embody humanities progress and ingenuity.
-Supermarkets are like the Schlaraffenland where honey and milk flows in rivers.
-Okay, okay, you have to spent some money to get stuff, but it's incredible what exotic things you can buy, and just the fact that if you are hungry you can buy whatever there.
-But I am digressions.
-Let's talk about association rule learning, which is usually introduced along with a shopping basket example.
-When you go grocery shopping, you can see your basket as a binary dataset.
-Either you buy a certain item (1) or you don't (0).
-Other people go shopping to, generating strings of 0's and 1's.
+I love grocery shopping.
+Many people hate it, but only because they are unaware of it's magnificence:
+Supermarkets are incredible places that deserve awe and wonder and embody the progress and ingenuity of humanity.
+Supermarkets are like the land of milk and honey.
+It's incredible what you can get in the supermarket: exotic fruits, spices from all over the world, products that take months or even years to make, like soy sauce, wine and cheese.
+But I digress.
+Let's talk about association rule learning, which is usually introduced with shopping baskets as example.
+When you go shopping, you can think of your shopping basket as a binary dataset.
+Either you buy a certain item (1) or you don't buy it (0).
+Other people also go shopping and generate their own data of 0's and 1's.
 
-Baskets may look like this: \(\{yeast, flour, salt\}\), \(\{beer, chips\}\), \(\{sandwich, lemonade, chips\}\), \{cheese, onions, tomatoes, potatoes, flour, olive oil, chocolate, beer, chips\}\$.
-I think you get it, I assume you have been to a supermarket before.
-
-The goal of association rule learning is to detect the patterns of which item is associated with which other item.
-Do people that buy flour also often buy yeast?
-If this association rule\\
-Association rule mining is, again, a case of describing \(P(X)\).
-An association rule could be \(\{beer\} \Rightarrow \{chips\}\) and would mean that people who buy beer frequently also buy chips.
-Then there are usually constraints that all the items should be frequent, because the modeler would mostly care about modes in the distribution.
-An association \(\{pizza Hawaii\} \Rightarrow \{Gatorade\}\) would just be not as interesting (I just assumed that it is infrequent).
-In more formal terms, association rules are short descriptions using conjunctive rules to describe regions of high density regions.
-A well-known algorithm is the apriori algorithm.
-Next time you go to the supermarket, please take a moment.
+The baskets might look like this: \(\{yeast, flour, salt\}\), \(\{beer, chips\}\), \(\{sandwich, lemonade, chips\}\), \(\{cheese, onions, tomatoes, potatoes, flour, olive oil, chocolate, beer, chips\}\).
+The goal of association rule learning is to detect the patterns of items.
+Do people who buy flour often buy yeast?
+Association rule mining is again a case of describing \(P(X)\).
+An association rule might be \(\{beer\} \Rightarrow \{chips\}\) and would mean that people who buy beer frequently buy chips.
+In more formal terms, association rules are short descriptions that use conjunctive rules to describe high density regions in a binary feature space.
+A well-known algorithm is the Apriori algorithm, but again, there are many option to choose from.
+The next time you go to the supermarket, please take a moment.
 Take it all in.
-The fact that you have all these choices.
-The fact that sitting for some hours a day at a computer earns you tokens that you can trade for whatever food it is that you want to have.
-Yes, many bad things are happening in the world, but if you stand in a supermarket with enough tokens, you are living what humanity must have dreamt of for thousands of years, and what we take for granted.
-I hope you can appreciate it as much as I do.
+The fact that you have so many choices.
+Many bad things are happening in the world, but when you stand in a supermarket (with enough money), you are living what humanity must have dreamed of for thousands of years and what we take for granted.
+I hope you appreciate this as much as I do.
 
 \hypertarget{dimensionality-reduction}{%
 \subsection{Dimensionality Reduction}\label{dimensionality-reduction}}
 
 Unfortunately, there is the ``curse of dimensionality''.
-The curse lies in the data density decreasing exponentially with each added features.
-So, when we think of the number of data points as staying fixed, adding more features makes any job harder to do, not only for unsupervised learning, such as clustering, but for every modeling approach.
-You can break the curse by finding a priest who is willing to \ldots{}
-Joke aside, the answer is of course dimensionality reduction.
-
-This can be images, but also tabular data with lots of columns.
-A common task is to reduce the dimensions, have less features to work with and look at.
-If all features are regarded equally, on what basis can we reduce the dimensionality, you might ask.
+The curse is that data density decreases exponentially with each additional features.
+If the number of data points remains constant, adding more features makes any modeling task more difficult, regardless of the mindset.
+Dimensionality reduction can be used to break this curse, or at least reduce its burden.
+If unsupervised learning regards all features, on what basis can we reduce the dimensionality?
 Not all features contribute towards \(P(X)\).
-Some features might have almost no variance.
-Other features might be strongly correlated with other features.
-In both cases we can select a subset of the features.
-There are various methods for feature selection, based on information-theoretic measures such as statistical correlation.
+Some features may almost have no variance.
+Other features may be highly correlated with other features.
+In either case, we can select a subset of the features, and \(P(X)\) will mostly look the same.
+There are several methods for feature selection based on information-theoretic measures such as statistical correlation.
 
 Or we can take our data and map it into a lower-dimensional space.
-Those dimensionality reductions techniques usually make you wish you had paid better attention in linear algebra.
+Those dimensionality reduction techniques usually make you wish you had paid better attention in linear algebra.
 They can usually be represented as matrix multiplication of your original feature matrix: principal component analysis (PCA), ICA, non-negative matrix factorization, multidimensional scaling, t-SNE, and so on.
-Data projection sounds a bit like science fiction, but it's mostly multiplying some matrices with each other, so just science without the fiction.
-If each of your data point represents a vegetables, all of the features height, width and weight could be mapped to one variable that expresses the size of the vegetable.
+If each of your data point represents a fruit, features like height, width and weight could be mapped to a new feature / dimension that represents the volume of the fruit.
 
 \begin{figure}
 
@@ -2879,44 +3223,44 @@ If each of your data point represents a vegetables, all of the features height, 
 \caption{Dimensionalty reduction}\label{fig:dimred}
 \end{figure}
 
-There are many more tasks besides clustering, outlier detection, association rule learning and dimensionality reduction.
-For example archetypal analysis, latent variables, factor analysis, and much more.
-Unsupervised learning truly is the colorful bird among the modeling mindsets.
+Unsupervised learning includes more tasks than just clustering, outlier detection, association rule learning and dimensionality reduction.
+For example, archetypal analysis, latent variables, factor analysis, and more.
+Unsupervised learning is truly the colorful bird among the modeling mindsets.
 
-\hypertarget{strengths-6}{%
-\section{Strengths}\label{strengths-6}}
+\hypertarget{strengths-7}{%
+\section{Strengths}\label{strengths-7}}
 
 \begin{itemize}
 \tightlist
 \item
-  Find hidden pattern in the data that the modelers with a supervised learning mindset would likely overlook.
+  Find hidden pattern in the data that modelers using a supervised learning mindset would likely miss.
 \item
-  Unsupervised learning works without a ground truth. That means no effort spent labeling data or finding the right variable to predict.
+  The overall mindset is very open in terms of the range of tasks included, how success can be evaluated, and openness to results and new discoveries.
 \item
-  The entire mindset is just very open-minded in the range of tasks that are included, in the way success can be evaluated, and also open about results and making new discoveries. Unsupervised machine learning is exploration, supervised machine learning is exploitation.
+  The openness for discovery can also mean discovering new business opportunities, learning something new, or gaining scientific insights.
 \item
-  The potential for discovery can also mean that you discover new business opportunities, learn something new, or get scientific insights.
+  The world is messy. One often has data, and a sense that the data might be potentially insightful. In this case, the unsupervised learning mindset is wonderful because it gives you the ability to just dive in.
 \item
-  The world is messy. It's common to have data, and the gut feeling that these are unique and potentially insightful. For this case, an unsupervised learning mindset is wonderful, as it gives you the ability to just start diving in, and working out the next steps from there.
+  As a more exploratory mindset, unsupervised learning can be a good starting point for further analysis of the data. These further steps can be done with a different mindset.
 \item
-  As a more exploratory mindset, unsupervised learning can be a good starting point for further analysis of the data. These further steps might happen within a different mindset.
+  Unlike any other mindset, unsupervised machine learning is able to sift through high-dimensional and complex data, partially automatically.
 \item
-  Like no other mindset, unsupervised machine learning is poised to somewhat automatically sift through high-dimensional and complex data, and return meaningful results.
+  Unsupervised learning works without a ground truth. This means no effort is required to label data.
 \end{itemize}
 
-\hypertarget{limitations-6}{%
-\section{Limitations}\label{limitations-6}}
+\hypertarget{limitations-7}{%
+\section{Limitations}\label{limitations-7}}
 
 \begin{itemize}
 \tightlist
 \item
-  One of the biggest limitation is the lack of ground truth which comes hand in hand with the difficulty of evaluating the resulting models. As a consequence, there are so many methods with often very different results.
+  One of the major limitations is the lack of ground truth, which comes with the difficulty of evaluating the resulting models. As a result, there are many methods with often very different results.\textsuperscript{\protect\hyperlink{ref-hastie2009elements}{23}}
 \item
-  Unsupervised machine learning is a good approach against the curse of dimensionality, but still also unsupervised machine learning can suffer greatly from it. The more features, the more meaningless and hard to interpret the clusters become, any data point can seem far away from the ``center'' making it an outlier.
+  Unsupervised machine learning is a good approach to the curse of dimensionality, but even so, unsupervised machine learning can suffer greatly. For example, the more features there are, the more meaningless and difficult to interpret the clusters become.
 \item
-  After the modeling, to make use of the results, usually requires to interpret the patterns. Especially for clustering and association rule learning. This requires domain expertise and human intervention.
+  In order for the modeling results to make sense, to patterns usually need to be interpreted. This is especially true for clustering and association rule learning. This requires expertise and human intervention.
 \item
-  There is no guarantee that unsupervised learning will reveal meaningful patterns. But even if none are revealed there is no guarantee that it was simply the wrong algorithm, but another might have uncovered something interesting.
+  There is no guarantee that meaningful patterns will be uncovered. And if no patterns are uncovered, there is no guarantee that another unsupervised would have uncovered something interesting.
 \end{itemize}
 
 \hypertarget{resources-1}{%
@@ -2925,7 +3269,7 @@ Unsupervised learning truly is the colorful bird among the modeling mindsets.
 \begin{itemize}
 \tightlist
 \item
-  The book Machine learning: a probabilistic perspective by Keven Murphy\textsuperscript{\protect\hyperlink{ref-murphy2012machine}{19}}
+  The book Machine learning: a probabilistic perspective by Keven Murphy.\textsuperscript{\protect\hyperlink{ref-murphy2012machine}{24}}
 \end{itemize}
 
 \hypertarget{reinforcement-learning}{%
@@ -3044,32 +3388,52 @@ Unsupervised learning truly is the colorful bird among the modeling mindsets.
 \CSLLeftMargin{12. }
 \CSLRightInline{Gandenberger G. Why i am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library; 2016. }
 
-\leavevmode\vadjust pre{\hypertarget{ref-hornik1989multilayer}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-lazer2014parable}{}}%
 \CSLLeftMargin{13. }
+\CSLRightInline{Lazer D, Kennedy R, King G, Vespignani A. The parable of google flu: Traps in big data analysis. Science. 2014;343(6176):1203--5. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-hernan2010causal}{}}%
+\CSLLeftMargin{14. }
+\CSLRightInline{Hernán MA, Robins JM. Causal inference. CRC Boca Raton, FL; 2010. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-pearl2012calculus}{}}%
+\CSLLeftMargin{15. }
+\CSLRightInline{Pearl J. The do-calculus revisited. arXiv preprint arXiv:12104852. 2012; }
+
+\leavevmode\vadjust pre{\hypertarget{ref-pearl2009causal}{}}%
+\CSLLeftMargin{16. }
+\CSLRightInline{Pearl J. Causal inference in statistics: An overview. Statistics surveys. 2009;3:96--146. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-athey2016recursive}{}}%
+\CSLLeftMargin{17. }
+\CSLRightInline{Athey S, Imbens G. Recursive partitioning for heterogeneous causal effects. Proceedings of the National Academy of Sciences. 2016;113(27):7353--60. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-hornik1989multilayer}{}}%
+\CSLLeftMargin{18. }
 \CSLRightInline{Hornik K, Stinchcombe M, White H. Multilayer feedforward networks are universal approximators. Neural networks. 1989;2(5):359--66. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-breiman2001statistical}{}}%
-\CSLLeftMargin{14. }
+\CSLLeftMargin{19. }
 \CSLRightInline{Breiman L. Statistical modeling: The two cultures (with comments and a rejoinder by the author). Statistical science. 2001;16(3):199--231. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-caruana2015intelligible}{}}%
-\CSLLeftMargin{15. }
+\CSLLeftMargin{20. }
 \CSLRightInline{Caruana R, Lou Y, Gehrke J, Koch P, Sturm M, Elhadad N. Intelligible models for healthcare: Predicting pneumonia risk and hospital 30-day readmission. In: Proceedings of the 21th ACM SIGKDD international conference on knowledge discovery and data mining. 2015. p. 1721--30. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-lapuschkin2019unmasking}{}}%
-\CSLLeftMargin{16. }
+\CSLLeftMargin{21. }
 \CSLRightInline{Lapuschkin S, Wäldchen S, Binder A, Montavon G, Samek W, Müller KR. Unmasking clever hans predictors and assessing what machines really learn. Nature communications. 2019;10(1):1--8. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-ribeiro2016should}{}}%
-\CSLLeftMargin{17. }
+\CSLLeftMargin{22. }
 \CSLRightInline{Ribeiro MT, Singh S, Guestrin C. " why should i trust you?" Explaining the predictions of any classifier. In: Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining. 2016. p. 1135--44. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-hastie2009elements}{}}%
-\CSLLeftMargin{18. }
+\CSLLeftMargin{23. }
 \CSLRightInline{Hastie T, Tibshirani R, Friedman JH, Friedman JH. The elements of statistical learning: Data mining, inference, and prediction. Vol. 2. Springer; 2009. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-murphy2012machine}{}}%
-\CSLLeftMargin{19. }
+\CSLLeftMargin{24. }
 \CSLRightInline{Murphy KP. Machine learning: A probabilistic perspective. MIT press; 2012. }
 
 \end{CSLReferences}
