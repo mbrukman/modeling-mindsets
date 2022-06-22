@@ -1,8 +1,8 @@
-# Causal inference {#causal-inference}
+# Causal Inference {#causal-inference}
 
-* Assumes that random variables are connected through cause and effect.
-* Builds a causal model from which statistical estimators are derived.
-* A [statistical modeling mindset](#statistical-modeling) that adds causality to [frequentist](#frequentist-inference) and [Bayesian](#bayesian-inference) inference.
+* A model is a good generalization of the world if it encodes causality.
+* Causal models connect random variables through directed cause and effect relationships.
+* Causal inference is a two-step process in which first a causal model is assumed and constructed and then translated into a [statistical](#statistical-modeling) or [machine learning](#machine-learning) model.
 
 <!-- TODO 
 
@@ -11,33 +11,37 @@
 - write about randomized tests / A-B tests, but more as in that  I describe it in another mindset
 -->
 
-"Thank you very much for this statistical model," the ecologist says to the statistician.
-"Very nice p-values, and interesting results! Would it be correct to say that the droughts caused the crop failures?"
-The statistician looks at the biologist, with a hint of concern.
+"Thank you so much for this statistical model," the ecologist says to the statistician, and continues, "Nice p-values, and insightful findings! Would it be correct to say that the droughts **caused** the crop failures?"
+The statistician looks at the ecologist, a hint of concern at the corner of the eyes.
 As if practiced, the statistician says: "Correlation does not imply causation".
-Unsatisfied, the ecologist responds: "But it would make a lot of sense to say drought was the cause!"
-The statistician frowns, clenching teeth as if in pain.
+Unsatisfied, the ecologist responds: "But it would make so much sense to conclude that the drought was the cause!"
+The statistician grimaces and clenches the teeth as if in pain.
 "Correlation does not imply causation", the statistician repeats, the words having a weird melody, as if in prayer.
-"But without a causal interpretation, how can the results be made useful?", the biologist insists.
+"But without a causal interpretation, how can the results be applied to advance science? I want to understand **why** the crop failures happened!", the ecologist insists.
 "Correlation does not imply causation. Correlation does not imply causation. Correlation ...", the statistician now chants, eyes closed shut, face twisted as if in great pain.
+The ecologist slowly retreats, shocked by the strong reactions of the statistician.
+Sometimes at night, when the wind howls outside, the ecologist hears the statistician's mantra in the wind.
 
 ## Does The Drug Help?   
 
 <!-- SCQM story -->
 
-A while back, I worked with a rheumatologist on the question whether a certain type of drug (TNF-alpha blockers) reduces the ossification of the spine of patients with axial spondyloarthritis.
-Axial spondyloarthritis is an incurable disease that usually leads to inflammation of the spine, and in the long-term the joints in the spine may fuse to bone formation (ossification).
-These TNF-alpha blockers work well to reduce inflammation, but it's unclear whether they can prevent the ossification.
-Because these drugs help so much, it would be unethical to do a clinical trial and withhold those drugs from the control group.
-At the time I worked at the foundation that had a huge data base of patients with axial spondyloarthritis: doctor visits, blood values, x-ray images, ...
-With a frequentist mindset, and in collaboration with the rheumatologist as the domain expert, I built a statistical model to answer the scientific question.
-I modeled the ossification within a time interval of two years as a function of drug yes/no, age of the patient, disease duration, the inflammation level and so on.
-The data is purely observational, meaning some patients got the medication, some didn't and the factors that influenced the drug choice potentially also influenced the outcome.
-So we included all factors that were potential confounders of the decision to give the drug, and of the bone development.
-Result: The drug did not reduce the ossification, which was in contradiction with the initial hypothesis that the drug also helps long-term.
-The lead statistician happened to participate in a causal inference course around the same time.
+A while back, I worked with a rheumatologist on an important medical question:
+Do TNF-alpha blockers reduce the long-term symptoms  of patients with axial spondyloarthritis, a chronic disease that is associated with inflammation of the spine.
+In the long-term, the joints in the spine can fuse to due to new bone formation (ossification). 
+TNF-alpha blockers, given regularly as injection or infusion, work really well to reduce inflammation.
+To understand whether TNF-alpha blockers also help against the ossification, a clinical trial might have given the best evidence.
+But withholding TNF-alpha blockers would be unethical due to their proven efficacy, and also the study would require a long-term observation.
+The next best option was to use observational data from hospitals and medical practices.
+The registry for rheumatic patients  I was working for maintained a huge data base of patients with axial spondyloarthritis, holding insightful data about the patients health-related history: doctor visits, blood values, x-ray images, and so on.
+In collaboration with the rheumatologist I built a statistical model to answer whether TNF-alpha blockers help against ossification.
+For these patients, we had x-ray images two years apart, from which radiologists had scored the progression of the new bone formation in the spine.
+To predict the progression, the model included various variables that were measured at the time of the first x-ray: the age of the patients, the disease duration, inflammation levels, medication used, and so on.
+The result of the analysis was that the drug didn't reduce ossification.
+The lead statistician of the patient registry happened to participate in a course on causal inference around the same time.
 She had the epiphany that we approached the modeling question the wrong way.
-She drew the DAG, like this:
+She drew a diagram visualizing how the drug, the inflammation and the ossification might be related.
+She drew the graph like this (Figure \@ref(fig:tnfdat):
 
 ```{r tnfdag, fig.cap = "The drug was known to influence inflammation (reduce it). Inflammation was thought to cause ossification (new bone formation). More inflammation, more ossification. The drug has, potentially, two pathways to reduce ossification: directly, or indirectly via reducing inflammation.", fig.height = 3, fig.width = 9}
 arr = arrow()
@@ -74,103 +78,106 @@ add_cc(p)
 <!-- the solution of the story -->
 It became immediately clear what the problem with our current model was:
 Inflammation was a potential mediator of the effect of TNF-alpha blockers on long-term ossification.
-Figure \@ref{fig:tnfdag} shows that the effect of the drug can be split into a direct effect and an indirect effect.
-By having the inflammation level as part of the model, the indirect effect of the treatment was "swallowed" by the effect of the inflammation on ossification.  
-Our initial model only measured the direct effect, but we were actually interested in the total effect which is the sum of direct and indirect effects.
-So we adjusted the model accordingly, removing the inflammation variable [^adjust-inflammation], with the result that the coefficient for the treatment measured the total effect instead of only the direct effect.
-Now the model clearly showed an that the treatment could reduce ossification by decreasing the inflammation levels.
-It sounds like common sense in hindsight, but coming from a frequentist mindset, you easily overlook such things.
+Figure \@ref(fig:tnfdag) shows that the effect of the drug can be split into a direct effect and an indirect effect.
+By having the inflammation level as part of the model, the indirect effect of the treatment was "swallowed".
+Any changes to the ossification based on reducing inflammation was reflected in the coefficient for inflammation levels.
+The way we set up the initial model, the causal interpretation of the coefficient for TNF-alpha blockers concerned only the direct effect.
+But we were actually interested in the total effect.
+The total effect is the direct effect of the medication plus all indirect effects, in this case indirectly via reduction of inflammation.
+So we adjusted the model accordingly, removing the inflammation variable. [^adjust-inflammation], so that the coefficient for TNF-alpha blockers would contain the total and not only the direct effect.
+Now the model clearly showed that TNF-alpha blockers reduce ossification by decreasing the inflammation levels.
+It sounds like common sense in hindsight, but coming from a frequentist mindset, my mind was blown.
 This moment was such a revelation and got me interested in causal inference.
 
-<!-- Motivation
-Does eating chicken broth fasten your recovery when your have cold?
-Did the tax reform lead to more new businesses?
-Why were the sales so low yesterday?
-These questions ask for causes to certain events or facts.
-I would go as far as saying that most of the times when we learn a model from data, we want it to encode causal relationship.
-Models that don't might yield misleading insights and might make false predictions.
-
--->
+CONTINUE HERE
 
 ## Causality
 
 <!-- what is causality -->
-$X$ is a cause of $Y$ if changing $X$ changes the probability distribution $P(Y)$.
-I think we all have an intuition what a cause and its effect are.
-Causality, brought to the world of random variables means:
-If you could **force** a random variable to have a certain value, how would the distribution of another random variable change?
-A cause is different from a mere association: If you would merely **observe** a certain value for a random variable, how would the distribution of another random variable look like?  
-We know that a wet lawn does not *cause* rain.
-How do we know it? Try watering your lawn for one year, every day,  and see whether the probability for rain has changed.
-But the two are associated:
-When you observe that your lawn is wet, the probability that it rains is higher than without that observation.
+<!--$X$ is a cause of $Y$ if changing $X$ changes the probability distribution $P(Y)$. -->
+We all have an intuition about causality.
+Rain is a possible cause for a wet lawn.
+A drug can be a cause of getting healthy.
+An environment policy can be a cause of reduced CO2 emissions.
+In terms of random variable, we can express causality in terms of distributions and interventions:
+If you **force** a random variable to have take on a certain value, how would the distribution of another random variable change?
+A cause is different from association:
+An association is only a statement about observation.
+We know that having a  wet lawn does not *cause* your neighbours lawn to be wet.
+How do we know it? Try watering your lawn for one year, every day, and see whether the probability for your neighbors lawn being wet has changed.
+But the two lawns two are associated:
+When you observe that your lawn is wet, the probability that your neighbors lawn is wet is high.
+The reason for association is, of course, the rain.
+Such shared causes are called confounders.
 
 <!-- not for the statisticians -->
-The archetypal statisticians avoids speaking of causality, as if it were to esoteric to speak about.
-As an anecdote: I have a Bachelor's and Master's degree in Statistics.
-What I learned about causality in those 5 years can be summarized in two statements: 1) Always add all confounders when building a statistical model [^confounders], and 2) correlation is not causation so don't interpret your models in a causal way.
-Or in short: We students were taught to not speak of the elephant in the room.
-Causality was presented as an unreachable goal, that should not even be attempted with statistical modeling.
+The archetypal statistician avoids speaking of causality.
+At least that's my experience after getting a Bachelor and Master in statistics.
+What I learned about causality in those 5 years can be summarized in two statements: 1) Always add all confounders when building a statistical model, and 2) correlation does not imply causation.
+We were taught not to causally interpret statistical models.
+We were taught to ignore the elephant in the room.
+Causality was presented as an unreachable goal that should not even be attempted with statistical modeling.
 We were taught how to dance around the topic.
-A variable is "associated with and increase in the outcome", the variable is not causing the change.
+A random variable can only be associated with the outcome, but we may not speak about the variable causing the outcome.
 
+<!-- a statisticians mantra goes against science -->
 "Correlation does not imply causation" truly is a mantra that you hear multiple times when you learn about statistics.
 I find that very curious, especially given that statistical modeling is supposed to be THE research tool of our times.
 Isn't research all about detecting how the world works?
 The "how", at least for me, implies that scientists are supposed to uncover causal structures.
-On the other hand, statisticians do, to some degree, care for causality.
-They have discovered that models need to be adjusted for confounders.
-Even if you can't provide causality:
-Knowing that the user of the models will in many cases make a causal interpretation, maybe we should at least attempt to make the model "as causal as possible"?
+And the truth is that, in the end, the results are, very often, interpreted causally, by the domain experts, by lay persons, and by the media.
+So shouldn't everyone at least attempt to make the model reflect causality as much as possible?
+Fortunately, some people think that we should put causality first.
 
 Welcome to the **causal inference** mindset.
 
 ## The Causal Mindset
 
 <!-- causal inference framework in a nutshell -->
-The causal inference mindset puts causality in the center.
+The causal inference mindset puts causality in the center of modeling.
 The goal of causal inference is to identify and quantify the **causal** effect a random variables had on the outcome of interest.
 
 <!-- Relation to other mindsets -->
 I would say that causal inference is a [statistical modeling mindset](#statistical-modeling), because it relies on probability distributions and random variables.
-But causal inference could also be seen as an "add-on" to other mindsets like [frequentist](#frequentism) or [Bayesian](#bayesian) inference, but also for [machine leanring](#machine-learning).
-But causality is not a mere cherry on top of another mindset.
-It's not like adding a new type of model to, for example, the arsenal of a frequentist.
-By bringing causality to the table, it challenges the culture of statistical modeling that only speaks of associations.
+Causal inference could also be seen as an "add-on" to other mindsets like [frequentist](#frequentism) or [Bayesian](#bayesian) inference, but also for [machine learning](#machine-learning).
+But it would be wrong to think causal inference as just a cherry on top of other mindsets. 
+It's much more than just adding a new type of method to another mindset, like adding support vector machines to supervised learning.
+Causal inference challenges the culture of statistical modeling.
+It requires the modelers to think more about the data-generating process, to be explicit about causes and effects.
 
-<!-- generalization mindset -->
-Causalists think of causality as the central ingredient to learning about the world.
-The world is assumed to work by cause and effect, so of course the models have to reflect these causalities as well.
-A model generalizes well when it encodes the correct causal relationships.
-Because only then can also be applied in other circumstances.
-Take Google Flu prediction model.
+<!-- mindsets without causality are broken -->
+It's kind of surprising just how many models are "broken" because they ignore causal thinking.
+A lack of causal considerations can mean that the analysis of a research paper is invalid or that a machine learning model in a product is vulnerable to changes in the data distribution or adversarial attacks.
+Take Google Flu prediction model as an example.
 Google predicted outbreaks of the flu based on frequencies of certain search terms.
-Clearly, the prediction model was not a causal model, and missed, for example, the nonseasonal 2009 flu. [@lazer2014parable]
-Or otherwise this would mean you can **cause** flu by hitting the right keys in the Google search bar.
-What happened is that the model in production quickly declined in performance, because the search patterns changed.
-For the causalist the case is very clear.
-Such a pure associational model is as fragile as an egg shell.
+Clearly, the prediction model was not a causal model.
+If it were causal, it would mean that you can cause flu outbreaks by searching on Google for certain terms.
+The flu detection model missed, for example, the nonseasonal 2009 flu. [@lazer2014parable]
+The machine learning model quickly declined in performance because the search patterns changed over time.
+No causalist would have signed off on such a non-causal model.
+A model that relies on only associations is as ephemeral as a fruit fly.
+A model only generalizes well when it encodes causal relationships.
+A causal flu model might rely on the virulence of the current flu strains, the number of vaccinated people, predictions of how cold the winter would be and so on.
+But never based on search terms.
 
 <!-- data can't speak for itself -->
-The causalist knows: Data can't speak for itself.
-We can look at it as hard as we want to, but it won't reveal the causal structures that produced it.
-It can reveal associations, but it can't even reveal the simplest structures.
-Sunshine duration on a given day can be seen causal for the number of people going into a park.
-In a dataset, we would see two columns with numbers.
-If we compute the correlation, we see that they are positively correlated.
+You can look as hard at the data as you want to, but it won't reveal the causal structures that produced it.
+You can automatically infer associations from the data, but even the simplest causal structures are ambiguous.
+The amount of sunshine on a given day can be considered causal for the number of park visitors.
+In a dataset, both features would appear as columns with numbers in it.
+And if we would compute the correlation, we would find out that sunshine and park visitors are positively correlated.
 The more sun, the more people.
 The more people, the more sun.
-To everyone, the causal relation is clear, because people showing up in the park certainly doesn't bother the sun even a little bit. 
-But your computer can't tell the difference.
-You fit a regression model predicting number of people.
-The computer will do it.
-You fit a regression model to predict hours of sunshine.
-The computer will do it.
-Upcoming headline: In the next heat wave, people are forbidden to go to the park, in an effort to reduce sunshine.
-Of course, non-causalist statisticians and machine learner wouldn't try to predict sunshine in this obvious non-causal way.
-But they also don't go all the way to think causality through.
-It's a weird situation.
-The causalist has to put in causal assumption, in order to build a causal model.
+The causal relationship is clear: The sun couldn't care less about park visitors.
+Instead, the sun is the cause of park visits.
+But this causal direction is not clear for your computer.
+No matter what choose as a target, the computer will oblige and fit the model.
+Breaking news: The government forbid visits to the park, in an effort to cool down the current heat wave.
+The causal mindset requires thinking even more about the data-generating process, making assumptions about causal relationships.
+These assumptions are an attack surface to critizice the mindset.
+But on the other hand, making these assumptions explicit allows to address and discuss derivating opinions.
+
+CONTINUE HERE
 
 <!-- encoding causality -->
 The best way to visualize causal models is with a directed acyclic graph that you have already seen in Figure \@ref(fig:tnfdag).
@@ -405,7 +412,7 @@ If you are interested in different variables, you have to repeat all the steps f
 
 * Arguably, causality is central to modeling the world. Causal inference is the mindset that takes causes to heart.
 * Causal inference allows to argue causal questions: An important ingredient for generalization.
-* I'd say in most cases the modeler actually wants causality. Scientists make causal interpretations. In marketing you want to know how measures impact customers causally.  
+* I'd say in most cases the modeler actually wants causality. Scientists make causal interpretations. In marketing you want to know how measures impact customers causally.
 * Causal models are more robust against changes in the environment. Or rather: Models that use non-causal, merely associative information might break more easily. For example: Google had a flu detector which predicted flu waves based on searches for flu-related terms. But searches are not causal, so the model broke.
 * The mindset is flexible and can enhance many other mindsets such as frequentism, Bayesianism, machine learning. Inherits strengths from the statistical modeling approach it builds upon.
 * DAGs make causal assumptions explicit. I would go as far and say that the subtext of many frequentist and Bayesian analyses is already a causal one. Or at least once the results get out of the hand of the modeller, the journalists, manager, decision maker and so on are likely to make causal interpretation anyway. Causal inference talks explicitly about causality, and especially about the causal structure assumptions that were made for the model. These can then be challenged and discussed.
@@ -425,3 +432,4 @@ If you are interested in different variables, you have to repeat all the steps f
 * 
 
 [^adjust-inflammation]: The attentive reader might object that I referred to inflammation now as both confounder and mediator. Both is correct, if we distinguish different time points. The initial model had inflammation after treatment begin as variable, so it acted as mediator. We later also adjusted the model for inflammation before treatment, when it acts a confounder.
+
