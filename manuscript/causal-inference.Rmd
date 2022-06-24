@@ -42,7 +42,7 @@ The result of the analysis was that the drug didn't reduce ossification.
 The lead statistician of the patient registry happened to participate in a course on causal inference around the same time.
 She had the epiphany that we approached the modeling question the wrong way.
 She drew a diagram visualizing how the drug, the inflammation and the ossification might be related.
-She drew the graph like this (Figure \@ref(fig:tnfdat):
+She drew the graph like this (Figure \@ref(fig:tnfdag):
 
 ```{r tnfdag, fig.cap = "The drug was known to influence inflammation (reduce it). Inflammation was thought to cause ossification (new bone formation). More inflammation, more ossification. The drug has, potentially, two pathways to reduce ossification: directly, or indirectly via reducing inflammation.", fig.height = 3, fig.width = 9}
 arr = arrow()
@@ -268,9 +268,9 @@ The overview is far from exhaustive, but should give you a better impression of 
 * Sometimes observational data can also have the character of an experiment, which is often called "natural experiments". When John Snow investigated cholera, he had access to data from a natural experiment. John Snow identified contaminated drinking water as the source of cholera, because the customers of one water company got sick of cholera much more often than customers from the other. The association of households to one company or the other served as a natural experiment, randomizing factors such as age, comorbidities, education, and so on.
 * Propensity score matching attempt to to estimate the effect of an invention, such as a treatment, by matching data points to account for differences in other variables.
 * Probably the most general and coherent framework of causal inference is by the statistician Judea Pearl. This "school" includes the do-calculus[@pearl2012calculus],   structural causal models, front- and backdoor criteria and many other tools for causal inference. [@pearl2009causal]
-* The **potential outcomes framework**[@athey2016recursive] is another larger causal "school", mostly used for studying causal effects of binary variables.
+* The **potential outcomes framework** [@athey2016recursive] is another larger causal "school", mostly used for studying causal effects of binary variables.
 * Causal discovery or structure identification is a subset of causal inference that aims to discover causal relationships from merely observational data.
-* Then there are so many individual methods that aim to provide causal modeling. One example is "honest causal forests", which are based on random forests and designed to model heterogeneity in treatment effects.[@athey2016recursiv]
+* Then there are so many individual methods that aim to provide causal modeling. One example is "honest causal forests", which are based on random forests and designed to model heterogeneity in treatment effects.[@athey2016recursive]
 * ...
 
 All approaches have in common that they assume a causal model.
@@ -333,7 +333,7 @@ Identification boils down to a selection of variables to adjust for in the stati
 To give you an idea, here are a few simple rules:
 
 * Include all confounders. Confounders are variables that are cause to both the variable of interest and the outcome. For example in Figure \@ref(fig:dag-rules) $X_2$ confounds $X_1$ and $Y$.
-* Exclude colliders. In DAG in Figure \@ref(fig:dag-rules), $X_$ is a collider for $Y$ and $X_1$. Adding colliders to a model opens an unwanted path.
+* Exclude colliders. In DAG in Figure \@ref(fig:dag-rules), $X_4$ is a collider for $Y$ and $X_1$. Adding colliders to a model opens an unwanted path.
 * Exclude mediators. When we want to measure the causal effect of $X_1$ on $Y$, we have make sure not to include $X_3$. Including $X_2$ would block the path between $X_1$ and $Y$, and we would falsely find that $X_1$ does not influence $Y$.
 
 ```{r dag-rules, dependson = "dag", fig.cap = "To understand the causal effect of X1 on Y, we have to build a regression model with $Y$ as target and $X_1$ and $X_2$ as predictor variables. Roles: $Y$ is the target, $X_1$ the variable of interest, $X_2$ a confounder of $X_1$ and $X_2$, $X_3$ a mediator to the effect of $X_1$ on $Y$, and $X_4$ is a collider."}
@@ -379,7 +379,7 @@ This is because, the identification might lead to a different set of variables t
 
 ## Further Reading
 
-* TODO:  
+* Free book: Causal Inference: What If [@hernan2010causal]
 
 [^adjust-inflammation]: The attentive reader might object that I referred to inflammation now as both confounder and mediator. Both is correct, if we distinguish different time points. The initial model had inflammation after treatment begin as variable, so it acted as mediator. We later also adjusted the model for inflammation before treatment, when it acts a confounder.
 
