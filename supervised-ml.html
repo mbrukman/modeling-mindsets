@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Supervised Learning | Modeling Mindsets</title>
   <meta name="description" content="Statistics, machine learning, causality, … The best data scientists don’t mindlessly follow just one approach. The best data scientists have all modeling mindsets at their disposal – and use the right tool for the right job." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Supervised Learning | Modeling Mindsets" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Christoph Molnar" />
 
 
-<meta name="date" content="2022-06-13" />
+<meta name="date" content="2022-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -224,13 +224,24 @@ div.csl-indent {
 <li class="chapter" data-level="7.6" data-path="likelihoodism.html"><a href="likelihoodism.html#limitations-3"><i class="fa fa-check"></i><b>7.6</b> Limitations</a></li>
 <li class="chapter" data-level="7.7" data-path="likelihoodism.html"><a href="likelihoodism.html#resources"><i class="fa fa-check"></i><b>7.7</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal inference</a></li>
+<li class="chapter" data-level="8" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>8</b> Causal Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="causal-inference.html"><a href="causal-inference.html#causality-for-the-rescue"><i class="fa fa-check"></i><b>8.1</b> Causality for the Rescue</a></li>
+<li class="chapter" data-level="8.2" data-path="causal-inference.html"><a href="causal-inference.html#causality"><i class="fa fa-check"></i><b>8.2</b> Causality</a></li>
+<li class="chapter" data-level="8.3" data-path="causal-inference.html"><a href="causal-inference.html#the-causal-mindset"><i class="fa fa-check"></i><b>8.3</b> The Causal Mindset</a></li>
+<li class="chapter" data-level="8.4" data-path="causal-inference.html"><a href="causal-inference.html#directed-acyclic-graph-dag"><i class="fa fa-check"></i><b>8.4</b> Directed Acyclic Graph (DAG)</a></li>
+<li class="chapter" data-level="8.5" data-path="causal-inference.html"><a href="causal-inference.html#many-frameworks-for-causality"><i class="fa fa-check"></i><b>8.5</b> Many Frameworks For Causality</a></li>
+<li class="chapter" data-level="8.6" data-path="causal-inference.html"><a href="causal-inference.html#from-causal-model-to-statistical-estimator"><i class="fa fa-check"></i><b>8.6</b> From Causal Model to Statistical Estimator</a></li>
+<li class="chapter" data-level="8.7" data-path="causal-inference.html"><a href="causal-inference.html#strengths-4"><i class="fa fa-check"></i><b>8.7</b> Strengths</a></li>
+<li class="chapter" data-level="8.8" data-path="causal-inference.html"><a href="causal-inference.html#limitations-4"><i class="fa fa-check"></i><b>8.8</b> Limitations</a></li>
+<li class="chapter" data-level="8.9" data-path="causal-inference.html"><a href="causal-inference.html#further-reading"><i class="fa fa-check"></i><b>8.9</b> Further Reading</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>9</b> Machine Learning</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="machine-learning.html"><a href="machine-learning.html#one-or-many-mindsets"><i class="fa fa-check"></i><b>9.1</b> One or Many Mindsets?</a></li>
 <li class="chapter" data-level="9.2" data-path="machine-learning.html"><a href="machine-learning.html#computer-oriented-task-driven-and-externally-motivated"><i class="fa fa-check"></i><b>9.2</b> Computer-Oriented, Task-Driven and Externally Motivated</a></li>
-<li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-4"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
-<li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-4"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
+<li class="chapter" data-level="9.3" data-path="machine-learning.html"><a href="machine-learning.html#strengths-5"><i class="fa fa-check"></i><b>9.3</b> Strengths</a></li>
+<li class="chapter" data-level="9.4" data-path="machine-learning.html"><a href="machine-learning.html#limitations-5"><i class="fa fa-check"></i><b>9.4</b> Limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="supervised-ml.html"><a href="supervised-ml.html"><i class="fa fa-check"></i><b>10</b> Supervised Learning</a>
 <ul>
@@ -243,8 +254,8 @@ div.csl-indent {
 <li class="chapter" data-level="10.7" data-path="supervised-ml.html"><a href="supervised-ml.html#an-automatable-mindset"><i class="fa fa-check"></i><b>10.7</b> An Automatable Mindset</a></li>
 <li class="chapter" data-level="10.8" data-path="supervised-ml.html"><a href="supervised-ml.html#a-competitive-mindset"><i class="fa fa-check"></i><b>10.8</b> A Competitive Mindset</a></li>
 <li class="chapter" data-level="10.9" data-path="supervised-ml.html"><a href="supervised-ml.html#nature-statistics-and-supervised-learning"><i class="fa fa-check"></i><b>10.9</b> Nature, Statistics and Supervised Learning</a></li>
-<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-5"><i class="fa fa-check"></i><b>10.10</b> Strengths</a></li>
-<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-5"><i class="fa fa-check"></i><b>10.11</b> Limitations</a></li>
+<li class="chapter" data-level="10.10" data-path="supervised-ml.html"><a href="supervised-ml.html#strengths-6"><i class="fa fa-check"></i><b>10.10</b> Strengths</a></li>
+<li class="chapter" data-level="10.11" data-path="supervised-ml.html"><a href="supervised-ml.html#limitations-6"><i class="fa fa-check"></i><b>10.11</b> Limitations</a></li>
 <li class="chapter" data-level="10.12" data-path="supervised-ml.html"><a href="supervised-ml.html#references"><i class="fa fa-check"></i><b>10.12</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html"><i class="fa fa-check"></i><b>11</b> Unsupervised Learning</a>
@@ -258,8 +269,8 @@ div.csl-indent {
 <li class="chapter" data-level="11.3.3" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#association-rule-learning"><i class="fa fa-check"></i><b>11.3.3</b> Association Rule Learning</a></li>
 <li class="chapter" data-level="11.3.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#dimensionality-reduction"><i class="fa fa-check"></i><b>11.3.4</b> Dimensionality Reduction</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#strengths-6"><i class="fa fa-check"></i><b>11.4</b> Strengths</a></li>
-<li class="chapter" data-level="11.5" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#limitations-6"><i class="fa fa-check"></i><b>11.5</b> Limitations</a></li>
+<li class="chapter" data-level="11.4" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#strengths-7"><i class="fa fa-check"></i><b>11.4</b> Strengths</a></li>
+<li class="chapter" data-level="11.5" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#limitations-7"><i class="fa fa-check"></i><b>11.5</b> Limitations</a></li>
 <li class="chapter" data-level="11.6" data-path="unsupervised-ml.html"><a href="unsupervised-ml.html#resources-1"><i class="fa fa-check"></i><b>11.6</b> Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="reinforcement-learning.html"><a href="reinforcement-learning.html"><i class="fa fa-check"></i><b>12</b> Reinforcement Learning</a></li>
@@ -429,7 +440,7 @@ Machine learning algorithms illuminate paths through the forest so that we can s
 The globally best <span class="math inline">\(f\)</span> might not be within this illuminated path, so we will usually only find a locally optimal <span class="math inline">\(f\)</span>.
 Machine learning algorithms differ in the form and complexity they allow for <span class="math inline">\(f\)</span>.
 Decision tree algorithms produce <span class="math inline">\(f\)</span>’s that look like step functions, since most trees algorithms only allow discrete jumps in prediction.
-Neural network are universal function approximators that can, in theory, approximate any function <span class="math inline">\(f\)</span>.<span class="citation"><sup><a href="#ref-hornik1989multilayer" role="doc-biblioref">13</a></sup></span></p>
+Neural network are universal function approximators that can, in theory, approximate any function <span class="math inline">\(f\)</span>.<span class="citation"><sup><a href="#ref-hornik1989multilayer" role="doc-biblioref">18</a></sup></span></p>
 <!-- optimization procedures -->
 <p>Each machine learning algorithm has its own procedure to search the hypothesis space.
 Most of the time, this search is about finding the right parameters for a model:
@@ -552,7 +563,7 @@ Progress in machine learning research is when a new machine learning algorithm b
 <h2><span class="header-section-number">10.9</span> Nature, Statistics and Supervised Learning<a href="supervised-ml.html#nature-statistics-and-supervised-learning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As we have seen, the mindsets of statistical modeling and supervised machine learning can be quite different.
 At their core, the two mindsets involve different ideas of how to model aspects of the world.
-The following comparison is more or less a summary of Leo Breiman’s famous article “Statistical Modeling: The Two Cultures”.<span class="citation"><sup><a href="#ref-breiman2001statistical" role="doc-biblioref">14</a></sup></span></p>
+The following comparison is more or less a summary of Leo Breiman’s famous article “Statistical Modeling: The Two Cultures”.<span class="citation"><sup><a href="#ref-breiman2001statistical" role="doc-biblioref">19</a></sup></span></p>
 <p>In the context of prediction, we can think of nature as a mechanism that takes features <span class="math inline">\(X\)</span> and produces output <span class="math inline">\(Y\)</span>.
 This mechanism is unknown and we want to learn about it using models.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:nature"></span>
@@ -592,8 +603,8 @@ They are different mindsets with different strengths and limitations.
 If a task involves evaluating unseen data against a well-defined performance metric, the best approach to that task is probably supervised machine learning.
 If your task requires a model with a strong theory that can explain the relationships in the data, statistical modeling is the way to go.</p>
 </div>
-<div id="strengths-5" class="section level2 hasAnchor" number="10.10">
-<h2><span class="header-section-number">10.10</span> Strengths<a href="supervised-ml.html#strengths-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="strengths-6" class="section level2 hasAnchor" number="10.10">
+<h2><span class="header-section-number">10.10</span> Strengths<a href="supervised-ml.html#strengths-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>The most straightforward mindset when it comes to making predictions.</li>
 <li>Loss function <span class="math inline">\(L\)</span> allows the model to be adapted quite well to the task at hand.</li>
@@ -601,23 +612,23 @@ If your task requires a model with a strong theory that can explain the relation
 <li>Supervised learning has a very coherent evaluation approach that I personally find very convincing, though quite one-sided. Measuring how well the model predicts new data is a very compelling way to define a good model.</li>
 </ul>
 </div>
-<div id="limitations-5" class="section level2 hasAnchor" number="10.11">
-<h2><span class="header-section-number">10.11</span> Limitations<a href="supervised-ml.html#limitations-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="limitations-6" class="section level2 hasAnchor" number="10.11">
+<h2><span class="header-section-number">10.11</span> Limitations<a href="supervised-ml.html#limitations-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Supervised learning without constraints does not lead to interpretable models and is therefore not as well suited to for gaining insights.</li>
 <li>Supervised learning is not as theoretically sound as statistical modeling.</li>
 <li>Making decisions based on only the most likely outcome ignores tail risks from less likely, but possible extreme outcomes.</li>
 <li>Uncertainty quantification is not a first class citizen as it is in, for example, <a href="#bayesian">Bayesian inference</a>. The modeler has to rely on a subset of machine learning algorithms that quantify uncertainty (for example Gaussian processes) or they have to use additional tools such as conformal prediction.</li>
 <li>Automation can lead to overlooking issues with the data and the task formulation.</li>
-<li>Generalization error is a good way to quantify generalization, relying solely on this metric will fail in the dumbest ways. There are many examples, such as using asthma as a predictor of lower risk of pneumonia<span class="citation"><sup><a href="#ref-caruana2015intelligible" role="doc-biblioref">15</a></sup></span>, classifying based on watermarks<span class="citation"><sup><a href="#ref-lapuschkin2019unmasking" role="doc-biblioref">16</a></sup></span>, and misclassifying dogs as wolfs based on snow in the background<span class="citation"><sup><a href="#ref-ribeiro2016should" role="doc-biblioref">17</a></sup></span>.</li>
+<li>Generalization error is a good way to quantify generalization, relying solely on this metric will fail in the dumbest ways. There are many examples, such as using asthma as a predictor of lower risk of pneumonia<span class="citation"><sup><a href="#ref-caruana2015intelligible" role="doc-biblioref">20</a></sup></span>, classifying based on watermarks<span class="citation"><sup><a href="#ref-lapuschkin2019unmasking" role="doc-biblioref">21</a></sup></span>, and misclassifying dogs as wolfs based on snow in the background<span class="citation"><sup><a href="#ref-ribeiro2016should" role="doc-biblioref">22</a></sup></span>.</li>
 <li>Feedback loops can break the models. Deployed into the wild, supervised learning models influences and even creates data that might end up training a future version of the same model. But this feedback loop is not well understood and difficult to respect in the modeling process.</li>
 </ul>
 </div>
 <div id="references" class="section level2 hasAnchor" number="10.12">
 <h2><span class="header-section-number">10.12</span> References<a href="supervised-ml.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Statistical Modeling: The Two Cultures by Leo Breiman.<span class="citation"><sup><a href="#ref-breiman2001statistical" role="doc-biblioref">14</a></sup></span> Highly recommended to understand differences between statistical modeling and supervised machine learning.</li>
-<li>I can recommend the book “Elements of Statistical Learning”<span class="citation"><sup><a href="#ref-hastie2009elements" role="doc-biblioref">18</a></sup></span> which covers not only supervised learning but also other machine learning topics. The book has a strong influence from the statistical modeling mindset.</li>
+<li>Statistical Modeling: The Two Cultures by Leo Breiman.<span class="citation"><sup><a href="#ref-breiman2001statistical" role="doc-biblioref">19</a></sup></span> Highly recommended to understand differences between statistical modeling and supervised machine learning.</li>
+<li>I can recommend the book “Elements of Statistical Learning”<span class="citation"><sup><a href="#ref-hastie2009elements" role="doc-biblioref">23</a></sup></span> which covers not only supervised learning but also other machine learning topics. The book has a strong influence from the statistical modeling mindset.</li>
 </ul>
 
 </div>
@@ -625,22 +636,22 @@ If your task requires a model with a strong theory that can explain the relation
 <h3>References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-hornik1989multilayer" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Hornik K, Stinchcombe M, White H. Multilayer feedforward networks are universal approximators. Neural networks. 1989;2(5):359–66. </div>
+<div class="csl-left-margin">18. </div><div class="csl-right-inline">Hornik K, Stinchcombe M, White H. Multilayer feedforward networks are universal approximators. Neural networks. 1989;2(5):359–66. </div>
 </div>
 <div id="ref-breiman2001statistical" class="csl-entry">
-<div class="csl-left-margin">14. </div><div class="csl-right-inline">Breiman L. Statistical modeling: The two cultures (with comments and a rejoinder by the author). Statistical science. 2001;16(3):199–231. </div>
+<div class="csl-left-margin">19. </div><div class="csl-right-inline">Breiman L. Statistical modeling: The two cultures (with comments and a rejoinder by the author). Statistical science. 2001;16(3):199–231. </div>
 </div>
 <div id="ref-caruana2015intelligible" class="csl-entry">
-<div class="csl-left-margin">15. </div><div class="csl-right-inline">Caruana R, Lou Y, Gehrke J, Koch P, Sturm M, Elhadad N. Intelligible models for healthcare: Predicting pneumonia risk and hospital 30-day readmission. In: Proceedings of the 21th ACM SIGKDD international conference on knowledge discovery and data mining. 2015. p. 1721–30. </div>
+<div class="csl-left-margin">20. </div><div class="csl-right-inline">Caruana R, Lou Y, Gehrke J, Koch P, Sturm M, Elhadad N. Intelligible models for healthcare: Predicting pneumonia risk and hospital 30-day readmission. In: Proceedings of the 21th ACM SIGKDD international conference on knowledge discovery and data mining. 2015. p. 1721–30. </div>
 </div>
 <div id="ref-lapuschkin2019unmasking" class="csl-entry">
-<div class="csl-left-margin">16. </div><div class="csl-right-inline">Lapuschkin S, Wäldchen S, Binder A, Montavon G, Samek W, Müller KR. Unmasking clever hans predictors and assessing what machines really learn. Nature communications. 2019;10(1):1–8. </div>
+<div class="csl-left-margin">21. </div><div class="csl-right-inline">Lapuschkin S, Wäldchen S, Binder A, Montavon G, Samek W, Müller KR. Unmasking clever hans predictors and assessing what machines really learn. Nature communications. 2019;10(1):1–8. </div>
 </div>
 <div id="ref-ribeiro2016should" class="csl-entry">
-<div class="csl-left-margin">17. </div><div class="csl-right-inline">Ribeiro MT, Singh S, Guestrin C. " why should i trust you?" Explaining the predictions of any classifier. In: Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining. 2016. p. 1135–44. </div>
+<div class="csl-left-margin">22. </div><div class="csl-right-inline">Ribeiro MT, Singh S, Guestrin C. " why should i trust you?" Explaining the predictions of any classifier. In: Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining. 2016. p. 1135–44. </div>
 </div>
 <div id="ref-hastie2009elements" class="csl-entry">
-<div class="csl-left-margin">18. </div><div class="csl-right-inline">Hastie T, Tibshirani R, Friedman JH, Friedman JH. The elements of statistical learning: Data mining, inference, and prediction. Vol. 2. Springer; 2009. </div>
+<div class="csl-left-margin">23. </div><div class="csl-right-inline">Hastie T, Tibshirani R, Friedman JH, Friedman JH. The elements of statistical learning: Data mining, inference, and prediction. Vol. 2. Springer; 2009. </div>
 </div>
 </div>
             </section>

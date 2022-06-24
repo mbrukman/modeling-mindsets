@@ -162,7 +162,7 @@
 \makeatother
 \subtitle{The Many Cultures of Learning From Data}
 \author{Christoph Molnar}
-\date{2022-06-13}
+\date{2022-06-24}
 
 \begin{document}
 \maketitle
@@ -2076,19 +2076,350 @@ But if the expert says she would collect more data depending on the outcome of t
 \end{itemize}
 
 \hypertarget{causal-inference}{%
-\chapter{Causal inference}\label{causal-inference}}
+\chapter{Causal Inference}\label{causal-inference}}
 
 \begin{itemize}
 \tightlist
 \item
-  Assumes that random variables are connected through cause and effect.
+  Causal models place random variables into cause-and-effect relationships.
 \item
-  Builds a causal model from which statistical estimators are derived.
+  A model is a good generalization of the world if it encodes causality.
 \item
-  A \protect\hyperlink{statistical-modeling}{statistical modeling mindset} that adds causality to \protect\hyperlink{frequentist-inference}{frequentist} and \protect\hyperlink{bayesian-inference}{Bayesian} inference.
+  Causal inference is not a stand-alone modeling mindset, but causal models are either integrated or translated into a \protect\hyperlink{statistical-modeling}{statistical} or \protect\hyperlink{machine-learning}{machine learning} models.
 \end{itemize}
 
-\textbf{This chapter is under construction! Stay tuned.}
+``Thank you for this statistical model,'' the ecologist says to the statistician, and continues, ``Nice p-values and insightful results! Can I conclude from the model that the droughts \textbf{caused} the crop failures?''
+The statistician looks at the ecologist, with a hint of concern.
+As if practiced, the statistician says, ``Correlation does not imply causation.''
+Displeased, the ecologist replies: ``But it would make so much sense to conclude that drought was the cause!''
+The statistician looks as if in pain.
+``Correlation does not imply causation'', the statistician repeats stubbornly.
+``How can we advance science without causality? I want to understand \textbf{why} the crop failures happened,'' the ecologist insists.
+``Correlation does not imply causation. Correlation does not imply causation. Correlation \ldots{}'', the statistician now chants, eyes closed, face contorted as if in great pain.
+The ecologist slowly backs away, shocked at the statistician's strange reaction.
+Sometimes at night, when everything is silent, the ecologist can still hear the haunting calls of the statistician.
+
+\hypertarget{causality-for-the-rescue}{%
+\section{Causality for the Rescue}\label{causality-for-the-rescue}}
+
+Some time ago, I worked with a rheumatologist on an important medical question:
+Do TNF-alpha blockers reduce long-term symptoms in patients with axial spondyloarthritis, a chronic condition associated with inflammation of the spine.
+In the long-term, the spinal joints may fuse due to new bone formation (ossification).
+TNF-alpha blockers, given regularly as injections or infusions, work wonders to reduce inflammation.
+A clinical trial would have been unethical:
+Given the proven effectiveness of TNF-alpha blockers in reducing inflammation, it would have been unethical to give a placebo.
+The next best option was to use observational data from hospitals and physician's offices.
+The registry of patients with rheumatic diseases for which I worked maintained a huge database of Swiss patients with axial spondyloarthritis.
+This database contained valuable data about the patients' health histories:
+Physician visits, blood work, x-rays, medication history, and so on.
+Working with the rheumatologist, I created a statistical model to see if TNF-alpha blockers could prevent ossification.
+For these patients, we had spine x-ray images two years apart, which radiologists used to quantify the progression of bone formation.
+To predict progression, the model included several variables measured at the time of the first radiograph: patient age, disease duration, inflammation levels, medication, etc.
+The result of the analysis was that the drug didn't reduce ossification.
+This finding was somewhat consistent with preliminary research findings of others.
+
+By chance, the lead statistician of the patient registry was taking a course on causal inference at about the same time.
+She had the epiphany that our model had a flaw.
+She drew a diagram visualizing how the drug, inflammation, and the ossification might be related.
+Figure \ref{fig:tnfdag} shows a reduced version of this graph:
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/tnfdag-1} 
+
+}
+
+\caption{The drug was known to influence (reduce) inflammation. Inflammation was thought to cause ossification (new bone formation). The drug can, in theory, reduce ossification in two ways: directly, or indirectly via reducing inflammation.}\label{fig:tnfdag}
+\end{figure}
+
+It became immediately clear where the problem lay in our current model:
+Inflammation was a potential mediator of the effect of TNF-alpha blockers on long-term ossification.
+Figure \ref{fig:tnfdag} shows that the effect of the drug can be divided into a direct and an indirect effect.
+The total effect is the direct effect of the drug plus any indirect effects, in this case via reduction of inflammation.
+We were interested in the total effect, but the way we built the model, the coefficient for the drug could only be interpreted as a direct effect.
+The indirect effect was fully reflected in the coefficient for the inflammation level, which was also included in our model.
+We therefore removed the inflammation variable.\footnote{Shouldn't inflammation levels be a confounder because it affects both the decision to treat and the ossification? Or is it a mediator? It depends on the time of the measurement. In the faulty model inflammation was considered after treatment started, making it a mediator of the drug. Later, we adjusted the model to include inflammation before the start of treatment, making it a confounder.}
+After removal, the coefficient for TNF-alpha blockers could now be interpreted as the total effect of the drug rather than just the direct effect.
+Then the model clearly showed that TNF-alpha blockers reduce ossification by reducing inflammation levels.
+This sounds like common sense in hindsight, but coming from a frequentist mindset, I was thunderstruck.
+That moment was a real revelation and piqued my interest in causal inference.
+
+\hypertarget{causality}{%
+\section{Causality}\label{causality}}
+
+We all have an intuition about causality.
+Rain is a possible cause of a wet lawn.
+A drug can be a cause of getting well.
+An environment policy can be a cause of reduced C02 emissions.
+Causality can be expressed as imaginary interventions in random variables:
+If you \textbf{force} one random variable to take on a certain value, how would the distribution of another random variable (in the real world) change?
+A cause is different than an association:
+An association is just a statement about an observation.
+We know that a wet lawn does not \emph{cause} your neighbor's lawn to be wet.
+How do we know that? Try watering your lawn every day for a year, and see if the probability of your neighbor's lawn being wet has changed.
+But the wetness of the two lawns is associated:
+If you find that your lawn is wet, the probability that your neighbor's lawn is wet is high.
+The reason for this association is, of course, rain.
+Such common causes are called confounders.
+
+The archetypal statistician avoids talking about causality.
+At least that's my experience, having done a bachelor's and masters in statistics.
+What I learned about causality in those 5 years can be summed up two statements: 1) All confounders must be included in the statistical model as dependent variables, and 2) correlation does not imply causation.
+We were taught not to interpret statistical models causally and to view causality as an unattainable goal.
+We were taught to ignore the elephant in the room.
+
+``Correlation does not imply causation'' is really a mantra you hear over and over again when learning about statistics.
+I find this very strange, especially considering that statistical modeling is supposedly THE research tool of our time.
+Isn't research all about figuring out how the world works?
+The ``how'' implies, at least for me, that scientists are supposed to uncover causal structures.
+The truth is that most results are interpreted causally anyways.
+By domain experts, by lay people, and by the media.
+Whether the statistician likes it or not.
+So shouldn't everyone at least try to fit the model with causality in mind?
+Fortunately, some people think we should put causality first.
+
+Welcome to the \textbf{causal inference} mindset.
+
+\hypertarget{the-causal-mindset}{%
+\section{The Causal Mindset}\label{the-causal-mindset}}
+
+The causal inference mindset places causality at the center of modeling.
+The goal of causal inference is to identify and quantify the \textbf{causal} effect of a random variable on the outcome of interest.
+
+Causal inference could be seen as an ``add-on'' to other mindsets such as \protect\hyperlink{frequentism}{frequentist} or \protect\hyperlink{bayesian}{Bayesian} inference, but also for \protect\hyperlink{machine-learning}{machine learning}.
+But it would be wrong to see causal inference as just a icing on the cake of the other mindsets.
+It's much more than just adding a new type of method to another mindset, like adding support vector machines to supervised learning.
+Causal inference challenges the culture of statistical modeling.
+It requires the modelers to think more about the data-generating process, to talk explicitly about causes and effects.
+
+It's quite surprising how many models are ``broken'' because they ignore causal reasoning.
+A lack of causal reasoning can mean that the analysis of a research paper is invalid, or that a machine learning model in a product is vulnerable to changes in data distribution or adversarial attacks.
+Take the Google Flu prediction model as an example.
+Google predicted flu outbreaks based on the frequency of Google searches.
+The prediction model was clearly not a causal model.
+If it were causal, it would mean that you one can could a flu outbreak by searching Google for certain terms.
+For example, the flu detection model missed the 2009 non-seasonal flu outbreak.\textsuperscript{\protect\hyperlink{ref-lazer2014parable}{13}}
+The machine learning model's performance quickly degraded as search patterns changed over time.
+For the causal modeler, a model that relies only on associations is as short-lived as a fruit fly.
+A model generalizes well only if it encodes causal relationships.
+A causal flu model might rely on the virulence of current flu strains, the number of people vaccinated, forecasts of how cold the winter will be, etc.
+
+You can study the data as closely as you like, but you can't fully discern just from the numbers what causal structures produced those data.
+You can automatically infer associations from the data, but even the simplest causal structures are ambiguous.
+Sunshine duration on a given day might be considered causal for the number of park visitors.
+In a dataset, both variables would appear as columns with numbers in them.
+And if we would calculate the correlation, we would find that sunshine and park visitors are positively correlated.
+The causal relationship is clear to everyone:
+The sunshine duration influences the park visits.
+Park visitors don't control the sunshine, and even the smokiest BBQ won't create enough clouds to change the sunshine duration.
+But this causal direction is not obvious to your computer.
+No matter which of the variables you target, the computer will comply and fit the model.
+\emph{Breaking news: The government has banned visits to the park to cool down the current heat wave.}
+
+Assumptions have to be made to decide on causal directions.
+These assumptions are often not be testable and therefore a subjective choice of the modeler.
+This creates a target for criticism of the causal inference mindset.
+On the other hand, causal inference makes causal assumptions explicit and encourages discussions.
+When two causal modelers have different opinions a particular causal direction, they have a way of talking about those differences.
+
+Let's take a look at the best way to make causal structures explicit: The directed acyclic graph.
+
+\hypertarget{directed-acyclic-graph-dag}{%
+\section{Directed Acyclic Graph (DAG)}\label{directed-acyclic-graph-dag}}
+
+Causal inference comes with a tool for visualizing causal relationships: The directed acyclic graphs, DAG for short.
+A DAG, like the one in Figure \ref{fig:dag}, makes it easy to understand which variable is a cause of another variable.
+Variables are represented as nodes and the causal direction is illustrated by an arrow.
+DAGs must be acyclic, meaning arrows are not allowed to go in a circle.
+For example, adding an arrow from \(Y\) to \(X_1\) in Figure \ref{fig:dag} would make the DAG cyclic, and most causal frameworks can't handle that.
+
+\begin{figure}
+
+{\centering \includegraphics[width=\textwidth]{figures/dag-1} 
+
+}
+
+\caption{A directed acyclic graph (DAG) with 5 variables.}\label{fig:dag}
+\end{figure}
+
+What can we see from the DAG in Figure \ref{fig:dag}?
+Variables \(X_2\) and \(X_3\) are direct causes of the target \(Y\).
+\(X_1\) affects \(Y\) only indirectly through \(X_3\).
+And \(X_4\) is not a cause of \(Y\), but \(Y\) causes \(X_4\) together with \(X_1\).
+
+But how do we know where to put arrows and in which direction they should point?
+There are several guides here:
+
+\begin{itemize}
+\tightlist
+\item
+  Good old common sense, such as knowing that park visitors can't control the sun.
+\item
+  Domain expertise.
+\item
+  Direction of time: We know that the elevator comes because you pressed the button, not the other way around.
+\item
+  Causal structure learning: To some extent we can learn causal structures automatically. But this usually leads to multiple, ambiguous DAGs.
+\end{itemize}
+
+DAG is a great tool for building causal models, but not all approaches rely on DAGs.
+
+\hypertarget{many-frameworks-for-causality}{%
+\section{Many Frameworks For Causality}\label{many-frameworks-for-causality}}
+
+There are bewildering number of ``schools'', frameworks, and individual models for causal inference.
+And they can differ in notation and approaches.\textsuperscript{\protect\hyperlink{ref-hernan2010causal}{14}}
+I find this lack of uniformity is the biggest barrier to entry into the causal inference mindset.
+You can choose different introductory books on Bayesian inference, and the basic notation, language and presented methods will be mostly the same.
+But causal inference is just a bit more messy.
+So don't despair, it's not you, it's causal inference.
+Anyway, here is a brief, non-exhaustive overview of causal modeling approaches to give you an idea of what's out there:
+
+\begin{itemize}
+\tightlist
+\item
+  Much causal inference consists of experimental design rather than causal modeling of observational data, such as clinical trials or A/B tests. Causality claims are derived from randomization and intervention.
+\item
+  Observational data can resemble an experiment, which some call a ``natural experiment''. When John Snow studied cholera, he had access to data from a natural experiment. John Snow identified contaminated drinking water as the source of cholera because customers of one water company were much more likely to get cholera than customers of the other.
+\item
+  Propensity score matching attempts to estimate the effect of an intervention by matching data points taking into account differences in other variables.
+\item
+  Probably the most general and coherent framework for causal inference comes from statistician Judea Pearl. This ``school'' includes the do-calculus\textsuperscript{\protect\hyperlink{ref-pearl2012calculus}{15}}, structural causal models, front- and backdoor criteria, and many other tools for causal inference.\textsuperscript{\protect\hyperlink{ref-pearl2009causal}{16}}
+\item
+  The potential outcomes framework\textsuperscript{\protect\hyperlink{ref-athey2016recursive}{17}} is another larger causal ``school'' used mainly for studying causal effects of binary variables.
+\item
+  Causal discovery or structure identification is a subfield of causal inference that aims to construct DAGs from observational data.
+\item
+  Mediation analysis can be used to examine how causal effects are mediated by other variables.
+\item
+  There are many individual methods that aim to provide causal modeling. One example is ``honest causal forests'', which are based on random forests and used to model heterogeneity in treatment effects.\textsuperscript{\protect\hyperlink{ref-athey2016recursive}{17}}
+\item
+  \ldots{}
+\end{itemize}
+
+All approaches have in common that they start from a causal model.
+This causal model can be very explicit, for example in the form of a DAG.
+But it can also be hidden in the assumptions of a method.
+The final estimate, however, is always a statistical estimator or a machine learning model or something similar.
+But how do you get from a causal model to a statistical estimator?
+
+\hypertarget{from-causal-model-to-statistical-estimator}{%
+\section{From Causal Model to Statistical Estimator}\label{from-causal-model-to-statistical-estimator}}
+
+In many cases we can't perform experiments because they are infeasible, too expensive or too time-consuming.
+But often we have observational data from which we want to infer causal effects.
+With observational data, the first casualty is causality -- at least from the point of view of non-causalists.
+When causal modelers see observational data, they start stretching and warming up their wrists in anticipation of all the DAG-drawing and modeling to come.
+
+Causal modelers claim that you can estimate causal effects even for observational data.
+I am willing to reveal their secret:
+Causal modelers use high-energy particle accelerators to create black holes.
+Each black hole contains a parallel universe in which they can study a different what-if scenarios.
+Joke aside, there is no magic ingredient for estimating causal effects.
+Causal modeling is mainly a recipe for translating causal models into statistical estimators, in the following 4 steps:\textsuperscript{\protect\hyperlink{ref-pearl2009causal}{16}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Formulate causal estimand.
+\item
+  Construct causal model.
+\item
+  Identify statistical model.
+\item
+  Estimate effect.
+\end{enumerate}
+
+Let's now look at the of the steps.
+The first step is to formulate the causal estimand.
+That means defining the causes and target that we are interested in.
+The estimand can be the effect of a treatment on a disease outcome.
+It can be the causal influence of supermarket layout on shopping behavior.
+Or it can be the extent to which climate change can be attributed to a particular heat wave.
+
+Once the causal estimand is formulated, we can derive the causal model.
+The causal model can be built in the form of DAG.
+And while it doesn't have to be a DAG, I think the DAG is the most meaningful ``storage'' and visualization of a causal model.
+I addition to the target and potential causes, all other variables relevant to both should be included as nodes in the DAG.
+Then the modeler must draw the causal relationships as arrows to finish the DAG.
+
+In the identification step, the causal modeler translates the causal model into a statistical estimator.
+Not all causal estimands can be estimated with observational data.
+In particular, if a confounder is missing, we can't estimate the causal effect.
+Identification can be a complicated, but there are also many simple rules that tell you which variables to include in the statistical model and which to exclude:
+
+\begin{itemize}
+\tightlist
+\item
+  Include all confounders, the common causes of both the variable of interest and the outcome. For example in Figure \ref{fig:dag-rules} \(X_2\) confounds \(X_1\) and \(Y\).
+\item
+  Exclude colliders. \(X_4\) is a collider for \(Y\) and \(X_1\). Adding colliders to a model opens an unwanted path.
+\item
+  Exclude mediators. If we want to measure the causal effect of \(X_1\) on \(Y\), we have to exclude \(X_3\). Including \(X_3\) would block the path between \(X_1\) and \(Y\), and we would incorrectly conclude that \(X_1\) has no effect on \(Y\).
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/dag-rules-1} 
+
+}
+
+\caption{To understand the causal effect of $X_1$ on $Y$, we have to build a regression model with $Y$ as the target and $X_1$ and $X_2$ as predictor variables.}\label{fig:dag-rules}
+\end{figure}
+
+In the end, we have an estimator or model that can be estimated or fitted without any special magic.
+Often it's a regular frequentist or Bayesian model, or a supervised machine learning model.
+This means that once the model is estimated, we can interpret the model it as we normally would.
+But since the model is also the result of causal reasoning, we may interpret the effect of interest in causal terms.
+
+To estimate causal effects of other variables, all steps must be repeated.
+The reason for this is that the identification may lead to a different set of variables for which the model must be adjusted.
+
+\hypertarget{strengths-4}{%
+\section{Strengths}\label{strengths-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  Causality is central to modeling the world, and causal inference is \textbf{the} mindset to embrace that fact.
+\item
+  I think most modelers actually want causal models. Of course, scientists want causal explanations to better understand the world. Modelers in industry also want causal models so they can understand the impact of marketing campaigns, for example.
+\item
+  Only causal models generalize well because they are more robust to changes in the environment. Or put another way: Non-causal models break down more easily, since they are based on associations.
+\item
+  Causal inference is a rather flexible mindset that extends many other mindsets such as frequentism, Bayesianism, machine learning.
+\item
+  DAGs make causal assumptions explicit. If you want to take away just one inside from this chapter, or from causal inference in general, it should be DAGs as a way of thinking and communicating.
+\item
+  You might say that causal modeling with observational data is not possible. The truth is hat once models are out of the hand of the modeler, in many cases they are interpreted causally. Why then not make an effort to introduce some of the best practices from causal inference?
+\end{itemize}
+
+\hypertarget{limitations-4}{%
+\section{Limitations}\label{limitations-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  Many modelers stay away from causal inference for observational data because they say causal models are either not possible or too complicated.
+\item
+  Confounders are especially tricky. For a causal interpretation, you have to assume that you have found all the confounders. But one can never prove that one has identified all confounders.
+\item
+  There are many schools and approaches to causal inference. This can be very confusing for newcomers.
+\item
+  Causal modeling requires subjective decisions. The causal modeler can never be sure that the causal model is correct.
+\item
+  Predictive performance and causality can be in conflict: Using non-causal variables may improve predictive performance, but may undermine the causal interpretation of the model.
+\end{itemize}
+
+\hypertarget{further-reading}{%
+\section{Further Reading}\label{further-reading}}
+
+\begin{itemize}
+\tightlist
+\item
+  Free book: Causal Inference: What If\textsuperscript{\protect\hyperlink{ref-hernan2010causal}{14}}
+\end{itemize}
 
 \hypertarget{machine-learning}{%
 \chapter{Machine Learning}\label{machine-learning}}
@@ -2180,8 +2511,8 @@ Statistical modeling is intrinsically motivated.
 The rationale for constructing the model is important.
 It's like judging food not only by how it tastes, but also by the cooking process: did the chef use the right ingredients? Was the cooking time appropriate, and so on.
 
-\hypertarget{strengths-4}{%
-\section{Strengths}\label{strengths-4}}
+\hypertarget{strengths-5}{%
+\section{Strengths}\label{strengths-5}}
 
 \begin{itemize}
 \tightlist
@@ -2195,8 +2526,8 @@ It's like judging food not only by how it tastes, but also by the cooking proces
   Machine learning is predestined for automating tasks and building digital products.
 \end{itemize}
 
-\hypertarget{limitations-4}{%
-\section{Limitations}\label{limitations-4}}
+\hypertarget{limitations-5}{%
+\section{Limitations}\label{limitations-5}}
 
 \begin{itemize}
 \tightlist
@@ -2346,7 +2677,7 @@ Machine learning algorithms illuminate paths through the forest so that we can s
 The globally best \(f\) might not be within this illuminated path, so we will usually only find a locally optimal \(f\).
 Machine learning algorithms differ in the form and complexity they allow for \(f\).
 Decision tree algorithms produce \(f\)'s that look like step functions, since most trees algorithms only allow discrete jumps in prediction.
-Neural network are universal function approximators that can, in theory, approximate any function \(f\).\textsuperscript{\protect\hyperlink{ref-hornik1989multilayer}{13}}
+Neural network are universal function approximators that can, in theory, approximate any function \(f\).\textsuperscript{\protect\hyperlink{ref-hornik1989multilayer}{18}}
 
 Each machine learning algorithm has its own procedure to search the hypothesis space.
 Most of the time, this search is about finding the right parameters for a model:
@@ -2466,7 +2797,7 @@ Progress in machine learning research is when a new machine learning algorithm b
 
 As we have seen, the mindsets of statistical modeling and supervised machine learning can be quite different.
 At their core, the two mindsets involve different ideas of how to model aspects of the world.
-The following comparison is more or less a summary of Leo Breiman's famous article ``Statistical Modeling: The Two Cultures''.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{14}}
+The following comparison is more or less a summary of Leo Breiman's famous article ``Statistical Modeling: The Two Cultures''.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{19}}
 
 In the context of prediction, we can think of nature as a mechanism that takes features \(X\) and produces output \(Y\).
 This mechanism is unknown and we want to learn about it using models.
@@ -2520,8 +2851,8 @@ They are different mindsets with different strengths and limitations.
 If a task involves evaluating unseen data against a well-defined performance metric, the best approach to that task is probably supervised machine learning.
 If your task requires a model with a strong theory that can explain the relationships in the data, statistical modeling is the way to go.
 
-\hypertarget{strengths-5}{%
-\section{Strengths}\label{strengths-5}}
+\hypertarget{strengths-6}{%
+\section{Strengths}\label{strengths-6}}
 
 \begin{itemize}
 \tightlist
@@ -2535,8 +2866,8 @@ If your task requires a model with a strong theory that can explain the relation
   Supervised learning has a very coherent evaluation approach that I personally find very convincing, though quite one-sided. Measuring how well the model predicts new data is a very compelling way to define a good model.
 \end{itemize}
 
-\hypertarget{limitations-5}{%
-\section{Limitations}\label{limitations-5}}
+\hypertarget{limitations-6}{%
+\section{Limitations}\label{limitations-6}}
 
 \begin{itemize}
 \tightlist
@@ -2551,7 +2882,7 @@ If your task requires a model with a strong theory that can explain the relation
 \item
   Automation can lead to overlooking issues with the data and the task formulation.
 \item
-  Generalization error is a good way to quantify generalization, relying solely on this metric will fail in the dumbest ways. There are many examples, such as using asthma as a predictor of lower risk of pneumonia\textsuperscript{\protect\hyperlink{ref-caruana2015intelligible}{15}}, classifying based on watermarks\textsuperscript{\protect\hyperlink{ref-lapuschkin2019unmasking}{16}}, and misclassifying dogs as wolfs based on snow in the background\textsuperscript{\protect\hyperlink{ref-ribeiro2016should}{17}}.
+  Generalization error is a good way to quantify generalization, relying solely on this metric will fail in the dumbest ways. There are many examples, such as using asthma as a predictor of lower risk of pneumonia\textsuperscript{\protect\hyperlink{ref-caruana2015intelligible}{20}}, classifying based on watermarks\textsuperscript{\protect\hyperlink{ref-lapuschkin2019unmasking}{21}}, and misclassifying dogs as wolfs based on snow in the background\textsuperscript{\protect\hyperlink{ref-ribeiro2016should}{22}}.
 \item
   Feedback loops can break the models. Deployed into the wild, supervised learning models influences and even creates data that might end up training a future version of the same model. But this feedback loop is not well understood and difficult to respect in the modeling process.
 \end{itemize}
@@ -2562,9 +2893,9 @@ If your task requires a model with a strong theory that can explain the relation
 \begin{itemize}
 \tightlist
 \item
-  Statistical Modeling: The Two Cultures by Leo Breiman.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{14}} Highly recommended to understand differences between statistical modeling and supervised machine learning.
+  Statistical Modeling: The Two Cultures by Leo Breiman.\textsuperscript{\protect\hyperlink{ref-breiman2001statistical}{19}} Highly recommended to understand differences between statistical modeling and supervised machine learning.
 \item
-  I can recommend the book ``Elements of Statistical Learning''\textsuperscript{\protect\hyperlink{ref-hastie2009elements}{18}} which covers not only supervised learning but also other machine learning topics. The book has a strong influence from the statistical modeling mindset.
+  I can recommend the book ``Elements of Statistical Learning''\textsuperscript{\protect\hyperlink{ref-hastie2009elements}{23}} which covers not only supervised learning but also other machine learning topics. The book has a strong influence from the statistical modeling mindset.
 \end{itemize}
 
 \hypertarget{unsupervised-ml}{%
@@ -2855,8 +3186,8 @@ Unsupervised learning includes more tasks than just clustering, outlier detectio
 For example, archetypal analysis, latent variables, factor analysis, and more.
 Unsupervised learning is truly the colorful bird among the modeling mindsets.
 
-\hypertarget{strengths-6}{%
-\section{Strengths}\label{strengths-6}}
+\hypertarget{strengths-7}{%
+\section{Strengths}\label{strengths-7}}
 
 \begin{itemize}
 \tightlist
@@ -2876,13 +3207,13 @@ Unsupervised learning is truly the colorful bird among the modeling mindsets.
   Unsupervised learning works without a ground truth. This means no effort is required to label data.
 \end{itemize}
 
-\hypertarget{limitations-6}{%
-\section{Limitations}\label{limitations-6}}
+\hypertarget{limitations-7}{%
+\section{Limitations}\label{limitations-7}}
 
 \begin{itemize}
 \tightlist
 \item
-  One of the major limitations is the lack of ground truth, which comes with the difficulty of evaluating the resulting models. As a result, there are many methods with often very different results.\textsuperscript{\protect\hyperlink{ref-hastie2009elements}{18}}
+  One of the major limitations is the lack of ground truth, which comes with the difficulty of evaluating the resulting models. As a result, there are many methods with often very different results.\textsuperscript{\protect\hyperlink{ref-hastie2009elements}{23}}
 \item
   Unsupervised machine learning is a good approach to the curse of dimensionality, but even so, unsupervised machine learning can suffer greatly. For example, the more features there are, the more meaningless and difficult to interpret the clusters become.
 \item
@@ -2897,7 +3228,7 @@ Unsupervised learning is truly the colorful bird among the modeling mindsets.
 \begin{itemize}
 \tightlist
 \item
-  The book Machine learning: a probabilistic perspective by Keven Murphy.\textsuperscript{\protect\hyperlink{ref-murphy2012machine}{19}}
+  The book Machine learning: a probabilistic perspective by Keven Murphy.\textsuperscript{\protect\hyperlink{ref-murphy2012machine}{24}}
 \end{itemize}
 
 \hypertarget{reinforcement-learning}{%
@@ -3016,32 +3347,52 @@ Unsupervised learning is truly the colorful bird among the modeling mindsets.
 \CSLLeftMargin{12. }
 \CSLRightInline{Gandenberger G. Why i am not a likelihoodist. Ann Arbor, MI: Michigan Publishing, University of Michigan Library; 2016. }
 
-\leavevmode\vadjust pre{\hypertarget{ref-hornik1989multilayer}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-lazer2014parable}{}}%
 \CSLLeftMargin{13. }
+\CSLRightInline{Lazer D, Kennedy R, King G, Vespignani A. The parable of google flu: Traps in big data analysis. Science. 2014;343(6176):1203--5. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-hernan2010causal}{}}%
+\CSLLeftMargin{14. }
+\CSLRightInline{Hernán MA, Robins JM. Causal inference. CRC Boca Raton, FL; 2010. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-pearl2012calculus}{}}%
+\CSLLeftMargin{15. }
+\CSLRightInline{Pearl J. The do-calculus revisited. arXiv preprint arXiv:12104852. 2012; }
+
+\leavevmode\vadjust pre{\hypertarget{ref-pearl2009causal}{}}%
+\CSLLeftMargin{16. }
+\CSLRightInline{Pearl J. Causal inference in statistics: An overview. Statistics surveys. 2009;3:96--146. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-athey2016recursive}{}}%
+\CSLLeftMargin{17. }
+\CSLRightInline{Athey S, Imbens G. Recursive partitioning for heterogeneous causal effects. Proceedings of the National Academy of Sciences. 2016;113(27):7353--60. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-hornik1989multilayer}{}}%
+\CSLLeftMargin{18. }
 \CSLRightInline{Hornik K, Stinchcombe M, White H. Multilayer feedforward networks are universal approximators. Neural networks. 1989;2(5):359--66. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-breiman2001statistical}{}}%
-\CSLLeftMargin{14. }
+\CSLLeftMargin{19. }
 \CSLRightInline{Breiman L. Statistical modeling: The two cultures (with comments and a rejoinder by the author). Statistical science. 2001;16(3):199--231. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-caruana2015intelligible}{}}%
-\CSLLeftMargin{15. }
+\CSLLeftMargin{20. }
 \CSLRightInline{Caruana R, Lou Y, Gehrke J, Koch P, Sturm M, Elhadad N. Intelligible models for healthcare: Predicting pneumonia risk and hospital 30-day readmission. In: Proceedings of the 21th ACM SIGKDD international conference on knowledge discovery and data mining. 2015. p. 1721--30. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-lapuschkin2019unmasking}{}}%
-\CSLLeftMargin{16. }
+\CSLLeftMargin{21. }
 \CSLRightInline{Lapuschkin S, Wäldchen S, Binder A, Montavon G, Samek W, Müller KR. Unmasking clever hans predictors and assessing what machines really learn. Nature communications. 2019;10(1):1--8. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-ribeiro2016should}{}}%
-\CSLLeftMargin{17. }
+\CSLLeftMargin{22. }
 \CSLRightInline{Ribeiro MT, Singh S, Guestrin C. " why should i trust you?" Explaining the predictions of any classifier. In: Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining. 2016. p. 1135--44. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-hastie2009elements}{}}%
-\CSLLeftMargin{18. }
+\CSLLeftMargin{23. }
 \CSLRightInline{Hastie T, Tibshirani R, Friedman JH, Friedman JH. The elements of statistical learning: Data mining, inference, and prediction. Vol. 2. Springer; 2009. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-murphy2012machine}{}}%
-\CSLLeftMargin{19. }
+\CSLLeftMargin{24. }
 \CSLRightInline{Murphy KP. Machine learning: A probabilistic perspective. MIT press; 2012. }
 
 \end{CSLReferences}
