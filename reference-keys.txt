@@ -70,9 +70,9 @@ causal-inference
 does-the-drug-help
 causality
 the-causal-mindset
-directed-acyclical-graphs
+directed-acyclic-graph
 many-frameworks-for-causality
-from-causal-to-conditional
+from-causal-model-to-statistical-estimator
 strengths-4
 limitations-4
 further-reading
