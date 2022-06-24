@@ -35,7 +35,7 @@ There are different ways how to let me know:
 
 ## Changelog
 
-
+- v0.5: Added causal inference chapter
 - v0.4: Added chapter on unsupervised learning
 - v0.3: Added chapters likelihoodism, machine learning and supervised learning.
 - v0.2: Added chapter Bayesian inference.

@@ -1,11 +1,13 @@
 # Design-based inference {#design-based-inference}
 
+<!-- TODO: Split into design-based (meta framework), survey sampling, design of experiments -->
 <!-- TODO: Malte zum reviewn schicken -->
 
 <!-- TODO: Read in detail https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856970/ -->
 
 <!-- TODO: Checkout Stichprobentheorie Material from LMU -->
 <!-- TODO: Checkout Experiment of Design material from LMU -->
+<!-- TODO: Add reference to this chapter from the causal inference chapter -->
 
 Design-based modeling favors strong research designs over complex statistical models. 
 Instead of focus on model, focus on sampling data.
