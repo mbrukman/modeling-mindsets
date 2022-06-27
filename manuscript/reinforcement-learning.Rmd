@@ -12,7 +12,9 @@ TODO: checkout https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
 
 <!-- motivation: joke about how static other mindsets are -->
 - start with some joke about how static the other mindsets are
--
+- reinforcement learner meets the others
+- they are frozen in time
+
 
 <!-- examples of reinforcement learning -->
 I guess since AlphaGos win against human, even many layperson might have heard about reinforcement learning.
@@ -56,6 +58,45 @@ I guess since AlphaGos win against human, even many layperson might have heard a
 - the policy is a mapping/function from the states and a possible action to a probability. The probability of the agent to take a certain action given a certain state $P(a_t = a | s_t = s)$.
 -
 
+### Policies
+
+- Policy is rule used for agent
+- policy tells what action to take
+- policy can be deterministic or stochastic
+- policy: $a_t = \mu(s_t)$ or $a_t = \pi(\cdot | s_t)$
+- you can see policy as the "brain" of the agent
+
+
+### Trajectories
+
+- Trajectory is a sequence of states and actions
+- $\tau = (s_0, a_0, s_1, a_1, \ldots)$
+- First state can be a random sample
+- Random sample from start-state distribution
+- But this depends on the specific simulation scenario
+- If start is expected to be the same, can be just the same start anyways.
+-
+
+### Value Functions
+
+- Value function tells us the value of a state
+- Value is expected return for a specific state, or state-action pair
+- Four way to define value functions:
+  - on-policy value function. only depends on the state, and assumes that always acting based on policy
+  - on-policy action-value function: taking some action a in state s, but then always following policy
+  - optimal value function: expected return for starting in s and always following the optimal policy
+  - optimal action-value function: expected return for starting in state s, taking arbitrary action a and the always following the optimal policy.
+
+
+## Deep Reinforcement Learning
+
+- policy is parameterized
+- the connection between the state and the action is parameterized
+- more specifically, a neural network is doing the decisions
+- weights of the neural network are learnable
+- so the policy can be learned by adjusting the neural network weights
+-
+
 ## The Bellman Equations
 
 TODO: check reinforcement learning book p. 79 
@@ -68,11 +109,28 @@ $$V(s) = \arg \max_{a} \left{R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') \right} $
 
 ## Misc
 
-- deep reinforcement learning?
 - in general, there are many different types of reinforcement learning algorithms (next to deep reinforcement learning): Q-learning, SARSA, ...
 - we talked about RL assuming full observability of all states.
   - but you might also have partial observability only. like fog of war in games, or the fact that you don't even know what's happening in the room next to you.
-  - 
+  - state is always all the information about the environment
+  - observation might be partial. that's what the agent gets.
+- Model-free vs model-based: Model-based means that the agent either learns a model of the environment or it has access to a model of it.
+
+## Impressive to Look At
+
+
+- Works well in games and simulations
+- fun to see in action:
+  - Go in action
+  - watch starcraft matches
+  - see little figures run around in some world, being adorable and such
+- these applications make it seem as though we a just two steps away from AGI
+- results are impressive
+- but: in very particular enviroment
+- hard to carry into the real world
+- or hard to translate into different environment
+-
+
 
 ## AI fails
 
@@ -90,7 +148,7 @@ $$V(s) = \arg \max_{a} \left{R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') \right} $
 - with interactions in mind
 - often more realistic to think of a model interacting with an environemnt
 - especially if understanding policy better
--
+- works well in games and simulations
 
 ## Limitations
 
@@ -107,6 +165,17 @@ $$V(s) = \arg \max_{a} \left{R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') \right} $
 
 - AI Fail paper
 - Reinforcement Learning, An introduction [@sutton2018reinforcement]
+
+
+```{r rl, fig.cap = "Reinforcement Learning."}
+r1 = rectFun(c(0, 0))
+r2 = rectFun(c(0, 2)) 
+
+ggplot(mapping = aes(x = x, y = y)) +
+  geom_path(data = r1) +
+  geom_path(data = r2)
+
+```
 
 
 
