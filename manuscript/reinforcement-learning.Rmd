@@ -5,38 +5,88 @@ TODO: checkout https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
 
 -->
 
-* The world is dynamic: The model is about an actor acting in an environment. The actions of the agent are only rewarded at the end.
-* Reinforcement learning balances exploration and exploitation,
-* A sub-mindset of [machine learning](#machine-learning).
+* The world is dynamic and so is the reinforcement learning mindset: The "model" is an actor interacting with its environment, collecting rewards.
+* Learning is a mix of exploiting knowledge about beneficial actions and exploring new options.
+* Reinforcement learning is useful in robotics, games and simulations.
+* Together with [supervised](#supervised) and [unsupervised](#unsupervised-ml), reinforcement learning is a [machine learning](#machine-learning) mindset.
 
 
 <!-- motivation: joke about how static other mindsets are -->
-- start with some joke about how static the other mindsets are
-- reinforcement learner meets the others
-- they are frozen in time
+Three machine learners of different minds attend a conference dinner.
+The dinner is served in form of a self-service buffet, and the service staff constantly refills the lavish offerings all night long.
+One of the dishes is super popular and not available most of the time: Dumplings.
+Once dumplings are refilled, within minutes the plate is empty again.
+Also the machine learners can't escape the pull of the dumplings.
+So they start to strategize, in their own way, how to get more dumplings.
+The supervised learner starts gathering data, trying to predict dumpling servings based on time, appearance of other dishes and so on.
+The unsupervised learner expands the goal: Why only look at dumplings? It's better to find out in more general what foods there are.
+Maybe dumplings are similar to other dishes offered?
+Maybe there are some outlier foods that are much better?
+The reinforcement learner was gone.
+Where did she go?
+The other two hadn't noticed her leaving.
+Suddenly she comes back, with a full plate of dumplings.
+The supervised and unsupervised learners gasp in surprise.
+"How did you find all these dumplings," they demand to know.
+She started sharing her success story: "Since my policy of just waiting at the buffet for dumplings didn't work out, I had to explore other actions.
+I walked outside where one waitress was on here cigarette break.
+We had some small talk, and I just ask her about the dumplings.
+She basically then gave me some dumplings straight out of the kitchen".
+The other two were flabbergasted.
+How should they have known that talking to people, interacting with their environment was always an option?
 
 
-<!-- examples of reinforcement learning -->
-I guess since AlphaGos win against human, even many layperson might have heard about reinforcement learning.
-- AlphaGO, Starcraft, ...
-- very general mindset, applicable in many areas
-- TODO: Find list of application areas
-- example 1: baking cookies in the Google cafeteria. TODO: research the story
-- example 2: cooling servers (also google?). TODO: Checkout story
-- example 3? TODO: research another cool application 
+<!-- applications -->
+Chess, Go, StarCraft II, Minecraft, various Atari games, ...
+All these games have in common that computers can play them too, beating human players by a long shot.
+The computer can play those games with the help of reinforcement learning.
+Reinforcement learning is not only to play, but also to  
+But reinforcement learning is not only for playing.
+It can also steer components in complex systems.
+For example, reinforcement learning was used to control the [cooling of Googles datacenters](https://www.technologyreview.com/2018/08/17/140987/google-just-gave-control-over-data-center-cooling-to-an-ai/).
+Reinforcement learning has been used to control robots, to control self-driving cars and much more.
+It's a versatile mindset that can be used in very dynamic situations.
 
+Welcome to the reinforcement learning mindset!
 
 ## The Reinforcement Learning Mindset
+
+<!-- reinforcement learning theory in a nutshell -->
+- state, actor,  policy
+-
+
+<!-- data structure is different -->
+- dynamic
+- scattered rewards
+- interaction
+- exploration vs exploitation like no other mindset
+
+<!-- why it's a machine learning mindset -->
 
 - Dynamic mindset
 - instead of just inspecting static dataset, an agent "explores" and interacts with an environment
 - machine learning mindset
 - different from supervised: no labelled input output pairs needed. supervised would need for every agent decision some information how good the decision was.
 - reinforcement learning, in contrast, gets the reward in the end. and has to propagate it all the way back to learn
-- finding balance between exploration and exploitation
+- finding balance between exploration and exploitation, which is unique to this mindset
 - exploitation: exploiting current knowledge of how to get a nice reward
 - exploration: venture out into uncharterd territory and find out what rewards await there.
+- RL is about learning how to act or what to do
+- mapping from environment to actions while maximizing a reward
+- typical elements in RL: Trial-and-error search and delayed rewards
+- RL is a holistic mindset: It considers the entire interaction of agent with environment
+- compare that with supervised: supervised only considers parts of the problem without connecting the prediction problem to the larger picture
+- for example: a company sends out advertisement to customers. based on how likely the customer is to buy.
+- in this example would be more meaningful to interact with the customer, explore and exploit
 
+
+- What can be an agent?
+  - Robots
+  - players in games like Go and starcraft
+  - but also componentes in larger system
+  - like regulation component in cooling system
+  - think of a buildings ventilation controller: environment are the sensors about temp, humidity and air quality. action is where and how much to ventilate
+  -
 
 ## Reinforcement Learning Theory
 
@@ -56,7 +106,84 @@ I guess since AlphaGos win against human, even many layperson might have heard a
   - value function: maps from state to value.
 - agent interacts with environment via actions which changes the state
 - the policy is a mapping/function from the states and a possible action to a probability. The probability of the agent to take a certain action given a certain state $P(a_t = a | s_t = s)$.
+- RL can be formalized as Markov Decision process: summarize most important info about current state of environment to achieve rewards
+- the agent itself has 4 components:
+  - policy: how the agent behaves for given situation
+  - reward signal:
+  - value function: 
+  - (optional) environment model
 -
+
+```{r rl, fig.cap = "Reinforcement Learning."}
+r1 = rectFun(c(0, 0))
+r2 = rectFun(c(0, 5)) 
+
+p = ggplot(mapping = aes(x = x, y = y)) +
+  geom_path(data = r1) +
+  annotate("text", label = "Environment", x = 0, y = 5) + 
+  geom_path(data = r2) +
+  annotate("text", label = "Agent", x = 0, y = 0) + 
+  annotate("curve", x = 1, y = 0, xend = 1, yend = 5, size = 1, curvature = 0.5, arrow = arrow(ends = "first"))  +
+  annotate("label", x = 1.7, y = 2.5, label = "Observation, Reward") +
+  annotate("curve", x = -1, y = 5, xend = -1, yend = 0, size = 1, curvature = 0.5, arrow = arrow(ends = "first")) +
+  annotate("label", x = -1.7, y = 2.5, label = "Policy, Action") +
+  scale_x_continuous(limits = c(-2.1, 2.1)) +
+  theme_void()
+
+add_cc(p)
+```
+
+
+### Compare to Other Mindset
+
+* Supervised + unsupervised learning sounds like they would cover all of ML, by set theory
+* But RL is a third ML paradigm
+* Much more Goal-directed and learning from interactions than the other mindsets
+* rewards are possibly delayed: in supervised learning training, it's always immediately clear what the performance for a prediction was
+* RL also different from unsupervised learning: goal in unsupervised is to detect hidden patterns
+* RL does not, like in supervised learning, get "label" if action was correct or not
+* Within RL, methods from other mindsets might be used:
+  * A sub-problem might be formulated as supervised problem
+* Also links with pychology and neuroscience 
+* Draws from AI, ML, but also operations research, control theory, statistics and optimization.
+* RL more dynamic setup than any other mindset
+* but this is also very restricting: only if you can give a RL algorithm access to such environment it can work with it
+* Therefore RL can't work with historical data: if you collected data on what recipes the people like  
+* Closest is maybe experimental design where the environment is manipulated to collect data
+  * Google Cookies were created by experimental design.
+  * The design choices were proposed by Bayesian optimization
+  * https://blog.google/technology/research/makings-smart-cookie/
+* Compare with deep learning
+  * Nice fusion between the two
+  * Actually the most success of reinforcement leanring came after fusion of the two
+  * Called: deep reinforcement learning. Should get an extra section
+
+```{r rl-trajectory, fig.cap = "Trajectory of a reinforcement learning agent through the state space, with a reward at the end."}
+p = ggplot() +
+  annotate("segment", x = 0, xend = 8, y = 1, yend = 1, arrow = arrow(), lty = 2) +
+  annotate("segment", x = 1, xend = 2, y = 1, yend = -0.8, arrow = arrow()) +
+  annotate("label", x = 1, y = 1, label = "State 0") +
+  annotate("segment", x = 2, xend = 3, y = -1, yend = 0.8, arrow = arrow()) +
+  annotate("label", x = 2, y = -1, label = "Actor") +
+  annotate("segment", x = 3, xend = 4, y = 1, yend = -0.8, arrow = arrow()) +
+  annotate("label", x = 3, y = 1, label = "State 1") +
+  annotate("segment", x = 4, xend = 5, y = -1, yend = 0.8, arrow = arrow()) +
+  annotate("label", x = 4, y = -1, label = "Actor") +
+  annotate("segment", x = 5, xend = 6, y = 1, yend = -0.8, arrow = arrow()) +
+  annotate("label", x = 5, y = 1, label = "State 3") +
+  annotate("segment", x = 6, xend = 7, y = -1, yend = 0.8, arrow = arrow()) +
+  annotate("label", x = 6, y = -1, label = "Actor") +
+  annotate("segment", x = 7, xend = 7, y = 1, yend = 1.4) +
+  annotate("label", x = 7, y = 1, label = "State 4") +
+  annotate("label", x = 7, y = 1.4, label = "Reward") +
+  coord_fixed() +
+  theme_void() +
+  scale_y_continuous(limits = c(-1.5, 1.5))
+
+add_cc(p)
+
+```
+
 
 ### Policies
 
@@ -86,6 +213,11 @@ I guess since AlphaGos win against human, even many layperson might have heard a
   - on-policy action-value function: taking some action a in state s, but then always following policy
   - optimal value function: expected return for starting in s and always following the optimal policy
   - optimal action-value function: expected return for starting in state s, taking arbitrary action a and the always following the optimal policy.
+- without rewards, there is no value
+- just a way to encode the reward into each state
+- while rewards are provided by the environment, values have to be estimated or calculated
+-
+-
 
 
 ## Deep Reinforcement Learning
@@ -100,7 +232,7 @@ I guess since AlphaGos win against human, even many layperson might have heard a
 ## The Bellman Equations
 
 TODO: check reinforcement learning book p. 79 
-$$V(s) = \arg \max_{a} \left{R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') \right} $$
+$$V(s) = \arg\max_{a}  R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') $$
 
 - Value of state s
 - defined recursively, based on the value of the next state
@@ -115,6 +247,13 @@ $$V(s) = \arg \max_{a} \left{R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') \right} $
   - state is always all the information about the environment
   - observation might be partial. that's what the agent gets.
 - Model-free vs model-based: Model-based means that the agent either learns a model of the environment or it has access to a model of it.
+- Quote RL book: Q-learning: By contrast, Q-learning methods only indirectly optimize for agent performance, by training Q_{\theta} to satisfy a self-consistency equation. There are many failure modes for this kind of learning, so it tends to be less stable.
+
+## Model-free vs model-based
+
+- model-based: has environment model that can be used for planning
+- model-free: no model of the world
+- 
 
 ## Impressive to Look At
 
@@ -155,11 +294,14 @@ $$V(s) = \arg \max_{a} \left{R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') \right} $
 - requires lots of simulations or runs. since so many are required, usually have to resort to simulation
 - requires that the task of interest can be sufficiently simulated in some way
 - also the transfer from simulation to real world is tricky
+- always needs an "agent": can only be used for those types of problems
 - I think there is a reason why we are not seeing RL to be used very often.
 - The big wins and big headlines are because of games. In those cases, the code could be directly adapted for simulation. And then when applied "in real life" the game was exactly the same environment
 - Training can be difficult
 - Difficult to define the reward correctly. RL algo might finish task in unexpected ways
--
+- Reproducibility is challenging in RL and often Training fails
+- RL doesn't really work yet: https://www.alexirpan.com/2018/02/14/rl-hard.html
+
 
 ## References
 
@@ -167,22 +309,6 @@ $$V(s) = \arg \max_{a} \left{R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') \right} $
 - Reinforcement Learning, An introduction [@sutton2018reinforcement]
 
 
-```{r rl, fig.cap = "Reinforcement Learning."}
-r1 = rectFun(c(0, 0))
-r2 = rectFun(c(0, 2)) 
-
-ggplot(mapping = aes(x = x, y = y)) +
-  geom_path(data = r1) +
-  geom_path(data = r2)
-
-```
 
 
-
-visualizations
-
-- state, policy, agent. arrow from agent to environment, labelled action. arrow from environment to agent, labelled state,reward. maybe should be two arrows, one for rewards, one for observation/state.
-  - agent could be a box further containing policy, and rl algo: state arrow goes into agent, and splits into two, one to policy, one to rl algo, one arrow from algo to policy, labelled policy update; one arrow out of policy, splitting to one as action into environment, the other goes back into the algo.
-  - see: https://www.mathworks.com/help/reinforcement-learning/ug/what-is-reinforcement-learning.html
--  
 
