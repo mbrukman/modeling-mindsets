@@ -1,7 +1,10 @@
 # Reinforcement Learning {#reinforcement-learning}
 
 <!-- 
-TODO: checkout https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+TODO:
+
+- find out examples of reward function: AlphaGo, Starcraft, self-driving cars
+-
 
 -->
 
@@ -36,6 +39,7 @@ The other two were flabbergasted.
 How should they have known that talking to people, interacting with their environment was always an option?
 
 
+
 <!-- applications -->
 Chess, Go, StarCraft II, Minecraft, various Atari games, ...
 All these games have in common that computers can play them too, beating human players by a long shot.
@@ -52,41 +56,215 @@ Welcome to the reinforcement learning mindset!
 ## The Reinforcement Learning Mindset
 
 <!-- reinforcement learning theory in a nutshell -->
-- state, actor,  policy
--
+In reinforcement learning, the model is an agent.
+And this agent has to interact with its environment.
+If the agent chooses the right actions, it might collect a reward.
+A lot of things can be the agent: a robotic arm, a player in a video game, a controller of a system.
+Reinforcement learning is for problems where we don't have the information what the right action is.
+For image classification, we often have training data and the data are labelled.
+The label tells us what the right action (read: classification) for the image is.
+But when playing a game, for example, we might only know at the very end how well the action went.
+But we never get to know, explicitly, for each action how good the choice was.
+This makes RL a holistic mindset: It considers the entire interaction of agent with environment.
+
+<!-- intuition -->
+<!-- TODO: Split up into subsections and scatter around a bit -->
+Imagine riding your bicycle to work.
+You have many options to design the path.
+But for now, you always pick the route suggested by your navigation device.
+You desire to arrive at work, and that in a timely fashion.
+But you also want to optimize the route! 
+There is an extra "reward" by riding through a park or seeing something nice on the way, like a nice church.
+So you start exploring.
+At each intersection you have different actions, stay on route, turn left, turn right.
+You either exploit the current best policy by following the navi.
+Or you explore and find an improvement for the route.
+You are the agent, the route is the environment.
+The reward function is a balance between fast route and a nice route.
+The rewards are sparse: The time you will know at the end of the route, and the nicety will spark sometimes along the route.
+This example also show a tricky tradeoff between immediate and future rewards:
+You could cycle all the way from immediate to immediate reward by following only the nicest routes.
+But you will never get to your work place.
+So the total reward can even end up being negative as you will get fired.
 
 <!-- data structure is different -->
-- dynamic
-- scattered rewards
-- interaction
-- exploration vs exploitation like no other mindset
+By this framing alone you can already see how different reinforcement learning is from the other mindsets.
+It's a lot more dynamic: The agent does not just make predictions and finds out what's right or wrong.
+Instead it has to interact with the environment, and sometimes the actions lead a lot later to a reward only.
+It's a difficult trade-off between exploration and exploitation of rewarding behavior.
 
-<!-- why it's a machine learning mindset -->
+<!-- still ml mindset -->
+Is reinforcement learning even a machine learning mindset?
+Hell yes it is.
+Maybe even more so than other mindsets.
+The idea is to make a computer act in an environment in a smart way.
+We also don't care about the algorithm itself.
+We only want to maximize the reward.
+The evaluation of the performance is external:
+It's the cumulative reward.
+And it's not important how a high reward was achieved.
 
-- Dynamic mindset
-- instead of just inspecting static dataset, an agent "explores" and interacts with an environment
-- machine learning mindset
-- different from supervised: no labelled input output pairs needed. supervised would need for every agent decision some information how good the decision was.
-- reinforcement learning, in contrast, gets the reward in the end. and has to propagate it all the way back to learn
+## Agent-Based and Policy-Guided
+  
+<!-- What is an agent -->
+Reinforcement learning is an agent-based mindset.
+That means it requires that the modeling task is formulated in such a way that an agent has to interact with an environment.
+An agent is an entity.
+Sometimes an entity even in the physical realm, but can also be merely a software entity.
+What can be an agent?
+
+- Robotic arm in an assembly line
+- Self-driving car
+- Opponent in a video game
+- Control units in larger system
+- ...
+
+```{r rl, fig.cap = "Reinforcement Learning."}
+r1 = rectFun(c(0, 0))
+r2 = rectFun(c(0, 5)) 
+
+p = ggplot(mapping = aes(x = x, y = y)) +
+  geom_path(data = r1) +
+  annotate("text", label = "Environment", x = 0, y = 5) + 
+  geom_path(data = r2) +
+  annotate("text", label = "Agent", x = 0, y = 0) + 
+  annotate("curve", x = 1, y = 0, xend = 1, yend = 5, size = 1, curvature = 0.5, arrow = arrow(ends = "first"))  +
+  annotate("label", x = 1.7, y = 2.5, label = "Observation, Reward") +
+  annotate("curve", x = -1, y = 5, xend = -1, yend = 0, size = 1, curvature = 0.5, arrow = arrow(ends = "first")) +
+  annotate("label", x = -1.7, y = 2.5, label = "Policy, Action") +
+  scale_x_continuous(limits = c(-2.1, 2.1)) +
+  theme_void()
+
+add_cc(p)
+```
+
+
+<!-- agent requirement is also problematic -->
+But that also means that only problems that can be centered around some agent are solvable with reinforcement learning.
+But you can be very creative.
+For example, image classification does not seem like an reinforcement learning task.
+But it can be used for, for example detecting multiple labels for an images by focusing on different regions of the image. [@chen2018recurrent]
+Here the agent is a bit more abstract, but you can think of it as a part of an algorithm that searches through regions of the image.
+So, if you are fully in the reinforcement mindset, you will often find ways to find an agent to serve your purposes.
+
+<!-- Observe and Act -->
+The agent can observe the state of the environment, either in part or in full.
+In a game of StarCraft II, the observation would include game stats such as the collected raw materials, or the position of the own units.
+The entire environment would of course include all the positions of the enemy units.
+Based on the observations the agent has to make a decision and take an action.
+An agent has certain options for action.
+These can be discrete or numeric, which has a big influence on the algorithms that one can use to model the actions.
+A discrete action would be in the game Tic-tac-toe: There are a maximum of 9 options where to draw a cross/circle.
+A continuous action would be in self-driving cars: There is a continuous scale for how strongly to steer left or right.
+But how does the agent get from observations to actions?
+
+
+### Policy
+
+<!-- Policy -->
+That's where the main question of reinforcement learning lies.
+The **brain** of the agent is called the policy.
+The policy maps from the observations to the actions.
+So once the problem is framed by designing action spaces, environment and so on, the prime goal of reinforcement learning is to learn a good policy. 
+But there is a huge problem: An action does not necessarily lead to a reward.
+But the reward is the signal that tells us whether an action was good given the current state.
+
+TODO: Visualize mapping between observation and actions as policy function
+
+### Value Functions
+
+<!-- Value function -->
+The solution is to assign a value to each state.
+The value function says for a specific state, or combination of state and action how good it is for the agent to be in this state.
+The value is the expected return for a specific state, or state-action pair.
+While rewards are directly provided by the environment, the values are something that has to be estimated or learned.
+That assignment does not come for free, of course.
+Reinforcement learning is also concerned with learning this value function.
+There are different ways to define this value function, depending on whether we define it only for the state, or pairs of state-action.
+Also based on whether we assign the value on-policy (the current policy of the agent) or for a theoretical optimal policy.
+The value function is a way to spread the possibly sparse rewards across all the states.
+
+
+
+A way to grapple the value function are the Bellman equations.
+It relates future rewards to current states:
+
+TODO: check reinforcement learning book p. 79 
+$$V(s) = \arg\max_{a}  R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') $$
+
+- Value of state s
+- defined recursively, based on the value of the next state
+- think of the last step where the value is clear when you get the reward, like win or lose a game
+-
+
+
+<!--
+- Four way to define value functions:
+  - on-policy value function. only depends on the state, and assumes that always acting based on policy
+  - on-policy action-value function: taking some action a in state s, but then always following policy
+  - optimal value function: expected return for starting in s and always following the optimal policy
+  - optimal action-value function: expected return for starting in state s, taking arbitrary action a and the always following the optimal policy.
+-->
+
+TODO: Visualize relationship between value function and reward. also regarding action and state
+
+### Learning A Policy
+
+<!-- Learning a policy --> 
+There are many different approaches to learn a policy.
+If the space of state and action are small, you can describe the policies with tables.
+Table-based, 
+
+
+<!-- between exploration and exploitation -->
 - finding balance between exploration and exploitation, which is unique to this mindset
 - exploitation: exploiting current knowledge of how to get a nice reward
 - exploration: venture out into uncharterd territory and find out what rewards await there.
-- RL is about learning how to act or what to do
-- mapping from environment to actions while maximizing a reward
 - typical elements in RL: Trial-and-error search and delayed rewards
-- RL is a holistic mindset: It considers the entire interaction of agent with environment
-- compare that with supervised: supervised only considers parts of the problem without connecting the prediction problem to the larger picture
-- for example: a company sends out advertisement to customers. based on how likely the customer is to buy.
-- in this example would be more meaningful to interact with the customer, explore and exploit
+
+<!-- Model-free vs model-based -->
+
+- model-based: has environment model that can be used for planning
+- model-free: no model of the world
+-
+
+## Finite Markov Decision Process
+
+- Solutions for MD processes
+  - dynamic programming
+  - Monte Carlo methods
+  - temporal difference learning
+- 
 
 
-- What can be an agent?
-  - Robots
-  - players in games like Go and starcraft
-  - but also componentes in larger system
-  - like regulation component in cooling system
-  - think of a buildings ventilation controller: environment are the sensors about temp, humidity and air quality. action is where and how much to ventilate
-  -
+## AlphaZero
+
+- For the game Go (but also Chess and some other fully observable games)
+- Based on three components
+  - Value network: Accepts as input the state, and the output is a single number, the value of a state. value of 1 for certain win, value of -1 for loose. draw is a 0. everything inbetween is about uncertainty who wins.
+  - Policy network
+  - Monte Carlo Tree Search
+- based on self-play
+- we start with empty board
+- Value network:
+  - based on many self-plays we can have a database of many pairs of state + outcome (who won)
+  - then it becomes simple supervised training!
+  - predict reward from state
+  - this then becomes the value of that state
+  - has a sense of good board versus bad board
+  - the value network is not about acting, just similar to image classification
+- Policy network
+  - Input is game state
+  - Output is the so-called prior policy
+  - Basically it's a vector that values each action
+  - the higher the output the more weight is on this action being a good move
+  - similar output to Monte Carlo tree search
+  - Training: in a loop with MCTS
+  - MCTS uses the policy network
+- Monte Carlo Tree Search
+  - Start with root node
+  - get for each possible action the policy network output
+  - 
 
 ## Reinforcement Learning Theory
 
@@ -114,25 +292,6 @@ Welcome to the reinforcement learning mindset!
   - (optional) environment model
 -
 
-```{r rl, fig.cap = "Reinforcement Learning."}
-r1 = rectFun(c(0, 0))
-r2 = rectFun(c(0, 5)) 
-
-p = ggplot(mapping = aes(x = x, y = y)) +
-  geom_path(data = r1) +
-  annotate("text", label = "Environment", x = 0, y = 5) + 
-  geom_path(data = r2) +
-  annotate("text", label = "Agent", x = 0, y = 0) + 
-  annotate("curve", x = 1, y = 0, xend = 1, yend = 5, size = 1, curvature = 0.5, arrow = arrow(ends = "first"))  +
-  annotate("label", x = 1.7, y = 2.5, label = "Observation, Reward") +
-  annotate("curve", x = -1, y = 5, xend = -1, yend = 0, size = 1, curvature = 0.5, arrow = arrow(ends = "first")) +
-  annotate("label", x = -1.7, y = 2.5, label = "Policy, Action") +
-  scale_x_continuous(limits = c(-2.1, 2.1)) +
-  theme_void()
-
-add_cc(p)
-```
-
 
 ### Compare to Other Mindset
 
@@ -140,6 +299,11 @@ add_cc(p)
 * But RL is a third ML paradigm
 * Much more Goal-directed and learning from interactions than the other mindsets
 * rewards are possibly delayed: in supervised learning training, it's always immediately clear what the performance for a prediction was
+* Compared to supervised: we train supervised model by telling it what the right action was (right classification, correct value, the ground truth)
+  * But in RL, the training data evaluates the actions, which is an implicit way of saying what the right action was. and it does so in its entire chain of actions.
+* compare that with supervised: supervised only considers parts of the problem without connecting the prediction problem to the larger picture
+* for example: a company sends out advertisement to customers. based on how likely the customer is to buy.
+* in this example would be more meaningful to interact with the customer, explore and exploit
 * RL also different from unsupervised learning: goal in unsupervised is to detect hidden patterns
 * RL does not, like in supervised learning, get "label" if action was correct or not
 * Within RL, methods from other mindsets might be used:
@@ -204,20 +368,7 @@ add_cc(p)
 - If start is expected to be the same, can be just the same start anyways.
 -
 
-### Value Functions
 
-- Value function tells us the value of a state
-- Value is expected return for a specific state, or state-action pair
-- Four way to define value functions:
-  - on-policy value function. only depends on the state, and assumes that always acting based on policy
-  - on-policy action-value function: taking some action a in state s, but then always following policy
-  - optimal value function: expected return for starting in s and always following the optimal policy
-  - optimal action-value function: expected return for starting in state s, taking arbitrary action a and the always following the optimal policy.
-- without rewards, there is no value
-- just a way to encode the reward into each state
-- while rewards are provided by the environment, values have to be estimated or calculated
--
--
 
 
 ## Deep Reinforcement Learning
@@ -227,16 +378,6 @@ add_cc(p)
 - more specifically, a neural network is doing the decisions
 - weights of the neural network are learnable
 - so the policy can be learned by adjusting the neural network weights
--
-
-## The Bellman Equations
-
-TODO: check reinforcement learning book p. 79 
-$$V(s) = \arg\max_{a}  R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') $$
-
-- Value of state s
-- defined recursively, based on the value of the next state
-- think of the last step where the value is clear when you get the reward, like win or lose a game
 -
 
 ## Misc
@@ -249,11 +390,7 @@ $$V(s) = \arg\max_{a}  R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') $$
 - Model-free vs model-based: Model-based means that the agent either learns a model of the environment or it has access to a model of it.
 - Quote RL book: Q-learning: By contrast, Q-learning methods only indirectly optimize for agent performance, by training Q_{\theta} to satisfy a self-consistency equation. There are many failure modes for this kind of learning, so it tends to be less stable.
 
-## Model-free vs model-based
-
-- model-based: has environment model that can be used for planning
-- model-free: no model of the world
-- 
+ 
 
 ## Impressive to Look At
 
@@ -271,7 +408,7 @@ $$V(s) = \arg\max_{a}  R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') $$
 -
 
 
-## AI fails
+## Malicious compliance: Choosing the right reward function
 
 - I always looked for opportunities to cite this paper
 - mischieveous AI
@@ -284,6 +421,7 @@ $$V(s) = \arg\max_{a}  R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') $$
 ## Strengths
 
 - dynamic
+- holistic
 - with interactions in mind
 - often more realistic to think of a model interacting with an environemnt
 - especially if understanding policy better
@@ -292,7 +430,7 @@ $$V(s) = \arg\max_{a}  R(s, a) + \gamma \sum_{S'} P(s,a,s')V(s') $$
 ## Limitations
 
 - requires lots of simulations or runs. since so many are required, usually have to resort to simulation
-- requires that the task of interest can be sufficiently simulated in some way
+- requires that the task of interest can be sufficiently simulated in some way, or that we have a way to run the learning process many times
 - also the transfer from simulation to real world is tricky
 - always needs an "agent": can only be used for those types of problems
 - I think there is a reason why we are not seeing RL to be used very often.
