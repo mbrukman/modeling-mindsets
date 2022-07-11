@@ -179,7 +179,6 @@ Most people's mindset is already a mixture of multiple modeling mindsets.
 And that's a good thing.
 Having an open mind about modeling ultimately makes you a better modeler.
 
-
 <!-- not clear cut: mindset subsets, mindset overlaps 
 This book does not claim to have a sharp scientific taxonomy or ontology of mindsets.
 Instead, I was quite liberal in deciding when something could be considered as a mindset.
@@ -227,12 +226,4 @@ TODO: Write about inductive vs deductive inference
 -->
 
 
-<!--
-## Linear Model as exampel
 
-
-The linear model is a mathematical model that represents a varaible Y as the weighted sum of other variables $X_1$, ..., $X_p$:
-
-$$Y = \beta_0 + \beta_1 X_1 + \ldots + \beta_p X_p$$
-
--->
