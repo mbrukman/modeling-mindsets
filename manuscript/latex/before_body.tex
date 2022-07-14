@@ -1,3 +1,10 @@
+% Turns href urls into foodnotes
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+
+
+
+
 %\cleardoublepage\newpage\thispagestyle{empty}\null
 %\cleardoublepage\newpage\thispagestyle{empty}\null
 %\cleardoublepage\newpage
