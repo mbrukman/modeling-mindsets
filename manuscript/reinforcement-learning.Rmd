@@ -121,13 +121,15 @@ A lower price means more customers, but less revenue per sale.
 The goal is to find the optimal price.
 Now you could have a supervised learning model that predicts number of sales based on price.
 Training such a model requires access to training data with varying prices.
-Even if such data were available, it might be have an inadequate.
+Even if such data were available, it might be inadequate.
 For example, an economic crisis might have had an effect on sales, but also on price choices, making the sales/price connection difficult to analyze.
 It would be much more natural to see the dynamic of the problem as it is:
 Changing the price changes the "environment", in our case the sales, inventory levels, and so on.
 Here, reinforcement learning is a way to run experiments.
 We balance exploitation of a good price balance with exploration of different prices.
 That's a much more holistic approach to pricing than having an isolated prediction model.
+Reinforcement learning has links to psychology and neuroscience.
+It draws from machine learning, but also operations research, control theory, statistics and optimization.
 
 
 <!-- not all tasks -->
@@ -329,42 +331,30 @@ This flexibility in what to learn is both curse and blessing.
 A blessing, because it gives us flexibility to adapt the reinforcement learning approach to different tasks.
 A curse, because it's not always clear how to appraoch a reinforcement learning task.
 
-CONTINUE HERE
+### Reinforcement Learning and Everything Else
 
-### Compare to Other Mindset
 
 <!-- ML -->
-If you take together supervised and unsupervised learning, just by the names it seems like they would make up completely the machine learning mindset.
-But reinforcement learning is a third sub- mindset of machine learning.
-Reinforcement learning is special because of the treatment of time and the goal-oriented actions.
+Reinforcement learning is said to be the third machine learning paradigm.
+Next to supervised and unsupervised learning.
+And it differs from the other two because of it's unique formulation as a decision-making agent in an interactive environment.
 
 <!-- RL versus supervised -->
-Is reinforcement not learning not just like supervised learning?
-In supervised learning we have the labels, in reinforcement learning we have the rewards.
-But they are quite different!
-The labels in supervised learning appear for every training instance, telling you what the right answer would have been.
-Imagine you want to use supervised learning to play Go.
-You would need for every move a label what a human would have decided in that case.
-So we would build a classifier: Predict the next move.
-If it was the same as a human does, the classification was correct, else it was wrong.
-This would lead to, at best, human performance of the game.
-Also, it completely misses the aspect of exploration, thinking ahead, and working with rewards.
-It would rob the playing algorithm of all "creative freedom" to develop a policy that maximizes the reward.
-The reward just tells us whether a sequence of actions was good or bad, but can't tell for individual action how meaningful they were.
-Rewards are usually delayed, in supervised learning the labels are immediate.
-Think of a manager leading a team of programmers.
-One manager looks at every ticket and checks whether the job done by the programmer was fulfilled.
-He gives feedback for every ticket:
-Either it was correctly done, or the manager shows them what the solution would have been.
-The other managers defines what the goal is (for example, make the app load under 1 second).
-How the team gets there doesn't matter to the manager, she only gives the reward.
-The first is obviously the supervised learning analogy, the second manager the reinforcement learning.
-From the perspective of reinforcement learning, supervised learning seems so short-sighted, so narrow.
+Rewards can seem a bit like labels in supervised learning.
+Or maybe with a good value function, aren't we in a supervised setup?
+We aren't.
+Supervised learning still lacks the ability of sequential decision making, balancing exploration and exploitation.
+Imagine approach a game like Go with a supervised learning mindset.
+We would pick the next move as the target to predict, and the game state as the input.
+As training data we could use records of human players.
+At best, this supervised approach could mimick average human players, but it could never explore any new strategies.
+There would be no creative freedom.
+Relative to reinforcement learning, supervised learning is short-sighted and narrow.
 Supervised learning only considers parts of the problem, without connecting actions.
-Reinforcement learning is a much more holistic approach, connecting all interactions.
+Reinforcement learning is a much more holistic approach sequentially connecting interactions.
 
 
-<!-- RL versus unsupervised learning -->
+<!-- RL versus unsupervised learning 
 Reinforcement learning is also not unsupervised learning.
 The reward is a sparse but strong signal for what to learn.
 Unsupervised learning does not have such a unique signal.
@@ -379,7 +369,9 @@ Indeed, there is.
 And the idea is that the reward is not extrinsic, but rather intrinsic.
 Similar to clustering: Here we decide on a criterion for what an interesting cluster would look like, without knowing whether the resulting grouping is "true".
 
-<!-- RL versus statistical modeling -->
+-->
+
+<!-- RL versus statistical modeling
 Reinforcement learning takes a good scoop from statistical modeling.
 How we talk about many concepts in reinforcement learning is in statistical terms.
 We talk about probablities for actions, Markov decision processes and so on.
@@ -396,62 +388,42 @@ While the mere number of units is correlated with winning, it's not strictly cau
 Having lots of resources and building the right units is causal for winning.
 An agent would not learn a policy that proposes non-causal actions, simply because they will not lead to a reward.
 However, the agent can learn to rely on non-causal observations, which makes it vulnerable.
+-->
+
+
+The connection between deep learning and reinforcement learning is a bit more special, so let's go deeper here (pun intended).
+In short: it's a fantastic match of mindsets.
+For more complex tasks, many reinforcement learning approaches are not adapted.
+For example, Go is a too complex game for many algorithms.
+Think about all the problems where the state is an images, or a video.
+And also the action space might be very large.
+Deep learning is perfectly equipped to handle such data.
+
+Deep reinforcement learning, the fusion of the two mindsets, is what got many people excited again about reinforcement learning and AI in general.
+Reinforcement learning is made "deep" buy replacing some components with deep neural networks.
+This can be a neural network for learning the value function, or learning the policy, for example.
+This allows more complex inputs than before.
+A successful example of deep reinforcement learning is Alpha Zero.
+Alpha Zero is a reinforcement learning algorithm that can play Go on a super-human level.
+It's then trained with self-play, basically playing against itself.
+AlphaZero features two deep neural networks: a value network and a policy network.
+The value network predicts the value (between -1 and +1) of a Go board position.
+This value network is trained in a supervised fashion.
+From self-play, a data set is created that stores board state + win/loss.
+The value network is quite similar to an image classifier, with the Board being the image.
+
+The policy network gives action probabilities based on the Go board.
+The agent does not automatically follow the most likely action.
+Instead, the policy network works in tandem  with a Monte Carlo tree search algorithm.
+The Monte Carlo tree search connects the policy with the value of the board, and simulates consequent moves.
+The training of the policy network is also intertwined with the Monte Carlo tree search.
 
 <!-- RL in general -->
-Reinforcement learning has links to psychology and neuroscience.
-It draws from machien learning, but also operations research, control theory, statistics and optimization.
-Reinforcement learning is the most dynamic setup.
+Deep reinforcement learning is an exciting combination of two mindsets.
+It resulted in great success in many games and is being applied in other fields such as robotics.
 
 
-
-
-The connection between deep learning and reinforcement learning is a bit more special, so let's go deeper here (haha):
-
-
-
-## Deep Reinforcement Learning
-
-Deep learning and reinforcement learning: A fantastic fusion of approaches.
-Learning a policy can be quite challenging.
-The input state might be visual, so it's only pixels.
-Also the action space might be large.
-Fortunately, deep learning can handle such complex and large data!
-
-TODO: Check about reinforcement learning
-Deep reinforcement learning, as it is called, allows to learn a parameterized policy.
-The idea of deep reinforcement learning is to replace some components in reinforcement learning with deep neural networks.
-So the policy is learned by a deep neural network, and the weights are learnable.
-This allows to use, for example, the entire screen of a game to serve as input to the policy.
-Deep Reinforcement learning is the reason why reinforcement learning has become so hyped.
-Basically like anything that deep learning touches becomes a hype topic, but that's another story.
-
-A successful example of deep reinforcement learning is Alpha Zero.
-Alpha Zero is a reinforcement learning algorithm that can play Go.
-It's predecessor, Alpha Go, has bested the Go world champion Lee Sedol.
-While Alpha Go was a mixture of many approaches, Alpha Zero is a pure deep reinforcement learning approach.
-By the way, it can also be trained to play other games such as chess or other fully observable games.
-Alpha Zero only needs the rules of the game.
-It's then trained with self-play, basically playing against itself.
-This happens many many times, and with each game, the gameplay is improved.
-AlphaZero features two deep neural networks: a value network and a policy network.
-The value network accepts the game state as input and outputs a single number, the value of that state, something between -1 and 1.
-A -1 would be a certain loss, a +1 a certain win, everything inbetween is less certain.
-So this value network can now be used to evaluate how good a certain position would be.
-And this can also be used to weight how good certain actions would be, by enumerating the possible actions and asking the value network how good the new positions are.
-The value network can be trained by a huge list of state + outcome (who won).
-This data set comes from self play.
-It's very much like supervised learning, but it's only a part of the entire AlphaZero algorithm. 
-It's not about acting, but rather similar to image classification.
-The value network gives us a sense of what a good and what a bad board position is.
-The policy network also has as input the game state, but it outputs a bunch of probabilities:
-For each action, the probability to follow that action, also called the "prior policy".
-It's called prior policy since this action is not followed automatically.
-The policy network works in tandem with a Monte Carlo tree search algorithm.
-The Monte Carlo tree search connects the policy with the value of the board, and expands simulations of next steps in the game.
-The policy network and the Monte Carlo tree search are in a more complex interaction with each other, which would go to deep at this point.
-The training of the policy network is intertwined / looped with the tree search.
-
-
+<!--
 ## Impressive to Look At
 
 With all the hype, it's quite surprising how little real world applications there are in practice.
@@ -466,14 +438,17 @@ It's harder.
 You first need a simulation and train the reinforcement learning agent in a simulation.
 But it's also difficult to make the transfer from simulation to reality.
 From the simulated robotic arm to the physical one.
+-->
+
 
 ## Strengths
 
-- For many problems reinforcement learning is the only viable approach.
-- Reinforcement learning is dynamic. To be honest, many, many problems have such a dynamic, they are time-dependent, they require a holistic interaction approach. And yet, we use other mindsets, either because it's simpler, or because of historic reasons.
-- This dynamic involves interactions -- the idea that the actions of the agent **changes** the environment. In other mindsets, the model is a mere "observer", which often is a false simplification. For example, the predictions of a model can change the environment, and by that the algorithm influences future training data.
-- It's also a holistic approach. Not individual actions are judged, but rather the entire decision process. Compare that to supervised learning where every prediction is judged individually.
-- Reinforcement learning is a good approach for playing games, robotics, planning and control problems.
+- Reinforcement learning allows to model the world in a dynamic fashion. And many tasks natural are agent-in-environment setups.
+- It's the best approach for planning, playing games, controlling robots and larger systems.
+- Actions of the agent **change** the environment. In other mindsets, the model is a mere "observer", which often is a false simplification.
+- More than other mindsets, reinforcement learning resembles how humans and animals learn (still quite different though). 
+- CONTINUE HERE
+- Is it the path to AGI?
 
 ## Limitations
 
