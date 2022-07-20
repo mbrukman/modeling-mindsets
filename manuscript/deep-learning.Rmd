@@ -1,12 +1,310 @@
 # Deep Learning {#deep-learning}
 
+* In deep learning, the world is modeled using (deep) neural networks.
+* The mindset is two-fold:
+  * Stacking neural network layers like Lego bricks, shaping the architecture for the task at hand.
+  * Standing on the should of giants: Build upon large pretrained networks that embed a lot of knowledge.
 * Neural networks based on stacking various layers of neurons.
-* World of feature embeddings, transfer learning and foundation models.
-* A machine learning mindset, can also be used for [supervised learning](#supervised-ml).
+* A machine learning mindset, orthogonal to [supervised learning](#supervised-ml), [unsupervised learning](#unsupervised-ml) and [reinforcement learning](#reinforcement-learning).
+
+<!-- short story -->
+The statistician carefully selected the next variable to include into the model.
+Maybe he should use the logarithm of the variable to better capture the relationship with the variable.
+The model now had 12 parameters, which should be fine to train.
+It was a good day.
+Time for a coffee break.
+The next room was occupied by another person.
+A deep learner.
+A butcher, a brute when it comes to modeling data.
+He dared look over her shoulder.
+He had never seen anything like it before.
+The model was a monstrosity.
+Millions of parameters.
+A horrible mess.
+No interpretability, no theory, no guaruantees for convergence.
+The deep learner shortly looked up, and quickly said "hi".
+The statistician watched in horror as the deep learner kept adding even more layers.
+
+<!-- a tale of failure and success -->
+2013.
+The first year that I really tried using neural networks.
+A most underwhelming experience.
+It was a small network with two hidden layers.
+The training was slow and the performance was disappointing.
+It was for a machine learning class.
+From that stand point, neural networks were just another supervised learning tool.
+Somewhere between support vector machines and random forests.
+
+
+Little did I know at the time the transformation that took place.
+Deep neural networks had already started to absolutely crush the competition in image recognition tasks like the ImageNet image classification challenge (CITE challenge, CITE AlexNet) [@krizhevsky2012imagenet,@ILSVRC15] or a traffic sign recognition challenge [@cirecsan2011committee].
+It's difficult to pinpoint exactly when the deep learning hype rocket took off.
+But around 2012 or a few years later seems about right.
+A hype that's still strong 10 years later, having not only become a deep learning hype, but an AI hype.
+This hype is reflected in the large number of deep learning researchers, an insane amount of money in AI products, and lots of media coverage.  
+
+Welcome to **Deep Learning**!   
+
+
+CONTINUE HERE
+
+## Deep Learning
+
+
+```{r nn, fig.cap = "A neural network with two input features, a first hidden layer with 3 neurons, another hidden layer with 3 neurons and a single output."}
+c1 = circleFun()
+c2 = circleFun(c(0,5))
+
+
+layerFun = function(x, ys, diameter = 1){
+  circs = lapply(ys, function(y) {
+      x = circleFun(center = c(x, y), diameter = 1)
+      x$group = sprintf("group%s%s", x, y)
+      x
+      })
+  dat = data.table::rbindlist(circs)
+  data.frame(dat)
+}
+
+input_layer  = layerFun(0, c(-1, 1))
+hidden_layer1 = layerFun(2, c(-2, 0, 2))
+hidden_layer2 = layerFun(4, c(-2, 0, 2))
+output_layer = layerFun(6, c(0))
+
+segs1 = expand.grid(x = 0, xend = 2, y = c(-1, 1), yend = c(-2, 0, 2)) 
+segs2 = expand.grid(x = 2, xend = 4, y = c(-2, 0, 2), yend = c(-2, 0, 2)) 
+segs3 = expand.grid(x = 4, xend = 6, y = c(-2, 0, 2), yend = c(0)) 
+
+segs = rbind(segs1, segs2, segs3)
+
+p = ggplot(mapping = aes(x = x, y = y)) +
+  geom_segment(data = segs, aes(xend = xend, yend = yend)) +
+  coord_fixed() +
+  geom_polygon(data = input_layer, aes(group = group), fill = "grey") +
+  geom_polygon(data = hidden_layer1, aes(group = group), fill = "grey") +
+  geom_polygon(data = hidden_layer2, aes(group = group), fill = "grey") +
+  geom_polygon(data = output_layer, aes(group = group), fill = "grey") +
+  theme_void() +
+  annotate("label", x = 0, y = 3, label = "Input") +
+  annotate("label", x = 2, y = 3, label = "Hidden 1") +
+  annotate("label", x = 4, y = 3, label = "Hidden 2") +
+  annotate("label", x = 6, y = 3, label = "Output") 
+add_cc(p)
+```
 
 
 
+- Machine Learning mindset
+- atomar unit: the artificial neurons
+- sometimes called: artificial neural networks (ANN)
+- These neurons are connected
+- meaning output of one neuron is input of the next one
+- often organized in layers
+- the input of one layer is the input to the next layer
+- input for the first layer are the data
+- output is multiplied by weights
+- These weights can be learned
+- learning takes place by defining some loss function
+- can be supervised or unsupervised
+- or also reinforcement learning
+- usually trained with back-propagation
+- kind of: show some data
+- get prediction of the data
+- see how far it is off, based on loss function
+- adapt waits
+- requires access to the gradient of the loss function with regards to the weights
+- kind of: wriggle the waits a little bit in the direction of minimizing the loss
+- but other training is possible as well
+- like evolutionary approaches
 
+
+## The Deep Learning Mindset
+
+<!-- revisiting my neural network experience -->
+- in 2012 when i used neural networks, it was one of many approaches
+- so, clearly I had a supervised ML approach in mind when I used them
+- neural networks can be just that: just another machine learning algorithm.
+- and then use NNs in supervised, unsupervised or RL manner
+- So, why do they get their own chapter?
+- And why don't, say support vector machines or decision trees not get their own chapters?
+- In this chapter, I want to convince you that Deep learning is it's own mindset.
+- Actually, even two, rather different ones
+
+<!-- technology and culturally and extra mindset -->
+<!-- delete this part? -->
+- before going deeper into the two mindsets, let's talk about cultural and technical reasons whey deep learning is its own mindset
+- GPUs trainable
+- there are TPUs
+
+## Stacking Legos
+
+- mindset of modularity, design-per-task
+- like instead of buying furniture, you go to the carpenters and tell them what you want
+- neural networks allow modularity
+- how it works:
+- you have some task to do
+- something made up:
+  - insurance company with digital workflow
+  - they want to estimate the damage
+  - bicycle insurance
+  - customers with insurance claim send in image of broken part
+  - and also have to fill out questionnaire
+  - insurance wants to use deep learnign to predict how much it will cost
+  - input: image of bike. and the survey answers (like initial cost of bike, parts that are broken, ...)
+  - they define a custom loss function:
+    - for true damages below 100 Euro it does not matter if predicted loss is 20 or 90. as long as its below 100 its fine
+    - 100 euro is selbstbehalt, so here they won't pay anyways
+    - also some other constraints which they make part of the loss function
+    - than they also build a custom neural network
+    - they take a standard convolutional neural network to process the image data
+    - but they also have the survey data
+    - so they use also a fully connected network
+    - they combine the networks
+    - into one
+    - trained with the loss function
+    - so the damage prediction can use both information
+- this is or at least was a typical approach
+- I call it the Lego approach
+- Deep learning is very modular
+- there are many layers
+  - Pooling or subsampling
+  - ReLU
+  - tanh activation layer
+  - Convolution 12, 2d, 3d, ...
+  - fully connected layer
+  - lstm lazer
+  - embedding
+  - dropout
+  - region proposal layer
+- all do something different and process the data from the layer before
+- combined with custom loss function
+- and custom way to train
+- and you got yourself an artisanal network. just for you!
+
+- this mindset is taking  the advantage of the modularity of deep learning archetictures
+- you can mix and combine different layers
+- and buy that, allow to use different types of data
+- even combine multi-medial data
+- you can use the loss function that you want
+- and in the end, it can still be trained with the same software
+- since everything is differentiable
+- and you throw backprobagation at it
+- you can use the same software for all of it
+- the same hardware
+- that's why I call it the lego approach:
+- you stack all together
+- each type of layer is like a lego piece
+- rearranged as needed
+- but of course, you can also buy pre-build sets and play with this then
+
+```{r layers, fig.cap = "Deep learning allows to stack layers."}
+layerFun = function(x) {rectFun(height = 5, width = 1, center = c(x, 0))}
+textFun = function(x, label) {annotate("text", x = x, y = 0, label = label, angle = 90, size = 5)}
+segFun = function(x) {annotate("segment", x = x + 0.6, xend = x + 2.4, y = 0, yend = 0, arrow = arrow(), size = 1)}
+
+ggplot(mapping = aes(x = x, y = y)) +
+  coord_fixed() +
+  theme_void() +
+  geom_path(data = layerFun(0)) +
+  textFun(0, "Input") +
+  segFun(0) +
+  geom_path(data = layerFun(3)) +
+  textFun(3, "Fully Connected") +
+  segFun(3) +
+  geom_path(data = layerFun(6)) +
+  textFun(6, "Convolution")   +
+  segFun(6) +
+  geom_path(data = layerFun(9)) +
+  textFun(9, "Pooling") +
+  segFun(9) +
+  geom_path(data = layerFun(12)) +
+  textFun(12, "Convolution")  +
+  segFun(12) +
+  geom_path(data = layerFun(15)) +
+  textFun(15, "Pooling")  +
+  segFun(15) +
+  geom_path(data = layerFun(18)) +
+  textFun(18, "Fully Connected") +
+  segFun(18) +
+  geom_path(data = layerFun(21)) +
+  textFun(21, "Soft Max")
+
+```
+
+
+
+## Learning On the Shoulders of Giants (Networks)
+
+- the other part of the mindset is a completely different
+- instead of building your Legos, ahem layers, from scratch, you start with a big ass network
+- a big ass network that is already trained!
+- and use the knowledge that is embedded in the neural network to your advantage
+
+
+<!-- transfer learning -->
+- there is something like transfer learning
+- take a pre-trained network, and only fine-tune it on the task at hand
+- for example, take a general image classifier
+- then use it to train a dog versus cat classifier
+- why do it? why does it work
+
+
+<!-- deep representation learning -->
+- The concept that allows this is called  deep representation learning
+- by training a network to classify images, it learns abstractions in the layers
+- for example: individual neurons react to different shapes like diagnosal
+- or they react to color
+- the higher up we go in the neural network, the more abstract the recognized patterns become
+- this can be leveraged for other tasks
+- because these same kind of features are useful for other image tasks
+- same goes for text and word embeddings
+- fine-tuning means to only learn the laster layer weights
+- or to initialize the network with the current weights, and then 
+- slowly train it
+
+```{r cnn-features, fig.cap = "Features learned by a convolutional neural network (Inception V1) trained on the ImageNet data. The features range from simple features in the lower convolutional layers (left) to more abstract features in the higher convolutional layers (right). Figure from Olah, et al. (2017, CC-BY 4.0) https://distill.pub/2017/feature-visualization/appendix/."}
+knitr::include_graphics("images/cnn-features.png")
+```
+
+
+
+<!-- bigger trend: large (language) models -->
+- But there is a new and stronger trend
+- train very large networks
+- using text, or images or multi-task even
+- especially large language models are noteworthy here 
+- they only generate text
+- which doesn't sound too exiting
+- but you can do a lot with it
+- mostly as creative tool
+- but also to answer questions
+- (although there is the bullshit ability)
+- TODO: find examples   
+- the networks get bigger and bigger
+- and can only be trained by large Tech companies that can affort it
+- training can cost millions in compute resources
+- university labs cannot do it.
+
+<!-- prompt engineering -->
+- and these large networks change completely how we model the world
+- because if the network is deep and has learned deep feature representations, it contains a lot of embedded knowledge
+- and this can be leveraged
+- but it's "inside" the network
+- and we have to get it out
+- let's say you have a "next-word" predictor
+- sounds boring
+- but is powerful, depending on what the input text is
+- if the input text is dialogue, we can complete this dialogue
+- but you can also prompt the network to do math question
+- or to write a dialogue for novel
+- or to summarize paragraphs
+- its a matter of writing a good prompt
+
+- you can also prompt text to image networks
+- create images, based on a text description
+- here it also becomes crucial to write a good prompt
+
+<!-- neural networks  why own mindset -->
 * Language Models
   * powerful connector of tasks and concepts
   * the importance of a prompt
@@ -29,21 +327,32 @@
 * prediction-focused
 *
 
-## Neural Networks
-
-* a bit about architecture
-
-
-## Transfer Learning
+<!-- examples of combinations -->
+- Combine different models: SM Socrates models: https://arxiv.org/pdf/2204.00598.pdf
+- Large language model for robotic navigation: https://sites.google.com/view/lmnav
 
 
-Combine different models: SM Socrates models: https://arxiv.org/pdf/2204.00598.pdf
+
 
 ## Advantages
 
+- Embeddings
+- Unified computation frameworks possible
+- Big ecosystem
+- best approach for modeling image and text data
+- gradient based
+- gradient based means computational graph
+
 ## Limitations
 
-* Adversarial attacks
+- non-causal
+- bullshitter mentality of llms
+- expensive to train
+- Adversarial attacks
+- Overhyped
+- Crowded space: Competition and so on
+- Biases. Of course also a problem for everything else, but there it's embedded and hidden.
+- Requires lots of data to train
 
 References:
 
