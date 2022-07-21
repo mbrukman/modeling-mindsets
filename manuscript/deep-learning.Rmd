@@ -46,9 +46,10 @@ This hype is reflected in the large number of deep learning researchers, an insa
 Welcome to **Deep Learning**!   
 
 
-CONTINUE HERE
-
 ## Deep Learning
+
+Deep learning is "simply" neural networks with many layers.
+
 
 
 ```{r nn, fig.cap = "A neural network with two input features, a first hidden layer with 3 neurons, another hidden layer with 3 neurons and a single output."}
@@ -92,30 +93,67 @@ p = ggplot(mapping = aes(x = x, y = y)) +
 add_cc(p)
 ```
 
+<!-- What is a neural network -->
+The input (images, tabular data, ...) is put into the neural network and some output, like a classification score is produced.
+The input is transformed multiple times as it passes through the neural network layers.
+Each layer enocdes a parameterized mathematical operation.
+After each step mathematical operation the data are transformed and "stored" in the neurons. 
+So the layer is the combination of the mathematical operation + the new transformed data (with the exception of the input layer).
+The atomic unit of a neural network is the neuron, but it's more useful to think of the layers as based units.  [^ann]
+The output of one layer serves as the input to the next layer.
 
 
+<!-- learnable operations -->
+The individual operations are parameterized.
+For example, in a fully connected layer, all activations from the previous layer are connected to every neuron in the next layer.
+Or, if we zoom in on a single neuron of the next layer, it's activation is a weighted some of all activations of the previous layer.
+A fully activation layer is usually followed by an activation layer, like ReLU.
+ReLU stands for rectified linear unit.
+This layer performs a threshold operation that sets negative activations to zero.
+
+<!-- training -->
+Neural networks are most commonly trained with backpropagation.
+The basic idea is that during training data points are shown.
+The error is backpropagated through all the layers of the neural network.
+Based on the loss function, the parameters of the neural network are adjusted.
+
+<!-- results from that architecture -->
+But why is this type of architecture so interesting?
+Why is it more interesting than random forests, or support vector machines?
+Let's dig in.
+It's two things that make neural networks something special.
+
+<!-- Lego layers -->
+Neural networks are organized in layers which are mathematical functions through which a derivative can flow.
+These layers can be freely combined with other layers, given that the input and output dimensions match.
+Since they all have a derivative, they can be trained together.
+This is like a toolbox from which you can pick whatever suits best.
+Because all are differentiable, we know that we can train the network anyways.
+It also allows for the computations to be organized in a computational graph.
+This makes the software engineering part easier and allows a coherent software approach.
+But more on this later.
+
+<!-- Embeddings and large models -->
+The second part is a most curious property of neural networks: feature representation learning.
+Neural networks can learn meaningful representations of the data within its own activations.
+For example, convolutional neural networks are used for image classification.
+The first layers learn to recognize simple patterns.
+The higher layers learn more abstract concepts, like tennis balls or dog ears.
+The thing is: the deeper the network, and the more parameters, the more room there is to learn such abstract concepts.
+And of course lots and lotsand lots of data.
+We are talking images and text data here.
+The neural network becomes a vessel for the concepts, patterns and ideas within the data.
+
+CONTINUE HERE
+
+<!-- a machine learning mindset -->
 - Machine Learning mindset
-- atomar unit: the artificial neurons
-- sometimes called: artificial neural networks (ANN)
-- These neurons are connected
-- meaning output of one neuron is input of the next one
-- often organized in layers
-- the input of one layer is the input to the next layer
-- input for the first layer are the data
-- output is multiplied by weights
-- These weights can be learned
-- learning takes place by defining some loss function
-- can be supervised or unsupervised
-- or also reinforcement learning
-- usually trained with back-propagation
-- kind of: show some data
-- get prediction of the data
-- see how far it is off, based on loss function
-- adapt waits
-- requires access to the gradient of the loss function with regards to the weights
-- kind of: wriggle the waits a little bit in the direction of minimizing the loss
-- but other training is possible as well
-- like evolutionary approaches
+- can be supervised or unsupervised or RL
+- results is what counts, BUT with the constraint that its neural networks
+- so not a perfectly pure mindset, because it is important what the model is built from
+- conditional on NNs, it doesn't matter how the goal is achieved
+- like, which archictecture is used
+- some people exclusively use deep neural networks
 
 
 ## The Deep Learning Mindset
@@ -357,3 +395,6 @@ knitr::include_graphics("images/cnn-features.png")
 References:
 
 * List of pre-trained models https://huggingface.co/models
+
+
+[^ann]: In the early days often called artificial neural networks. Still artificial now, but, how wants to write such long words?
