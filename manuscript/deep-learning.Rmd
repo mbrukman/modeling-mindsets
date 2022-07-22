@@ -143,42 +143,104 @@ The thing is: the deeper the network, and the more parameters, the more room the
 And of course lots and lotsand lots of data.
 We are talking images and text data here.
 The neural network becomes a vessel for the concepts, patterns and ideas within the data.
+Also more on that later.
+
+
+<!-- a machine learning mindset -->
+Deep learning is a machine learning mindset, albeit an imperfect one.
+It's a machine learning mindset in the sense that it's hyper focused on performance.
+Also concerns such as the data-generating process or interpretability are in the backseat.
+By definition you leave the deep learning mindset when you would choose, for example, a random forest if the performance is better.
+And there are really people who would use only neural networks to solve modeling problems.
+Given that we only use neural networks, the deep learning mindset is a perfect machine learning mindset.
+As we care about minimizing the generalization error.
+A good deep learner searches various neural network architectures and optimizes hyperparameters such as training rates.
+
+<!-- DL overlaps with other ML mindsets --> 
+Deep learning cannot be categorized with the three other machine learning mindsets.
+Because deep learning can appear in all three:
+Neural networks can be used in a supervised fashion.
+They can be used for unsupervised learning.
+And they are used in reinforcement learning, called deep reinforcement learning.
+And you can do those things while being in the deep learning mindset.
+
+
+<!-- what mindset are you in ? -->
+If you use a deep neural network to forecast crop yields, are you coming from a supervised or a deep learning mindset?  
+It depends.
+Did you also try out other machine learning approaches, like random forests or support vector machines?
+And just ended up with neural networks because they work best?
+Or did you choose neural networks because they are known to work well for, for example image classification.
+Or were some other constraints for using neural networks?
+Like some time constraint, or because your companies backend is already well equipped for neural networks.
+In all those cases you are clearly acting from within a supervised learning mindset.
+But you might use deep learning because you always do.
+Because you are familiar with it.
+Because you know exactly how custom build a neural network specifically for that task.
+Or you want to leverage a pre-trained network.
+The you are clearly working from a deep learning mindset.
+
+<!-- revisiting my neural network experience -->
+In 2013, when I tried neural networks for the first time, it was just one of many approaches.
+So I clearly was just doing so from a supervised mindset. 
+Neural networks -- just another machine learning approach to try.
+
+Let's get a bit deeper into why deep learning is special.
+
+## Stacking Legos
+
+<!-- what is Lego -->
+Lego is a construction toy system (not only for kids though).
+It consists of individual bricks and pieces that can be put together to construct bigger structures.
+Like a castle, a garden, or a space shuttle.
+But you can also use the individual parts to build your own stuff.
+
+<!-- deep learning is like Lego -->
+Building neural network architecture Deep learning is like a Lego system.
+Each layer is a brick, that you can combine with more layers into an architecture of your liking.
+Only the dimensions have to match, but otherwise you are free to stack layers.
+And it's guaranteed that they are trainable, thanks to all these layers having a derivative.
+
+<!-- modularity makes implementation -->
+When a deep neural network is implemented, the software automatically builds up a (directed acyclic) graph of the chained operations.
+Given that graph, the deep learning software can automatically compute the gradients for each parameter within that graph.
+The last layer's output is used to compute the loss of the model.
+Working backwards from that layer the derivative of that loss is computed for every layer.
+
+<!-- layers with different functions -->
+Which layers you choose depends on the task, type of input data (image, text, tabular, ...), compute resources, data size, ...
+Here is a peak into the available bricks, I mean, layers.
+
+* Fully connected layer. All neurons of the previous layer are connected to all neurons of the next.
+* Convolution layer. Turning  image-like input into a "feature-map". Useful for grid-like data, such as images or spatial data. 
+* Activation layers such as ReLU. They are needed to prevent the network from just being a neural network. Typically used after most layers.
+* LSTM layer. Stands for long short term memory, and useful for sequential data.
+* Embedding layer. Turns categorical data into numerical vectors. Useful for quantifying the concepts of the categories regarding their usefulness for the task.
+* ...
 
 CONTINUE HERE
 
-<!-- a machine learning mindset -->
-- Machine Learning mindset
-- can be supervised or unsupervised or RL
-- results is what counts, BUT with the constraint that its neural networks
-- so not a perfectly pure mindset, because it is important what the model is built from
-- conditional on NNs, it doesn't matter how the goal is achieved
-- like, which archictecture is used
-- some people exclusively use deep neural networks
+Lots of layers to choose from
 
+  - Pooling or subsampling
+  - ReLU
+  - tanh activation layer
+  - Convolution 12, 2d, 3d, ...
+  - fully connected layer
+  - embedding
+  - dropout
+  - region proposal layer
+- all do something different and process the data from the layer before
+- combined with custom loss function
+- and custom way to train
+- and you got yourself an artisanal network. just for you!
 
-## The Deep Learning Mindset
-
-<!-- revisiting my neural network experience -->
-- in 2012 when i used neural networks, it was one of many approaches
-- so, clearly I had a supervised ML approach in mind when I used them
-- neural networks can be just that: just another machine learning algorithm.
-- and then use NNs in supervised, unsupervised or RL manner
-- So, why do they get their own chapter?
-- And why don't, say support vector machines or decision trees not get their own chapters?
-- In this chapter, I want to convince you that Deep learning is it's own mindset.
-- Actually, even two, rather different ones
-
-<!-- technology and culturally and extra mindset -->
-<!-- delete this part? -->
-- before going deeper into the two mindsets, let's talk about cultural and technical reasons whey deep learning is its own mindset
-- GPUs trainable
-- there are TPUs
-
-## Stacking Legos
 
 - mindset of modularity, design-per-task
 - like instead of buying furniture, you go to the carpenters and tell them what you want
 - neural networks allow modularity
+- GPUs trainable
+- there are TPUs
 - how it works:
 - you have some task to do
 - something made up:
@@ -205,19 +267,6 @@ CONTINUE HERE
 - I call it the Lego approach
 - Deep learning is very modular
 - there are many layers
-  - Pooling or subsampling
-  - ReLU
-  - tanh activation layer
-  - Convolution 12, 2d, 3d, ...
-  - fully connected layer
-  - lstm lazer
-  - embedding
-  - dropout
-  - region proposal layer
-- all do something different and process the data from the layer before
-- combined with custom loss function
-- and custom way to train
-- and you got yourself an artisanal network. just for you!
 
 - this mindset is taking  the advantage of the modularity of deep learning archetictures
 - you can mix and combine different layers
@@ -391,6 +440,7 @@ knitr::include_graphics("images/cnn-features.png")
 - Crowded space: Competition and so on
 - Biases. Of course also a problem for everything else, but there it's embedded and hidden.
 - Requires lots of data to train
+- Tree-based methods consistently outperform neural networks on tabular data (cite Gael)
 
 References:
 
