@@ -216,34 +216,18 @@ Here is a peak into the available bricks, I mean, layers.
 * Activation layers such as ReLU. They are needed to prevent the network from just being a neural network. Typically used after most layers.
 * LSTM layer. Stands for long short term memory, and useful for sequential data.
 * Embedding layer. Turns categorical data into numerical vectors. Useful for quantifying the concepts of the categories regarding their usefulness for the task.
+* Region proposal layer. Outputs bounding boxes on images. Used in neural networks for object detection.
 * ...
 
-CONTINUE HERE
+And many, many more.
+One of the jobs of deep learning researchers is to invent new types of layers (and show how to use them in some new architecture).
 
-Lots of layers to choose from
+<!-- build your own lego castle -->
+Now, if there is some task to do, like, a prediction task, you can custom build you own neural network!
+Pick a loss function.
+Define the output: class probabilities? 1-dimensional regression? Bounding boxes on images? Image segmentation? The next letter in a sequence? 
+Just stack layers    
 
-  - Pooling or subsampling
-  - ReLU
-  - tanh activation layer
-  - Convolution 12, 2d, 3d, ...
-  - fully connected layer
-  - embedding
-  - dropout
-  - region proposal layer
-- all do something different and process the data from the layer before
-- combined with custom loss function
-- and custom way to train
-- and you got yourself an artisanal network. just for you!
-
-
-- mindset of modularity, design-per-task
-- like instead of buying furniture, you go to the carpenters and tell them what you want
-- neural networks allow modularity
-- GPUs trainable
-- there are TPUs
-- how it works:
-- you have some task to do
-- something made up:
   - insurance company with digital workflow
   - they want to estimate the damage
   - bicycle insurance
