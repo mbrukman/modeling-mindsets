@@ -8,22 +8,9 @@
 * A machine learning mindset, orthogonal to [supervised learning](#supervised-ml), [unsupervised learning](#unsupervised-ml) and [reinforcement learning](#reinforcement-learning).
 
 <!-- short story -->
-The statistician carefully selected the next variable to include into the model.
-Maybe he should use the logarithm of the variable to better capture the relationship with the variable.
-The model now had 12 parameters, which should be fine to train.
-It was a good day.
-Time for a coffee break.
-The next room was occupied by another person.
-A deep learner.
-A butcher, a brute when it comes to modeling data.
-He dared look over her shoulder.
-He had never seen anything like it before.
-The model was a monstrosity.
-Millions of parameters.
-A horrible mess.
-No interpretability, no theory, no guaruantees for convergence.
-The deep learner shortly looked up, and quickly said "hi".
-The statistician watched in horror as the deep learner kept adding even more layers.
+*The statistician watched in horror as the deep learner kept adding more and more layers to his model.
+The model was a monstrosity, she had never seen anything like it before.
+No theory, no guarantees for convergence, just millions of parameters.*
 
 <!-- a tale of failure and success -->
 2013.
