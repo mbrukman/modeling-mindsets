@@ -220,6 +220,7 @@ Other mindsets
 * Representation learning? https://en.wikipedia.org/wiki/Feature_learning
 * Semi-parametric models? Or at least mention it in liklelihood mindset. For example the cox model.
 * Decision theory: As alternative to frequentism, Bayesianism, likelihoodism. Focus is on decisions even more so than on frequentism. Strongly builds on statistical mdeling mindsets. Contra argument: not very unified field https://people.kth.se/~soh/decisiontheory.pdf   https://en.wikipedia.org/wiki/Decision_theory
+* Evolutionary algorithms. Not sure, because it can also be seen as just an optimization strategy. But it's also a modeling mindset: Algorithms are in competition; evolutionary mechanisms produce good or at least useful models of the world. A good model is one that survives.
 
 TODO: Write about inductive vs deductive inference
 
