@@ -258,9 +258,11 @@ add_cc(p, 14)
 ## What to Learn
 
 <!-- what should the agent learn? -->
-Now here comes the part that can be confusing if you are not familiar with the field.
-It's not immediately what the reinforcement agent should learn.
-Here are different approaches:
+To me this was the most confusing part: Which function(s) do we actually learn in reinforcement learning?
+In supervised learning it's very clear.
+We learn the function that maps the features to the label.
+But it's not obvious what the reinforcement agent should learn.
+And in fact there are many different possible approaches:  
 
 - Learn a complete model of the environment. The agent can query such a model to simulate which would be the best action to take at each time step.
 - Learn the state value function. If an agent has access to a value function, it can choose actions that maximize the value.
@@ -268,34 +270,28 @@ Here are different approaches:
 - Learn the policy directly.
 
 These approaches are not mutually exclusive, but can be mixed and matched.
-
-Oh, and in addition we have many different options how we learn these things.
+Oh, and in addition we have many different options **how** we learn these things.
 And that depends a lot on the dimensionality of the environment and the actions space.
-
-Tic-tac-toe and Go are pretty similar games.
+For example, Tic-tac-toe and Go are pretty similar games.
 I imagine the objections of all Go players reading this, but hear me out.
 Two players face each other off in a fierce, round-based game of strategy!
 The battlefield is a rectangular board with gridded positions.
 Each player positions marks on the grid.
 The winner is determined by the constellations of the marks.
 
-Despite some of these conditions being similar, the games a vastly different to play for reinforcement learning (and humans).
-Tic-tac-toe as environment is often taught in reinforcement learning entry classes.
-The first super-human Go agent [beat](https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol) the Go champion Lee Sedol in 2016, which was a huge media spectacle.
-The huge difference between Tic-tac-toe and Go:
-The size of action and state spaces.
+Despite some similarities, the games differ vastly in difficulty for both humans and reinforcement learning.
+Tic-tac-toe is often used as an example in reinforcement learning entry classes.
+The first super-human Go agent [beat](https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol) the Go champion Lee Sedol in 2016, which was a huge media spectacle and required lots of compute resources.
+The relevant differences between Tic-tac-toe and Go are the sizes of action space and state space.
 
 <!-- Tic-tac-toeis easy -->
-In Tic-tac-toe, there are at most 9 possible actions and in the realm of $10^3$ possible action-state pairs.
+In Tic-tac-toe, there are at most 9 possible actions and in the order of $10^3$ possible action-state pairs.
 The agent can learn to play Tic-tac-toe by Q-learning, a model-free reinforcement learning approach to learn the value of an action in a particular state.
 This basically enumerates the state-action pairs and iteratively updates the values, while playing more and more games.
-
 <!-- Go is different -->
 In Go there are $\sim 10^{170}$ possible states.  
 We can't enumerate the states.
-The agent was trained to play Go using deep reinforcement learning.
-Learning a neural network for predicting the value of a position.
-And combinining another neural network and a search algorithm (Monte Carlo tree search) for policy decisions.
+The agent was trained to play Go using deep reinforcement learning (read more on that later).
 
 <!-- Learning a policy -->
 <!--
@@ -306,9 +302,9 @@ There are many different approaches to learn a policy.
 * Actor Critic Algorithm:
 -->
 
-This flexibility in what to learn is both curse and blessing.
-A blessing, because it gives us flexibility to adapt the reinforcement learning approach to different tasks.
-A curse, because it's not always clear how to appraoch a reinforcement learning task.
+This flexibility in what to learn is both a blessing and a curse.
+A blessing because it gives us flexibility to adapt the reinforcement learning approach to different tasks.
+A curse because it's not always clear how to approach a reinforcement learning task.
 
 ## The Other Mindsets 
 
