@@ -51,3 +51,8 @@ manuscript/figures
 
 # literature
 literature/*
+
+# some latex stuff
+*.aux
+*.toc
+*.idx
