@@ -15,58 +15,49 @@ TODO:
 
 -->
 
-* Reinforcement learning is a framework for modeling interactive decisions of an agent based on rewards.
-* Applications in robotics, games, complex systems and simulations.
+* Reinforcement learning models an agent that interacts with its environment.
+* It' used in robotics, games, complex systems and simulations.
 * Together with [supervised](#supervised) and [unsupervised](#unsupervised-ml), reinforcement learning is a [machine learning](#machine-learning) mindset.
 
 
 <!-- motivation: joke about how static other mindsets are -->
-*Three machine learners attend a conference dinner.
-Before them is a lavish self-service buffet, constantly replenished by the service staff.
-The dumplings are in high demand, and therefore not available most of the time.
-The machine learners decide to increase their chances for dumplings.
-The supervised learner starts collecting data on dumpling arrivals.
-Surely, the arrival of the delicacy must be predictable!
-The unsupervised learner thinks bigger.
-In which cluster of dishes does the cluster occurr?
-The reinforcement learner merely leaves the table, only to return a few minutes later.
-With dumplings. A full plate.
-The supervised and unsupervised learners gasp in surprise.
-"How did you get all these dumplings?" they want to know.
+*Two machine learners attend a dinner with a huge buffet.
+Dumplings are in high demand but not available most of the time.
+The supervised learner tries to predict when the waiters refill the dumplings.
+The reinforcement learner leaves only to return with a plate full of dumplings.
+"How did you get these dumplings?", the supervised learner asks.
 "First I tried my luck at the buffet, but of course the dumplings were gone.", the reinforcement learner explains.
-"Then I thought my options.
-The simplest action seemed to be to ask a waiter.
-My action was rewarded me with a full plate of dumplings!"
-The other two were mind-blown.
-How could they have known that proactively interacting with the environment is an option?*
-
+"Then I thought about my options and decided to talk to a waiter.
+That decision was rewarded with dumplings!"
+The supervised learner was mind-blown, as interaction with the environment never seemed to be an option.*
 
 
 <!-- motivation: super-human gamers -->
 Chess, Go, StarCraft II, Minecraft, Atari games, ...
-Many people enjoy playing these games, or might even do so professionally.
-But they aren't alone.
-Computers can play them to.
+Many people enjoy playing these games.
+But they aren't the only ones.
+Computers play these games as well.
 And they play them at a super-human level.
-Many of these games are also very complex.
+
 Go has $10^{127}$ possible board positions, more than there are atoms in the universe (around $10^{78}$ to $10^{82}$).
 StarCraft II is a complex real-time strategy game, which requires planning, resource management and military tactics.
-These achievements were made possible by machine learning.
+Super-human game play was made possible by machine learning.
 But not by supervised or unsupervised learning.
 It's the third modeling mindset that outplayed us.
 A modeling mindset that gives the computer a "brain" and makes it an agent acting in an environment.
 
 Welcome to **reinforcement learning**!
 
-## The Reinforcement Learning Mindset
+## Reinforcement Learning
 
 <!-- reinforcement learning theory in a nutshell -->
 At the core of a reinforcement learning model is the agent.
-This agent doesn't sell houses, it's doesn't fight Neo, and it's not investigating crimes.
-No. The reinforcement learning agent interacts with an environment with the goal of maximizing rewards.
+This agent doesn't sell houses, it doesn't fight Neo, and it's not investigating crimes.
+No. 
+This agent can be a Go player [@silver2016mastering], a route planner, a cooling control unit[@li2019transforming], robotic arm [@gu2017deep], self-driving car steering unit [@kiran2021deep] or an image segmentation unit [@wang2018outline].
+An agent in reinforcement learning is an entity that interacts with an environment with the goal of maximizing its rewards.
 This environment can be a video game, a city map, a cooling system, an assembly line in a factory, ...
-The agent is an entity like a Go player [@silver2016mastering], a route planner, a cooling control unit[@li2019transforming], robotic arm [@gu2017deep], self-driving car steering unit [@kiran2021deep], an image segmentation unit [@wang2018outline].  
-The agent observes the environment, but also acts within it and thereby possibly change it.
+The agent observes the environment, but also acts within it, thereby changing it.
 But how does the agent choose it's actions?
 Similar to humans, the agent is "motivated" by rewards:
 Beating the other players in StarCraft, getting the temperature right in the building, collecting coins in Super Mario.
@@ -74,7 +65,7 @@ The "brain" of the agent is called the policy.
 The policy is like a guide that says how to act in which situation.
 <!-- A policy can be deterministic (Do A) or stochastic (Do A with 90% probability and B with 10%). -->
 
-```{r rl, fig.cap = "Reinforcement Learning."}
+```{r rl, fig.cap = "Reinforcement Learning.", fig.height = 2, fig.width = 6}
 r1 = rectFun(c(0, 0))
 r2 = rectFun(c(0, 5)) 
 
@@ -83,69 +74,77 @@ p = ggplot(mapping = aes(x = x, y = y)) +
   annotate("text", label = "Environment", x = 0, y = 5) + 
   geom_path(data = r2) +
   annotate("text", label = "Agent", x = 0, y = 0) + 
-  annotate("curve", x = 1, y = 0, xend = 1, yend = 5, size = 1, curvature = 0.5, arrow = arrow(ends = "first"))  +
-  annotate("label", x = 1.7, y = 2.5, label = "Observation, Reward") +
-  annotate("curve", x = -1, y = 5, xend = -1, yend = 0, size = 1, curvature = 0.5, arrow = arrow(ends = "first")) +
-  annotate("label", x = -1.7, y = 2.5, label = "Policy, Action") +
+  annotate("curve", x = 0.65, y = 0, xend = 0.65, yend = 5, size = 1, curvature = 0.5, arrow = arrow(ends = "first"))  +
+  annotate("label", x = 0.9, y = 2.5, label = "Observation,\nReward") +
+  annotate("curve", x = -0.65, y = 5, xend = -0.65, yend = 0, size = 1, curvature = 0.5, arrow = arrow(ends = "first")) +
+  annotate("label", x = -0.9, y = 2.5, label = "Action") +
   scale_x_continuous(limits = c(-2.1, 2.1)) +
   theme_void()
 
-add_cc(p)
+add_cc(p, size = 8)
 ```
 
+## A Dynamic Mindset
+
 <!--  RL is dynamic -->
-Reinforcement learning is a dynamic modeling approach.
-If you fully embrace this modeling mindset, you see tasks as the computer interacting with it's surroundings.
-And not, like in other mindsets, working with static snapshots of the world.
-The idea of interaction of computer and environment just isn't part of all the other modeling mindsets such as supervised learning or Bayesianism. 
+Reinforcement learning is dynamic.
+When using reinforcement learning to solve a task, the task is viewed as an interaction between a computer (program) and another system or environment.
+In comparison, the other mindsets are stale.
+They work with static snapshots of the world.
+This idea of interaction of computer and environment just isn't part of all the other modeling mindsets such as supervised learning or Bayesianism. 
 In most modeling mindsets, you usually first collect data and then build the model.
-In reinforcement learning the data are produced by the agent interacting with the environment. [^pretrained]
+In reinforcement learning the data are produced by the agent interacting with the environment.[^pretrained]
 The agent chooses which states to explore, and therefore which data to generate.
 The computer is running it's own experiments and learning from them.
 The agent cycles through:
 
 - Observation: Look at the world.
 - Action: Interact with the world.
-- Reward: Get feedback on the action.
-
+- Reward: Get feedback on prior actions.
 
 <!-- RL is holistic -->
 This dynamic or lack thereof has further implications.
-Outputs from computer models often affect their environment.
+Things like prediction algorithms often affect their environment.
 But in other mindsets, this interaction is difficult to model.
+
+<!-- product pricing example -->
 Think about pricing a product.
 A high price means more revenue per sale, but less customers.
 A low price means more customers, but less revenue per sale.
-The goal is to find the optimal price.
-You could answer the question with supervised learning.
-Simply train a model to predict number of sales given the price and potentially other factors.
+The seller wants to find the optimal price balancing demand and revenue per sale.
+You could use supervised learning.
+Simply train a model to predict the number of sales given the price and other factors (day of the week, promotions, ...).
 Training such a model requires access to historic data with varying prices.
 But even if you had such data, it's likely to be inadequate.
 It's likely that the data was not generated by some experimental design.
-It could be that the ideal price is higher or lower than was ever set.
-And supervised learning can only learn from what has already happened, but can't explore new things.
+Maybe the optimal price is higher than any historical price.
+But supervised learning can only learn from observed data; it can't explore new options.
 
 <!-- RL is holistic part II -->
 Reinforcement learning can handle this dynamic situation.
 Changing the price changes the "environment", in our case the sales, inventory levels, and so on.
-Here, reinforcement learning is a way to run experiments.
+Reinforcement learning is a way to run experiments.
 It can deal with the trade-off between exploring new prices and exploiting already learned pricing strategies. 
 This makes reinforcement learning a much more holistic approach.
-Especially compare to stale prediction models.
+Especially compared to stale prediction models.
 
 <!-- still ml mindset -->
 Reinforcement learning is a typical machine learning mindset.
 Maybe even more than supervised and unsupervised learning.
 A motivation of machine learning is to make the computer act intelligently.
 We humans can better relate to a machine if it is intelligent in a human sense (and not just a calculator or Excel sheet).
-Reinforcement learning, by making the computer an entity in an environment, exactly transports this idea of intelligent intelligence.
-When a computer acts intelligently in a game, maybe in a seemingly human way, we are impressed.
+By "embodying" the computer as an agent in an environment, reinforcement learning conveys this concept of intelligence. 
+We are amazed when a machine performs intelligently in a game, maybe in a human-like manner. 
 
 <!-- ml mindset on technical level as well -->
-Also on the technical level is reinforcement learning a typical machine learning mindset.
+Reinforcement learning also fulfills the other criteria for machine learning.
 We don't care how exactly the agents policy is implemented -- as long as it works.
-And the "working" part can be measured rather directly through the sum of the rewards.
-
+It's task-driven and we don't care how the task was achieved.
+Or, as the Ovid said: "Exitus acta probat", the result justifies the deed.
+How good the result is can be measured very directly because of the rewards.
+Just average the rewards over multiple episodes (one episode is playing one game, or doing one round of simulation) and we can compare different models.
+A reward is an external signal, and doesn't rely on model assumptions (as many evaluation techniques in statistics do).
+But what is a reward anyways and is it different from labels in supervised learning?
 
 <!-- the core of RL -->
 <!--
@@ -162,40 +161,39 @@ To decide whether a problem can be solved with reinforcement learning, one has t
 ###  Reward and Value
 
 <!-- agents are all too human -->
-Laying on the couch is easy; working out is difficult.
+Relaxing on the couch is easy; working out is difficult.
 Why?
 There are immediate negative reward associated with working out: 
-It's exhausting, you have to shower afterwards, you have to plan, you have to adjust other plans, ...
-There are huge positive rewards as well:
-Becoming fit and strong, reducing risk for heart attacks and many other health problems, prolonging your life, ... 
+It's exhausting, you have to shower afterwards, you have to integrate it into your daily life,  ...
+There are huge positive rewards as well, such as becoming fit and strong, reducing your heart attack risk, prolonging your life.
 These positive rewards are delayed.
 Only after weeks of workouts will you reap the first rewards.
-Reinforcement learning agents have to deal with the same problem.
-Rewards are usually delayed.
+Other positive rewards will only materialize after years or even decades.
+Reinforcement learning agents have to deal with the same problem of delayed rewards.
 In addition, rewards can also be sparse.
-Only after an entire game of Go is there a reward, either +1 for a win or -1 for a loss.
-If the agent made 100 moves in that game, how should it know which moves where good, and which ones were bad?
+For example, in Tic-tac-toe, there is only one reward at the very end of the game (win or lose).
+Most actions are without immediate reward and therefore without feedback.
+If the agent loses after 4 moves in Tic-tac-toe, how should it know which moves where the bad ones?
 
 <!-- Value function -->
-A solution is to assign a value to each state -- even if there is no reward.
-If we have just a few possible states, like in Tic-tac-toe, we can tabulate all possible states and write the values in the table.
-If states are continuous or the space is too big, we can have a value function.
+A solution is to assign a value to each state -- even for the ones without reward.
+If we have just a few possible states, like in Tic-tac-toe, we can make a table with all possible states and write the values in the table.
+If states are continuous or the space is too big, we can express the value as a function.
 The value function accepts a state as input, or possibly a combination of state and action.
-And the output is the value of the state or state/action.
+And the output is the value.
 
 <!-- what is a value -->
-But what exactly IS a value?
-In simple terms, the value judges how good it is for the agent to be in this state.
-The agent should seek out higher value states.
+But what is a value?
+In simple terms, the value says how good it is for the agent to be in this state.
 The value is the expected reward given a state or a state-action pair.
 You can think of value as spreading the reward backwards in time, like jam across bread.
-When you exercise, it's because you know the value of exercising.
+When you exercise today, it's because you know the value of exercising.
 You imagine the future reward of your actions and value the current state accordingly.
-Or maybe you don't think of the value all because working out has become a habit.
+Or maybe you don't think of the value at all because working out has become a habit.
 It has become your policy.
 
 <!-- how to learn value functions? -->
-Rewards are provided by the environment, but the values are not provided.
+Rewards are provided by the environment, but the values are not.
 The values or the value function can only be estimated.
 There are various ways to learn the value function.
 One way is to turn it into a supervised learning task!
@@ -255,10 +253,22 @@ add_cc(p, 14)
 
 ```
 
+But even the value function might not be enough.
+That's when reward engineering enters the stage. 
+A modeler can choose to create additional rewards.
+For example, in a race game, instead of only win or loose reward, a reward for high speed can be introduced.
+Reward engineering is tricky, because agents often behave like the evil genie in a bottle, who take wishes (aka rewards) quite literally.
+An good CoastRunners, a boat racing game.
+The ultimate goal is to finish the race first, but the score was also increased by collecting objects on the racing path.
+The agent learned not to finish the race.
+Instead, it learned to go in circles, collecting the same respawning objects over and over again. 
+The greedy agent scored, on average, [20% higher than humans](https://openai.com/blog/faulty-reward-functions/).
+
 ## What to Learn
 
 <!-- what should the agent learn? -->
-To me this was the most confusing part: Which function(s) do we actually learn in reinforcement learning?
+To me this was the most confusing part when getting into reinforcement learning:
+Which function(s) do we actually learn in reinforcement learning?
 In supervised learning it's very clear.
 We learn the function that maps the features to the label.
 But it's not obvious what the reinforcement agent should learn.
@@ -281,46 +291,34 @@ The winner is determined by the constellations of the marks.
 
 Despite some similarities, the games differ vastly in difficulty for both humans and reinforcement learning.
 Tic-tac-toe is often used as an example in reinforcement learning entry classes.
+In contrast, Go was, for a long time, dominated by humans.
 The first super-human Go agent [beat](https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol) the Go champion Lee Sedol in 2016, which was a huge media spectacle and required lots of compute resources.
 The relevant differences between Tic-tac-toe and Go are the sizes of action space and state space.
 
 <!-- Tic-tac-toeis easy -->
 In Tic-tac-toe, there are at most 9 possible actions and in the order of $10^3$ possible action-state pairs.
 The agent can learn to play Tic-tac-toe by Q-learning, a model-free reinforcement learning approach to learn the value of an action in a particular state.
-This basically enumerates the state-action pairs and iteratively updates the values, while playing more and more games.
+Q-learning basically enumerates the state-action pairs and iteratively updates the values, while playing more and more games.
 <!-- Go is different -->
-In Go there are $\sim 10^{170}$ possible states.  
-We can't enumerate the states.
-The agent was trained to play Go using deep reinforcement learning (read more on that later).
+In Go there are $\sim 10^{170}$ possible states.
+We can't enumerate this amount of states.
+Working with this high-dimensional state and action spaces required using neural networks (more on that later).
 
-<!-- Learning a policy -->
-<!--
-There are many different approaches to learn a policy.
+If you find or found it harder to get into reinforcement learning, it's not you.
+It's difficult because of the many options for learning goals and learning algorithms.
 
-* If the space of state and action are small, you can describe the policies with tables.
-* REINFORCE, a Monte-Carlo policy gradient method. Parameterized, differentiable policy function that is learned via gradient.
-* Actor Critic Algorithm:
--->
-
-This flexibility in what to learn is both a blessing and a curse.
-A blessing because it gives us flexibility to adapt the reinforcement learning approach to different tasks.
-A curse because it's not always clear how to approach a reinforcement learning task.
-
-## The Other Mindsets 
-
-<!-- ML -->
-Reinforcement learning is the third machine learning paradigm, next to supervised and unsupervised learning.
-Reinforcement learning differs from the other two because of it's unique formulation of a decision-making agent in an interactive environment.
+## Is Reinforcement Learning Supervised?
 
 <!-- RL versus supervised -->
 At first glance, rewards seem similar to ground truth labels in supervised learning.
-Especially with the value function, we could learn the policy with supervised learning, right?
+Especially when we have a value function, we could learn the policy with supervised learning, couldn't we?
 Not really.
-Supervised learning is unsuitable for sequential decision making which requires balancing exploration and exploitation.
-Imagine approach a game like Go with a supervised learning mindset.
+Supervised learning alone is unsuitable for sequential decision making which requires balancing exploration and exploitation.
+Imagine modeling a game like Go with a supervised learning mindset.
 We would pick the next move as the target to predict, and the game state as the input.
-As training data we could use records of human players.
-At best, this supervised approach would mimic human players, but it could never explore any new strategies.
+As training data we could use records of plays by human.
+At best, this supervised approach would mimic human players.
+But it could never explore novel strategies.
 There would be no creative freedom and no path to super-human gameplay.
 Next to reinforcement learning, supervised learning seems short-sighted and narrow.
 Supervised learning only considers parts of the problem without connecting actions.
@@ -369,7 +367,9 @@ An agent would not learn a policy that proposes non-causal actions, simply becau
 However, the agent can learn to rely on non-causal observations, which makes it vulnerable.
 -->
 
+## Deep Reinforcement Learning
 
+<!-- mixing RL and DL is a good idea -->
 The connection between deep learning and reinforcement learning is a bit more special, so let's go deeper here (pun intended).
 In short: it's a fantastic mixture of mindsets.
 Reinforcement learning struggled with high-dimensional input and large state spaces.
@@ -377,16 +377,16 @@ For example Go was too complex for many reinforcement learning algorithms.
 Also other environments where the states are images or videos are challenging to model.
 Except when you can use deep learning.
 
-
-Deep reinforcement learning got many more people excited about reinforcement learning, and about AI in general.
-For this fusion of approaches, reinforcement learning is made "deep" by replacing some functions with deep neural networks.
-For example the value function or the policy function.
-Using deep neural networks allows more complex input, especially images.
+<!-- use DL for complex RL functions -->
+Deep reinforcement learning made many people excited about AI in general.
+Reinforcement learning is made "deep" by replacing some functions with deep neural networks.
+For example, the value function or the policy function.
+Using deep neural networks allows more complex inputs such as images.
 A successful example of deep reinforcement learning is Alpha Zero.
 Alpha Zero is a reinforcement learning algorithm that can play Go on a super-human level.
 Alpha Zero relies on two deep neural networks: a value network and a policy network.
-From self-play, a data set is created that stores board state + win/loss.
-The value network is trained on this self-play data to predict the value (between -1 and +1) of a Go board position.
+From self-play, a data set is created that stores for each game all the board states and the final outcome (win or loss).
+The value network is trained on this self-play data to predict the outcome (between -1 and +1) of the game from the Go board.
 The policy network outputs action probabilities based on the Go board (the state).
 But the agent doesn't automatically follow the most likely action.
 Instead, the policy network works in tandem with a Monte Carlo tree search algorithm.
@@ -418,31 +418,30 @@ From the simulated robotic arm to the physical one.
 
 ## Strengths
 
-- Reinforcement learning allows to model the world in a dynamic fashion. And many tasks natural are agent-in-environment setups.
-- It's the best approach for planning, playing games, controlling robots and larger systems.
+- Reinforcement learning allows to model the world in a dynamic fashion.
+- It's a great approach for planning, playing games, controlling robots and larger systems.
 - Actions of the agent **change** the environment. In other mindsets, the model is a mere "observer", which often is a false simplification.
-- More than other mindsets, reinforcement learning resembles how humans and animals learn (still quite different though). 
 - Reinforcement learning seems to be the closest modeling paradigm for mimicking animal intelligence.
+- Reinforcement learning is proactive. It means learning by doing, balancing exploration and exploitation, and creating experiments on the go.
 
 
 ## Limitations
 
-- Reinforcement learning requires that the task involves some form of "agent".
+- Reinforcement learning requires that the task involves some form of "agent". Many modeling tasks just don't fit this scenario.
 - Very often, reinforcement learning, especially deep reinforcement learning, is just the [wrong approach to a problem](https://www.alexirpan.com/2018/02/14/rl-hard.html).
 - Reinforcement learning models can be very difficult to train and reproduce:
-  - Learning requires many episodes, because it's sample inefficient.
+  - Learning requires many episodes, because reinforcement learning is sample inefficient.
   - Designing the right reward function can be tricky.
   - The training can be unstable, and might get stuck in local optima.
-- Reinforcement learning models are trained in artificial environments. It's difficult to transfer the models into the physical world.
-- Model-free or model-based? Learn the policy? Or the value function? Or the action-value function? There are many choice which can be overwhelming.
+- Reinforcement learning models are usually trained in artificial, digital environments. It's difficult to transfer the models into the physical world.
+- Model-free or model-based? Learn the policy? Or the value function? Or the action-value function? There are many choices, which can be overwhelming.
 
 
 
 ## References
 
-- Reinforcement Learning, An introduction [@sutton2018reinforcement]
-- One of my favorite papers about algorithm "fails" [@lehman2020surprising]. It's focused evolutionary algorithms, not reinforcement learning. But it holds lessons for how tricky it can be to set a good goal to optimize for. Prepare yourself for a program repair robotor that makes software tests easier instead of repairing the software. 
-
+- A very comprehensive reference is the book: Reinforcement Learning, An Introduction [@sutton2018reinforcement]
+- The paper "The surprising creativity of digital evolution" is one of my all-time favorite papers[@lehman2020surprising]. It's focused evolutionary algorithms, but it holds more general lessons for how tricky it is to design an optimization goal.
 
 
 [^pretrained]: Data may be collected beforehand. For example, the Alpha Go algorithm was pre-trained by Go moves from human players (in a supervised learning fashion). [@chen2018recurrent]
