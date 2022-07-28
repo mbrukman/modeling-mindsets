@@ -12,16 +12,9 @@
 - write about randomized tests / A-B tests, but more as in that  I describe it in another mindset
 -->
 
-"Thank you for this statistical model," the ecologist says to the statistician, and continues, "Nice p-values and insightful results! Can I conclude from the model that the droughts **caused** the crop failures?"
-The statistician looks at the ecologist, with a hint of concern.
-As if practiced, the statistician says, "Correlation does not imply causation."
-Displeased, the ecologist replies: "But it would make so much sense to conclude that drought was the cause!"
-The statistician looks as if in pain.
-"Correlation does not imply causation", the statistician repeats stubbornly.
-"How can we advance science without causality? I want to understand **why** the crop failures happened," the ecologist insists.
-"Correlation does not imply causation. Correlation does not imply causation. Correlation ...", the statistician now chants, eyes closed, face contorted as if in great pain.
-The ecologist slowly backs away, shocked at the statistician's strange reaction.
-Sometimes at night, when everything is silent, the ecologist can still hear the haunting calls of the statistician.
+10-minute course on causality for old-school statisticians, says the note on the door.
+You can hear people chanting.
+"Correlation does not imply causation. Correlation does not imply causation, ..."
 
 ## Causality for the Rescue
 
