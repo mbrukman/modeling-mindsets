@@ -24,6 +24,8 @@ fig:clustering1
 fig:clustering
 fig:clustering2
 fig:dimred
+fig:rl
+fig:rl-trajectory
 what-this-book-is-about
 who-this-book-is-for
 models
@@ -67,10 +69,10 @@ strengths-3
 limitations-3
 resources
 causal-inference
-does-the-drug-help
+causality-for-the-rescue
 causality
 the-causal-mindset
-directed-acyclic-graph
+directed-acyclic-graph-dag
 many-frameworks-for-causality
 from-causal-model-to-statistical-estimator
 strengths-4
@@ -106,6 +108,13 @@ strengths-7
 limitations-7
 resources-1
 reinforcement-learning
+the-reinforcement-learning-mindset
+reward-and-value
+what-to-learn
+the-other-mindsets
+strengths-8
+limitations-8
+references-1
 deep-learning
 interpretable-ml
 design-based-inference
