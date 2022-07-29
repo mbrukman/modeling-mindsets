@@ -138,10 +138,10 @@
 % Removes page numbers from bottom
 \ofoot{}
 
-
 % Turns href urls into foodnotes
-\let\oldhref\href
-\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+%\let\oldhref\href
+%\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+
 
 % Create index
 \usepackage{makeidx}
@@ -162,10 +162,17 @@
 \makeatother
 \subtitle{The Many Cultures of Learning From Data}
 \author{Christoph Molnar}
-\date{2022-07-27}
+\date{2022-07-29}
 
 \begin{document}
 \maketitle
+
+% Turns href urls into foodnotes
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+
+
+
 
 %\cleardoublepage\newpage\thispagestyle{empty}\null
 %\cleardoublepage\newpage\thispagestyle{empty}\null
@@ -307,14 +314,19 @@ Expand your mind when it comes to modeling the world using data.
 The book is about all the different mindsets that allow you to model the world with data.
 Each mindset represents a different perspective on how to see the world through data.
 In this book, you will find for each mindset the \textbf{assumptions, central ideas, their relationship to other mindsets, and their strengths and limitations}.
-Modeling mindsets is not about history.
-Modeling mindsets is a mixture of lightweight methodological introduction and philosophy.
+Most importantly, Modeling Mindset is about the implicit ideas and attitudes that people have about modeling in each mindsets.
+It's about what's between the lines, what experienced modelers understand by intuition and through years of experience.
+The implicit ideas of each modeling philosophies, that you normally don't find in books.
+Modeling Mindsets is not about history.
+Modeling Mindsets is a mixture of lightweight methodological introduction and philosophy.
 That said, this book is not and \textbf{cannot be a full introduction to each mindset}.
 There are entire books about, for example, Bayesian inference, or supervised machine learning.
 After reading this book, you will not automatically become a frequentist statistician, or a causal inference expert.
 Sorry to disappoint this early in the book.
 However, reading Modeling Mindsets can open doors to new ways of thinking about modeling.
 But there are other resources to explore what's behind each door -- an online course on machine learning, blog posts about about causal inference, a book about design-based inference, \ldots{}
+The book will also help you understand why people with different mindsets have all these misunderstandings.
+
 In each chapter, I refer to \textbf{useful resources to deepen the particular mindset}.
 
 \hypertarget{who-this-book-is-for}{%
@@ -3230,14 +3242,332 @@ Unsupervised learning is truly the colorful bird among the modeling mindsets.
 \begin{itemize}
 \tightlist
 \item
-  The world is dynamic: The model is about an actor acting in an environment. The actions of the agent are only rewarded at the end.
+  Reinforcement learning models an agent that interacts with its environment.
 \item
-  Reinforcement learning balances exploration and exploitation,
+  It's used in robotics, games, complex systems, and simulations.
 \item
-  A sub-mindset of \protect\hyperlink{machine-learning}{machine learning}.
+  Together with \protect\hyperlink{supervised}{supervised} and \protect\hyperlink{unsupervised-ml}{unsupervised} learning, reinforcement learning is a \protect\hyperlink{machine-learning}{machine learning} mindset.
 \end{itemize}
 
-\textbf{This chapter is under construction! Stay tuned.}
+\emph{Two machine learners attend a dinner with a huge buffet.
+Dumplings are in high demand, but unavailable most of the time.
+The supervised learner tries to predict when the waiters refill the dumplings.
+The reinforcement learner leaves and returns with a plate full of dumplings.
+``How did you get these dumplings?'' asks the supervised learner.
+``First I tried my luck at the buffet, but of course the dumplings were gone,'' explains the reinforcement learner.
+``Then I thought about my options and decided to talk to a waiter.
+That decision was rewarded with dumplings!''
+The supervised learner was stunned, as interacting with the environment never seemed to be an option.}
+
+Chess, Go, StarCraft II, Minecraft, Atari games, \ldots{}
+Many people enjoy playing these games.
+But they are not the only ones.
+Computers also play these games.
+And they play them at a super-human level.
+
+All these games require long-term planning and difficult decisions.
+In Go, there are \(10^{127}\) possible board positions, more than there are atoms in the universe (about \(10^{78}\) to \(10^{82}\)).
+StarCraft II is a complex real-time strategy game that requires planning, resource management and military tactics.
+Playing these games at superhuman levels was made possible by machine learning.
+Super-human game play was made possible by machine learning.
+But not through supervised or unsupervised learning.
+It is the third modeling mindset that has outplayed us humans.
+A modeling mindset that gives the computer a ``brain'' and turns into an agent acting in an environment.
+
+Welcome to \textbf{reinforcement learning}!
+
+\hypertarget{reinforcement-learning-1}{%
+\section{Reinforcement Learning}\label{reinforcement-learning-1}}
+
+At the center of a reinforcement learning model is the agent.
+This agent doesn't sell houses, it doesn't fight Neo, and it doesn't investigate crimes.
+No.~
+Reinforcement learning agents play Go\textsuperscript{\protect\hyperlink{ref-silver2016mastering}{25}}, plan routes, control cooling units\textsuperscript{\protect\hyperlink{ref-li2019transforming}{26}}, move robotic arms\textsuperscript{\protect\hyperlink{ref-gu2017deep}{27}}, steer self-driving cars\textsuperscript{\protect\hyperlink{ref-kiran2021deep}{28}} or guide image segmentation\textsuperscript{\protect\hyperlink{ref-wang2018outline}{29}}.
+An agent in reinforcement learning is an entity that interacts with an environment with the goal of maximizing rewards.
+This environment can be a video game, a city map, a cooling system, an assembly line in a factory, \ldots{}
+The agent observes the environment, but also acts in it, thereby changing it.
+But how does the agent choose it's actions?
+Similar to humans, the agent is ``motivated'' by rewards:
+Defeating the other players in StarCraft, setting the right temperature in the building, collecting coins in Super Mario.
+The ``brain'' of the agent is the policy.
+The policy decides what the agent should do next, depending on the situation it is in.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/rl-1} 
+
+}
+
+\caption{Reinforcement Learning.}\label{fig:rl}
+\end{figure}
+
+\hypertarget{a-dynamic-mindset}{%
+\section{A Dynamic Mindset}\label{a-dynamic-mindset}}
+
+Reinforcement learning is dynamic.
+When using reinforcement learning to solve a task, the task is viewed as an interaction between a computer (program) and another system or environment.
+In comparison, the other mindsets are stationary.
+They work with static snapshots of the world.
+Interaction between computer and environment isn't part of all the other modeling mindsets such as supervised learning or Bayesianism.
+In most modeling mindsets, data are usually collected first and then the model is built.
+In reinforcement learning, the data are generated by the agent's interaction with the environment.\footnote{Data may be collected beforehand. For example, the Alpha Go algorithm was pre-trained by Go moves from human players (in a supervised learning fashion).\textsuperscript{\protect\hyperlink{ref-chen2018recurrent}{30}}}
+The agent chooses which states of the environment to explore and in turn which data to generate.
+The computer runs its own experiments and learns from them.
+The agent goes through a cycle:
+
+\begin{itemize}
+\tightlist
+\item
+  Observation: Look at the world.
+\item
+  Action: Interact with the world.
+\item
+  Reward: Get feedback on previous action(s).
+\end{itemize}
+
+Think about pricing a product.
+A high price means more revenue per sale, but fewer customers.
+A low price means more customers, but less revenue per sale.
+The seller wants to find the optimal price that balances demand and revenue per sale.
+What about using supervised learning?
+Simply train a model to predict the number of sales based on price and other factors (day of the week, promotions, \ldots).
+To train such a model, you need historical data with different prices.
+But even if you had such data, it would probably be suboptimal.
+It's likely that the data were not generated by an experimental design.
+Perhaps the optimal price is higher than any historical price.
+But supervised learning can only learn from observed data; it can't explore new options.
+
+Reinforcement learning can deal with this dynamic pricing situation.
+A change in price changes the ``environment'', in our case the sales, inventory, etc.
+Reinforcement learning is a way to conduct experiments with the price.
+It can handle the trade-off between exploring new prices and exploiting already learned pricing strategies.
+This makes reinforcement learning a much more holistic approach that connects interactions.
+
+Reinforcement learning is a typical machine learning mindset.
+Maybe even more so than supervised and unsupervised learning.
+One motivation of machine learning is to make the computer act intelligently.
+We humans can better relate to a machine if it is intelligent in the human sense (and not just a calculator).
+By ``embodying'' the computer as an agent in an environment, reinforcement learning conveys this concept of intelligence.
+We are amazed when a machine can play games, perhaps even in a human-like manner.
+
+Reinforcement learning also meets the other criteria for a machine learning mindset.
+We don't care how exactly the agent policy is implemented -- as long as it works.
+Or, as Ovid said, ``Exitus acta probat'', the result justifies the deed.
+How good the result is can be measured very directly by the rewards.
+Just average the rewards over several episodes (an episode is one game, or a simulation round) and compare these across models.
+A reward is an external signal and doesn't rely on model assumptions (as many evaluation methods in statistics do).
+But what is a reward anyway and is it different from labels in supervised learning?
+
+\hypertarget{reward-and-value}{%
+\subsection{Reward and Value}\label{reward-and-value}}
+
+Relaxing is easy; exercising is hard.
+But why?
+There are immediate negative rewards associated with exercise:
+It's tiring, you have to shower afterwards, you have to fit it into your daily routine, \ldots{}
+There are also huge positive rewards, such as getting fit and strong, reducing the risk of heart attacks, and prolonging life.
+These positive rewards occur with a delay of weeks, years or even decades.
+Reinforcement learning agents also deal with delayed rewards.
+In addition, rewards can be sparse.
+For example, in Tic-tac-toe, there is only a single reward at the end of the game (win or lose).
+Most actions are without immediate reward and therefore without feedback.
+In Tic-tac-toe, if the agent loses after 4 moves, how is it supposed to know which moves where the bad ones?
+
+One solution is to assign a value to each state -- even to those that have no reward.
+If there are only a few possible states, as in Tic-tac-toe, we can create a table with all possible states and their values.
+If states are continuous or the space is too large, we can express the value as a function.
+The value function accepts a state as input, or possibly a combination of state and action.
+And the output is the value.
+
+But what is a value?
+Simply put, the value tells how good it is for the agent to be in that state.
+Value is the expected reward for a state or state-action pair.
+You can think of value as the reward being spread back in time, like jam on a loaf of bread.
+If you exercise today, it's because you know the value of exercising.
+You imagine the future reward for your actions today and value the current state accordingly.
+Or maybe you don't think about the value at all because working out has become a habit for you.
+It has become your policy.
+
+Rewards are provided by the environment, but the values are not.
+The values or the value function can only be estimated.
+There are several ways to learn the value function.
+One way is to turn it into a supervised learning task!
+The Go algorithm Alpha Zero, for example, did exactly that.
+Through self-play, Alpha Zero collected a dataset of state-reward pairs.
+Researchers trained a neural network on this dataset to predict win (+1) or loss (-1) as a function of the game state.
+Another approach to learning the value function is Monte Carlo estimation:
+We start from random initial states, follow the current policy of the agent, and accumulate the rewards.
+Then we average the rewards for each state.
+Monte Carlo estimation works only for environments with few states.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth]{figures/rl-trajectory-1} 
+
+}
+
+\caption{Trajectory of a reinforcement learning agent through the state space, with a reward at the end.}\label{fig:rl-trajectory}
+\end{figure}
+
+Defining the reward can be surprisingly tricky.
+An agents can behave like an evil genie who takes wishes (aka rewards) quite literally.
+A good example is CoastRunners, a boat racing game.
+The ultimate goal is to finish the race first, but the score (aka reward) was increased by collecting objects on the race course.
+The agent learned not to finish the race.
+Instead, it learned to go around in circles and collect the same reappearing objects over and over again.
+The greedy agent scored on average \href{https://openai.com/blog/faulty-reward-functions/}{20\% more points than humans}.
+
+\hypertarget{what-to-learn}{%
+\section{What to Learn}\label{what-to-learn}}
+
+For me, this was the most confusing part to getting started with reinforcement learning:
+What function(s) are we actually learning in reinforcement learning?
+In supervised learning, it's very clear.
+We learn the function that maps the features to the label.
+But it's not clear what the reinforcement agent is supposed to learn.
+And in fact, there are many different possible approaches:
+
+\begin{itemize}
+\tightlist
+\item
+  Learn a complete model of the environment. The agent can query such a model to simulate what the best action would be for each time step.
+\item
+  Learn the state value function. If an agent has access to a value function, it can choose actions that maximize the value.
+\item
+  Learn the action-value function, which takes as input not just the state, but state and action.
+\item
+  Learn the policy directly.
+\end{itemize}
+
+These approaches are not mutually exclusive, but can be combined.
+Oh, and also, we have many different ways \textbf{how} we learn these things.
+And that depends a lot on the dimensionality of the environment and the actions space.
+For example, Tic-tac-toe and Go are pretty similar games.
+I imagine all the Go players reading this book will object, but here me out.
+Two players face in a fierce, turn-based strategy game!
+The battlefield is a rectangular board with a grid.
+Each player places markers on the grid.
+The winner is determined by the constellations of the markers.
+
+Despite some similarities, the games differ significantly in their difficulty for both humans and reinforcement learning.
+Tic-tac-toe is often used as an example in reinforcement learning entry classes and is a ``solved'' problem.
+In contrast, Go has long been dominated by humans.
+The first super-human Go agent \href{https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol}{beat} the Go champion Lee Sedol in 2016, which was a big media spectacle and required many computational resources.
+The relevant differences between Tic-tac-toe and Go are the size of action space and state space.
+
+In Tic-tac-toe, there are at most 9 possible actions and on the order of \(10^3\) possible action-state pairs.
+The agent can learn to play Tic-tac-toe by using Q-learning, a model-free reinforcement learning approach to learn the value of an action in a given state.
+Q-learning basically enumerates the state-action pairs and iteratively updates the values as more and more games are played.
+In Go, there are \(\sim 10^{170}\) possible states.
+We can't enumerate this set of states.
+To work with these high-dimensional state and action spaces, we need to use neural networks (more on this later).
+
+If you find or found it difficult to get started with reinforcement learning, it's not you.
+It's difficult because there are so many possibilities for how to train a reinforcement learning agent.
+
+\hypertarget{is-reinforcement-learning-supervised}{%
+\section{Is Reinforcement Learning Supervised?}\label{is-reinforcement-learning-supervised}}
+
+At first glance, rewards seem similar to ground truth in supervised learning.
+Especially if we have a value function, we could learn the policy with supervised learning, right?
+Not really.
+Supervised learning alone is unsuitable for sequential decision making that requires balancing exploration and exploitation.
+Imagine modeling a game like Go with a supervised learning mindset.
+We would choose the next move as the target to predict and use the game state as the input.
+We could use recordings of human game as training data.
+At best, this supervised approach would mimic average human players.
+But it could never explore novel strategies.
+There would be no creative freedom and no path to super-human gameplay.
+Compared to reinforcement learning, supervised learning seems short-sighted and narrow-minded.
+Supervised learning only considers parts of the problem without connecting actions.
+Reinforcement learning is a much more holistic approach that sequentially connects interactions.
+
+\hypertarget{deep-reinforcement-learning}{%
+\section{Deep Reinforcement Learning}\label{deep-reinforcement-learning}}
+
+The connection between deep learning and reinforcement learning is a bit more special, so let's go deeper here (pun intended).
+In short: it's a fantastic fusion of mindsets.
+Reinforcement learning alone struggles with high-dimensional inputs and large state spaces.
+Go, for example, was too complex for reinforcement learning to solve.
+Other environments where the states are images or videos also difficult to model.
+Unless you throw deep learning into the mix.
+
+Deep reinforcement learning has gotten many people excited about AI in general.
+Reinforcement learning is made ``deep'' by replacing some functions with deep neural networks.
+For example, the value function or the policy function.
+Using deep neural networks allows for more complex inputs such as images.
+A successful example of deep reinforcement learning is Alpha Zero.
+Alpha Zero can play Go on a super-human level.
+Alpha Zero relies on two deep neural networks: a value network and a policy network.
+A dataset is created from the algorithm playing against itself.
+This dataset stores all the states of the board and the final outcome (win or loss) for each game.
+The value network is trained on this self-play data to predict the outcome of the game (between -1 and +1) from the Go board.
+The policy network outputs action probabilities based on the Go board (the state).
+But the agent doesn't automatically follow the most likely action.
+Instead, the policy network works in tandem with a Monte Carlo tree search algorithm.
+The Monte Carlo tree search connects the policy with the value of the board and simulates possible next moves.
+Training of the policy network is also interwoven with the Monte Carlo tree search.
+
+Deep reinforcement learning is an exciting combination of the two mindsets.
+It has lead to great success in many games and is being applied in other areas such as robotics.
+But it's quite data intensive and often \href{https://www.alexirpan.com/2018/02/14/rl-hard.html}{not the right approach}.
+
+\hypertarget{strengths-8}{%
+\section{Strengths}\label{strengths-8}}
+
+\begin{itemize}
+\tightlist
+\item
+  Reinforcement learning allows us to model the world in a dynamic way.
+\item
+  It's a great approach for planning, playing games, controlling robots and larger systems.
+\item
+  Actions of the agent change the environment. In other mindsets, the model is a mere ``observer'', which often is a false simplification.
+\item
+  Reinforcement learning seems to be the modeling paradigm that most closely mimics animal intelligence.
+\item
+  Reinforcement learning is proactive. It involves learning by doing, balancing exploration and exploitation, and creating experiments on the fly.
+\end{itemize}
+
+\hypertarget{limitations-8}{%
+\section{Limitations}\label{limitations-8}}
+
+\begin{itemize}
+\tightlist
+\item
+  Reinforcement learning requires that the task involve some form of agent. Many modeling tasks don't fit this scenario.
+\item
+  Very often, reinforcement learning, especially deep reinforcement learning, is the \href{https://www.alexirpan.com/2018/02/14/rl-hard.html}{wrong approach to a problem}.
+\item
+  Reinforcement learning models can be very difficult to train and reproduce:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Learning requires many episodes because reinforcement learning is sample inefficient.
+  \item
+    Designing the right reward function can be tricky.
+  \item
+    Training can be unstable and can get stuck in local optima.
+  \end{itemize}
+\item
+  Reinforcement learning models are usually trained in artificial digital environments. It's difficult to transfer the models to the physical world.
+\item
+  The reasons why reinforcement learning models are not trained in the real world are due to the large number of required training episodes and the risks of real-world experiments. Remember the pricing example: It's probably too risky for any business to let a reinforcement learning algorithm experiment with prices in real time.
+\item
+  Model-free or model-based? Learn the policy? Or the value function? Or the action-value function? There are many modeling choices and this can be overwhelming.
+\end{itemize}
+
+\hypertarget{references-1}{%
+\section{References}\label{references-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  A very comprehensive reference is the book: Reinforcement Learning, An Introduction\textsuperscript{\protect\hyperlink{ref-sutton2018reinforcement}{31}}
+\item
+  The paper ``The surprising creativity of digital evolution'' is one of my all-time favorite papers\textsuperscript{\protect\hyperlink{ref-lehman2020surprising}{32}}. It deals with evolutionary algorithms, but it also has more general lessons about how difficult it is to design an optimization goal.
+\end{itemize}
 
 \hypertarget{deep-learning}{%
 \chapter{Deep Learning}\label{deep-learning}}
@@ -3286,8 +3616,8 @@ Unsupervised learning is truly the colorful bird among the modeling mindsets.
 
 \textbf{This chapter is under construction! Stay tuned.}
 
-\hypertarget{references-1}{%
-\chapter*{References}\label{references-1}}
+\hypertarget{references-2}{%
+\chapter*{References}\label{references-2}}
 
 
 \hypertarget{refs}{}
@@ -3387,6 +3717,38 @@ Unsupervised learning is truly the colorful bird among the modeling mindsets.
 \leavevmode\vadjust pre{\hypertarget{ref-murphy2012machine}{}}%
 \CSLLeftMargin{24. }
 \CSLRightInline{Murphy KP. Machine learning: A probabilistic perspective. MIT press; 2012. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-silver2016mastering}{}}%
+\CSLLeftMargin{25. }
+\CSLRightInline{Silver D, Huang A, Maddison CJ, Guez A, Sifre L, Van Den Driessche G, et al. Mastering the game of go with deep neural networks and tree search. nature. 2016;529(7587):484--9. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-li2019transforming}{}}%
+\CSLLeftMargin{26. }
+\CSLRightInline{Li Y, Wen Y, Tao D, Guan K. Transforming cooling optimization for green data center via deep reinforcement learning. IEEE transactions on cybernetics. 2019;50(5):2002--13. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-gu2017deep}{}}%
+\CSLLeftMargin{27. }
+\CSLRightInline{Gu S, Holly E, Lillicrap T, Levine S. Deep reinforcement learning for robotic manipulation with asynchronous off-policy updates. In: 2017 IEEE international conference on robotics and automation (ICRA). IEEE; 2017. p. 3389--96. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-kiran2021deep}{}}%
+\CSLLeftMargin{28. }
+\CSLRightInline{Kiran BR, Sobh I, Talpaert V, Mannion P, Al Sallab AA, Yogamani S, et al. Deep reinforcement learning for autonomous driving: A survey. IEEE Transactions on Intelligent Transportation Systems. 2021; }
+
+\leavevmode\vadjust pre{\hypertarget{ref-wang2018outline}{}}%
+\CSLLeftMargin{29. }
+\CSLRightInline{Wang Z, Sarcar S, Liu J, Zheng Y, Ren X. Outline objects using deep reinforcement learning. arXiv preprint arXiv:180404603. 2018; }
+
+\leavevmode\vadjust pre{\hypertarget{ref-chen2018recurrent}{}}%
+\CSLLeftMargin{30. }
+\CSLRightInline{Chen T, Wang Z, Li G, Lin L. Recurrent attentional reinforcement learning for multi-label image recognition. In: Proceedings of the AAAI conference on artificial intelligence. 2018. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-sutton2018reinforcement}{}}%
+\CSLLeftMargin{31. }
+\CSLRightInline{Sutton RS, Barto AG. Reinforcement learning: An introduction. MIT press; 2018. }
+
+\leavevmode\vadjust pre{\hypertarget{ref-lehman2020surprising}{}}%
+\CSLLeftMargin{32. }
+\CSLRightInline{Lehman J, Clune J, Misevic D, Adami C, Altenberg L, Beaulieu J, et al. The surprising creativity of digital evolution: A collection of anecdotes from the evolutionary computation and artificial life research communities. Artificial life. 2020;26(2):274--306. }
 
 \end{CSLReferences}
 

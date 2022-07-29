@@ -24,6 +24,8 @@ fig:clustering1
 fig:clustering
 fig:clustering2
 fig:dimred
+fig:rl
+fig:rl-trajectory
 what-this-book-is-about
 who-this-book-is-for
 models
@@ -106,6 +108,15 @@ strengths-7
 limitations-7
 resources-1
 reinforcement-learning
+reinforcement-learning-1
+a-dynamic-mindset
+reward-and-value
+what-to-learn
+is-reinforcement-learning-supervised
+deep-reinforcement-learning
+strengths-8
+limitations-8
+references-1
 deep-learning
 interpretable-ml
 design-based-inference
