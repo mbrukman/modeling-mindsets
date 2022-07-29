@@ -3,14 +3,19 @@
 The book is about all the different mindsets that allow you to model the world with data.
 Each mindset represents a different perspective on how to see the world through data.
 In this book, you will find for each mindset the **assumptions, central ideas, their relationship to other mindsets, and their strengths and limitations**.
-Modeling mindsets is not about history.
-Modeling mindsets is a mixture of lightweight methodological introduction and philosophy.
+Most importantly, Modeling Mindset is about the implicit ideas and attitudes that people have about modeling in each mindsets.
+It's about what's between the lines, what experienced modelers understand by intuition and through years of experience.
+The implicit ideas of each modeling philosophies, that you normally don't find in books.
+Modeling Mindsets is not about history.
+Modeling Mindsets is a mixture of lightweight methodological introduction and philosophy.
 That said, this book is not and **cannot be a full introduction to each mindset**.
 There are entire books about, for example, Bayesian inference, or supervised machine learning.
 After reading this book, you will not automatically become a frequentist statistician, or a causal inference expert.
 Sorry to disappoint this early in the book.
 However, reading Modeling Mindsets can open doors to new ways of thinking about modeling.
 But there are other resources to explore what's behind each door -- an online course on machine learning, blog posts about about causal inference, a book about design-based inference, ...
+The book will also help you understand why people with different mindsets have all these misunderstandings.
+
 In each chapter, I refer to **useful resources to deepen the particular mindset**.
 
 ## Who This Book is For

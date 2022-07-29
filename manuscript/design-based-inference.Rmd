@@ -50,6 +50,14 @@ So we have to include it into the model as a variable (predictor / covariate).
 For design-based modeling, we design our sampling / experiment to account for such things.
 For example by stratified sampling design in all age and and professions.
 
+## Google Cookie Experiment
+
+* Design that is sequential
+* Closest is maybe experimental design where the environment is manipulated to collect data
+  * Google Cookies were created by experimental design.
+  * The design choices were proposed by Bayesian optimization
+  * https://blog.google/technology/research/makings-smart-cookie/
+
 
 
 ## Assumptions
